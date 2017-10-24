@@ -1,0 +1,72 @@
+Reports have been completely overhauled.  The classic Leladia-style
+Kort's templates will NOT work anymore, you must convert your own
+custom reports to XSLT format.
+
+The Reports in version 2.0 and later (since beta 1.92) are based
+on XSLT stylesheet translation.  To modify the reports you must
+work in XSLT to describe how a SCTemplate xml becomes the document
+you want.  It's a very powerful - if you can do some basic stuff
+with the UI XML files in DAoC, you can probably learn XSLT with
+not much hassle (plus you'll find it's a valuable skill to know.)
+
+STEP ONE - Learn what you have to work with.  A saved template
+only contains the essentials - XML that describes the toon, and
+the items they have and items to craft.
+
+SCTemplate input to your XSLT report has this AND MORE.  Explore
+this using the 'File' - 'Export SCTemplate XML' feature, to create
+the SCTemplate report input.  The PRIMARY difference is that many
+values that you see on the screen or in reports are calculated for
+you to insert in your report.
+
+STEP TWO - Learn a little XSLT.  For starters, take a look at the
+DefaultConfigReport.xsl file in the reports directory.  It reports
+most (but not all) the variables from an SCTemplate, using a short
+one-row SLOT template and another SCItem template for each piece.
+
+Anything you want to report should be either provided for you, or 
+one simple calculation away.  If something seems too complicated 
+to calculate, you possibly missed something, and we are more than 
+happy to help (and, fix it if needed!)  Post your issue on the 
+developers forum at http://sourceforge.net/projects/kscraft and 
+we'll have a look.
+
+STEP THREE - Try it.  First, you can use ANY xslt 1.0 parser to
+merge the exported SCTemplate xml to your new report.  Second, you
+can test from inside the program by choosing your own report xslt
+template file with the View - Choose Format option.  
+
+Try to View - Configuration, if the parser can't understand your 
+template. it will throw up a detailed error message with the exact 
+line and column where it encountered the mistake.  Fix and just retry, 
+you don't need to quit the program to retest (your template is read 
+each time you select View - Configuration).
+
+STEP FOUR - Get Crazy!  Try a UI XML Window!  This offers two-pass
+parsing so the X and Y window coordinates can be handled in a second
+pass through the XSLT engine.  DefaultUiXmlWindow.xsl creates just
+the label's Data elements - while DefaultUiXmlWindowPost.xsl will
+place those in a window in <LabelDef> elements.
+
+You can try your own UI XML Window with either one or two passes.
+If MyWindow.xsl has a corresponding MyWindowPost.xsl that will be
+run after the first pass, otherwise if there is no Post.xsl file
+for your template, it will run only one pass.
+
+That's it!  We are even willing to consider helping the first few
+people who ask to convert their templates for them, provided
+
+  * IT'S ORIGINAL!  Nothing just a bit different from the norm.
+    We need to see your example report output to decide if it's
+    original, and also to make sure our results match yours.
+
+  * YOU LICENSE IT for all the kscraft users under the GPL (or 
+    a less restrictive license, attribution clauses aren't even 
+    accepted although WE happily acknowledge contributions.)
+    Submitting anything to the project by email or forums or the
+    bug/enhancement trackers is an implicit grant of license.
+
+That's it - we are happy to help a little or a lot if it helps the
+entire user community.
+
+Give it a try!

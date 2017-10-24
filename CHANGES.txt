@@ -1,0 +1,883 @@
+Updated 6/13/2007 - Version 2.01
+
+  Show Endurance only for weapon using classes unless there are items
+  with Fatigue or Fatigue Cap bonuses, show Power/Power % only for
+  magic users unless there are items with Power/%Power/Power Cap.
+
+  Added additional '5th slot' bonuses for the dragonsworn crafted items.
+
+  Outfits now get properly updated when loading an item directly from 
+  its XML file.
+
+  Fixed saving items with bad class restrictions (or other non
+  string entries) and knock out any class restriction on read if
+  it is blank.
+
+  Load resource file from appPath and not current working directory
+  path. People who have template files mapped to open up KSCraft 
+  automatically would see no icons.
+
+Updated 4/26/2007 - Version 2.00 - in sync with DAoC 1.88
+
+  Sum Archery/Spell bonuses as "Archery and Spell" bonuses,
+  for total bonuses.  
+
+  Aproximate the chances of success based on Mythic's half-hearted 
+  post about chances to blow up.  Our approximation is full of .5%
+  rounding errors (in both directions), which shouldn't make a big 
+  difference.  The chance to succeed (and not blow up) appears to be
+    34% + ItemQualModifier (6% to 26%) - OCPenalty(10 to 70%) 
+        + SkillBonus (0% to 100%) - (SkillBonus - 100%) * OCPenalty / 2
+  so 1000 skill crafters aren't affected, while the younger the crafter,
+  with the larger the overcharge, the more the penalty affects them (a
+  level 1 toon doing a 5 point overcharge would suffer a full 35% penalty 
+  on top of the old formula, with a -45% (impossible) chance of success).
+
+  Touched up layout of Ethinarg's search results view, the list
+  now shows the item name as clickable link (instead of seperate
+  "Add to Template" link) to add the item.  Added a Clear Query
+  button to reset the form.
+
+  Solved loading and switching outfits, loading a template
+  now shows the selected outfit and each outfit's selected
+  items correctly.
+
+  Default to the first non-All Magic, non-All Melee skill
+  so the user can enter an amount before choosing a skill.
+  (All Magic/All Melee are restricted to an amount of 1).
+
+  Fixed Ethinarg 'Add Item to Template' to display the slot
+  choice for non-ring/wrist/weapon slots.
+
+  Save new DaocIniPath in preferences (important for users
+  not on an actual game PC.)  Select the first toon to help
+  users who are often confused at first.  The display now
+  shows the client (it digs 2 directories deep from the .ini
+  files path to find them all).
+
+  Added Material items to the SCItem/SLOT for report writers
+  (only created by the output xml feature, not saved in the
+  persistant templates).
+
+  Akatsuki moved from the GOA/Euro list to the US list with
+  their new server number, for exporting gems.  Updated all
+  of the euro server numbers.
+
+Updated 3/30/2007 - Version 1.99 - catch up to DAoC 1.88
+
+  Search Ethinarg's Database grew a quickbar button.  It also 
+  pops up a window prompting the user to choose a spot to stick 
+  the item, when choosing to 'Add Item to template', from what 
+  we can second-guess for good slot choices.  Solves a bug where 
+  most rings could not be imported, and lets the user pick from
+  left and right hand for rings and wrists, for example.
+
+  For purposes of the Spellcrafting program, there are now three
+  bonuses "Archery and Spell Damage", "Archery and Spell Range",
+  and "Archery and Casting Speed" as was wrote by Mythic in the
+  1.88 patch notes.  The game has yet to display these as such,
+  but Archery now affects Spells and Spell now affects Archery.
+
+  Removed Pathfinding for Rangers, changed bow-skills of Hunters,
+  Rangers and Scouts and to all be 'Archery', and changed Airy War 
+  gems to 'Archery' for 1.88.  Yes, it doesn't match the delve.
+  The name may be adjusted again, later, just waiting to see.
+
+  Although pre-1.88 crafted bonuses show up in game as Recurve Bow, 
+  Composite Bow, or Archery, all will display in the Calculator 
+  as 'Archery'.  For inquiring minds from Mordred and Gaheris, 
+  they all affect all primary Archers.  'All Archery Skills' but 
+  not 'Archery' will also affect Crossbow.  
+
+  So imported items archery-skills will be changed to 'Archery', 
+  and the user can switch them to All Archery Skills where it's 
+  appropriate (this really only affects Crossbow classes).  This 
+  is less misleading then changing items to say "All Archery Skills"
+  when they are not, tricking Crossbow specs into adding such an 
+  item to the template.  It is part of the reason the crafted-gem
+  skill will show as "Archery" for now, as well.
+
+  Many users were confused seeing "2 All Melee Skills" followed by
+  "4 Slash" "4 Thrust" etc.  It IS added, but now to make clearer
+  that it's a subtotal, it will show as "(2 All Melee Skills)".
+
+  Have quit moving the maximized window around when changing options.
+
+  Export Gems works again (it always did, actually) and will reset
+  your path to your .ini files on first-use.  Your .ini files are
+  being moved (as you log into them one by one) into your profile's
+  Application Data\Electronic Arts\Dark Age of Camelot directory.
+  This is the -new- default for export-gems path.
+
+  If there is a program bug and a template or export document
+  can't be prepared, the template or exported xml will no longer 
+  be overwritten as a blank file.
+
+  Now asking the user to please send in the Spellcraft.exe.log error 
+  messages when the template XML can't be created to be saved, and
+  asking the user to send in the Spellcraft.exe.log AND the template 
+  when a template can't be reloaded due to XML, template or item 
+  processing errors, in the error messagebox.
+
+  If an equipped item is deleted or moved, the next item in the
+  list will be Equipped at it becomes the selected item.
+
+  Delete or Move item now updates all outfits that used to point
+  at the removed item, and points them to the next item in this
+  slot.  Outfits will continue to point to the same newly blank 
+  item when the entire item or its slots are Cleared.
+
+  Changed modality of progress box with Ethinarg search. Now it
+  is only modal with regards to the Ethinarg search dialog.
+
+  Added the 'location' search to the Ethinarg item search.
+
+  Fixed encoding of spaces in item name with Ethinarg search.
+
+  Ethinarg search options are now saved on program exit.
+
+  When adding a found item to a template, there is a much more
+  informative dialog box.
+
+  Fixed spelling of Guinevere for our diehard roleplayers (who
+  don't have alot of humor for spelling errors :)
+
+Updated 03/09/2007 - Version 1.98
+
+  You will find your Spellcraft.xml preferences file saved in
+  \Documents and Settings\(you)\Application Data\KSCraft\
+  on Windows or in ~/.kscraft/Spellcraft.xml on unix or mac.
+  Your existing file will be renamed oldSpellcraft.xml in the
+  program's directory.
+
+  Added a second page of Item Info (the button switches between
+  the Item Info and Item Slots views).  These include the Bonus,
+  AF/DPS and Speed plus additional item Realm, Type and other 
+  database item fields inspired by Ethinarg, a grid of the race
+  restrictions, and per item notes.  The template notes moved 
+  from the Options window to this display.
+
+  Craft Times now work - either for the entire template (look
+  beneath the Character Level) plus by-item (below
+
+  Mythrian items will no longer affect the distance to bonus cap 
+  (these cap-caps are now correctly raised).
+
+  Fixed Configuration Report/Save Template to name all gems by the
+  realm of the Character, not by the realm of the item.
+
+  Added Enhanced Shield and Harp to the new item, item type menus.
+
+  Split Clear Item from Clear Slots (we actually argued about what
+  the feature was supposed to do, until we decided we aught to give
+  users both features).
+
+  Fixed Swap Gems (again).  For good this time, we hope.
+
+  Squished the slots with a scrollbar when needed for good old 
+  800x600 displays (we haven't heard of anyone still using 640x480
+  and won't support them.)
+
+  By popular request (and possibly to test Requirements at some point
+  in a future patch) added Champion Level and Realm Rank to templates.
+
+  EA Mythic US server ini file numbers now clash with Euro/GOA server
+  ini file numbers, so US players saw the wrong server name for their
+  characters.  Added a new Option to show Euro/GOA servers.
+
+  When loading a classic template, don't throw away either the drop
+  or crafted 'empty item' just because they have no slots filled in.
+  Users -expect- to see an empty item waiting for them, it was there
+  when they saved it.  We still collapse the empty drop or crafted
+  item when an item, alone, is loaded.
+
+  Added ability to search Ethinarg's database from within the 
+  application and add found items directly to the current template.
+
+Updated 01/30/2007 - Version 1.97
+
+  Export Gems fixes: don't die looking for made gems, set the crafted
+  gems to marked (but not checked), update the next quickbar slot
+  after exporting, and disable the export button when there is no
+  crafter or no gems chosen to export.  This makes it easier to see
+  when gems are successfully exported.
+
+  Changed the description from "Hide 'done' gems" to "Hide 'made' gems".
+
+  Item renaming now works properly again (signal name broken in 1.96).
+
+Updated 1/25/2007 - Version 1.96 - Patch 1.87 SC Overhaul
+
+  Removed Quality factor entirely from gems.
+
+  Removed Crafting Time tracking from gems.
+
+  Change the concept of tracking 'remakes' to tracking 'makes',
+  where zero makes is costed as if it will be one make, and one 
+  or more makes are the actual number of gems that were imbued
+  (replaced one-by-one as the crafter goes Kaboom.)
+
+  Removed 'expected multiplier' because the SC'er doesn't know
+  exactly when they will go Kaboom, and will replace only one
+  gem if they plan ahead.  Imbued three with no overcharge, and
+  hold off the overcharge gem so only one gem explodes if any
+
+  Hide acuity-type stats that don't apply to the class if the stat
+  has no bonus and display "ACU" for classes with no acuity stat
+  when there is a useless bonus.
+
+  Track makes on the main item info pane (where Quality used to be).
+
+  Save the last View -> Toolbar preference and the toolbar's current 
+  location (top/bottom/left/right) from session to session.  Fixed
+  the Config Report button to bring up the correct report.
+
+  Fix export gems so all Spellcrafting toons show up. It had choked
+  on antique -###.ini toons when ### was an unknown server number.
+
+  Total all remade gem costs by item and in grand total, this was 
+  broken in 1.93.
+
+  Patched Qt so that opening the ItemList with broken network drives
+  or floppy drives doesn't timeout for > 10s.
+
+Updated 01/17/2007 - Version 1.93 - The Last Old Flavor (Quality)
+
+  ** This version preserves Quality for our European friends, until
+  ** the crafting patch arrives on their hemisphere.  The number 1.94
+  ** is reserved, in case some updates from 1.93 are necessary to
+  ** hold them over until that day comes.
+
+  Added 'Outfits' - An outfit is a collection each item selected for
+  each tab.  Create multiple outfits (e.g. PvP, RvR, Buffing, etc...)
+  in the same Spellcrafting template to make it easier to work out
+  specific stats.  This works along with the feature added in 1.92 for
+  multiple items per slot.  An Outfit ONLY keeps track of which item 
+  is selected and if it is equipped.  If more than one outfit shares the 
+  same item, and you modify it on one outfit, the changes appear on the 
+  other outfits.  Create New Items when they really are distinct items,
+  items, such as Gloves (Summoning), Gloves (RvR) and Gloves (PvP). 
+  Name these items however you like by editing their Item Names.
+
+  The main window now shows single-gem cost and not the estimated cost,
+  no matter if multiple makes are already recorded, or if the quality
+  would demand multiple makes.
+
+  The utility calculation for hits has been fixed.
+
+  Fixed Quickbar loading.  Mythic has changed the server codes with the 
+  Labyrinth of the Minotaur expansion patch.
+
+  Focus does not show up in the drop-down gem type lists on each effect
+  if the character class you have selected does not have a focus skill.
+  This feature is disabled with the 'Hide Non Class Skills' option.
+
+  Updated mauler class gems for LoTM patch 1.85k
+
+  Fixed item's Realm by assuming it is the realm of the class, for now.
+
+  Overhauled saving preferences (options).
+
+  Added a toolbar with icons for easier access to common functions like
+  New Template, Save Template, New Item, Save Item, Load Item, etc.
+
+  Fixed a bug with the 'Save as Text' option for config reports where
+  non-printable characters were showing up in the output.
+  
+  Memory usage has been cut in half.  On program startup it should be down 
+  to around 30MB.
+
+Updated 11/04/2006 - Version 1.92
+
+  IMPORTANT: Leladia Template support is dropped for good.  If you have 
+  any old template files from Leladia's calculator, open and save them
+  in an older version of Kort's, then you can load them in the current
+  version of Kort's.
+
+  IMPORTANT: Combined the Power and Hits effects into the "Stat" effects
+  list.  Sorry to confuse some of you, but this makes room for more things
+  especially in the drop effect-type list.
+
+  AF and PP% (Power Pool %) are now in the stat list. Added Essense resist.  
+
+  Load Item now defaults to the 'All\(slots) directory, if there is no 
+  (realm)\(slot) directory found, but All\(slot) directory exists.
+
+  Discarded the beloved Customizable report syntax that dates all the way
+  back to Leladia's, in favor of a much more flexible xslt implementation.
+  This means that earlier 'custom reports' must be rewritten in xslt. See
+  DefaultConfigReport.xsl for a fairly complete example.  Lots of most
+  requested changes to this report!
+
+  The same xslt change has been applied to the custom UI Window beta
+  feature from earlier versions.  Here, too, any UI Window templates
+  must be written in xslt.  This is a two-pass flavor to allow the window
+  positions to be updated, see DefaultUiXmlWindow.xsl for an example,
+  with DefaultUiXmlWindowPost.xsl as the second pass.
+
+  Added a File - Export SCTemplate XML option; it is a template with much
+  too much data so that report authors can examine every field available
+  for report authors to include in their xslt report formats.
+
+  The report window now remembers the last directory used to save reports.
+
+  Corrected Move Item so even drop items can be moved from slot to slot
+  (the entire item, not just the gems).  Also fixed a Swap Gems bug.
+
+  Fixed a flaw that Edit - Item Type was creating a new item, instead
+  of modifying the current item.
+
+  Fixed a bug in Materials reports for new armors and other non-imbued
+  item bonuses that caused the report to crash.
+
+  Fixed the escape key within the dropdown lists.  Escape will not change
+  the previously selected item when it closes the dropdown list.
+
+  Qt 4.2 is now strongly recommended to enable all of the layout features
+  and easiest-to-use interface.  Several 4.2-specific crash bugs fixed.
+  Version 4.2.1 is now packaged in the Windows installer.
+
+Updated 10/16/2006 - Version 1.91
+
+  Ensure all item variants for each slot are correctly saved.
+
+  Recall a crafted item's name when it's loaded again.
+
+  Recall the most recently used Realm on startup.
+
+  File menu option 'Item Database Path' will change the path of the items
+  tree (containing All/Albion/Hibernia/Midgard directory trees) and even
+  create all the realm subdirs and item slot sub-subdirs.
+
+  If 'Load Item' isn't pointing to a Realm/Slot/ directory tree, stop
+  showing the filesystem root.  For 'Save Item', prompt to save the item
+  file with it's filename (the Item_Name_slot.xml), and don't create the
+  subdirectories automatically (for users who don't care for the layout).
+
+  Load Item's dropdown directory name (up top) will show the equivilant
+  realm/slot directory for each realm if the Coop option is set, and
+  always show the All/slot crossrealm directory name.
+
+  Show the Gem's name in the config report (broken in 1.90).  Also added
+  the 6th player and 11th, 12th crafted slots to the config.
+
+  Fixed 'Save Item', which was broken in 1.90.
+
+Updated 10/07/2006 - Version 1.90
+
+  This version, 1.90 is leading to the new 2.0 version.  Please consider
+  this version experimental for now, do not overwrite your old template
+  or item files that are important to you!  With the substantial changes
+  listed below, please expect some bugs and report them to the project
+  at http://sourceforge.net/projects/kscraft and click on 'Bugs'.
+
+  You can leave feedback about these changes in the Users forum (choose
+  'Forums' from the menu at the project page.)  Until version 2.0 is
+  released, the project will continue to offer the prior version 1.45,
+  which is considered stable.
+
+  Completely overhauled the UI from Qt3.3 to Qt4.1 (the GUI library used
+  to create and manage the screens).  Some of the controls and options
+  change behavior slightly because Qt4.1 is vastly different.  This was
+  necessary to simplify the licensing under the GPL while improving the
+  interface on Windows.  With Qt4.1, sip and PyQt, the program now works
+  well (without any extra patches) on Mac/Aqua or Unix/X11.
+
+  Drop v.s. Crafted Item are now folded into each item, selected from the
+  item name dropdown (top right corner of the item display.)  Multiple drop
+  and crafted items may be stored in each slot!  Edit menu's New Item, 
+  Move Item, and Delete Item let you manage the list of items in the slot,
+  and File - Load Item will load it's new item at the front of the list.
+  Edit the name in the displayed box to change the item name is (typing
+  a few characters in that box does not look up an item by name.)
+
+  The Item's Load/Save/Craft/Clear buttons can now be found in the menu,
+  under File - Load/Save Item, Edit - Clear Item and View - Gem Crafting.
+  Hotkeys make these easier to reach (except for Clear Item, too dangerous.)
+
+  Introduce the many crafted item bonuses and tincture effects available, 
+  in the 4th - 6th slots, as applicable.  See the Edit - Item Type submenu.
+  No hints are offered for which bonus-by-item, since they are still in flux.
+  Check the item itself for its bonus, and please report to us any missing
+  crafted bonus.  There is a table of armor bonuses at www.craftsage.com.
+
+  Added the optional 'Requirement' to every non-crafted item slot.  For
+  example, Legendary melee/magic/archery bonus is "vs. Monsters", some
+  effects might be "Level ##", while Artifacts may be "Artifact Level #"
+
+  Item Price is now displayed.  Item Cost (until crafted) is now based 
+  on the (fractional!) estimate of how many gem makes, and that is based 
+  on the quality of the gems chosen.  Mark the gem Done in the Gem Crafting
+  window (with the true number of remakes if any) to fix the exact cost.
+
+  Template and item files are far smaller, because default/empty data isn't
+  saved to the file.  Crafter's skill, material multipliers and other 
+  preferences are no longer loaded from or saved to a template, since those
+  options are specific to the -crafter's- own configuration.
+
+  Export Gems to a specific character's .ini file now lists only crafters;
+  the crafter character must already have a Spellcraft menu item on one 
+  of their quickbars for the program to recognize them as a crafter.
+
+  Export autoselects items who's gems are undone, and are the Active item.
+  It Disable items with no craftable flavor, or all Unused slots.  Added
+  the Spare item as an exportable slot, and you now specify the Bar, Row, 
+  and Pos as the starting slot, it reports the last bar, row, pos used.
+
+  Prevent albion tank templates from showing Slash/Crush/Thrust resists
+  while delving skills or showing skills while delving those resists.  Also
+  prevents PvE Parry from being shown with Parry skill when delving either.
+
+  Split Character.py tables apart from the constants.py module, so these 
+  Realm / Class / Race / Server lists might be used for other kinds of
+  DAoC programs.
+
+  Corrections to MultiTabBar and SearchingCombo controls, so that the form
+  won't do unexpected things (when alt-tabbing between the game for example.)
+
+  Players told us they were confused by the existing 'template changed'
+  warning popup, so it will now pop up a Save Template? question with
+  Yes, No, or Cancel options.  The program now correctly tracks if a template
+  has changed.
+
+------------------------------------------------------------------------------
+
+Updated 06/09/2006 - Version 1.45
+
+  Thanks to Mythic's generous policy and their specific permission to this
+  project to borrow their in-game gem toolbar artwork with the appropriate 
+  acknowledgement, redo the introduction splash screen and About box!  /salute
+
+  Fixed keys on the drop lists and tab buttons, the Alt key amoung others
+  was switching choices, causing alot of frustration for alt-tabbers.
+
+  When using the Open Item dialog, only a list, not file details (date, type
+  etc) will be displayed next to the preview window.
+
+  If a filename is given to Spellcraft.pyw or the compiled program, open
+  it on startup (loaded before the window is displayed).
+
+  Improved the Config reports.  Added PvE Bonus entries under other bonuses.
+  Have dropped unused items (not slots) from the list.
+
+Updated 05/21/2006 - Version 1.44
+
+  Fixed Windows 98/ME font selection.  With Unicode for Windows, Qt was
+  getting horribly confused by the standard font 'Trebuchet MS'.
+
+  Create a more windows-like list of Menu tabs, File Edit View etc...
+  and create an Errors menu item to collect a clickable menu list
+  off all the template errors.
+
+  Removed the error label fields from the window, displaying more
+  of the Other Bonuses list at one time.
+
+  Restore everyone's favorite quick-change, view Distance to Cap,
+  as a View menu item (with a check mark to indicate when active).
+
+  Eliminate the possibility of > 94 quality 'Unused' gems, unused are
+  always 94 for blowup computation.
+
+  Remember the 'amount' when switching from type to type, such as when
+  the user changes 5 str to 5 dex.
+
+  Add 'Elf' to Blademaster's choice of races, 'Shield' skill to Wardens, 
+  removed Arborial Path Focus from VW (not affected anymore), and
+  identified servers Akatsuki #145 and Glastonbury #20 for export gems.
+
+  Fix distance-to-cap of Focus pseudo-skill.  Now compares focus level
+  to the character's level.
+
+  Fix export-toolbars to export stats and resists!  These were missing
+  the suffix ' Jewel' in the name of the gems causing only skills and
+  focus gems to be exported.
+
+  Very experimental 'other...' bonuses and effects added, allowing the
+  unusual bonus or effect to be typed in by the user.
+
+  Very experimental 'Effects' added.  Craftable items allows the choice
+  of one Alchemy Tincture to apply. For drop items allows to choose the
+  various offensive/reactive/charged or other (such as casted) effects.
+  These are not priced now, because the cost and price of the tincture
+  might not follow the costing rules of the current cost options, or
+  they might be customer-provided or even customer-applied.
+
+  Shrunk the size of saved template files by omitting any slot with no
+  effect ('Unused').
+
+  Behave nicely if the source-code user doesn't choose to install psyco.
+  This has no effect on folks who grab the installer.
+
+Updated 11/28/05 - Version 1.43.0011 (dev)
+
+  Moved 'Distance To Cap' to the Options window, save user's preference.
+
+  Remember the preference for Options - Include Done in Material list,
+  and Options - Coop/PvP server items check boxes.
+
+  Fixed the materials/costs of the Catacombs Brilliant and Finesse gems.
+  Fix materials window, when clicking a gem name, so the multiplier works.
+
+  Axed the 'Focus' list.  All Focuses are now listed under the Skills list.
+
+  Fixed the config report for 'All Spell Lines Focus' to show all focuses
+  (was dropping the first focus for the class.)
+
+  The [...] button for an item's level is a bit more useful & informative.
+
+  Cloth armor (any item with the same DPSAF as it's level) will be
+  reduced one level for computation of available imbue points.
+
+  Fixed the materials 'save as text' button, broken since the new Qt 3.4.
+
+  Fixed the 'delve', when clicking on stats, to pull up stat caps,
+  and when clicking on this toon's casting stat it also pulls up all 
+  of the 'Acuity' stat and cap bonuses; when clicking any power bonus
+  pull up all related power, % power pool and power cap bonuses; and
+  includes Skill and Focus bonuses when delving either on a caster.
+
+  Fixed loading a template, such that the chest piece doesn't become
+  a crafted item upon loading a saved template with a drop chest.
+  'Other Bonuses' list is now clickable (delves items with other skill).
+
+  Improve display on Mac/Aqua (still looks odd, and breaks Aqua rules).
+
+  Now importing older 'PvE' category as 'PvE Bonus' category.
+
+  Corrected caps for imported 'Healing Effectiveness', 'Duration of Spells'
+  and added 'Spell Piercing' bonus (as Mythic named it, not Resist Pierce).
+
+  Sorcerer +Mind fixed to display for +All Magic (even with no real benefit).
+  Ranger's Pathfinding skill changed from +all magic, to an 'other' skill.
+  Removed Valewalker Aboreal Focus, testing shows -no- gain, anymore.
+
+  Fixed two-row MultiTabBar so all the quirks since 1.43.0009 are cleaned up.
+
+  Added Offensive/Reactive/Charged/Other Effects slot types for drop items.
+
+
+Updated 11/02/05 - Version 1.43.0010 (dev)
+Fixed the Load item window, simplified the preview to display correctly.
+Fixed the Power cap (broken only in 1.43.0009).
+
+Updated 10/31/05 - Version 1.43.0009 (dev)
+Added server codes for Hector, Deria, Cumbria.
+Import non-Kort 'PvE' category as 'PvE Bonus' category.
+Fix stat-cap cap (max +25 stat cap items at level 50).
+Changed to a two-row-tabs layout of body & jewelry, without using tab 
+pages which required all of the controls to be shifted back and forth.
+Recoded the const tables to make them read-only (protection from bugs).
+Reformatted tables and fixed some values (Briton Spirit resist, etc.)
+Fixed SC Quickbar tables, but will be broken by future Mythic changes.
+Extended Quickbars to 30 bars (1-10 on 1st bar, 11-30 on 2nd/3rd bars).
+Added some of the new servers for the Fill in Quickbars feature.
+
+Ehrayn Updated 3/18/05 - Patch 1.0.7
+Display Racial Resists as +# when not included in total.
+Fix updating of many fields when switching realm/class/race on the fly.
+Restore the dropdown for Acuity Drop Stats bonus, broken in 1.0.5.
+Fix some report bugs, broken in the 1.0.5 overhaul.
+
+Ehrayn Updated 3/14/05 - Patch 1.0.6
+Warned ya that wouldn't last long - fix major foobar in 1.0.5 
+which broke all of the Cap Increases and Other Bonuses display.
+Also fixed some strange side effects of the Options window when
+not changing realms - now ensure we keep our old class/race.
+
+Ehrayn Updated 3/14/05 - Patch 1.0.5
+Allow change of Realm under options, WITHOUT erasing the template.
+Have refactored MANY tables, eliminated redundancy, support co-op templates.
+Renamed MANY effects, with new translation table (constants.py FixEffectsTable).
+Table changes provide new -faster- hash lookups.  Feel the burn.
+Filter the player-crafted drop-down effect list to class-specific skills.
+'Unrecognized' skills are added to the drop down list for information.
+Paladin and Reaver gain Piety as their classes Acuity stat.  
+Add Shield skill for Armsman and Valkyrie.  
+Removed non-Warden Nature skill from Wardens.
+
+Ehrayn Updated 3/08/05 - Patch 1.0.4
+HUGE speedup: prevent recursive/mutiple invocations of 'calculate()'
+Properly refresh + to Cap Stat/Pow/Hits when 'unset' to zero.
+Unequipped items are now included in cost/materials.
+Remove Blunt skill from Nightshade, give back Pacification to Healers.
+Drop Acuity stat for Rangers (casting pool is Str anyways.)
+Ignore Distance-To-Cap option entirely for the config report.
+Config report displays +cap effects but still does not observe/note caps.
+
+Ehrayn Updated 3/06/05 - Patch 1.0.3
+Allow Bonus, DPS/AF and Speed for crafted items.
+Finished some GUI Cleanup, allow all 10 gems always, caps show w/ stats.
+Polearm for Armsman only (not Paladin).
+Added PvE-Only Bonuses, recoded all cap logic (watch for bugs).
+
+Ehrayn Updated 2/24/05 - Patch 1.0.2
+GUI Cleanups, shrunk the top panel to make more space for slots.
+Corrected several lingering QtPy .ui source file problems.
+
+Ehrayn Updated 2/23/05 - Patch 1.0.1
+Removed Materials/Options buttons, moved to the Reports menu.
+Added Warning if Finesse stone +2 or higher is chosen
+Fixed Calulation for Finesse/Brilliant prices.
+
+Ehrayn Updated 2/23/05 - Patch 1.0.0
+Added all Catacombs and +all melee/magic gems (patch 1.74).
+Added all new Catacombs classes.
+Reorganized logic for gems with conflicting names.
+Corrected Verdant Path Focus, as a Mineral Encrusted Spell Stone.
+Corrected Briton's resists (Cold).
+GUI Cleanups, moved Hits/Pow to the 'Stats' list.
+Version number is now in the 'About' box, only.
+
+Updated 4/10/04 - Version 1.42b
+Options will now save correctly.
+
+Updated 4/10/04 - Version 1.42a
+Fixed template loading problem.
+
+Updated 4/10/04 - Version 1.42
+Gems now sort properly on the materials list.
+Fixed a bug with distance to cap config reports.
+Racial resists will now update properly when loading a template.
+Added option to not include racial resists in totals.
+Fixed an issue with the Spellcraft.xml file preventing proper startup.
+
+Updated 4/04/04 - Version 1.41
+Fixed a couple of gem recepies.
+Added multiplier spinbox on materials report.
+The second column in the Resists box now shows racial resists, there is a drop down box below character level where you can set race type. When Total Bonus is selected, the Racial Resists will be added into the total.
+In the options dialog, next to realm selection, there is a checkbox for Coop/PvP servers. This will allow you to load an item from any realm.
+The installer should hopefully work correctly without having to uninstall/reinstall the software. Please give me feedback if this does/doesn't work.
+Updated 3/25/04 - Version 1.40a
+Fixed 0-byte saves.
+
+Updated 3/23/04 - Version 1.40
+Hopefully all the problems with distance to cap and unicode-<UTF-8 are fixed.
+If you are upgrading to this version, use the full installer. The program I used to generate the .exe has changed.
+
+Updated 3/13/04 - Version 1.39
+Fixed Distance to cap problem, which should fix the Error Loading Template Problem.
+
+Updated 3/13/04 - Version 1.38
+Fixed remaining unicode problems. Fixed line breaks and the column break tag for the UI folks.
+
+Updated 3/13/04 - Version 1.37
+Other bonuses will now show distance to cap.
+Fixed problems with importing items with non-ascii characters
+Added blank lines and columns for the UI mod people
+
+Updated 3/09/04 - Version 1.36
+Cap Increases will now add up properly in the Other Bonuses List
+Fixed a problem where selecting some jewelry tabs would cause things to not update properly
+Added beta version of UI XML generation for the UI Mod folks
+
+Updated 2/26/04 - Version 1.35
+Fixed problem with templates :\
+
+Updated 2/26/04 - Version 1.35
+Cap increases will now show in the Other Bonuses list
+
+Updated 2/17/04 - Version 1.34
+Fixed problem with acuity and wardens
+
+Updated 1/18/04 - Version 1.33
+Fixed a problem were stats from a loaded item wouldn't update until you toggled the Player/Drop button.
+
+Updated 1/18/04 - Version 1.32
+Fixed problem with defaults file that wouldn't get you open the calculator.
+
+Updated 1/18/04 - Version 1.31
+Fixed bug _again_ that was crashing setting up craft bars for european players
+Fixed utility discrepancy with the item previewer
+Fixed problems relating to Linux - it should run ok on it now.
+
+Updated 1/17/04 - Version 1.30
+Added recent files on the File Menu.
+The path to Daoc in craft bar setup will now be persistent.
+The assigned config report template will not be persistent.
+Fixed small problem with config report crashing.
+Cleaned up the "Save As Text" option so there should be fewer spaces.
+
+Updated 1/14/04 - Version 1.29
+Gems will now be placed in piece order when setting up craft bars.
+Acuity now properly increases piety for Friars and Clerics.
+Added a new report tag, - prevents an item from printing in a config report if it is totally empty
+Example:
+
+
+This woudl not print if there are no stats ont he chest piece
+
+
+
+Updated 1/5/04 - Version 1.28
+Fixed a problem some international users were having with pricing.
+The equipped checkboxes now work correctly on all tabs
+You can now have 4 focus bonuses (hey someone asked for it...)
+
+Updated 1/1/04 - Version 1.27
+Window size/position is now persistent
+Materials will now be subtracted from Expected Materials on the crafting window when a gem is marked as done
+
+Updated 12/31/03 - Version 1.26
+Fixed typo with Hand to Hand
+Item locator window now handles +All slots correctly
+
+Updated 12/21/03 - Version 1.25
+Added Swap Gems With... option to the Tools menu.
+
+Updated 12/16/03 - Version 1.24
+Fixed problem where the materials list would not show for painworking and Verdant Path Focuses.
+Added Archery Range Bonus
+
+Updated 12/11/03 - Version 1.23
+Fixed small bug when importing Leladia templates
+
+Updated 12/09/03 - Version 1.22
+Added fatique under other bonuses
+Fixed Painworking spelling error
+
+Updated 12/02/03 - Version 1.21
+Added Acuity stat and cap increase
+
+Updated 11/24/03 - Version 1.20
+Fixed mispelling of Hurture
+Removed Critical Strike from +All Melee Skills
+Fixed bug in item level calculator where selecting non-shield items after selecting shield would not re-enable the af/dps box.
+
+Updated 11/23/03 - Version 1.19
+Drops now have 10 slots (for artifacts)
+Fixed problem with All Focus Bonus and Enchanters/Mentalists
+European players can now use the setup craft bars option properly
+You can now scroll around the window if it is too small to view everything
+
+Updated 11/21/03 - Version 1.18
+Fixed a problem where the config report would not generate properly in Distance To Cap Mode
+Fixed a problem where stats would cease to update.
+
+Updated 11/18/03 - Version 1.17
+All Magic Skills for Albion now adds Cold Magic and not Ice Magic
+Arrow keys now work on the combo boxes again
+
+Updated 11/17/03 - Version 1.16
+Fixed problem where combo boxes were not updated when being selected with the keyboard.
+
+Updated 11/16/03 - Version 1.15
+Combo boxes are now searchable by typing the first letter of items in them.
+
+Updated 11/14/03 - Version 1.14
+Cancelling while loading an item no longer loads the last item anyways.
+Bonus now displays properly on config report
+Items should get saved in the proper location
+
+Updated 11/13/03 - Version 1.13
+Increased speed of Config Report
+Crafterskill and realm will now save properly.
+Lists will update properly on realm change
+
+Updated 11/13/03 - Version 1.12
+Fixed problem where Config Report would hang on ToA bonuses
+Cap Increases will not show as stat increases in the locations window
+Stats now properly update when Class is changed
+
+Updated 11/11/03 - Version 1.11
+Fixed problem with crash on saving.
+Added filename on window
+Save verification now asks on 'New' and is more sane
+
+Updated 11/11/03 - Version 1.10
+Fixed problem with materials list
+Fixed problem with non-numeric characters in Amount field
+Added item previewer
+
+Updated 11/10/03 - Version 1.09
+Fixed a bug with Overcharge Point pricing
+Pricing will now be persistent across sessions
+Fixed bug where Mystical Essence Gems would not be automatically setup properly.
+
+Updated 11/09/03 - Version 1.08
+Fixed problem with materials list generation.
+
+Updated 11/09/03 - Version 1.07
+Implemented pricing window
+Fixed problem where crafting times were not being saved properly
+Items marked as 'All' should now import properly
+
+Updated 11/08/03 - Version 1.06
+When setting up craft bars, you can now select individual pieces
+Fixed tab order on main window
+You can now arrow through tabs
+
+Updated 11/06/03 - Version 1.05
+Added ability to attach notes to a template
+Added ability to set up hotbars with gems in game (NEEDS TESTING!)
+Exclude done items from materials list checkbox will now save its state during a session
+
+Updated 11/05/03 - Version 1.04
+Fixed item import bug with the 'Equipped' flag
+Added checkbox in Options to exclude done gems from materials list
+Gem Names/Dusts/Liquids should now display in merchant order on materials list
+Added 'About' box.
+Fixed a problem where +All Magic Skills was adding 'Smiting' and not 'Smite'
+
+Updated 11/05/03 - Version 1.03
+Fixed bug that wouldn't let you Unequip and item
+
+Updated 11/02/03 - Version 1.02
+Fixed Gem ordering in Materials report
+Fixed erroneous duplicate gem error
+Can now click on skills (not skills from +ALL bonuses) to get their piece locations
+
+Updated 11/02/03 - Version 1.01
+Fixed flexible gem lookup problem
+
+Updated 11/02/03 - Version 1.0
+Added version label!
+
+Updated 11/02/03
+Fixed some cost calculation issues
+Templates now save the craft multiplier
+Fixed bug with Scythe skill and gem materials
+Implemented report scripting for the Config Report, see reports/Reports.txt for details
+
+Updated 10/31/03
+Tighted up the UI for our low resolution users
+Changed ordering of Gem Names in the Materials List to more match merchants
+
+Updated 10/31/03
+Fixed some weird widget display issues
+
+Updated 10/29/03
+Fixed a problem with import Hand to Hand gems
+Added the ability to click on Skill labels and such
+Fixed default paths on Saving/Opening
+Added *.wrist to bracer item load
+
+Updated 10/28/03
+Minor Bugfixes
+The Materials/Config reports are in!
+
+Updated 10/28/03
+Added Materials Expected to the craft dialog.
+Fixed a slight problem with materials calculation.
+The Materials/Config reports will be finished soon, I promise.
+
+Updated 10/28/03
+Added all ToA Item Bonuses (hopefully they work correctly).
+Fixed a problem with saving 'Hands' Item.
+
+Updated 10/25/03
+Implemented Craft window.
+Changed Windows installer to use the PyExe/distutils distribution
+
+Updated 10/23/03
+Fixed 5.5 imbues showing as impossible
+Suppressed combo box errors
+Added error warnings for Duplicate Gems / Impossible OCs
+Distance to cap now adjusts with char level
+
+Updated 10/23/03
+Fixed missing python23.dll in Windows installer
+Suppressed Dos Box
+
+Updated 10/22/03 - Bugfixes:
+Fixed some display and cost calculation issues.
+Leladia's .scc files can now be imported (Leladia v.2.0 only)

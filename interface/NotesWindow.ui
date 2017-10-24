@@ -1,0 +1,83 @@
+<ui version="4.0" stdsetdef="1" >
+  <author></author>
+  <comment></comment>
+  <exportmacro></exportmacro>
+  <class>B_NotesWindow</class>
+  <widget class="QDialog" name="B_NotesWindow" >
+    <property name="geometry" >
+      <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>364</width>
+        <height>306</height>
+      </rect>
+    </property>
+    <property name="windowTitle" >
+      <string>Notes</string>
+    </property>
+    <widget class="QLabel" name="B_NotesDialog" >
+      <property name="geometry" >
+        <rect>
+          <x>23</x>
+          <y>3</y>
+          <width>83</width>
+          <height>16</height>
+        </rect>
+      </property>
+      <property name="text" >
+        <string>Template Notes:</string>
+      </property>
+    </widget>
+    <widget class="QTextEdit" name="NoteText" >
+      <property name="geometry" >
+        <rect>
+          <x>16</x>
+          <y>24</y>
+          <width>336</width>
+          <height>237</height>
+        </rect>
+      </property>
+    </widget>
+    <widget class="QPushButton" name="PushButton8" >
+      <property name="geometry" >
+        <rect>
+          <x>49</x>
+          <y>271</y>
+          <width>93</width>
+          <height>27</height>
+        </rect>
+      </property>
+      <property name="text" >
+        <string>Save</string>
+      </property>
+    </widget>
+    <widget class="QPushButton" name="PushButton9" >
+      <property name="geometry" >
+        <rect>
+          <x>219</x>
+          <y>271</y>
+          <width>93</width>
+          <height>26</height>
+        </rect>
+      </property>
+      <property name="text" >
+        <string>Cancel</string>
+      </property>
+    </widget>
+  </widget>
+  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
+  <connections>
+    <connection>
+      <sender>PushButton8</sender>
+      <signal>clicked()</signal>
+      <receiver>B_NotesWindow</receiver>
+      <slot>accept()</slot>
+    </connection>
+    <connection>
+      <sender>PushButton9</sender>
+      <signal>clicked()</signal>
+      <receiver>B_NotesWindow</receiver>
+      <slot>reject()</slot>
+    </connection>
+  </connections>
+</ui>

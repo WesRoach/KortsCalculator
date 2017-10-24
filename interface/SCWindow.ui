@@ -1,0 +1,2716 @@
+<ui version="4.0" >
+ <class>B_SC</class>
+ <widget class="QMainWindow" name="B_SC" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>761</width>
+    <height>510</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Spellcrafting Calculator</string>
+  </property>
+  <widget class="QWidget" name="ScWinFrame" >
+   <layout class="QGridLayout" >
+    <property name="margin" >
+     <number>3</number>
+    </property>
+    <property name="spacing" >
+     <number>4</number>
+    </property>
+    <item row="0" column="0" >
+     <widget class="GroupFrame" name="GroupCharInfo" >
+      <property name="frameShape" >
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="lineWidth" >
+       <number>1</number>
+      </property>
+      <layout class="QGridLayout" >
+       <property name="margin" >
+        <number>4</number>
+       </property>
+       <property name="spacing" >
+        <number>0</number>
+       </property>
+       <item row="0" column="0" >
+        <widget class="QLabel" name="LabelCharName" >
+         <property name="text" >
+          <string>&amp;Name: </string>
+         </property>
+         <property name="textFormat" >
+          <enum>Qt::PlainText</enum>
+         </property>
+         <property name="buddy" >
+          <cstring>CharName</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" colspan="3" >
+        <widget class="QLineEdit" name="CharName" />
+       </item>
+       <item row="1" column="0" >
+        <widget class="QLabel" name="LabelRealm" >
+         <property name="text" >
+          <string>Realm: </string>
+         </property>
+         <property name="textFormat" >
+          <enum>Qt::PlainText</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1" colspan="3" >
+        <widget class="SearchingCombo" name="Realm" />
+       </item>
+       <item row="2" column="0" >
+        <widget class="QLabel" name="LabelCharClass" >
+         <property name="text" >
+          <string>Class: </string>
+         </property>
+         <property name="textFormat" >
+          <enum>Qt::PlainText</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1" colspan="3" >
+        <widget class="SearchingCombo" name="CharClass" />
+       </item>
+       <item row="3" column="0" >
+        <widget class="QLabel" name="LabelCharRace" >
+         <property name="text" >
+          <string>Race: </string>
+         </property>
+         <property name="textFormat" >
+          <enum>Qt::PlainText</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1" colspan="3" >
+        <widget class="SearchingCombo" name="CharRace" />
+       </item>
+       <item row="4" column="0" >
+        <widget class="QLabel" name="LabelCharLevel" >
+         <property name="text" >
+          <string>Level: </string>
+         </property>
+         <property name="textFormat" >
+          <enum>Qt::PlainText</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1" >
+        <widget class="QLineEdit" name="CharLevel" />
+       </item>
+       <item row="4" column="2" >
+        <widget class="QLabel" name="LabelRealmRank" >
+         <property name="text" >
+          <string>RR: </string>
+         </property>
+         <property name="textFormat" >
+          <enum>Qt::PlainText</enum>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="3" >
+        <widget class="QLineEdit" name="RealmRank" />
+       </item>
+       <item row="5" column="0" >
+        <widget class="QLabel" name="LabelCraftTime" >
+         <property name="text" >
+          <string>Time: </string>
+         </property>
+         <property name="textFormat" >
+          <enum>Qt::PlainText</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1" >
+        <widget class="QLineEdit" name="CraftTime" />
+       </item>
+       <item row="5" column="2" >
+        <widget class="QLabel" name="LabelChampionLevel" >
+         <property name="text" >
+          <string>CL: </string>
+         </property>
+         <property name="textFormat" >
+          <enum>Qt::PlainText</enum>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="3" >
+        <widget class="QLineEdit" name="ChampionLevel" />
+       </item>
+       <item row="6" column="0" >
+        <widget class="QLabel" name="LabelOutfitName" >
+         <property name="text" >
+          <string>&amp;Outfit: </string>
+         </property>
+         <property name="textFormat" >
+          <enum>Qt::PlainText</enum>
+         </property>
+         <property name="buddy" >
+          <cstring>OutfitName</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1" colspan="3" >
+        <widget class="SearchingCombo" name="OutfitName" >
+         <property name="editable" >
+          <bool>true</bool>
+         </property>
+         <property name="insertPolicy" >
+          <enum>QComboBox::NoInsert</enum>
+         </property>
+         <property name="duplicatesEnabled" >
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0" colspan="4" >
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType" >
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>1</width>
+           <height>3</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="8" column="0" >
+        <widget class="QLabel" name="LabelTotalCost" >
+         <property name="text" >
+          <string>Cost: </string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="1" colspan="3" >
+        <widget class="QLabel" name="TotalCost" >
+         <property name="text" >
+          <string>0</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="0" >
+        <widget class="QLabel" name="LabelTotalPrice" >
+         <property name="text" >
+          <string>Price: </string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="1" colspan="3" >
+        <widget class="QLabel" name="TotalPrice" >
+         <property name="text" >
+          <string>0</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="0" colspan="4" >
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType" >
+          <enum>QSizePolicy::MinimumExpanding</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>1</width>
+           <height>0</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="1" >
+     <widget class="GroupFrame" name="GroupStats" >
+      <property name="frameShape" >
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="lineWidth" >
+       <number>1</number>
+      </property>
+      <layout class="QGridLayout" >
+       <property name="margin" >
+        <number>4</number>
+       </property>
+       <property name="spacing" >
+        <number>0</number>
+       </property>
+       <item row="0" column="0" >
+        <widget class="QLabel" name="StrengthLabel" >
+         <property name="text" >
+          <string>STR: </string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" >
+        <widget class="QLabel" name="Strength" >
+         <property name="text" >
+          <string>0</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2" >
+        <widget class="QLabel" name="StrengthCap" >
+         <property name="text" >
+          <string>-</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" >
+        <widget class="QLabel" name="ConstitutionLabel" >
+         <property name="text" >
+          <string>CON: </string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1" >
+        <widget class="QLabel" name="Constitution" >
+         <property name="text" >
+          <string>0</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2" >
+        <widget class="QLabel" name="ConstitutionCap" >
+         <property name="text" >
+          <string>-</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" >
+        <widget class="QLabel" name="DexterityLabel" >
+         <property name="text" >
+          <string>DEX: </string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1" >
+        <widget class="QLabel" name="Dexterity" >
+         <property name="text" >
+          <string>0</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2" >
+        <widget class="QLabel" name="DexterityCap" >
+         <property name="text" >
+          <string>-</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0" >
+        <widget class="QLabel" name="QuicknessLabel" >
+         <property name="text" >
+          <string>QUI: </string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1" >
+        <widget class="QLabel" name="Quickness" >
+         <property name="text" >
+          <string>0</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2" >
+        <widget class="QLabel" name="QuicknessCap" >
+         <property name="text" >
+          <string>-</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0" >
+        <widget class="QLabel" name="IntelligenceLabel" >
+         <property name="text" >
+          <string>INT: </string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1" >
+        <widget class="QLabel" name="Intelligence" >
+         <property name="text" >
+          <string>0</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="2" >
+        <widget class="QLabel" name="IntelligenceCap" >
+         <property name="text" >
+          <string>-</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0" >
+        <widget class="QLabel" name="PietyLabel" >
+         <property name="text" >
+          <string>PIE: </string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1" >
+        <widget class="QLabel" name="Piety" >
+         <property name="text" >
+          <string>0</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="2" >
+        <widget class="QLabel" name="PietyCap" >
+         <property name="text" >
+          <string>-</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0" >
+        <widget class="QLabel" name="CharismaLabel" >
+         <property name="text" >
+          <string>CHA: </string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1" >
+        <widget class="QLabel" name="Charisma" >
+         <property name="text" >
+          <string>0</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="2" >
+        <widget class="QLabel" name="CharismaCap" >
+         <property name="text" >
+          <string>-</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0" >
+        <widget class="QLabel" name="EmpathyLabel" >
+         <property name="text" >
+          <string>EMP: </string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1" >
+        <widget class="QLabel" name="Empathy" >
+         <property name="text" >
+          <string>0</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="2" >
+        <widget class="QLabel" name="EmpathyCap" >
+         <property name="text" >
+          <string>-</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="0" >
+        <widget class="QLabel" name="AcuityLabel" >
+         <property name="text" >
+          <string>ACU: </string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="1" >
+        <widget class="QLabel" name="Acuity" >
+         <property name="text" >
+          <string>0</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="2" >
+        <widget class="QLabel" name="AcuityCap" >
+         <property name="text" >
+          <string>-</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="0" >
+        <widget class="QLabel" name="PowerLabel" >
+         <property name="text" >
+          <string>Pow: </string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="1" >
+        <widget class="QLabel" name="Power" >
+         <property name="text" >
+          <string>0</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="2" >
+        <widget class="QLabel" name="PowerCap" >
+         <property name="text" >
+          <string>-</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="0" >
+        <widget class="QLabel" name="PowerPoolLabel" >
+         <property name="text" >
+          <string>PP%: </string>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="1" >
+        <widget class="QLabel" name="PowerPool" >
+         <property name="text" >
+          <string>0</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="2" >
+        <widget class="QLabel" name="PowerPoolCap" >
+         <property name="text" >
+          <string>-</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="0" >
+        <widget class="QLabel" name="FatigueLabel" >
+         <property name="text" >
+          <string>End: </string>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="1" >
+        <widget class="QLabel" name="Fatigue" >
+         <property name="text" >
+          <string>0</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="2" >
+        <widget class="QLabel" name="FatigueCap" >
+         <property name="text" >
+          <string>-</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="12" column="0" >
+        <widget class="QLabel" name="AFLabel" >
+         <property name="text" >
+          <string>AF: </string>
+         </property>
+        </widget>
+       </item>
+       <item row="12" column="1" >
+        <widget class="QLabel" name="AF" >
+         <property name="text" >
+          <string>0</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="12" column="2" >
+        <widget class="QLabel" name="AFCap" >
+         <property name="text" >
+          <string>-</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="13" column="0" >
+        <widget class="QLabel" name="HitsLabel" >
+         <property name="text" >
+          <string>Hits: </string>
+         </property>
+        </widget>
+       </item>
+       <item row="13" column="1" >
+        <widget class="QLabel" name="Hits" >
+         <property name="text" >
+          <string>0</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="13" column="2" >
+        <widget class="QLabel" name="HitsCap" >
+         <property name="text" >
+          <string>-</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="14" column="0" colspan="3" >
+        <layout class="QHBoxLayout" >
+         <property name="margin" >
+          <number>0</number>
+         </property>
+         <property name="spacing" >
+          <number>5</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="LabelTotalUtility" >
+           <property name="text" >
+            <string>Utility: </string>
+           </property>
+           <property name="alignment" >
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="TotalUtility" >
+           <property name="text" >
+            <string>0.0</string>
+           </property>
+           <property name="alignment" >
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="15" column="0" colspan="3" >
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType" >
+          <enum>QSizePolicy::MinimumExpanding</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>1</width>
+           <height>0</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="2" >
+     <widget class="GroupFrame" name="GroupResists" >
+      <property name="frameShape" >
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="lineWidth" >
+       <number>1</number>
+      </property>
+      <layout class="QGridLayout" >
+       <property name="margin" >
+        <number>4</number>
+       </property>
+       <property name="spacing" >
+        <number>0</number>
+       </property>
+       <item row="0" column="0" >
+        <widget class="QLabel" name="BodyLabel" >
+         <property name="text" >
+          <string>Body: </string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" >
+        <widget class="QLabel" name="Body" >
+         <property name="text" >
+          <string>0</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2" >
+        <widget class="QLabel" name="BodyCap" >
+         <property name="text" >
+          <string>-</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" >
+        <widget class="QLabel" name="ColdLabel" >
+         <property name="text" >
+          <string>Cold: </string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1" >
+        <widget class="QLabel" name="Cold" >
+         <property name="text" >
+          <string>0</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2" >
+        <widget class="QLabel" name="ColdCap" >
+         <property name="text" >
+          <string>-</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" >
+        <widget class="QLabel" name="HeatLabel" >
+         <property name="text" >
+          <string>Heat: </string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1" >
+        <widget class="QLabel" name="Heat" >
+         <property name="text" >
+          <string>0</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2" >
+        <widget class="QLabel" name="HeatCap" >
+         <property name="text" >
+          <string>-</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0" >
+        <widget class="QLabel" name="EnergyLabel" >
+         <property name="text" >
+          <string>Energy: </string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1" >
+        <widget class="QLabel" name="Energy" >
+         <property name="text" >
+          <string>0</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2" >
+        <widget class="QLabel" name="EnergyCap" >
+         <property name="text" >
+          <string>-</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0" >
+        <widget class="QLabel" name="MatterLabel" >
+         <property name="text" >
+          <string>Matter: </string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1" >
+        <widget class="QLabel" name="Matter" >
+         <property name="text" >
+          <string>0</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="2" >
+        <widget class="QLabel" name="MatterCap" >
+         <property name="text" >
+          <string>-</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0" >
+        <widget class="QLabel" name="SpiritLabel" >
+         <property name="text" >
+          <string>Spirit: </string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1" >
+        <widget class="QLabel" name="Spirit" >
+         <property name="text" >
+          <string>0</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="2" >
+        <widget class="QLabel" name="SpiritCap" >
+         <property name="text" >
+          <string>-</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0" >
+        <widget class="QLabel" name="CrushLabel" >
+         <property name="text" >
+          <string>Crush: </string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1" >
+        <widget class="QLabel" name="Crush" >
+         <property name="text" >
+          <string>0</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="2" >
+        <widget class="QLabel" name="CrushCap" >
+         <property name="text" >
+          <string>-</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0" >
+        <widget class="QLabel" name="ThrustLabel" >
+         <property name="text" >
+          <string>Thrust: </string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1" >
+        <widget class="QLabel" name="Thrust" >
+         <property name="text" >
+          <string>0</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="2" >
+        <widget class="QLabel" name="ThrustCap" >
+         <property name="text" >
+          <string>-</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="0" >
+        <widget class="QLabel" name="SlashLabel" >
+         <property name="text" >
+          <string>Slash: </string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="1" >
+        <widget class="QLabel" name="Slash" >
+         <property name="text" >
+          <string>0</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="2" >
+        <widget class="QLabel" name="SlashCap" >
+         <property name="text" >
+          <string>-</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="0" >
+        <widget class="QLabel" name="EssenceLabel" >
+         <property name="text" >
+          <string>Essence: </string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="1" >
+        <widget class="QLabel" name="Essence" >
+         <property name="text" >
+          <string>0</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="2" >
+        <widget class="QLabel" name="EssenceCap" >
+         <property name="text" >
+          <string>-</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="0" colspan="3" >
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType" >
+          <enum>QSizePolicy::MinimumExpanding</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>1</width>
+           <height>1</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="3" >
+     <widget class="GroupFrame" name="GroupSkillsList" >
+      <property name="frameShape" >
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="lineWidth" >
+       <number>1</number>
+      </property>
+      <layout class="QGridLayout" >
+       <property name="margin" >
+        <number>4</number>
+       </property>
+       <property name="spacing" >
+        <number>0</number>
+       </property>
+       <item row="0" column="0" >
+        <widget class="SkillsView" native="1" name="SkillsList" >
+         <property name="sizePolicy" >
+          <sizepolicy>
+           <hsizetype>7</hsizetype>
+           <vsizetype>7</vsizetype>
+           <horstretch>1</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="focusPolicy" >
+          <enum>Qt::StrongFocus</enum>
+         </property>
+         <property name="frameShape" >
+          <enum>QFrame::NoFrame</enum>
+         </property>
+         <property name="frameShadow" >
+          <enum>QFrame::Plain</enum>
+         </property>
+         <property name="lineWidth" >
+          <number>0</number>
+         </property>
+         <property name="verticalScrollBarPolicy" >
+          <enum>Qt::ScrollBarAlwaysOff</enum>
+         </property>
+         <property name="horizontalScrollBarPolicy" >
+          <enum>Qt::ScrollBarAsNeeded</enum>
+         </property>
+         <property name="autoScroll" >
+          <bool>true</bool>
+         </property>
+         <property name="editTriggers" >
+          <set>QAbstractItemView::NoEditTriggers</set>
+         </property>
+         <property name="isWrapping" stdset="0" >
+          <bool>true</bool>
+         </property>
+         <property name="resizeMode" >
+          <enum>QListView::Adjust</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="0" colspan="4" >
+     <layout class="QVBoxLayout" >
+      <property name="margin" >
+       <number>0</number>
+      </property>
+      <property name="spacing" >
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="MultiTabBar" native="1" name="PieceTab" >
+        <property name="focusPolicy" >
+         <enum>Qt::StrongFocus</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer>
+        <property name="orientation" >
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeType" >
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
+        <property name="sizeHint" >
+         <size>
+          <width>1</width>
+          <height>1</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="MultiTabFrame" native="1" name="GroupItemFrame" >
+         <property name="sizePolicy" >
+          <sizepolicy>
+           <hsizetype>7</hsizetype>
+           <vsizetype>5</vsizetype>
+           <horstretch>0</horstretch>
+           <verstretch>1</verstretch>
+          </sizepolicy>
+         </property>
+        <layout class="QVBoxLayout" >
+         <property name="margin" >
+          <number>6</number>
+         </property>
+         <property name="spacing" >
+          <number>0</number>
+         </property>
+         <item>
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeType" >
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" >
+            <size>
+             <width>1</width>
+             <height>2</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" >
+           <property name="margin" >
+            <number>0</number>
+           </property>
+           <property name="spacing" >
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="ItemLevelLabel" >
+             <property name="text" >
+              <string>&amp;Level: </string>
+             </property>
+             <property name="textFormat" >
+              <enum>Qt::PlainText</enum>
+             </property>
+             <property name="buddy" >
+              <cstring>ItemLevel</cstring>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="ItemLevel" />
+           </item>
+           <item>
+            <widget class="QPushButton" name="ItemLevelButton" >
+             <property name="maximumSize" >
+              <size>
+               <width>21</width>
+               <height>21</height>
+              </size>
+             </property>
+             <property name="text" >
+              <string>...</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="ItemQualityLabel" >
+             <property name="text" >
+              <string>Quality: </string>
+             </property>
+             <property name="textFormat" >
+              <enum>Qt::PlainText</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="SearchingCombo" name="QualDrop" />
+           </item>
+           <item>
+            <widget class="QLineEdit" name="QualEdit" />
+           </item>
+           <item>
+            <widget class="QLabel" name="ItemNameLabel" >
+             <property name="text" >
+              <string>Item &amp;Name: </string>
+             </property>
+             <property name="textFormat" >
+              <enum>Qt::PlainText</enum>
+             </property>
+             <property name="buddy" >
+              <cstring>ItemNameCombo</cstring>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="SearchingCombo" name="ItemNameCombo" >
+             <property name="sizePolicy" >
+              <sizepolicy>
+               <hsizetype>7</hsizetype>
+               <vsizetype>0</vsizetype>
+               <horstretch>20</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="editable" >
+              <bool>true</bool>
+             </property>
+             <property name="insertPolicy" >
+              <enum>QComboBox::NoInsert</enum>
+             </property>
+             <property name="duplicatesEnabled" >
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="Equipped" >
+             <property name="text" >
+              <string>Equi&amp;pped</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="ToggleItemView" >
+             <property name="text" >
+              <string>Item Slots</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QStackedLayout" >
+           <property name="margin" >
+            <number>0</number>
+           </property>
+           <property name="spacing" >
+            <number>0</number>
+           </property>
+           <item>
+           <widget class="QWidget" name="ItemSummaryFrame" >
+            <layout class="QHBoxLayout" >
+             <property name="margin" >
+              <number>0</number>
+             </property>
+             <property name="spacing" >
+              <number>9</number>
+             </property>
+             <item>
+              <widget class="QWidget" name="ItemInfoFrame" >
+              <layout class="QVBoxLayout" >
+               <property name="margin" >
+                <number>0</number>
+               </property>
+               <property name="spacing" >
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="LabelItemInfo" >
+                 <property name="text" >
+                  <string>Item Information:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="ScrollArea" native="1" name="ScrollItemInfo" >
+                 <property name="sizePolicy" >
+                  <sizepolicy>
+                   <hsizetype>0</hsizetype>
+                   <vsizetype>5</vsizetype>
+                   <horstretch>0</horstretch>
+                   <verstretch>1</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="frameShape" >
+                  <enum>QFrame::NoFrame</enum>
+                 </property>
+                 <property name="verticalScrollBarPolicy" >
+                  <enum>Qt::ScrollBarAsNeeded</enum>
+                 </property>
+                 <property name="horizontalScrollBarPolicy" >
+                  <enum>Qt::ScrollBarAlwaysOff</enum>
+                 </property>
+                 <widget class="QWidget" name="ItemInfoGrid" >
+
+                <layout class="QGridLayout" >
+                 <property name="margin" >
+                  <number>0</number>
+                 </property>
+                 <property name="spacing" >
+                  <number>0</number>
+                 </property>
+                 <item row="0" column="0" >
+                  <widget class="QLabel" name="LabelItemRealm" >
+                   <property name="text" >
+                    <string>Realm: </string>
+                   </property>
+                   <property name="textFormat" >
+                    <enum>Qt::PlainText</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1" colspan="3" >
+                  <widget class="SearchingCombo" name="ItemRealm" />
+                 </item>
+                 <item row="1" column="0" >
+                  <widget class="QLabel" name="LabelItemType" >
+                   <property name="text" >
+                    <string>Type: </string>
+                   </property>
+                   <property name="textFormat" >
+                    <enum>Qt::PlainText</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1" colspan="3" >
+                  <widget class="SearchingCombo" name="ItemType" />
+                 </item>
+                 <item row="2" column="0" >
+                  <widget class="QLabel" name="LabelItemSource" >
+                   <property name="text" >
+                    <string>Origin: </string>
+                   </property>
+                   <property name="textFormat" >
+                    <enum>Qt::PlainText</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1" colspan="3" >
+                  <widget class="SearchingCombo" name="ItemSource" />
+                 </item>
+                 <item row="3" column="0" >
+                  <widget class="QLabel" name="LabelBonusEdit" >
+                   <property name="text" >
+                    <string>Bonus: </string>
+                   </property>
+                   <property name="textFormat" >
+                    <enum>Qt::PlainText</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="1" >
+                  <widget class="QLineEdit" name="BonusEdit" />
+                 </item>
+                 <item row="3" column="2" >
+                  <widget class="QLabel" name="LabelAFDPSEdit" >
+                   <property name="text" >
+                    <string>DPS: </string>
+                   </property>
+                   <property name="textFormat" >
+                    <enum>Qt::PlainText</enum>
+                   </property>
+                   <property name="alignment" >
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="3" >
+                  <widget class="QLineEdit" name="AFDPSEdit" />
+                 </item>
+                 <item row="4" column="0" >
+                  <widget class="QLabel" name="LabelSpeedEdit" >
+                   <property name="text" >
+                    <string>Speed: </string>
+                   </property>
+                   <property name="textFormat" >
+                    <enum>Qt::PlainText</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="1" >
+                  <widget class="QLineEdit" name="SpeedEdit" />
+                 </item>
+                 <item row="4" column="2" colspan="2" >
+                  <layout class="QHBoxLayout" >
+                   <property name="margin" >
+                    <number>0</number>
+                   </property>
+                   <property name="spacing" >
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <spacer>
+                     <property name="orientation" >
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeType" >
+                      <enum>QSizePolicy::Minimum</enum>
+                     </property>
+                     <property name="sizeHint" >
+                      <size>
+                       <width>1</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item>
+                    <widget class="QCheckBox" name="Offhand" >
+                     <property name="text" >
+                      <string>Offhand</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item row="5" column="0" >
+                  <widget class="QLabel" name="LabelDamageType" >
+                   <property name="text" >
+                    <string>Damage: </string>
+                   </property>
+                   <property name="textFormat" >
+                    <enum>Qt::PlainText</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="5" column="1" colspan="3" >
+                  <widget class="SearchingCombo" name="DamageType" />
+                 </item>
+                 <item row="6" column="0" colspan="4" >
+                  <widget class="QLabel" name="LabelItemRequirement" >
+                   <property name="text" >
+                    <string>Requirement: </string>
+                   </property>
+                   <property name="textFormat" >
+                    <enum>Qt::PlainText</enum>
+                   </property>
+                   <property name="alignment" >
+                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignBottom</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="7" column="0" colspan="4" >
+                  <widget class="QLineEdit" name="ItemRequirement" />
+                 </item>
+                 <item row="8" column="0" colspan="4" >
+                  <spacer>
+                   <property name="orientation" >
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeType" >
+                    <enum>QSizePolicy::MinimumExpanding</enum>
+                   </property>
+                   <property name="sizeHint" >
+                    <size>
+                     <width>1</width>
+                     <height>1</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="9" column="0" >
+                  <widget class="QLabel" name="LabelDBSource" >
+                   <property name="text" >
+                    <string>Source: </string>
+                   </property>
+                   <property name="textFormat" >
+                    <enum>Qt::PlainText</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="9" column="1" colspan="3" >
+                  <widget class="QLabel" name="DBSource" >
+                   <property name="text" >
+                    <string/>
+                   </property>
+                   <property name="textFormat" >
+                    <enum>Qt::PlainText</enum>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+
+                 </widget>
+                </widget>
+               </item>
+              </layout>
+              </widget>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" >
+               <property name="margin" >
+                <number>0</number>
+               </property>
+               <property name="spacing" >
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="LabelClassRestrictionTable" >
+                 <property name="text" >
+                  <string>Class Restrictions:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QListWidget" name="ClassRestrictionTable" />
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" >
+               <property name="margin" >
+                <number>0</number>
+               </property>
+               <property name="spacing" >
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="LabelItemNoteText" >
+                 <property name="text" >
+                  <string>Item Notes:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QTextEdit" name="ItemNoteText" >
+                 <property name="focusPolicy" >
+                  <enum>Qt::StrongFocus</enum>
+                 </property>
+                 <property name="tabChangesFocus" >
+                  <bool>true</bool>
+                 </property>
+                 <property name="acceptRichText" >
+                  <bool>false</bool>
+                 </property>
+                 <property name="textInteractionFlags" >
+                  <enum>Qt::TextEditable</enum>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" >
+               <property name="margin" >
+                <number>0</number>
+               </property>
+               <property name="spacing" >
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="LabelNoteText" >
+                 <property name="text" >
+                  <string>Template Notes:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QTextEdit" name="NoteText" >
+                 <property name="focusPolicy" >
+                  <enum>Qt::StrongFocus</enum>
+                 </property>
+                 <property name="tabChangesFocus" >
+                  <bool>true</bool>
+                 </property>
+                 <property name="acceptRichText" >
+                  <bool>false</bool>
+                 </property>
+                 <property name="textInteractionFlags" >
+                  <enum>Qt::TextEditable</enum>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+           </item>
+           <item>
+           <widget class="QWidget" name="ItemSlotsFrame" >
+            <layout class="QHBoxLayout" >
+             <property name="margin" >
+              <number>0</number>
+             </property>
+             <property name="spacing" >
+              <number>9</number>
+             </property>
+             <item>
+            <layout class="QVBoxLayout" >
+             <property name="margin" >
+              <number>0</number>
+             </property>
+             <property name="spacing" >
+              <number>0</number>
+             </property>
+             <item>
+             <widget class="QWidget" name="ItemSlotsHeader" >
+              <layout class="QGridLayout" >
+               <property name="margin" >
+                <number>0</number>
+               </property>
+               <property name="spacing" >
+                <number>0</number>
+               </property>
+               <item row="0" column="0" >
+                <spacer>
+                 <property name="orientation" >
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeType" >
+                  <enum>QSizePolicy::Minimum</enum>
+                 </property>
+                 <property name="sizeHint" >
+                  <size>
+                   <width>5</width>
+                   <height>5</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="1" >
+                <widget class="QLabel" name="LabelGemType" >
+                 <property name="text" >
+                  <string> Type</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2" >
+                <widget class="QLabel" name="LabelGemAmount" >
+                 <property name="text" >
+                  <string> Amount</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="3" >
+                <widget class="QLabel" name="LabelGemEffect" >
+                 <property name="text" >
+                  <string> Effect</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="4" >
+                <widget class="QLabel" name="LabelGemMakes" >
+                 <property name="text" >
+                  <string> Makes</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="4" colspan="3" >
+                <widget class="QLabel" name="LabelRequirement" >
+                 <property name="text" >
+                  <string> Requirement</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="5" >
+                <widget class="QLabel" name="LabelGemPoints" >
+                 <property name="text" >
+                  <string>Points</string>
+                 </property>
+                 <property name="alignment" >
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="6" >
+                <widget class="QLabel" name="LabelGemCost" >
+                 <property name="text" >
+                  <string>Unit Cost</string>
+                 </property>
+                 <property name="alignment" >
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="7" >
+                <spacer>
+                 <property name="orientation" >
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeType" >
+                  <enum>QSizePolicy::Minimum</enum>
+                 </property>
+                 <property name="sizeHint" >
+                  <size>
+                   <width>5</width>
+                   <height>1</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="0" column="8" >
+                <widget class="QLabel" name="LabelGemName" >
+                 <property name="text" >
+                  <string>Name</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+             </item>
+             <item>
+              <widget class="ScrollArea" native="1" name="ScrollSlots" >
+               <property name="sizePolicy" >
+                <sizepolicy>
+                 <hsizetype>7</hsizetype>
+                 <vsizetype>5</vsizetype>
+                 <horstretch>0</horstretch>
+                 <verstretch>1</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="frameShape" >
+                <enum>QFrame::NoFrame</enum>
+               </property>
+               <property name="verticalScrollBarPolicy" >
+                <enum>Qt::ScrollBarAsNeeded</enum>
+               </property>
+               <property name="horizontalScrollBarPolicy" >
+                <enum>Qt::ScrollBarAlwaysOff</enum>
+               </property>
+               <widget class="QWidget" name="ItemSlotsGrid" >
+                <layout class="QGridLayout" >
+                 <property name="margin" >
+                  <number>0</number>
+                 </property>
+                 <property name="spacing" >
+                  <number>0</number>
+                 </property>
+                 <item row="0" column="0" >
+                  <widget class="QLabel" name="Gem_Label_1" >
+                   <property name="text" >
+                    <string>Slot &amp;1: </string>
+                   </property>
+                   <property name="textFormat" >
+                    <enum>Qt::PlainText</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1" >
+                  <widget class="SearchingCombo" name="Type_1" />
+                 </item>
+                 <item row="0" column="2" >
+                  <widget class="QLineEdit" name="Amount_Edit_1" />
+                 </item>
+                 <item row="0" column="2" >
+                  <widget class="SearchingCombo" name="Amount_Drop_1" />
+                 </item>
+                 <item row="0" column="3" >
+                  <widget class="SearchingCombo" name="Effect_1" >
+                   <property name="editable" >
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="4" >
+                  <widget class="QSpinBox" name="Makes_1" >
+                   <property name="focusPolicy" >
+                    <enum>Qt::StrongFocus</enum>
+                   </property>
+                   <property name="specialValueText" >
+                    <string> </string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="4" colspan="3" >
+                  <widget class="QLineEdit" name="Requirement_1" />
+                 </item>
+                 <item row="0" column="5" >
+                  <widget class="QLabel" name="Points_1" >
+                   <property name="text" >
+                    <string>0.0</string>
+                   </property>
+                   <property name="alignment" >
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="6" >
+                  <widget class="QLabel" name="Cost_1" >
+                   <property name="text" >
+                    <string>0c</string>
+                   </property>
+                   <property name="alignment" >
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item rowspan="12" row="0" column="7" >
+                  <spacer>
+                   <property name="orientation" >
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeType" >
+                    <enum>QSizePolicy::Minimum</enum>
+                   </property>
+                   <property name="sizeHint" >
+                    <size>
+                     <width>5</width>
+                     <height>1</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="0" column="8" >
+                  <widget class="QLabel" name="Name_1" >
+                   <property name="text" >
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item rowspan="4" row="0" column="8" >
+                  <spacer>
+                   <property name="orientation" >
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeType" >
+                    <enum>QSizePolicy::Minimum</enum>
+                   </property>
+                   <property name="sizeHint" >
+                    <size>
+                     <width>5</width>
+                     <height>5</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="1" column="0" >
+                  <widget class="QLabel" name="Gem_Label_2" >
+                   <property name="text" >
+                    <string>Slot &amp;2: </string>
+                   </property>
+                   <property name="textFormat" >
+                    <enum>Qt::PlainText</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1" >
+                  <widget class="SearchingCombo" name="Type_2" />
+                 </item>
+                 <item row="1" column="2" >
+                  <widget class="QLineEdit" name="Amount_Edit_2" />
+                 </item>
+                 <item row="1" column="2" >
+                  <widget class="SearchingCombo" name="Amount_Drop_2" />
+                 </item>
+                 <item row="1" column="3" >
+                  <widget class="SearchingCombo" name="Effect_2" >
+                   <property name="editable" >
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="4" >
+                  <widget class="QSpinBox" name="Makes_2" >
+                   <property name="focusPolicy" >
+                    <enum>Qt::StrongFocus</enum>
+                   </property>
+                   <property name="specialValueText" >
+                    <string> </string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="4" colspan="3" >
+                  <widget class="QLineEdit" name="Requirement_2" />
+                 </item>
+                 <item row="1" column="5" >
+                  <widget class="QLabel" name="Points_2" >
+                   <property name="text" >
+                    <string>0.0</string>
+                   </property>
+                   <property name="alignment" >
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="6" >
+                  <widget class="QLabel" name="Cost_2" >
+                   <property name="text" >
+                    <string>0c</string>
+                   </property>
+                   <property name="alignment" >
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="8" >
+                  <widget class="QLabel" name="Name_2" >
+                   <property name="text" >
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="0" >
+                  <widget class="QLabel" name="Gem_Label_3" >
+                   <property name="text" >
+                    <string>Slot &amp;3: </string>
+                   </property>
+                   <property name="textFormat" >
+                    <enum>Qt::PlainText</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1" >
+                  <widget class="SearchingCombo" name="Type_3" />
+                 </item>
+                 <item row="2" column="2" >
+                  <widget class="QLineEdit" name="Amount_Edit_3" />
+                 </item>
+                 <item row="2" column="2" >
+                  <widget class="SearchingCombo" name="Amount_Drop_3" />
+                 </item>
+                 <item row="2" column="3" >
+                  <widget class="SearchingCombo" name="Effect_3" >
+                   <property name="editable" >
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="4" >
+                  <widget class="QSpinBox" name="Makes_3" >
+                   <property name="focusPolicy" >
+                    <enum>Qt::StrongFocus</enum>
+                   </property>
+                   <property name="specialValueText" >
+                    <string> </string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="4" colspan="3" >
+                  <widget class="QLineEdit" name="Requirement_3" />
+                 </item>
+                 <item row="2" column="5" >
+                  <widget class="QLabel" name="Points_3" >
+                   <property name="text" >
+                    <string>0.0</string>
+                   </property>
+                   <property name="alignment" >
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="6" >
+                  <widget class="QLabel" name="Cost_3" >
+                   <property name="text" >
+                    <string>0c</string>
+                   </property>
+                   <property name="alignment" >
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="8" >
+                  <widget class="QLabel" name="Name_3" >
+                   <property name="text" >
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="0" >
+                  <widget class="QLabel" name="Gem_Label_4" >
+                   <property name="text" >
+                    <string>Slot &amp;4: </string>
+                   </property>
+                   <property name="textFormat" >
+                    <enum>Qt::PlainText</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="1" >
+                  <widget class="SearchingCombo" name="Type_4" />
+                 </item>
+                 <item row="3" column="2" >
+                  <widget class="QLineEdit" name="Amount_Edit_4" />
+                 </item>
+                 <item row="3" column="2" >
+                  <widget class="SearchingCombo" name="Amount_Drop_4" />
+                 </item>
+                 <item row="3" column="3" >
+                  <widget class="SearchingCombo" name="Effect_4" >
+                   <property name="editable" >
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="4" >
+                  <widget class="QSpinBox" name="Makes_4" >
+                   <property name="focusPolicy" >
+                    <enum>Qt::StrongFocus</enum>
+                   </property>
+                   <property name="specialValueText" >
+                    <string> </string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="4" colspan="3" >
+                  <widget class="QLineEdit" name="Requirement_4" />
+                 </item>
+                 <item row="3" column="5" >
+                  <widget class="QLabel" name="Points_4" >
+                   <property name="text" >
+                    <string>0.0</string>
+                   </property>
+                   <property name="alignment" >
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="6" >
+                  <widget class="QLabel" name="Cost_4" >
+                   <property name="text" >
+                    <string>0c</string>
+                   </property>
+                   <property name="alignment" >
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="8" >
+                  <widget class="QLabel" name="Name_4" >
+                   <property name="text" >
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="0" >
+                  <widget class="QLabel" name="Gem_Label_5" >
+                   <property name="text" >
+                    <string>Slot &amp;5: </string>
+                   </property>
+                   <property name="textFormat" >
+                    <enum>Qt::PlainText</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="1" >
+                  <widget class="SearchingCombo" name="Type_5" />
+                 </item>
+                 <item row="4" column="2" >
+                  <widget class="QLineEdit" name="Amount_Edit_5" />
+                 </item>
+                 <item row="4" column="2" >
+                  <widget class="SearchingCombo" name="Amount_Drop_5" />
+                 </item>
+                 <item row="4" column="3" >
+                  <widget class="SearchingCombo" name="Effect_5" >
+                   <property name="editable" >
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="4" colspan="3" >
+                  <widget class="QLineEdit" name="Requirement_5" />
+                 </item>
+                 <item row="4" column="8" >
+                  <widget class="QLabel" name="Name_5" >
+                   <property name="text" >
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="8" >
+                  <spacer>
+                   <property name="orientation" >
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeType" >
+                    <enum>QSizePolicy::Minimum</enum>
+                   </property>
+                   <property name="sizeHint" >
+                    <size>
+                     <width>5</width>
+                     <height>5</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="5" column="0" >
+                  <widget class="QLabel" name="Gem_Label_6" >
+                   <property name="text" >
+                    <string>Slot &amp;6: </string>
+                   </property>
+                   <property name="textFormat" >
+                    <enum>Qt::PlainText</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="5" column="1" >
+                  <widget class="SearchingCombo" name="Type_6" />
+                 </item>
+                 <item row="5" column="2" >
+                  <widget class="QLineEdit" name="Amount_Edit_6" />
+                 </item>
+                 <item row="5" column="2" >
+                  <widget class="SearchingCombo" name="Amount_Drop_6" />
+                 </item>
+                 <item row="5" column="3" >
+                  <widget class="SearchingCombo" name="Effect_6" >
+                   <property name="editable" >
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="5" column="4" colspan="3" >
+                  <widget class="QLineEdit" name="Requirement_6" />
+                 </item>
+                 <item row="5" column="8" >
+                  <widget class="QLabel" name="Name_6" >
+                   <property name="text" >
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="5" column="8" >
+                  <spacer>
+                   <property name="orientation" >
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeType" >
+                    <enum>QSizePolicy::Minimum</enum>
+                   </property>
+                   <property name="sizeHint" >
+                    <size>
+                     <width>5</width>
+                     <height>5</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="6" column="0" >
+                  <widget class="QLabel" name="Gem_Label_7" >
+                   <property name="text" >
+                    <string>Slot &amp;7: </string>
+                   </property>
+                   <property name="textFormat" >
+                    <enum>Qt::PlainText</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="6" column="1" >
+                  <widget class="SearchingCombo" name="Type_7" />
+                 </item>
+                 <item row="6" column="2" >
+                  <widget class="QLineEdit" name="Amount_Edit_7" />
+                 </item>
+                 <item row="6" column="3" >
+                  <widget class="SearchingCombo" name="Effect_7" >
+                   <property name="editable" >
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="6" column="4" colspan="3" >
+                  <widget class="QLineEdit" name="Requirement_7" />
+                 </item>
+                 <item row="6" column="8" >
+                  <spacer>
+                   <property name="orientation" >
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeType" >
+                    <enum>QSizePolicy::Minimum</enum>
+                   </property>
+                   <property name="sizeHint" >
+                    <size>
+                     <width>5</width>
+                     <height>5</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="7" column="0" >
+                  <widget class="QLabel" name="Gem_Label_8" >
+                   <property name="text" >
+                    <string>Slot &amp;8: </string>
+                   </property>
+                   <property name="textFormat" >
+                    <enum>Qt::PlainText</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="7" column="1" >
+                  <widget class="SearchingCombo" name="Type_8" />
+                 </item>
+                 <item row="7" column="2" >
+                  <widget class="QLineEdit" name="Amount_Edit_8" />
+                 </item>
+                 <item row="7" column="3" >
+                  <widget class="SearchingCombo" name="Effect_8" >
+                   <property name="editable" >
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="7" column="4" colspan="3" >
+                  <widget class="QLineEdit" name="Requirement_8" />
+                 </item>
+                 <item row="7" column="8" >
+                  <layout class="QHBoxLayout" >
+                   <property name="margin" >
+                    <number>0</number>
+                   </property>
+                   <property name="spacing" >
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QLabel" name="ItemUtilityLabel" >
+                     <property name="text" >
+                      <string>Utility:   </string>
+                     </property>
+                     <property name="alignment" >
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="ItemUtility" >
+                     <property name="text" >
+                      <string>0.0</string>
+                     </property>
+                     <property name="alignment" >
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer>
+                     <property name="orientation" >
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeType" >
+                      <enum>QSizePolicy::MinimumExpanding</enum>
+                     </property>
+                     <property name="sizeHint" >
+                      <size>
+                       <width>5</width>
+                       <height>1</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                 <item row="8" column="0" >
+                  <widget class="QLabel" name="Gem_Label_9" >
+                   <property name="text" >
+                    <string>Slot &amp;9: </string>
+                   </property>
+                   <property name="textFormat" >
+                    <enum>Qt::PlainText</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="8" column="1" >
+                  <widget class="SearchingCombo" name="Type_9" />
+                 </item>
+                 <item row="8" column="2" >
+                  <widget class="QLineEdit" name="Amount_Edit_9" />
+                 </item>
+                 <item row="8" column="3" >
+                  <widget class="SearchingCombo" name="Effect_9" >
+                   <property name="editable" >
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="8" column="4" colspan="3" >
+                  <widget class="QLineEdit" name="Requirement_9" />
+                 </item>
+                 <item row="8" column="8" colspan="4" >
+                  <spacer>
+                   <property name="orientation" >
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeType" >
+                    <enum>QSizePolicy::Minimum</enum>
+                   </property>
+                   <property name="sizeHint" >
+                    <size>
+                     <width>5</width>
+                     <height>5</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="9" column="0" >
+                  <widget class="QLabel" name="Gem_Label_10" >
+                   <property name="text" >
+                    <string>Slot 1&amp;0:</string>
+                   </property>
+                   <property name="textFormat" >
+                    <enum>Qt::PlainText</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="9" column="1" >
+                  <widget class="SearchingCombo" name="Type_10" />
+                 </item>
+                 <item row="9" column="2" >
+                  <widget class="QLineEdit" name="Amount_Edit_10" />
+                 </item>
+                 <item row="9" column="3" >
+                  <widget class="SearchingCombo" name="Effect_10" >
+                   <property name="editable" >
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="9" column="4" colspan="3" >
+                  <widget class="QLineEdit" name="Requirement_10" />
+                 </item>
+                 <item row="10" column="0" >
+                  <widget class="QLabel" name="Gem_Label_11" >
+                   <property name="text" >
+                    <string>Slot 11&amp;- </string>
+                   </property>
+                   <property name="textFormat" >
+                    <enum>Qt::PlainText</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="10" column="1" >
+                  <widget class="SearchingCombo" name="Type_11" />
+                 </item>
+                 <item row="10" column="2" >
+                  <widget class="QLineEdit" name="Amount_Edit_11" />
+                 </item>
+                 <item row="10" column="3" >
+                  <widget class="SearchingCombo" name="Effect_11" >
+                   <property name="editable" >
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="10" column="4" colspan="3" >
+                  <widget class="QLineEdit" name="Requirement_11" />
+                 </item>
+                 <item row="11" column="0" >
+                  <widget class="QLabel" name="Gem_Label_12" >
+                   <property name="text" >
+                    <string>Slot 12&amp;=</string>
+                   </property>
+                   <property name="textFormat" >
+                    <enum>Qt::PlainText</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="11" column="1" >
+                  <widget class="SearchingCombo" name="Type_12" />
+                 </item>
+                 <item row="11" column="2" >
+                  <widget class="QLineEdit" name="Amount_Edit_12" />
+                 </item>
+                 <item row="11" column="3" >
+                  <widget class="SearchingCombo" name="Effect_12" >
+                   <property name="editable" >
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="11" column="4" colspan="3" >
+                  <widget class="QLineEdit" name="Requirement_12" />
+                 </item>
+                 <item row="5" column="0" colspan="7" >
+                  <spacer>
+                   <property name="orientation" >
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeType" >
+                    <enum>QSizePolicy::Minimum</enum>
+                   </property>
+                   <property name="sizeHint" >
+                    <size>
+                     <width>5</width>
+                     <height>5</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="6" column="0" colspan="3" >
+                  <spacer>
+                   <property name="orientation" >
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeType" >
+                    <enum>QSizePolicy::Minimum</enum>
+                   </property>
+                   <property name="sizeHint" >
+                    <size>
+                     <width>5</width>
+                     <height>5</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="6" column="3" colspan="4" >
+                  <spacer>
+                   <property name="orientation" >
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeType" >
+                    <enum>QSizePolicy::Minimum</enum>
+                   </property>
+                   <property name="sizeHint" >
+                    <size>
+                     <width>5</width>
+                     <height>5</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="7" column="0" >
+                  <spacer>
+                   <property name="orientation" >
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeType" >
+                    <enum>QSizePolicy::Minimum</enum>
+                   </property>
+                   <property name="sizeHint" >
+                    <size>
+                     <width>5</width>
+                     <height>5</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="7" column="1" >
+                  <widget class="QLabel" name="LabelItemCraftTime" >
+                   <property name="text" >
+                    <string>Item SC Time (min): </string>
+                   </property>
+                   <property name="textFormat" >
+                    <enum>Qt::PlainText</enum>
+                   </property>
+                  </widget>
+                  <property name="buddy" >
+                   <cstring>ItemCraftTime</cstring>
+                  </property>
+                 </item>
+                 <item row="7" column="2" >
+                  <widget class="QLineEdit" name="ItemCraftTime" />
+                 </item>
+                 <item row="7" column="3" colspan="2" >
+                  <widget class="QLabel" name="ItemImbueLabel" >
+                   <property name="text" >
+                    <string>Imbue Points: </string>
+                   </property>
+                   <property name="alignment" >
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="7" column="5" >
+                  <widget class="QLabel" name="ItemImbue" >
+                   <property name="text" >
+                    <string>0.0</string>
+                   </property>
+                   <property name="alignment" >
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="7" column="6" >
+                  <widget class="QLabel" name="ItemImbueTotal" >
+                   <property name="text" >
+                    <string> / 0.0</string>
+                   </property>
+                   <property name="alignment" >
+                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item rowspan="4" row="8" column="0" colspan="3" >
+                  <spacer>
+                   <property name="orientation" >
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeType" >
+                    <enum>QSizePolicy::Minimum</enum>
+                   </property>
+                   <property name="sizeHint" >
+                    <size>
+                     <width>5</width>
+                     <height>5</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="8" column="3" colspan="2" >
+                  <widget class="QLabel" name="ItemOverchargeLabel" >
+                   <property name="text" >
+                    <string>Overcharge: </string>
+                   </property>
+                   <property name="alignment" >
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="8" column="5" colspan="2" >
+                  <widget class="QLabel" name="ItemOvercharge" >
+                   <property name="text" >
+                    <string>None</string>
+                   </property>
+                   <property name="alignment" >
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="9" column="3" colspan="2" >
+                  <widget class="QLabel" name="ItemCostLabel" >
+                   <property name="text" >
+                    <string>Item Cost: </string>
+                   </property>
+                   <property name="alignment" >
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="9" column="5" colspan="2" >
+                  <widget class="QLabel" name="ItemCost" >
+                   <property name="text" >
+                    <string/>
+                   </property>
+                   <property name="alignment" >
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="10" column="3" colspan="2" >
+                  <widget class="QLabel" name="ItemPriceLabel" >
+                   <property name="text" >
+                    <string>Item Price: </string>
+                   </property>
+                   <property name="alignment" >
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="10" column="5" colspan="2" >
+                  <widget class="QLabel" name="ItemPrice" >
+                   <property name="text" >
+                    <string/>
+                   </property>
+                   <property name="alignment" >
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="11" column="0" colspan="7" >
+                  <spacer>
+                   <property name="orientation" >
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeType" >
+                    <enum>QSizePolicy::Minimum</enum>
+                   </property>
+                   <property name="sizeHint" >
+                    <size>
+                     <width>5</width>
+                     <height>5</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="12" column="0" colspan="9" >
+                  <spacer>
+                   <property name="orientation" >
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeType" >
+                    <enum>QSizePolicy::MinimumExpanding</enum>
+                   </property>
+                   <property name="sizeHint" >
+                    <size>
+                     <width>1</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </widget>
+              </widget>
+             </item>
+            </layout>
+             </item>
+            </layout>
+           </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11" />
+ <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
+ <customwidgets>
+  <customwidget>
+   <class>SearchingCombo</class>
+   <extends>QComboBox</extends>
+   <header>SearchingCombo.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>SkillsView</class>
+   <extends>QListView</extends>
+   <header>SkillsView.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ScrollArea</class>
+   <extends>QWidget</extends>
+   <header>ScrollArea.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>MultiTabBar</class>
+   <extends>QWidget</extends>
+   <header>MultiTabBar.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>MultiTabFrame</class>
+   <extends>QFrame</extends>
+   <header>MultiTabBar.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>GroupFrame</class>
+   <extends>QFrame</extends>
+   <header>GroupFrame.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>CharName</tabstop>
+  <tabstop>Realm</tabstop>
+  <tabstop>CharClass</tabstop>
+  <tabstop>CharRace</tabstop>
+  <tabstop>CharLevel</tabstop>
+  <tabstop>RealmRank</tabstop>
+  <tabstop>CraftTime</tabstop>
+  <tabstop>ChampionLevel</tabstop>
+  <tabstop>OutfitName</tabstop>
+  <tabstop>PieceTab</tabstop>
+  <tabstop>ItemLevel</tabstop>
+  <tabstop>ItemLevelButton</tabstop>
+  <tabstop>QualEdit</tabstop>
+  <tabstop>QualDrop</tabstop>
+  <tabstop>ItemNameCombo</tabstop>
+  <tabstop>Equipped</tabstop>
+  <tabstop>ToggleItemView</tabstop>
+  <tabstop>ItemRealm</tabstop>
+  <tabstop>ItemType</tabstop>
+  <tabstop>ItemSource</tabstop>
+  <tabstop>BonusEdit</tabstop>
+  <tabstop>AFDPSEdit</tabstop>
+  <tabstop>SpeedEdit</tabstop>
+  <tabstop>Offhand</tabstop>
+  <tabstop>DamageType</tabstop>
+  <tabstop>ItemRequirement</tabstop>
+  <tabstop>ClassRestrictionTable</tabstop>
+  <tabstop>ItemNoteText</tabstop>
+  <tabstop>NoteText</tabstop>
+  <tabstop>Type_1</tabstop>
+  <tabstop>Amount_Edit_1</tabstop>
+  <tabstop>Amount_Drop_1</tabstop>
+  <tabstop>Effect_1</tabstop>
+  <tabstop>Makes_1</tabstop>
+  <tabstop>Requirement_1</tabstop>
+  <tabstop>Type_2</tabstop>
+  <tabstop>Amount_Edit_2</tabstop>
+  <tabstop>Amount_Drop_2</tabstop>
+  <tabstop>Effect_2</tabstop>
+  <tabstop>Makes_2</tabstop>
+  <tabstop>Requirement_2</tabstop>
+  <tabstop>Type_3</tabstop>
+  <tabstop>Amount_Edit_3</tabstop>
+  <tabstop>Amount_Drop_3</tabstop>
+  <tabstop>Effect_3</tabstop>
+  <tabstop>Makes_3</tabstop>
+  <tabstop>Requirement_3</tabstop>
+  <tabstop>Type_4</tabstop>
+  <tabstop>Amount_Edit_4</tabstop>
+  <tabstop>Amount_Drop_4</tabstop>
+  <tabstop>Effect_4</tabstop>
+  <tabstop>Makes_4</tabstop>
+  <tabstop>Requirement_4</tabstop>
+  <tabstop>Type_5</tabstop>
+  <tabstop>Amount_Edit_5</tabstop>
+  <tabstop>Amount_Drop_5</tabstop>
+  <tabstop>Effect_5</tabstop>
+  <tabstop>Requirement_5</tabstop>
+  <tabstop>Type_6</tabstop>
+  <tabstop>Amount_Edit_6</tabstop>
+  <tabstop>Amount_Drop_6</tabstop>
+  <tabstop>Effect_6</tabstop>
+  <tabstop>Requirement_6</tabstop>
+  <tabstop>Type_7</tabstop>
+  <tabstop>Amount_Edit_7</tabstop>
+  <tabstop>Effect_7</tabstop>
+  <tabstop>Requirement_7</tabstop>
+  <tabstop>Type_8</tabstop>
+  <tabstop>Amount_Edit_8</tabstop>
+  <tabstop>Effect_8</tabstop>
+  <tabstop>Requirement_8</tabstop>
+  <tabstop>Type_9</tabstop>
+  <tabstop>Amount_Edit_9</tabstop>
+  <tabstop>Effect_9</tabstop>
+  <tabstop>Requirement_9</tabstop>
+  <tabstop>Type_10</tabstop>
+  <tabstop>Amount_Edit_10</tabstop>
+  <tabstop>Effect_10</tabstop>
+  <tabstop>Requirement_10</tabstop>
+  <tabstop>Type_11</tabstop>
+  <tabstop>Amount_Edit_11</tabstop>
+  <tabstop>Effect_11</tabstop>
+  <tabstop>Requirement_11</tabstop>
+  <tabstop>Type_12</tabstop>
+  <tabstop>Amount_Edit_12</tabstop>
+  <tabstop>Effect_12</tabstop>
+  <tabstop>Requirement_12</tabstop>
+  <tabstop>ItemCraftTime</tabstop>
+  <tabstop>SkillsList</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

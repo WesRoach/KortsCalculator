@@ -1,0 +1,66 @@
+Urgently needed;
+
+  Dragonsworn Caster Staves grant 4 slots, plus 2% magic damage,
+  plus 50 focus, AND can carry a tincture.  6 slots didn't last
+  that long.
+
+Oddball things;
+
+  Prettify the display of stats with caps for the screen, with
+  a stat/maxstat flavor option (75/101 or similar).
+
+  Let slots share an Item list, e.g. both Left Ring and Right Ring
+  keep track of the same unused Rings.  "Move to" sort of provides this,
+  but not very elegantly.
+
+  Default to %USERPROFILE%/My Documents/Spellcrafting/Templates
+  for saving Templates and .../Reports for saving exported reports 
+  on Windows?  Keep Items/ by default under the program dir?
+
+  Folks have asked for RvR and PvE utility numbers.  Not easy though.
+
+  Show Bonuses of % as #% finally?
+
+  Allow users to choose to include class-specific bonuses for resists?
+  (mostly, applies to heavy tanks).  Need the growth table from level
+  40 through 50.
+
+  Calculate "Piece Ablative" as an average based on chance-to-hit-body-part?
+
+Tincture;
+
+  Allow *Drop* Effect slots to have any value (such as a 5.1 DS effect
+  or 64/5 DoT effect), not just pure integers.  Requires us to flip the
+  validator, non-trivial.
+
+  List Reactive Effects, ordered by %chance to hit body part?
+
+Ideas for New Items/Item Type;
+
+  Add new Mythical item bonuses to the list, and make the Mythrian's
+  item list specific to that item type.  (NOT including stat+statcap
+  because they can add two slots for the statcap and the stat!)
+
+  Add 1.85-1.87 enchanced craft slot5 lookups (by realm/style/piece).
+  Use the 'Item Level' dialog to choose a specialty-crafted item?
+  (Don't get rid of choosing bonuses, since Mythic keeps adding on.)
+
+  A guildy suggested that the user could fix all of the body armor
+  pieces or all the weapons which are crafted, based on popping up
+  the itemlevel window only once (cool!!!)  Something similar for item 
+  quality?  Or a Copy drop menu to fill one other slot, all armor,
+  all (four) weapons, or all gems (for quick-lv 51)?
+
+  Fill in Bonus based on itemlevel dialog, when known from material level.  
+
+GUI Gooey Ideas;
+
+  Fix WindowsXP skin view of Group boxes (which we override universally
+  because of the Classic appearance stupidity).
+
+  Can we make the 'editing' flavor of the dropdown controls line up
+  with their look when they are in drop-pick only mode on Mac?  They
+  seem off by -3,-1 (x,y) pixels and offsized -4,-1 or so.  Or just
+  blame trolltech?  How about the corresponding pure-edit controls so
+  they line up, too?
+

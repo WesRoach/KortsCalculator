@@ -1,0 +1,780 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>B_Options</class>
+ <widget class="QDialog" name="B_Options">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>627</width>
+    <height>530</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Options</string>
+  </property>
+  <layout class="QVBoxLayout">
+   <property name="spacing">
+    <number>6</number>
+   </property>
+   <property name="margin">
+    <number>9</number>
+   </property>
+   <item>
+    <layout class="QVBoxLayout">
+     <property name="spacing">
+      <number>6</number>
+     </property>
+     <property name="margin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QTabWidget" name="Tab">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="currentIndex">
+        <number>1</number>
+       </property>
+       <widget class="QWidget" name="General">
+        <attribute name="title">
+         <string>General</string>
+        </attribute>
+        <layout class="QVBoxLayout">
+         <property name="spacing">
+          <number>6</number>
+         </property>
+         <property name="margin">
+          <number>9</number>
+         </property>
+         <item>
+          <layout class="QVBoxLayout">
+           <property name="spacing">
+            <number>6</number>
+           </property>
+           <property name="margin">
+            <number>0</number>
+           </property>
+           <item>
+            <layout class="QHBoxLayout">
+             <property name="spacing">
+              <number>6</number>
+             </property>
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="TextLabel1">
+               <property name="text">
+                <string>Crafter Skill:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="Skill"/>
+             </item>
+             <item>
+              <spacer>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="CapDistance">
+             <property name="text">
+              <string>Show Distance To Cap (instead of total)</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="ShowDoneGems">
+             <property name="text">
+              <string>Hide &quot;Made&quot; Gems from Materials List and Exported Gems</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="ShowScrollingSlots">
+             <property name="text">
+              <string>Scrollable Slots (allows your window to be shorter)</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="EuroServers">
+             <property name="text">
+              <string>Export Gems to European/GOA Servers</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="IncludeRR">
+             <property name="text">
+              <string>Include Racial Resists in Totals</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="HideNonClassSkills">
+             <property name="text">
+              <string>Hide Skills not usable by this Class</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="Coop">
+             <property name="text">
+              <string>Co-op / PvP Server</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="TextLabel2_5">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>        (Lets you access items from all realms)</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer>
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="Price">
+        <attribute name="title">
+         <string>Price</string>
+        </attribute>
+        <layout class="QVBoxLayout">
+         <property name="spacing">
+          <number>6</number>
+         </property>
+         <property name="margin">
+          <number>9</number>
+         </property>
+         <item>
+          <layout class="QVBoxLayout">
+           <property name="spacing">
+            <number>6</number>
+           </property>
+           <property name="margin">
+            <number>0</number>
+           </property>
+           <item>
+            <layout class="QHBoxLayout">
+             <property name="spacing">
+              <number>6</number>
+             </property>
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item>
+              <layout class="QVBoxLayout">
+               <property name="spacing">
+                <number>6</number>
+               </property>
+               <property name="margin">
+                <number>0</number>
+               </property>
+               <item>
+                <layout class="QHBoxLayout">
+                 <property name="spacing">
+                  <number>6</number>
+                 </property>
+                 <property name="margin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QGroupBox" name="GroupBox1">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="title">
+                    <string>Price per</string>
+                   </property>
+                   <layout class="QHBoxLayout">
+                    <property name="spacing">
+                     <number>6</number>
+                    </property>
+                    <property name="margin">
+                     <number>9</number>
+                    </property>
+                    <item>
+                     <layout class="QVBoxLayout">
+                      <property name="spacing">
+                       <number>6</number>
+                      </property>
+                      <property name="margin">
+                       <number>0</number>
+                      </property>
+                      <item>
+                       <layout class="QGridLayout">
+                        <property name="margin">
+                         <number>0</number>
+                        </property>
+                        <property name="spacing">
+                         <number>6</number>
+                        </property>
+                        <item row="0" column="1">
+                         <widget class="QLineEdit" name="PPGem">
+                          <property name="text">
+                           <string>0</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="0" column="0">
+                         <widget class="QLabel" name="TextLabel1_2">
+                          <property name="text">
+                           <string>Gem:</string>
+                          </property>
+                          <property name="alignment">
+                           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="2" column="1">
+                         <widget class="QLineEdit" name="PPOrder">
+                          <property name="text">
+                           <string>0</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="1" column="0">
+                         <widget class="QLabel" name="TextLabel1_2_2">
+                          <property name="text">
+                           <string>Item:</string>
+                          </property>
+                          <property name="alignment">
+                           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="2" column="0">
+                         <widget class="QLabel" name="TextLabel1_2_3">
+                          <property name="text">
+                           <string>Order:</string>
+                          </property>
+                          <property name="alignment">
+                           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="1" column="1">
+                         <widget class="QLineEdit" name="PPItem">
+                          <property name="text">
+                           <string>0</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="TextLabel2_3">
+                        <property name="text">
+                         <string>(cost+ X)</string>
+                        </property>
+                        <property name="alignment">
+                         <set>Qt::AlignCenter</set>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item>
+                  <layout class="QVBoxLayout">
+                   <property name="spacing">
+                    <number>6</number>
+                   </property>
+                   <property name="margin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QGroupBox" name="GroupBox6">
+                     <property name="title">
+                      <string>Per hour</string>
+                     </property>
+                     <layout class="QVBoxLayout">
+                      <property name="spacing">
+                       <number>6</number>
+                      </property>
+                      <property name="margin">
+                       <number>9</number>
+                      </property>
+                      <item>
+                       <layout class="QVBoxLayout">
+                        <property name="spacing">
+                         <number>6</number>
+                        </property>
+                        <property name="margin">
+                         <number>0</number>
+                        </property>
+                        <item>
+                         <widget class="QLineEdit" name="HourPrice">
+                          <property name="text">
+                           <string>0</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QCheckBox" name="HourInclude">
+                          <property name="text">
+                           <string>Include</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QGroupBox" name="GroupBox4">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="title">
+                      <string>General Markup</string>
+                     </property>
+                     <layout class="QVBoxLayout">
+                      <property name="spacing">
+                       <number>6</number>
+                      </property>
+                      <property name="margin">
+                       <number>9</number>
+                      </property>
+                      <item>
+                       <layout class="QVBoxLayout">
+                        <property name="spacing">
+                         <number>6</number>
+                        </property>
+                        <property name="margin">
+                         <number>0</number>
+                        </property>
+                        <item>
+                         <layout class="QHBoxLayout">
+                          <property name="spacing">
+                           <number>6</number>
+                          </property>
+                          <property name="margin">
+                           <number>0</number>
+                          </property>
+                          <item>
+                           <widget class="QLineEdit" name="GenMarkup">
+                            <property name="text">
+                             <string>50</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QLabel" name="TextLabel11">
+                            <property name="text">
+                             <string>%</string>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="TextLabel12">
+                          <property name="text">
+                           <string>(cost + (cost * X%))</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <widget class="QGroupBox" name="GroupBox3">
+                 <property name="title">
+                  <string>Price per lvl/point</string>
+                 </property>
+                 <layout class="QVBoxLayout">
+                  <property name="spacing">
+                   <number>6</number>
+                  </property>
+                  <property name="margin">
+                   <number>9</number>
+                  </property>
+                  <item>
+                   <layout class="QGridLayout">
+                    <property name="margin">
+                     <number>0</number>
+                    </property>
+                    <property name="spacing">
+                     <number>6</number>
+                    </property>
+                    <item row="3" column="0">
+                     <widget class="QCheckBox" name="PPInclude">
+                      <property name="text">
+                       <string>Include</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="1" column="0" colspan="2">
+                     <widget class="QLineEdit" name="PPImbue">
+                      <property name="text">
+                       <string>0</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="2" column="3" colspan="2">
+                     <widget class="QLabel" name="TextLabel9">
+                      <property name="text">
+                       <string>per O/C pt.</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="2" column="0" colspan="3">
+                     <widget class="QLineEdit" name="PPOC">
+                      <property name="text">
+                       <string>0</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="1" column="2" colspan="3">
+                     <widget class="QLabel" name="TextLabel8">
+                      <property name="text">
+                       <string>per imbue pt.</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="0" colspan="4">
+                     <widget class="QLineEdit" name="PPLevel">
+                      <property name="text">
+                       <string>0</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="4">
+                     <widget class="QLabel" name="TextLabel7">
+                      <property name="text">
+                       <string>per level</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="3" column="2" colspan="3">
+                     <widget class="QLabel" name="TextLabel10">
+                      <property name="text">
+                       <string>(cost + X)</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QGroupBox" name="GroupBox5">
+               <property name="title">
+                <string>Price by Gem Tier</string>
+               </property>
+               <layout class="QVBoxLayout">
+                <property name="spacing">
+                 <number>6</number>
+                </property>
+                <property name="margin">
+                 <number>9</number>
+                </property>
+                <item>
+                 <layout class="QVBoxLayout">
+                  <property name="spacing">
+                   <number>6</number>
+                  </property>
+                  <property name="margin">
+                   <number>0</number>
+                  </property>
+                  <item>
+                   <widget class="QTableWidget" name="TierPriceTable">
+                    <property name="rowCount">
+                     <number>10</number>
+                    </property>
+                    <property name="columnCount">
+                     <number>2</number>
+                    </property>
+                    <row/>
+                    <row/>
+                    <row/>
+                    <row/>
+                    <row/>
+                    <row/>
+                    <row/>
+                    <row/>
+                    <row/>
+                    <row/>
+                    <column/>
+                    <column/>
+                   </widget>
+                  </item>
+                  <item>
+                   <layout class="QHBoxLayout">
+                    <property name="spacing">
+                     <number>6</number>
+                    </property>
+                    <property name="margin">
+                     <number>0</number>
+                    </property>
+                    <item>
+                     <widget class="QCheckBox" name="TierInclude">
+                      <property name="text">
+                       <string>Include</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="TextLabel15">
+                      <property name="text">
+                       <string>(cost + X)</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout">
+             <property name="spacing">
+              <number>6</number>
+             </property>
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item>
+              <spacer>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="CostInPrice">
+               <property name="text">
+                <string>Include cost in price</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout">
+             <property name="spacing">
+              <number>6</number>
+             </property>
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item>
+              <spacer>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QLabel" name="TextLabel2_4">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>All numbers (except percentages) are in amounts of Gold.</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout">
+       <property name="spacing">
+        <number>25</number>
+       </property>
+       <property name="margin">
+        <number>0</number>
+       </property>
+       <item>
+        <spacer>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="OK">
+         <property name="text">
+          <string>OK</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="Cancel">
+         <property name="text">
+          <string>Cancel</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
+ <tabstops>
+  <tabstop>PPGem</tabstop>
+  <tabstop>PPItem</tabstop>
+  <tabstop>PPOrder</tabstop>
+  <tabstop>PPLevel</tabstop>
+  <tabstop>PPImbue</tabstop>
+  <tabstop>PPOC</tabstop>
+  <tabstop>PPInclude</tabstop>
+  <tabstop>GenMarkup</tabstop>
+  <tabstop>TierInclude</tabstop>
+  <tabstop>HourPrice</tabstop>
+  <tabstop>HourInclude</tabstop>
+  <tabstop>CostInPrice</tabstop>
+  <tabstop>OK</tabstop>
+  <tabstop>Cancel</tabstop>
+  <tabstop>Skill</tabstop>
+  <tabstop>CapDistance</tabstop>
+  <tabstop>ShowDoneGems</tabstop>
+  <tabstop>IncludeRR</tabstop>
+  <tabstop>HideNonClassSkills</tabstop>
+  <tabstop>Coop</tabstop>
+  <tabstop>Tab</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

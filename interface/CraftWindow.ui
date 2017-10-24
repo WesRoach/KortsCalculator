@@ -1,0 +1,371 @@
+<ui version="4.0" >
+ <author></author>
+ <comment></comment>
+ <exportmacro></exportmacro>
+ <class>B_CraftWindow</class>
+ <widget class="QDialog" name="B_CraftWindow" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>525</width>
+    <height>509</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Working Item Detail</string>
+  </property>
+  <layout class="QHBoxLayout" >
+   <property name="margin" >
+    <number>9</number>
+   </property>
+   <property name="spacing" >
+    <number>6</number>
+   </property>
+   <item>
+    <layout class="QVBoxLayout" >
+     <property name="margin" >
+      <number>0</number>
+     </property>
+     <property name="spacing" >
+      <number>6</number>
+     </property>
+     <item>
+      <widget class="QGroupBox" name="GroupBox1" >
+       <property name="title" >
+        <string>Gems</string>
+       </property>
+       <layout class="QVBoxLayout" >
+        <property name="margin" >
+         <number>9</number>
+        </property>
+        <property name="spacing" >
+         <number>6</number>
+        </property>
+        <item>
+         <layout class="QVBoxLayout" >
+          <property name="margin" >
+           <number>0</number>
+          </property>
+          <property name="spacing" >
+           <number>6</number>
+          </property>
+          <item>
+           <layout class="QGridLayout" >
+            <property name="margin" >
+             <number>0</number>
+            </property>
+            <property name="spacing" >
+             <number>3</number>
+            </property>
+            <item row="0" column="0" >
+             <widget class="QLabel" name="GemNameLabel" >
+              <property name="sizePolicy" >
+               <sizepolicy>
+                <hsizetype>5</hsizetype>
+                <vsizetype>4</vsizetype>
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text" >
+               <string>Name:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1" >
+             <widget class="QLabel" name="GemMakesLabel" >
+              <property name="text" >
+               <string>Makes:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2" >
+             <widget class="QLabel" name="GemCostLabel" >
+              <property name="text" >
+               <string>Cost:</string>
+              </property>
+              <property name="alignment" >
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0" >
+             <widget class="QLabel" name="Gem1Name" >
+              <property name="sizePolicy" >
+               <sizepolicy>
+                <hsizetype>3</hsizetype>
+                <vsizetype>4</vsizetype>
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text" >
+               <string>None</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1" >
+             <widget class="QSpinBox" name="Gem1Makes" >
+              <property name="sizePolicy" >
+               <sizepolicy>
+                <hsizetype>1</hsizetype>
+                <vsizetype>4</vsizetype>
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2" >
+             <widget class="QLabel" name="Gem1Cost" >
+              <property name="sizePolicy" >
+               <sizepolicy>
+                <hsizetype>5</hsizetype>
+                <vsizetype>4</vsizetype>
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text" >
+               <string>0c</string>
+              </property>
+              <property name="alignment" >
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0" >
+             <widget class="QLabel" name="Gem2Name" >
+              <property name="sizePolicy" >
+               <sizepolicy>
+                <hsizetype>3</hsizetype>
+                <vsizetype>4</vsizetype>
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text" >
+               <string>None</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1" >
+             <widget class="QSpinBox" name="Gem2Makes" />
+            </item>
+            <item row="2" column="2" >
+             <widget class="QLabel" name="Gem2Cost" >
+              <property name="text" >
+               <string>0c</string>
+              </property>
+              <property name="alignment" >
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0" >
+             <widget class="QLabel" name="Gem3Name" >
+              <property name="sizePolicy" >
+               <sizepolicy>
+                <hsizetype>3</hsizetype>
+                <vsizetype>5</vsizetype>
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text" >
+               <string>None</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1" >
+             <widget class="QSpinBox" name="Gem3Makes" />
+            </item>
+            <item row="3" column="2" >
+             <widget class="QLabel" name="Gem3Cost" >
+              <property name="text" >
+               <string>0c</string>
+              </property>
+              <property name="alignment" >
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0" >
+             <widget class="QLabel" name="Gem4Name" >
+              <property name="sizePolicy" >
+               <sizepolicy>
+                <hsizetype>3</hsizetype>
+                <vsizetype>5</vsizetype>
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text" >
+               <string>None</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1" >
+             <widget class="QSpinBox" name="Gem4Makes" />
+            </item>
+            <item row="4" column="2" >
+             <widget class="QLabel" name="Gem4Cost" >
+              <property name="text" >
+               <string>0c</string>
+              </property>
+              <property name="alignment" >
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" >
+            <property name="margin" >
+             <number>0</number>
+            </property>
+            <property name="spacing" >
+             <number>6</number>
+            </property>
+            <item>
+             <widget class="QGroupBox" name="GroupBox2_2" >
+              <property name="title" >
+               <string>Materials (used)</string>
+              </property>
+              <layout class="QVBoxLayout" >
+               <property name="margin" >
+                <number>9</number>
+               </property>
+               <property name="spacing" >
+                <number>6</number>
+               </property>
+               <item>
+                <widget class="QTextEdit" name="MatsUsed" />
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="GroupBox2_2_2" >
+              <property name="title" >
+               <string>Materials (one make)</string>
+              </property>
+              <layout class="QVBoxLayout" >
+               <property name="margin" >
+                <number>9</number>
+               </property>
+               <property name="spacing" >
+                <number>6</number>
+               </property>
+               <item>
+                <widget class="QTextEdit" name="MatsExpected" >
+                 <property name="sizePolicy" >
+                  <sizepolicy>
+                   <hsizetype>7</hsizetype>
+                   <vsizetype>7</vsizetype>
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" >
+          <property name="margin" >
+           <number>0</number>
+          </property>
+          <property name="spacing" >
+           <number>6</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" >
+            <property name="margin" >
+             <number>0</number>
+            </property>
+            <property name="spacing" >
+             <number>6</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="TextLabel8" >
+              <property name="text" >
+               <string>Total Cost:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="TotalCost" >
+              <property name="text" >
+               <string>0c</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" >
+       <property name="margin" >
+        <number>0</number>
+       </property>
+       <property name="spacing" >
+        <number>6</number>
+       </property>
+       <item>
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType" >
+          <enum>QSizePolicy::Expanding</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>16</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="Close" >
+         <property name="text" >
+          <string>Close</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>102</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
+ <resources/>
+ <connections/>
+</ui>

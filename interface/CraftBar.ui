@@ -1,0 +1,711 @@
+<ui version="4.0" >
+ <class>B_CraftBar</class>
+ <widget class="QDialog" name="B_CraftBar" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>587</width>
+    <height>512</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Craft Bar Setup</string>
+  </property>
+  <widget class="QWidget" name="layoutWidget" >
+   <property name="geometry" >
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>571</width>
+     <height>494</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" >
+    <property name="margin" >
+     <number>0</number>
+    </property>
+    <property name="spacing" >
+     <number>6</number>
+    </property>
+    <item>
+     <layout class="QVBoxLayout" >
+      <property name="margin" >
+       <number>0</number>
+      </property>
+      <property name="spacing" >
+       <number>6</number>
+      </property>
+      <item>
+       <layout class="QHBoxLayout" >
+        <property name="margin" >
+         <number>0</number>
+        </property>
+        <property name="spacing" >
+         <number>6</number>
+        </property>
+        <item>
+         <spacer>
+          <property name="orientation" >
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType" >
+           <enum>QSizePolicy::Maximum</enum>
+          </property>
+          <property name="sizeHint" >
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QLabel" name="TextLabel1" >
+          <property name="sizePolicy" >
+           <sizepolicy>
+            <hsizetype>4</hsizetype>
+            <vsizetype>5</vsizetype>
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text" >
+           <string>Path to DAoC Folder:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="DaocPath" />
+        </item>
+        <item>
+         <widget class="QPushButton" name="PathSelectButton" >
+          <property name="sizePolicy" >
+           <sizepolicy>
+            <hsizetype>0</hsizetype>
+            <vsizetype>0</vsizetype>
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize" >
+           <size>
+            <width>28</width>
+            <height>28</height>
+           </size>
+          </property>
+          <property name="maximumSize" >
+           <size>
+            <width>28</width>
+            <height>28</height>
+           </size>
+          </property>
+          <property name="baseSize" >
+           <size>
+            <width>28</width>
+            <height>28</height>
+           </size>
+          </property>
+          <property name="text" >
+           <string>...</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer>
+          <property name="orientation" >
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType" >
+           <enum>QSizePolicy::Maximum</enum>
+          </property>
+          <property name="sizeHint" >
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QLabel" name="TextLabel2" >
+        <property name="text" >
+         <string>(i.e. C:\Mythic\[Atlantis, Camelot, Isles])</string>
+        </property>
+        <property name="alignment" >
+         <set>Qt::AlignHCenter|Qt::AlignTop</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" >
+      <property name="margin" >
+       <number>0</number>
+      </property>
+      <property name="spacing" >
+       <number>6</number>
+      </property>
+      <item>
+       <layout class="QVBoxLayout" >
+        <property name="margin" >
+         <number>0</number>
+        </property>
+        <property name="spacing" >
+         <number>6</number>
+        </property>
+        <item>
+         <widget class="QGroupBox" name="GroupBox20" >
+          <property name="title" >
+           <string>Crafter to Load</string>
+          </property>
+          <layout class="QVBoxLayout" >
+           <property name="margin" >
+            <number>6</number>
+           </property>
+           <property name="spacing" >
+            <number>6</number>
+           </property>
+           <item>
+            <layout class="QVBoxLayout" >
+             <property name="margin" >
+              <number>0</number>
+             </property>
+             <property name="spacing" >
+              <number>6</number>
+             </property>
+             <item>
+              <widget class="QTableView" name="CharList" >
+               <property name="showGrid" >
+                <bool>false</bool>
+               </property>
+               <property name="gridStyle" >
+                <enum>Qt::NoPen</enum>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="TextLabel14" >
+          <property name="text" >
+           <string>You must be logged out of the selected 
+character for the changes to take effect.</string>
+          </property>
+          <property name="alignment" >
+           <set>Qt::AlignHCenter|Qt::AlignTop</set>
+          </property>
+          <property name="wordWrap" >
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" >
+        <property name="margin" >
+         <number>0</number>
+        </property>
+        <property name="spacing" >
+         <number>6</number>
+        </property>
+        <item>
+         <widget class="QGroupBox" name="GroupBox19" >
+          <property name="title" >
+           <string>Gems To Load</string>
+          </property>
+          <layout class="QVBoxLayout" >
+           <property name="margin" >
+            <number>6</number>
+           </property>
+           <property name="spacing" >
+            <number>6</number>
+           </property>
+           <item>
+            <layout class="QGridLayout" >
+             <property name="margin" >
+              <number>0</number>
+             </property>
+             <property name="spacing" >
+              <number>6</number>
+             </property>
+             <item row="3" column="2" >
+              <widget class="QCheckBox" name="RangedSelect" >
+               <property name="text" >
+                <string>Ranged</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1" >
+              <widget class="QCheckBox" name="LegsSelect" >
+               <property name="text" >
+                <string>Legs</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1" >
+              <widget class="QCheckBox" name="FeetSelect" >
+               <property name="text" >
+                <string>Feet</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2" >
+              <widget class="QCheckBox" name="LHSelect" >
+               <property name="text" >
+                <string>Left Hand</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0" >
+              <widget class="QCheckBox" name="HeadSelect" >
+               <property name="text" >
+                <string>Head</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0" >
+              <widget class="QCheckBox" name="ArmsSelect" >
+               <property name="text" >
+                <string>Arms</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="2" >
+              <widget class="QCheckBox" name="THSelect" >
+               <property name="text" >
+                <string>2 Handed</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0" >
+              <widget class="QCheckBox" name="ChestSelect" >
+               <property name="text" >
+                <string>Chest</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1" >
+              <widget class="QCheckBox" name="HandsSelect" >
+               <property name="text" >
+                <string>Hands</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2" >
+              <widget class="QCheckBox" name="RHSelect" >
+               <property name="text" >
+                <string>Right Hand</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1" >
+              <widget class="QCheckBox" name="SpareSelect" >
+               <property name="text" >
+                <string>Spare</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" >
+             <property name="margin" >
+              <number>0</number>
+             </property>
+             <property name="spacing" >
+              <number>6</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="TextLabel7" >
+               <property name="text" >
+                <string>Hotbar to Start At:</string>
+               </property>
+               <property name="alignment" >
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSpinBox" name="HotbarNum" >
+               <property name="maximum" >
+                <number>3</number>
+               </property>
+               <property name="minimum" >
+                <number>1</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="TextLabel7_2" >
+               <property name="text" >
+                <string> Row:</string>
+               </property>
+               <property name="alignment" >
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSpinBox" name="HotbarRow" >
+               <property name="maximum" >
+                <number>10</number>
+               </property>
+               <property name="minimum" >
+                <number>1</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer>
+               <property name="orientation" >
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" >
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" >
+             <property name="margin" >
+              <number>0</number>
+             </property>
+             <property name="spacing" >
+              <number>6</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="TextLabel8" >
+               <property name="text" >
+                <string>Hotbar Position to Start At:</string>
+               </property>
+               <property name="alignment" >
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSpinBox" name="HotbarPos" >
+               <property name="maximum" >
+                <number>10</number>
+               </property>
+               <property name="minimum" >
+                <number>1</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer>
+               <property name="orientation" >
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" >
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" >
+             <property name="margin" >
+              <number>0</number>
+             </property>
+             <property name="spacing" >
+              <number>6</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="TextLabel10" >
+               <property name="text" >
+                <string>Ending Bar:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="EndBar" >
+               <property name="text" >
+                <string>0</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="TextLabel10_2" >
+               <property name="text" >
+                <string>Row:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="EndRow" >
+               <property name="text" >
+                <string>0</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="TextLabel11" >
+               <property name="text" >
+                <string>Position:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="EndPos" >
+               <property name="text" >
+                <string>0</string>
+               </property>
+               <property name="alignment" >
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" >
+             <property name="margin" >
+              <number>0</number>
+             </property>
+             <property name="spacing" >
+              <number>6</number>
+             </property>
+             <item>
+              <spacer>
+               <property name="orientation" >
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" >
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QLabel" name="LabelNumGems" >
+               <property name="text" >
+                <string>Total Number of Gems to Load:</string>
+               </property>
+               <property name="alignment" >
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="NumGems" >
+               <property name="text" >
+                <string>0</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer>
+               <property name="orientation" >
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" >
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" >
+          <property name="margin" >
+           <number>0</number>
+          </property>
+          <property name="spacing" >
+           <number>11</number>
+          </property>
+          <item>
+           <spacer>
+            <property name="orientation" >
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" >
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="LoadGemsButton" >
+            <property name="sizePolicy" >
+             <sizepolicy>
+              <hsizetype>3</hsizetype>
+              <vsizetype>0</vsizetype>
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize" >
+             <size>
+              <width>110</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text" >
+             <string>Load Gems</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer>
+            <property name="orientation" >
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" >
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="GroupBox21" >
+      <property name="title" >
+       <string/>
+      </property>
+      <layout class="QHBoxLayout" >
+       <property name="margin" >
+        <number>9</number>
+       </property>
+       <property name="spacing" >
+        <number>6</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="TextLabel9" >
+         <property name="text" >
+          <string>This dialog lets you automatically set up hotbars for crafting gems. It takes all "non-finished" gems and places them in order on your hotbars starting at the bar and position you specify. It will place all the gems consecutively, so make sure you do not have anything on your bars in that range. If you do not leave enough space, it will error w/o changing your bars. A backup copy of your character will be saved as [charname]-[server].ini.bak in your DAoC folder.  Replacing the file with the .bak copy will restore your settings.</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+         </property>
+         <property name="wordWrap" >
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" >
+      <property name="margin" >
+       <number>0</number>
+      </property>
+      <property name="spacing" >
+       <number>6</number>
+      </property>
+      <item>
+       <spacer>
+        <property name="orientation" >
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" >
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="PushButton19" >
+        <property name="text" >
+         <string>Close</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer>
+        <property name="orientation" >
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" >
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
+ <tabstops>
+  <tabstop>DaocPath</tabstop>
+  <tabstop>PathSelectButton</tabstop>
+  <tabstop>CharList</tabstop>
+  <tabstop>ChestSelect</tabstop>
+  <tabstop>ArmsSelect</tabstop>
+  <tabstop>HeadSelect</tabstop>
+  <tabstop>LegsSelect</tabstop>
+  <tabstop>HandsSelect</tabstop>
+  <tabstop>FeetSelect</tabstop>
+  <tabstop>SpareSelect</tabstop>
+  <tabstop>RHSelect</tabstop>
+  <tabstop>LHSelect</tabstop>
+  <tabstop>THSelect</tabstop>
+  <tabstop>RangedSelect</tabstop>
+  <tabstop>HotbarNum</tabstop>
+  <tabstop>HotbarRow</tabstop>
+  <tabstop>HotbarPos</tabstop>
+  <tabstop>LoadGemsButton</tabstop>
+  <tabstop>PushButton19</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>PushButton19</sender>
+   <signal>clicked()</signal>
+   <receiver>B_CraftBar</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
