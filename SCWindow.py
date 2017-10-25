@@ -374,8 +374,6 @@ class SCWindow(QMainWindow, Ui_B_SC):
             self.switchOnType['drop'].append(self.AmountEdit[i])
             self.connect(self.AmountEdit[i], SIGNAL("editingFinished()"),
                          self.amountsChanged)
-            # self.connect(self.AmountEdit[i],SIGNAL("textChanged(const QString&)"),
-            #             self.amountsChanged)
 
             self.Effect.append(getattr(self, 'Effect_%d' % idx))
             self.Effect[i].setFixedSize(QSize(effectwidth, cbheight))
@@ -390,8 +388,6 @@ class SCWindow(QMainWindow, Ui_B_SC):
             self.switchOnType['drop'].append(self.Requirement[i])
             self.connect(self.Requirement[i], SIGNAL("editingFinished()"),
                          self.amountsChanged)
-            # self.connect(self.Requirement[i],SIGNAL("textChanged(const QString&)"),
-            #            self.amountsChanged)
 
             if i < 6:
                 self.AmountDrop.append(getattr(self, 'Amount_Drop_%d' % idx))
@@ -481,7 +477,6 @@ class SCWindow(QMainWindow, Ui_B_SC):
         self.connect(self.OutfitName, SIGNAL("activated(int)"), self.outfitNameSelected)
         self.connect(self.OutfitName, SIGNAL("editTextChanged(const QString&)"), self.outfitNameEdited)
 
-        # self.connect(self.PieceTab,SIGNAL("currentChanged"),self.pieceTabChanged)
         self.PieceTab.currentChanged.connect(self.pieceTabChanged)
 
         self.connect(self.ToggleItemView, SIGNAL("clicked(bool)"), self.toggleItemView)
@@ -590,12 +585,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
         self.moveitemmenu = QMenu('&Move Item to', self)
         self.swapgemsmenu = QMenu('S&wap Gems with', self)
 
-        # DON'T SWAP OR MOVE TWICE!!!!!!
-        # self.connect(self.swapgemsmenu, SIGNAL("triggered(QAction*)"),
-        #             self.swapWith)
         self.connect(self.swappiecemenu, SIGNAL("triggered(QAction*)"), self.swapWith)
-        # self.connect(self.moveitemmenu, SIGNAL("triggered(QAction*)"),
-        #             self.moveTo)
         self.connect(self.movepiecemenu, SIGNAL("triggered(QAction*)"), self.moveTo)
         self.connect(self.movejewelmenu, SIGNAL("triggered(QAction*)"), self.moveTo)
 

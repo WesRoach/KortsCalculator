@@ -54,10 +54,7 @@ class ItemListDialog(QFileDialog):
         self.setViewMode(QFileDialog.List)
         self.preview = ItemPreview(self, realm, charclass)
 
-        # self.connect(self,SIGNAL("currentChanged(const QString&)"),self.currentChanged)
         self.currentChanged.connect(self.onCurrentChanged)
-
-        # self.connect(self,SIGNAL("finished(int)"),self.finish)
         self.finished.connect(self.finish)
 
         self.loadOptions()
