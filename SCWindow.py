@@ -489,13 +489,12 @@ class SCWindow(QMainWindow, Ui_B_SC):
 
     def getIcon(self, namebase):
         thisicon = QIcon()
+
         for size in (16, 24, 32,):
-            thisicon.addFile(':/images/normal/' + namebase + str(size) + '.png',
-                             QSize(size, size), QIcon.Normal, QIcon.Off)
-            thisicon.addFile(':/images/disabled/' + namebase + str(size) + '.png',
-                             QSize(size, size), QIcon.Disabled, QIcon.Off)
-            thisicon.addFile(':/images/hot/' + namebase + str(size) + '.png',
-                             QSize(size, size), QIcon.Active, QIcon.Off)
+            thisicon.addFile(':/images/normal/' + namebase + str(size) + '.png', QSize(size, size), QIcon.Normal, QIcon.Off)
+            thisicon.addFile(':/images/disabled/' + namebase + str(size) + '.png', QSize(size, size), QIcon.Disabled, QIcon.Off)
+            thisicon.addFile(':/images/hot/' + namebase + str(size) + '.png', QSize(size, size), QIcon.Active, QIcon.Off)
+
         return thisicon
 
     def initMenu(self):
@@ -503,42 +502,31 @@ class SCWindow(QMainWindow, Ui_B_SC):
         self.toolbar.setObjectName("CraftingToolbar")
 
         self.rf_menu = QMenu('&Recent Files')
-        self.connect(self.rf_menu, SIGNAL("triggered(QAction*)"),
-                     self.loadRecentFile)
-
+        self.rf_menu.triggered['QAction *'].connect(self.loadRecentFile)
         self.filemenu = QMenu('&File', self)
-        self.filemenu.addAction('&New', self.newFile,
-                                QKeySequence(Qt.CTRL + Qt.Key_N))
+        self.filemenu.addAction('&New', self.newFile, QKeySequence(Qt.CTRL + Qt.Key_N))
         self.toolbar.addAction(self.getIcon('New'), 'New', self.newFile)
-        self.filemenu.addAction('&Open...', self.openFile,
-                                QKeySequence(Qt.CTRL + Qt.Key_O))
+        self.filemenu.addAction('&Open...', self.openFile, QKeySequence(Qt.CTRL + Qt.Key_O))
         self.toolbar.addAction(self.getIcon('Open'), 'Open', self.openFile)
-        self.filemenu.addAction('&Save', self.saveFile,
-                                QKeySequence(Qt.CTRL + Qt.Key_S))
+        self.filemenu.addAction('&Save', self.saveFile, QKeySequence(Qt.CTRL + Qt.Key_S))
         self.toolbar.addAction(self.getIcon('Save'), 'Save', self.saveFile)
         self.filemenu.addAction('Save &As...', self.saveAsFile)
-        self.toolbar.addAction(self.getIcon('SaveAs'), 'Save As',
-                               self.saveAsFile)
+        self.toolbar.addAction(self.getIcon('SaveAs'), 'Save As', self.saveAsFile)
 
         self.filemenu.addSeparator()
         self.toolbar.addSeparator()
 
-        self.filemenu.addAction('&Load Item...', self.loadItem,
-                                QKeySequence(Qt.CTRL + Qt.SHIFT + Qt.Key_L))
-        self.toolbar.addAction(self.getIcon('LoadItem'), 'Load Item',
-                               self.loadItem)
-        self.filemenu.addAction('Sa&ve Item...', self.saveItem,
-                                QKeySequence(Qt.CTRL + Qt.SHIFT + Qt.Key_S))
-        self.toolbar.addAction(self.getIcon('SaveItem'), 'Save Item',
-                               self.saveItem)
+        self.filemenu.addAction('&Load Item...', self.loadItem, QKeySequence(Qt.CTRL + Qt.SHIFT + Qt.Key_L))
+        self.toolbar.addAction(self.getIcon('LoadItem'), 'Load Item', self.loadItem)
+        self.filemenu.addAction('Sa&ve Item...', self.saveItem, QKeySequence(Qt.CTRL + Qt.SHIFT + Qt.Key_S))
+        self.toolbar.addAction(self.getIcon('SaveItem'), 'Save Item', self.saveItem)
         self.filemenu.addAction('Item Database Path...', self.chooseItemPath)
 
         self.filemenu.addSeparator()
         self.toolbar.addSeparator()
 
         self.filemenu.addAction('Export &Quickbars...', self.openCraftBars)
-        self.toolbar.addAction(self.getIcon('ExportGems'), 'Quickbars',
-                               self.openCraftBars)
+        self.toolbar.addAction(self.getIcon('ExportGems'), 'Quickbars', self.openCraftBars)
         self.filemenu.addAction('Export SCTemplate XML...', self.exportAsFile)
         self.filemenu.addAction('Export &UI Window...', self.generateUIXML)
         self.filemenu.addAction('Choose UI Format...', self.chooseXMLUIFile)
@@ -547,8 +535,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
 
         self.filemenu.addMenu(self.rf_menu)
         self.filemenu.addSeparator()
-        self.filemenu.addAction('E&xit', self.close,
-                                QKeySequence(Qt.CTRL + Qt.Key_X))
+        self.filemenu.addAction('E&xit', self.close, QKeySequence(Qt.CTRL + Qt.Key_X))
         self.menuBar().addMenu(self.filemenu)
 
         self.movejewelmenu = QMenu('Jewel Slots', self)
@@ -568,17 +555,17 @@ class SCWindow(QMainWindow, Ui_B_SC):
         self.moveitemmenu = QMenu('&Move Item to', self)
         self.swapgemsmenu = QMenu('S&wap Gems with', self)
 
-        self.connect(self.swappiecemenu, SIGNAL("triggered(QAction*)"), self.swapWith)
-        self.connect(self.movepiecemenu, SIGNAL("triggered(QAction*)"), self.moveTo)
-        self.connect(self.movejewelmenu, SIGNAL("triggered(QAction*)"), self.moveTo)
+        self.swappiecemenu.triggered['QAction *'].connect(self.swapWith)
+        self.movepiecemenu.triggered['QAction *'].connect(self.moveTo)
+        self.movejewelmenu.triggered['QAction *'].connect(self.moveTo)
 
         self.newitemmenu = QMenu('&New Item', self)
         self.chooseitemmenu = QMenu('Item &Type', self)
 
         self.newitemmenu = QMenu('&New Item', self)
         self.chooseitemmenu = QMenu('Item &Type', self)
-        self.connect(self.newitemmenu, SIGNAL("triggered(QAction*)"), self.newItemType)
-        self.connect(self.chooseitemmenu, SIGNAL("triggered(QAction*)"), self.chooseItemType)
+        self.newitemmenu.triggered['QAction *'].connect(self.newItemType)
+        self.chooseitemmenu.triggered['QAction *'].connect(self.chooseItemType)
 
         self.editmenu = QMenu('&Edit', self)
         self.chooseitemmenuid = self.editmenu.addMenu(self.chooseitemmenu)
@@ -634,22 +621,19 @@ class SCWindow(QMainWindow, Ui_B_SC):
             act.setCheckable(True)
             self.viewtoolbarmenu.addAction(act)
         self.viewtoolbarmenu.actions()[1].setChecked(True)
-        self.connect(self.viewtoolbarmenu, SIGNAL("triggered(QAction*)"),
-                     self.viewToolbar)
+        self.viewtoolbarmenu.triggered['QAction *'].connect(self.viewToolbar)
         self.viewmenu.addMenu(self.viewtoolbarmenu)
 
         self.viewmenu.addSeparator()
 
-        self.showcapmenuid = self.viewmenu.addAction('&Distance to Cap',
-                                                     self.showCap, QKeySequence(Qt.ALT + Qt.Key_D))
+        self.showcapmenuid = self.viewmenu.addAction('&Distance to Cap', self.showCap, QKeySequence(Qt.ALT + Qt.Key_D))
         self.showcapmenuid.setCheckable(True)
         self.showcapmenuid.setChecked(self.capDistance)
         self.menuBar().addMenu(self.viewmenu)
 
         self.errorsmenu = QMenu('Errors', self)
         self.errorsmenuid = self.menuBar().addMenu(self.errorsmenu)
-        self.connect(self.errorsmenu, SIGNAL('triggered(QAction*)'),
-                     self.changePieceTab)
+        self.errorsmenu.triggered['QAction *'].connect(self.changePieceTab)
         self.helpmenu = QMenu('&Help', self)
         self.helpmenu.addAction('&About', self.aboutBox)
         self.menuBar().addMenu(self.helpmenu)
