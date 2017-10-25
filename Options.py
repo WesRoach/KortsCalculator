@@ -50,7 +50,6 @@ class Options(QDialog, Ui_B_Options):
 
         # TODO: REMOVE THE PRICING TAB IN OPTIONS
         self.TierPriceTable.itemChanged['QTableWidgetItem *'].connect(self.tierPriceSet)
-        print("self.ok_pressed")
 
         self.parent = parent
         skilllist = range(1000, -1, -50)
