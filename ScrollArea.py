@@ -22,7 +22,7 @@ class ScrollArea(QtGui.QScrollArea):
         self.sizehint = QtCore.QSize(QtGui.QScrollArea.sizeHint(self))
         self.rowheight = -1
 
-        self.verticalScrollBar().valueChanged.connect(self.positionNearest)
+        self.verticalScrollBar().valueChanged[int].connect(self.positionNearest)
 
     def setWidget(self, widget):
         QtGui.QScrollArea.setWidget(self, widget)

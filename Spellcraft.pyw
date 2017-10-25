@@ -24,7 +24,9 @@ class ScApplication(QApplication):
 
         if args[0]:
             args[0] = unicode(QDir(self.curPath).absoluteFilePath(args[0]))
+
         else:
+
             args[0] = unicode(QDir(self.curPath).absoluteFilePath(__file__))
         self.appPath = unicode(QDir.cleanPath(QDir(args[0]).absoluteFilePath("..")))
 

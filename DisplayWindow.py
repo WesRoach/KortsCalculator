@@ -1,6 +1,6 @@
 # DisplayWindow.py: Dark Age of Camelot Spellcrafting Calculator 
 #
-# See http://kscraft.sourceforge.net/ for updates
+# See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
 #
 # See NOTICE.txt for copyrights and grant of license
 
@@ -12,16 +12,19 @@ import string
 
 
 class DisplayWindow(QDialog, Ui_B_DisplayWindow):
-    def __init__(self, parent=None, name=None, modal=False, fl=Qt.Widget):
+
+    def __init__(self, parent = None, name = None, modal = False, fl = Qt.Widget):
         QDialog.__init__(self, parent, fl)
         Ui_B_DisplayWindow.setupUi(self, self)
+
         if (name):
             self.setObjectName(name)
+
         if (modal):
             self.setModal(modal)
 
-        self.connect(self.PushButton1, SIGNAL("clicked()"), self.CloseWindow)
-        self.connect(self.DisplayText, SIGNAL("itemActivated(QListWidgetItem*)"), self.LocationClicked)
+        self.PushButton1.clicked.connect(self.CloseWindow)
+        self.DisplayText.itemActivated['QListWidgetItem *'].connect(self.LocationClicked)
 
         self.scwindow = parent
 
@@ -36,10 +39,13 @@ class DisplayWindow(QDialog, Ui_B_DisplayWindow):
     def LocationClicked(self, a0):
         if a0 is None: return
         tabname, rest = string.split(str(a0.text()), ':', 1)
+
         if tabname in JewelTabList:
             col = JewelTabList.index(tabname)
             self.scwindow.PieceTab.setCurrentIndex(1, col)
+
         elif tabname in PieceTabList:
             col = PieceTabList.index(tabname)
             self.scwindow.PieceTab.setCurrentIndex(0, col)
+
         self.done(1)

@@ -135,7 +135,6 @@ class SCWindow(QMainWindow, Ui_B_SC):
         cbwidth = self.CharClass.getMinimumWidth(['Necromancer'])
         itmcbwidth = self.ItemType.getMinimumWidth(['Composite Bow'])
         amtcbwidth = self.QualDrop.getMinimumWidth(['100'])
-        # minSizeHint includes one char, test 19.9 width...
         amtedwidth = self.ItemLevel.minimumSizeHint().width()
         amtedwidth += testfont.size(Qt.TextSingleLine, "19.").width()
 
@@ -350,9 +349,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
         width = testfont.size(Qt.TextSingleLine, "  ").width()
         headergrid.setColumnMinimumWidth(7, width)
         itemslotgrid.setColumnMinimumWidth(7, width)
-        width = testfont.size(Qt.TextSingleLine,
-                              "Owl-runed Stable Enlightening Adamantium Tincture").width()
-        #            "Imperfect Mineral Encrusted Nature Spell Stone").width()
+        width = testfont.size(Qt.TextSingleLine, "Owl-runed Stable Enlightening Adamantium Tincture").width()
         itemslotgrid.setColumnMinimumWidth(8, width)
 
         # XXX FIX ME - I want to have a decimal!  But Double validator isn't working
@@ -364,42 +361,33 @@ class SCWindow(QMainWindow, Ui_B_SC):
             self.GemLabel.append(getattr(self, 'Gem_Label_%d' % idx))
             self.Type.append(getattr(self, 'Type_%d' % idx))
             self.Type[i].setFixedSize(QSize(typewidth, cbheight))
-            self.connect(self.Type[i], SIGNAL("activated(int)"),
-                         self.typeChanged)
+            self.Type[i].activated[int].connect(self.typeChanged)
             self.GemLabel[i].setBuddy(self.Type[i])
 
             self.AmountEdit.append(getattr(self, 'Amount_Edit_%d' % idx))
             self.AmountEdit[i].setFixedSize(QSize(amtcbwidth, edheight))
             self.AmountEdit[i].setValidator(editAmountValidator)
             self.switchOnType['drop'].append(self.AmountEdit[i])
-            self.connect(self.AmountEdit[i], SIGNAL("editingFinished()"),
-                         self.amountsChanged)
+            self.AmountEdit[i].editingFinished.connect(self.amountsChanged)
 
             self.Effect.append(getattr(self, 'Effect_%d' % idx))
             self.Effect[i].setFixedSize(QSize(effectwidth, cbheight))
             self.Effect[i].setInsertPolicy(QComboBox.NoInsert)
-            self.connect(self.Effect[i], SIGNAL("activated(int)"),
-                         self.effectChanged)
-            self.connect(self.Effect[i], SIGNAL("editTextChanged(const QString&)"),
-                         self.effectChanged)
-
+            self.Effect[i].activated[int].connect(self.effectChanged)
+            self.Effect[i].editTextChanged[str].connect(self.effectChanged)
             self.Requirement.append(getattr(self, 'Requirement_%d' % idx))
             self.Requirement[i].setFixedSize(QSize(reqwidth, edheight))
             self.switchOnType['drop'].append(self.Requirement[i])
-            self.connect(self.Requirement[i], SIGNAL("editingFinished()"),
-                         self.amountsChanged)
+            self.Requirement[i].editingFinished.connect(self.amountsChanged)
 
             if i < 6:
                 self.AmountDrop.append(getattr(self, 'Amount_Drop_%d' % idx))
                 self.AmountDrop[i].setFixedSize(QSize(amtcbwidth, cbheight))
-                self.connect(self.AmountDrop[i], SIGNAL("activated(int)"),
-                             self.amountsChanged)
+                self.AmountDrop[i].activated[int].connect(self.amountsChanged)
                 self.Name.append(getattr(self, 'Name_%d' % idx))
-                self.switchOnType['player'].extend([
-                    self.AmountDrop[i], self.Name[i], ])
+                self.switchOnType['player'].extend([self.AmountDrop[i], self.Name[i]])
             else:
-                self.switchOnType['drop'].extend([
-                    self.GemLabel[i], self.Type[i], self.Effect[i], ])
+                self.switchOnType['drop'].extend([self.GemLabel[i], self.Type[i], self.Effect[i]])
 
             if i < 4:
                 self.Makes.append(getattr(self, 'Makes_%d' % idx))
@@ -407,13 +395,11 @@ class SCWindow(QMainWindow, Ui_B_SC):
                     self.Makes[i].setFrame(False)
                     self.Makes[i].lineEdit().setFrame(True)
                 self.Makes[i].setFixedSize(QSize(amtcbwidth, cbheight))
-                self.connect(self.Makes[i], SIGNAL("valueChanged(int)"), self.amountsChanged)
-                # Hide '0' values
+                self.Makes[i].valueChanged[int].connect(self.amountsChanged)
                 self.Makes[i].setSpecialValueText(" ")
                 self.Points.append(getattr(self, 'Points_%d' % idx))
                 self.Cost.append(getattr(self, 'Cost_%d' % idx))
-                self.switchOnType['player'].extend([
-                    self.Makes[i], self.Points[i], self.Cost[i], ])
+                self.switchOnType['player'].extend([self.Makes[i], self.Points[i], self.Cost[i]])
 
             itemslotgrid.setRowMinimumHeight(i, max(cbheight, edheight))
 
@@ -456,53 +442,50 @@ class SCWindow(QMainWindow, Ui_B_SC):
         self.ScWinFrame.updateGeometry()
 
     def initControls(self):
-        # Send these home to the parent form (this QMainWindow), they are dumb QFrames:
         self.GroupStats.mousePressEvent = self.ignoreMouseEvent
         self.GroupResists.mousePressEvent = self.ignoreMouseEvent
         self.GroupItemFrame.mousePressEvent = self.ignoreMouseEvent
 
-        self.connect(self.GroupStats, SIGNAL("mousePressEvent(QMouseEvent*)"), self.mousePressEvent)
-        self.connect(self.GroupResists, SIGNAL("mousePressEvent(QMouseEvent*)"), self.mousePressEvent)
-        self.connect(self.GroupItemFrame, SIGNAL("mousePressEvent(QMouseEvent*)"), self.mousePressEvent)
-        self.connect(self.CharName, SIGNAL("textChanged(const QString&)"), self.templateChanged)
-        self.connect(self.Realm, SIGNAL("activated(int)"), self.realmChanged)
-        self.connect(self.CharClass, SIGNAL("activated(int)"), self.charClassChanged)
-        self.connect(self.CharRace, SIGNAL("activated(int)"), self.raceChanged)
-        self.connect(self.CharLevel, SIGNAL("textChanged(const QString&)"), self.totalsChanged)
+        # self.connect(self.GroupStats, SIGNAL("mousePressEvent(QMouseEvent*)"), self.mousePressEvent)
+        # self.connect(self.GroupResists, SIGNAL("mousePressEvent(QMouseEvent*)"), self.mousePressEvent)
+        # self.connect(self.GroupItemFrame, SIGNAL("mousePressEvent(QMouseEvent*)"), self.mousePressEvent)
+        self.CharName.textChanged[str].connect(self.templateChanged)
+        self.Realm.activated[int].connect(self.realmChanged)
+        self.CharClass.activated[int].connect(self.charClassChanged)
+        self.CharRace.activated[int].connect(self.raceChanged)
+        self.CharLevel.textChanged[str].connect(self.totalsChanged)
 
-        # Change these to totalsChanged if Restrictions are finally tested:
-        self.connect(self.RealmRank, SIGNAL("textChanged(const QString&)"), self.templateChanged)
-        self.connect(self.ChampionLevel, SIGNAL("textChanged(const QString&)"), self.templateChanged)
-        self.connect(self.CraftTime, SIGNAL("textChanged(const QString&)"), self.totalsChanged)
-        self.connect(self.OutfitName, SIGNAL("activated(int)"), self.outfitNameSelected)
-        self.connect(self.OutfitName, SIGNAL("editTextChanged(const QString&)"), self.outfitNameEdited)
+        self.RealmRank.textChanged[str].connect(self.templateChanged)
+        self.ChampionLevel.textChanged[str].connect(self.templateChanged)
+        self.CraftTime.textChanged[str].connect(self.totalsChanged)
+        self.OutfitName.activated[int].connect(self.outfitNameSelected)
+        self.OutfitName.editTextChanged[str].connect(self.outfitNameEdited)
 
         self.PieceTab.currentChanged.connect(self.pieceTabChanged)
+        self.ToggleItemView.clicked[bool].connect(self.toggleItemView)
+        self.ItemLevel.textChanged[str].connect(self.itemChanged)
+        self.ItemLevelButton.clicked.connect(self.itemLevelShow)
+        self.QualDrop.activated[int].connect(self.itemChanged)
+        self.QualEdit.textChanged[str].connect(self.itemChanged)
+        self.ItemNameCombo.activated[int].connect(self.itemNameSelected)
 
-        self.connect(self.ToggleItemView, SIGNAL("clicked(bool)"), self.toggleItemView)
-        self.connect(self.ItemLevel, SIGNAL("textChanged(const QString&)"), self.itemChanged)
-        self.connect(self.ItemLevelButton, SIGNAL("clicked()"), self.itemLevelShow)
-        self.connect(self.QualDrop, SIGNAL("activated(int)"), self.itemChanged)
-        self.connect(self.QualEdit, SIGNAL("textChanged(const QString&)"), self.itemChanged)
-        self.connect(self.ItemNameCombo, SIGNAL("activated(int)"), self.itemNameSelected)
-        self.connect(self.ItemNameCombo, SIGNAL("editTextChanged(const QString&)"), self.itemNameEdited)
-        self.connect(self.Equipped, SIGNAL("stateChanged(int)"), self.itemChanged)
-        self.connect(self.ItemCraftTime, SIGNAL("textChanged(const QString&)"), self.itemChanged)
-        self.connect(self.ItemRealm, SIGNAL("activated(int)"), self.itemRealmChanged)
-        self.connect(self.ItemType, SIGNAL("activated(int)"), self.itemTypeChanged)
-        self.connect(self.ItemSource, SIGNAL("activated(int)"), self.itemInfoChanged)
-        self.connect(self.AFDPSEdit, SIGNAL("textChanged(const QString&)"), self.itemInfoChanged)
-        self.connect(self.BonusEdit, SIGNAL("textChanged(const QString&)"), self.itemInfoChanged)
-        self.connect(self.SpeedEdit, SIGNAL("textChanged(const QString&)"), self.itemInfoChanged)
-        self.connect(self.Offhand, SIGNAL("stateChanged(int)"), self.itemInfoChanged)
-        self.connect(self.DamageType, SIGNAL("activated(int)"), self.itemInfoChanged)
-        self.connect(self.ItemRequirement, SIGNAL("textChanged(const QString&)"), self.itemInfoChanged)
+        self.ItemNameCombo.editTextChanged[str].connect(self.itemNameEdited)
+        self.Equipped.stateChanged[int].connect(self.itemChanged)
+        self.ItemCraftTime.textChanged[str].connect(self.itemChanged)
+        self.ItemRealm.activated[int].connect(self.itemRealmChanged)
+        self.ItemType.activated[int].connect(self.itemTypeChanged)
+        self.ItemSource.activated[int].connect(self.itemInfoChanged)
+        self.AFDPSEdit.textChanged[str].connect(self.itemInfoChanged)
+        self.BonusEdit.textChanged[str].connect(self.itemInfoChanged)
+        self.SpeedEdit.textChanged[str].connect(self.itemInfoChanged)
+        self.Offhand.stateChanged[int].connect(self.itemInfoChanged)
+        self.DamageType.activated[int].connect(self.itemInfoChanged)
+        self.ItemRequirement.textChanged[str].connect(self.itemInfoChanged)
+        self.ClassRestrictionTable.itemChanged['QListWidgetItem *'].connect(self.classRestrictionsChanged)
+        self.ItemNoteText.textChanged.connect(self.itemInfoChanged)
+        self.NoteText.textChanged.connect(self.templateChanged)
+        self.SkillsList.activated[QModelIndex].connect(self.skillClicked)
 
-        self.connect(self.ClassRestrictionTable, SIGNAL('itemChanged(QListWidgetItem *)'), self.classRestrictionsChanged)
-        self.connect(self.ItemNoteText, SIGNAL("textChanged()"), self.itemInfoChanged)
-        self.connect(self.NoteText, SIGNAL("textChanged()"), self.templateChanged)
-
-        self.connect(self.SkillsList, SIGNAL("activated(const QModelIndex&)"), self.skillClicked)
 
     def getIcon(self, namebase):
         thisicon = QIcon()

@@ -130,7 +130,6 @@ class MultiTabBar(QWidget):
         self.__layoutTabs()
         self.update()
 
-        # TODO: THIS CANNOT BE EASILY CHANGED. PERHAPS A UI REWRITE IS IN ORDER.
         self.currentChanged.emit(row, col)
 
     def numTabsInRow(self, row):

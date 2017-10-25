@@ -27,10 +27,9 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
             self.GemName.append(getattr(self, 'Gem%dName' % idx))
             self.GemCost.append(getattr(self, 'Gem%dCost' % idx))
             self.GemMakes.append(getattr(self, 'Gem%dMakes' % idx))
-            # Hide '0' values
             self.GemMakes[i].setSpecialValueText(" ")
-            self.connect(self.GemMakes[i],SIGNAL("valueChanged(int)"),self.RemakeChanged)
-        self.connect(self.Close,SIGNAL("clicked()"),self.CloseWindow)
+            self.GemMakes[i].valueChanged[int].connect(self.RemakeChanged)
+        self.Close.clicked.connect(self.CloseWindow)
         self.parent = parent
         testfont = QFontMetrics(QApplication.font())
         width = testfont.size(Qt.TextSingleLine, "  199g 00s 00c").width()
