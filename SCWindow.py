@@ -123,13 +123,13 @@ class SCWindow(QMainWindow, Ui_B_SC):
         ]
         self.switchOnType['player'] = [
             self.QualDrop,
-            # self.LabelItemCraftTime, self.ItemCraftTime,
+            self.LabelItemCraftTime, self.ItemCraftTime,
             self.LabelGemMakes, self.LabelGemPoints,
             self.LabelGemCost, self.LabelGemName,
             self.ItemImbueLabel, self.ItemImbue, self.ItemImbueTotal,
             self.ItemOverchargeLabel, self.ItemOvercharge,
-            # self.ItemCostLabel, self.ItemCost,
-            # self.ItemPriceLabel, self.ItemPrice,
+            self.ItemCostLabel, self.ItemCost,
+            self.ItemPriceLabel, self.ItemPrice,
         ]
 
         cbwidth = self.CharClass.getMinimumWidth(['Necromancer'])
@@ -157,11 +157,11 @@ class SCWindow(QMainWindow, Ui_B_SC):
         self.CharRace.setFixedSize(QSize(cbwidth, cbheight))
         self.CharLevel.setFixedSize(QSize(amtedwidth, edheight))
         self.CharLevel.setValidator(QIntValidator(0, 99, self))
-        # self.RealmRank.setFixedSize(QSize(amtedwidth, edheight))
-        # self.ChampionLevel.setFixedSize(QSize(amtedwidth, edheight))
-        # self.ChampionLevel.setValidator(QIntValidator(0, 10, self))
-        # self.CraftTime.setFixedSize(QSize(amtedwidth, edheight))
-        # self.CraftTime.setValidator(QIntValidator(0, 999, self))
+        self.RealmRank.setFixedSize(QSize(amtedwidth, edheight))
+        self.ChampionLevel.setFixedSize(QSize(amtedwidth, edheight))
+        self.ChampionLevel.setValidator(QIntValidator(0, 10, self))
+        self.CraftTime.setFixedSize(QSize(amtedwidth, edheight))
+        self.CraftTime.setValidator(QIntValidator(0, 999, self))
         self.OutfitName.setFixedSize(QSize(cbwidth, cbheight))
         self.OutfitName.setCompleter(None)
         self.GroupCharInfo.layout().setColumnStretch(2, 1)
@@ -403,8 +403,8 @@ class SCWindow(QMainWindow, Ui_B_SC):
 
             itemslotgrid.setRowMinimumHeight(i, max(cbheight, edheight))
 
-            # self.ItemCraftTime.setFixedSize(QSize(amtcbwidth, edheight))
-            # self.ItemCraftTime.setValidator(QIntValidator(0, 99, self))
+            self.ItemCraftTime.setFixedSize(QSize(amtcbwidth, edheight))
+            self.ItemCraftTime.setValidator(QIntValidator(0, 99, self))
 
         # Lock the height of ItemSlotsGrid, this is all we need.  Then
         # optimize based on the height of ItemInfoFrame and round it out
@@ -455,9 +455,9 @@ class SCWindow(QMainWindow, Ui_B_SC):
         self.CharRace.activated[int].connect(self.raceChanged)
         self.CharLevel.textChanged[str].connect(self.totalsChanged)
 
-        # self.RealmRank.textChanged[str].connect(self.templateChanged)
-        # self.ChampionLevel.textChanged[str].connect(self.templateChanged)
-        # self.CraftTime.textChanged[str].connect(self.totalsChanged)
+        self.RealmRank.textChanged[str].connect(self.templateChanged)
+        self.ChampionLevel.textChanged[str].connect(self.templateChanged)
+        self.CraftTime.textChanged[str].connect(self.totalsChanged)
         self.OutfitName.activated[int].connect(self.outfitNameSelected)
         self.OutfitName.editTextChanged[str].connect(self.outfitNameEdited)
 
@@ -471,7 +471,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
 
         self.ItemNameCombo.editTextChanged[str].connect(self.itemNameEdited)
         self.Equipped.stateChanged[int].connect(self.itemChanged)
-        # self.ItemCraftTime.textChanged[str].connect(self.itemChanged)
+        self.ItemCraftTime.textChanged[str].connect(self.itemChanged)
         self.ItemRealm.activated[int].connect(self.itemRealmChanged)
         self.ItemType.activated[int].connect(self.itemTypeChanged)
         self.ItemSource.activated[int].connect(self.itemInfoChanged)
@@ -674,7 +674,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
                 self.setTabOrder(self.AmountEdit[i], self.Effect[i])
                 self.setTabOrder(self.Effect[i], self.Requirement[i])
             prev = self.Requirement[i]
-        # self.setTabOrder(prev, self.ItemCraftTime)
+        self.setTabOrder(prev, self.ItemCraftTime)
 
     def showFixWidgets(self):
         for i in range(0, 6):
@@ -875,9 +875,9 @@ class SCWindow(QMainWindow, Ui_B_SC):
         self.Realm.setCurrentIndex(Realms.index(self.realm))
         self.realmChanged(Realms.index(self.realm))
         self.CharLevel.setText('50')
-        # self.RealmRank.setText('REMOVE')
-        # self.ChampionLevel.setText('REMOVE')
-        # self.CraftTime.setText('0')
+        self.RealmRank.setText('5L0')
+        self.ChampionLevel.setText('10')
+        self.CraftTime.setText('0')
         self.appendOutfit()
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
         self.modified = False
@@ -1179,7 +1179,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
         self.ItemNameCombo.setCurrentIndex(0)
 
         self.Equipped.setChecked(int(item.Equipped))
-        # self.ItemCraftTime.setText(item.Time)
+        self.ItemCraftTime.setText(item.Time)
 
         if itemtype == 'drop':
             realms = AllRealms
@@ -1527,8 +1527,8 @@ class SCWindow(QMainWindow, Ui_B_SC):
                 self.Name[i].setToolTip(slot.gemName(self.realm))
             self.ItemImbue.setText('%3.1f' % imbuepts)
             self.ItemImbueTotal.setText(' / ' + unicode(itemimbue))
-            # self.ItemCost.setText(SC.formatCost(item.cost()))
-            # self.ItemPrice.setText(SC.formatCost(item.price(self.pricingInfo)))
+            self.ItemCost.setText(SC.formatCost(item.cost()))
+            self.ItemPrice.setText(SC.formatCost(item.price(self.pricingInfo)))
             if imbuepts >= (itemimbue + 6.0):
                 self.ItemOvercharge.setText('Impossible')
                 error_act = QAction('Impossible overcharge on %s' % key, self)
@@ -1613,8 +1613,8 @@ class SCWindow(QMainWindow, Ui_B_SC):
                 else:
                     amount = amounts['TotalBonus']
                 self.insertSkill(amount, skill + suffix, lookup)
-        # self.TotalCost.setText(SC.formatCost(tot['Cost']))
-        # self.TotalPrice.setText(SC.formatCost(tot['Price']))
+        self.TotalCost.setText(SC.formatCost(tot['Cost']))
+        self.TotalPrice.setText(SC.formatCost(tot['Price']))
         self.TotalUtility.setText('%3.1f' % tot['Utility'])
         self.errorsmenuid.setEnabled(errorcount > 0)
         item = self.itemattrlist[self.currentTabLabel]
