@@ -3,7 +3,7 @@ import os
 import sys
 
 files = (
-    ('ScWindow.ui', 'B_ScWindow.py'),
+    ('SCWindow.ui', 'B_SCWindow.py'),
     ('CraftWindow.ui', 'B_CraftWindow.py'),
     ('DisplayWindow.ui', 'B_DisplayWindow.py'),
     ('ReportWindow.ui', 'B_ReportWindow.py'),
