@@ -2,167 +2,171 @@
 
 # Form implementation generated from reading ui file 'ItemLevel.ui'
 #
-# Created: Wed Dec 27 21:57:51 2006
-#      by: PyQt4 UI code generator 4.1.1
+# Created by: PyQt4 UI code generator 4.11.4
 #
 # WARNING! All changes made in this file will be lost!
 
-
-import sys
 from PyQt4 import QtCore, QtGui
-from SearchingCombo import SearchingCombo
 
+try:
+    _fromUtf8 = QtCore.QString.fromUtf8
+except AttributeError:
+    def _fromUtf8(s):
+        return s
+
+try:
+    _encoding = QtGui.QApplication.UnicodeUTF8
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig, _encoding)
+except AttributeError:
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig)
 
 class Ui_B_ItemLevel(object):
     def setupUi(self, B_ItemLevel):
-        B_ItemLevel.setObjectName("B_ItemLevel")
-        B_ItemLevel.resize(QtCore.QSize(QtCore.QRect(0,0,333,192).size()).expandedTo(B_ItemLevel.minimumSizeHint()))
-
+        B_ItemLevel.setObjectName(_fromUtf8("B_ItemLevel"))
+        B_ItemLevel.resize(333, 192)
         self.hboxlayout = QtGui.QHBoxLayout(B_ItemLevel)
         self.hboxlayout.setMargin(9)
         self.hboxlayout.setSpacing(6)
-        self.hboxlayout.setObjectName("hboxlayout")
-
+        self.hboxlayout.setObjectName(_fromUtf8("hboxlayout"))
         self.vboxlayout = QtGui.QVBoxLayout()
         self.vboxlayout.setMargin(0)
         self.vboxlayout.setSpacing(6)
-        self.vboxlayout.setObjectName("vboxlayout")
-
+        self.vboxlayout.setObjectName(_fromUtf8("vboxlayout"))
         self.hboxlayout1 = QtGui.QHBoxLayout()
         self.hboxlayout1.setMargin(0)
         self.hboxlayout1.setSpacing(6)
-        self.hboxlayout1.setObjectName("hboxlayout1")
-
+        self.hboxlayout1.setObjectName(_fromUtf8("hboxlayout1"))
         self.ButtonGroup3 = QtGui.QFrame(B_ItemLevel)
-
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(7),QtGui.QSizePolicy.Policy(7))
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.ButtonGroup3.sizePolicy().hasHeightForWidth())
         self.ButtonGroup3.setSizePolicy(sizePolicy)
-        self.ButtonGroup3.setMinimumSize(QtCore.QSize(180,130))
-        self.ButtonGroup3.setBaseSize(QtCore.QSize(0,0))
-        self.ButtonGroup3.setObjectName("ButtonGroup3")
-
+        self.ButtonGroup3.setMinimumSize(QtCore.QSize(180, 130))
+        self.ButtonGroup3.setBaseSize(QtCore.QSize(0, 0))
+        self.ButtonGroup3.setObjectName(_fromUtf8("ButtonGroup3"))
         self.verticalLayout = QtGui.QWidget(self.ButtonGroup3)
-        self.verticalLayout.setGeometry(QtCore.QRect(10,10,160,111))
-        self.verticalLayout.setObjectName("verticalLayout")
-
+        self.verticalLayout.setGeometry(QtCore.QRect(10, 10, 160, 111))
+        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.vboxlayout1 = QtGui.QVBoxLayout(self.verticalLayout)
         self.vboxlayout1.setMargin(0)
         self.vboxlayout1.setSpacing(0)
-        self.vboxlayout1.setObjectName("vboxlayout1")
-
+        self.vboxlayout1.setObjectName(_fromUtf8("vboxlayout1"))
         self.Armor = QtGui.QRadioButton(self.verticalLayout)
         self.Armor.setChecked(True)
-        self.Armor.setObjectName("Armor")
+        self.Armor.setObjectName(_fromUtf8("Armor"))
         self.vboxlayout1.addWidget(self.Armor)
-
         self.ClothArmor = QtGui.QRadioButton(self.verticalLayout)
-        self.ClothArmor.setObjectName("ClothArmor")
+        self.ClothArmor.setObjectName(_fromUtf8("ClothArmor"))
         self.vboxlayout1.addWidget(self.ClothArmor)
-
         self.Weapon = QtGui.QRadioButton(self.verticalLayout)
-        self.Weapon.setObjectName("Weapon")
+        self.Weapon.setObjectName(_fromUtf8("Weapon"))
         self.vboxlayout1.addWidget(self.Weapon)
-
         self.Shield = QtGui.QRadioButton(self.verticalLayout)
-        self.Shield.setObjectName("Shield")
+        self.Shield.setObjectName(_fromUtf8("Shield"))
         self.vboxlayout1.addWidget(self.Shield)
-
         self.ReinforcedShield = QtGui.QRadioButton(self.verticalLayout)
-        self.ReinforcedShield.setObjectName("ReinforcedShield")
+        self.ReinforcedShield.setObjectName(_fromUtf8("ReinforcedShield"))
         self.vboxlayout1.addWidget(self.ReinforcedShield)
         self.hboxlayout1.addWidget(self.ButtonGroup3)
-
-        spacerItem = QtGui.QSpacerItem(40,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.hboxlayout1.addItem(spacerItem)
-
         self.vboxlayout2 = QtGui.QVBoxLayout()
         self.vboxlayout2.setMargin(0)
         self.vboxlayout2.setSpacing(6)
-        self.vboxlayout2.setObjectName("vboxlayout2")
-
+        self.vboxlayout2.setObjectName(_fromUtf8("vboxlayout2"))
         self.hboxlayout2 = QtGui.QHBoxLayout()
         self.hboxlayout2.setMargin(0)
         self.hboxlayout2.setSpacing(6)
-        self.hboxlayout2.setObjectName("hboxlayout2")
-
+        self.hboxlayout2.setObjectName(_fromUtf8("hboxlayout2"))
         self.LevelLabel = QtGui.QLabel(B_ItemLevel)
-        self.LevelLabel.setObjectName("LevelLabel")
+        self.LevelLabel.setObjectName(_fromUtf8("LevelLabel"))
         self.hboxlayout2.addWidget(self.LevelLabel)
-
         self.Level = QtGui.QLineEdit(B_ItemLevel)
-
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(4),QtGui.QSizePolicy.Policy(0))
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Maximum, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.Level.sizePolicy().hasHeightForWidth())
         self.Level.setSizePolicy(sizePolicy)
-        self.Level.setMinimumSize(QtCore.QSize(52,0))
+        self.Level.setMinimumSize(QtCore.QSize(52, 0))
         self.Level.setAlignment(QtCore.Qt.AlignRight)
-        self.Level.setObjectName("Level")
+        self.Level.setObjectName(_fromUtf8("Level"))
         self.hboxlayout2.addWidget(self.Level)
         self.vboxlayout2.addLayout(self.hboxlayout2)
-
         self.hboxlayout3 = QtGui.QHBoxLayout()
         self.hboxlayout3.setMargin(0)
         self.hboxlayout3.setSpacing(6)
-        self.hboxlayout3.setObjectName("hboxlayout3")
-
+        self.hboxlayout3.setObjectName(_fromUtf8("hboxlayout3"))
         self.AFDPSLabel = QtGui.QLabel(B_ItemLevel)
-        self.AFDPSLabel.setObjectName("AFDPSLabel")
+        self.AFDPSLabel.setObjectName(_fromUtf8("AFDPSLabel"))
         self.hboxlayout3.addWidget(self.AFDPSLabel)
-
         self.AFDPS = QtGui.QLineEdit(B_ItemLevel)
-        self.AFDPS.setMinimumSize(QtCore.QSize(58,0))
+        self.AFDPS.setMinimumSize(QtCore.QSize(58, 0))
         self.AFDPS.setAlignment(QtCore.Qt.AlignRight)
-        self.AFDPS.setObjectName("AFDPS")
+        self.AFDPS.setObjectName(_fromUtf8("AFDPS"))
         self.hboxlayout3.addWidget(self.AFDPS)
         self.vboxlayout2.addLayout(self.hboxlayout3)
-
         self.ShieldType = SearchingCombo(B_ItemLevel)
-
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Policy(4),QtGui.QSizePolicy.Policy(4))
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Maximum, QtGui.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.ShieldType.sizePolicy().hasHeightForWidth())
         self.ShieldType.setSizePolicy(sizePolicy)
-        self.ShieldType.setObjectName("ShieldType")
+        self.ShieldType.setObjectName(_fromUtf8("ShieldType"))
         self.vboxlayout2.addWidget(self.ShieldType)
         self.hboxlayout1.addLayout(self.vboxlayout2)
         self.vboxlayout.addLayout(self.hboxlayout1)
-
         self.hboxlayout4 = QtGui.QHBoxLayout()
         self.hboxlayout4.setMargin(0)
         self.hboxlayout4.setSpacing(6)
-        self.hboxlayout4.setObjectName("hboxlayout4")
-
+        self.hboxlayout4.setObjectName(_fromUtf8("hboxlayout4"))
         self.OK = QtGui.QPushButton(B_ItemLevel)
-        self.OK.setObjectName("OK")
+        self.OK.setObjectName(_fromUtf8("OK"))
         self.hboxlayout4.addWidget(self.OK)
-
-        spacerItem1 = QtGui.QSpacerItem(40,20,QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Minimum)
+        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.hboxlayout4.addItem(spacerItem1)
-
         self.Cancel = QtGui.QPushButton(B_ItemLevel)
-        self.Cancel.setObjectName("Cancel")
+        self.Cancel.setObjectName(_fromUtf8("Cancel"))
         self.hboxlayout4.addWidget(self.Cancel)
         self.vboxlayout.addLayout(self.hboxlayout4)
         self.hboxlayout.addLayout(self.vboxlayout)
 
         self.retranslateUi(B_ItemLevel)
-
+        self.Armor.clicked.connect(B_ItemLevel.TypeChanged)
+        self.ClothArmor.clicked.connect(B_ItemLevel.TypeChanged)
+        self.Weapon.clicked.connect(B_ItemLevel.TypeChanged)
+        self.Shield.clicked.connect(B_ItemLevel.TypeChanged)
+        self.ReinforcedShield.clicked.connect(B_ItemLevel.TypeChanged)
+        self.Level.textChanged[str].connect(B_ItemLevel.LevelChanged)
+        self.Level.editingFinished.connect(B_ItemLevel.LevelDone)
+        self.AFDPS.textChanged[str].connect(B_ItemLevel.AFDPSChanged)
+        self.AFDPS.editingFinished.connect(B_ItemLevel.AFDPSDone)
+        self.ShieldType.activated[str].connect(B_ItemLevel.ShieldChanged)
+        self.OK.clicked.connect(B_ItemLevel.OkClicked)
         QtCore.QMetaObject.connectSlotsByName(B_ItemLevel)
 
     def retranslateUi(self, B_ItemLevel):
-        B_ItemLevel.setWindowTitle(QtGui.QApplication.translate("B_ItemLevel", "Item Level", None, QtGui.QApplication.UnicodeUTF8))
-        self.Armor.setText(QtGui.QApplication.translate("B_ItemLevel", "Armor", None, QtGui.QApplication.UnicodeUTF8))
-        self.ClothArmor.setText(QtGui.QApplication.translate("B_ItemLevel", "Cloth Armor", None, QtGui.QApplication.UnicodeUTF8))
-        self.Weapon.setText(QtGui.QApplication.translate("B_ItemLevel", "Weapon", None, QtGui.QApplication.UnicodeUTF8))
-        self.Shield.setText(QtGui.QApplication.translate("B_ItemLevel", "Shield", None, QtGui.QApplication.UnicodeUTF8))
-        self.ReinforcedShield.setText(QtGui.QApplication.translate("B_ItemLevel", "Reinforced Shield", None, QtGui.QApplication.UnicodeUTF8))
-        self.LevelLabel.setText(QtGui.QApplication.translate("B_ItemLevel", "Level:", None, QtGui.QApplication.UnicodeUTF8))
-        self.AFDPSLabel.setText(QtGui.QApplication.translate("B_ItemLevel", "AF/DPS:", None, QtGui.QApplication.UnicodeUTF8))
-        self.OK.setText(QtGui.QApplication.translate("B_ItemLevel", "OK", None, QtGui.QApplication.UnicodeUTF8))
-        self.Cancel.setText(QtGui.QApplication.translate("B_ItemLevel", "Cancel", None, QtGui.QApplication.UnicodeUTF8))
+        B_ItemLevel.setWindowTitle(_translate("B_ItemLevel", "Item Level", None))
+        self.Armor.setText(_translate("B_ItemLevel", "Armor", None))
+        self.ClothArmor.setText(_translate("B_ItemLevel", "Cloth Armor", None))
+        self.Weapon.setText(_translate("B_ItemLevel", "Weapon", None))
+        self.Shield.setText(_translate("B_ItemLevel", "Shield", None))
+        self.ReinforcedShield.setText(_translate("B_ItemLevel", "Reinforced Shield", None))
+        self.LevelLabel.setText(_translate("B_ItemLevel", "Level:", None))
+        self.AFDPSLabel.setText(_translate("B_ItemLevel", "AF/DPS:", None))
+        self.OK.setText(_translate("B_ItemLevel", "OK", None))
+        self.Cancel.setText(_translate("B_ItemLevel", "Cancel", None))
+
+from SearchingCombo import SearchingCombo
+
+if __name__ == "__main__":
+    import sys
+    app = QtGui.QApplication(sys.argv)
+    B_ItemLevel = QtGui.QDialog()
+    ui = Ui_B_ItemLevel()
+    ui.setupUi(B_ItemLevel)
+    B_ItemLevel.show()
+    sys.exit(app.exec_())
+
