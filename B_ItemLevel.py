@@ -6,7 +6,9 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtWidgets
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+from SearchingCombo import SearchingCombo
 
 class Ui_B_ItemLevel(object):
     def setupUi(self, B_ItemLevel):
@@ -126,9 +128,9 @@ class Ui_B_ItemLevel(object):
         self.Shield.clicked.connect(B_ItemLevel.TypeChanged)
         self.ReinforcedShield.clicked.connect(B_ItemLevel.TypeChanged)
         self.Level.textChanged[str].connect(B_ItemLevel.LevelChanged)
-        self.Level.focusChanged.connect(B_ItemLevel.LevelDone)
+        self.Level.editingFinished.connect(B_ItemLevel.LevelDone)
         self.AFDPS.textChanged[str].connect(B_ItemLevel.AFDPSChanged)
-        self.AFDPS.focusChanged.connect(B_ItemLevel.AFDPSDone)
+        self.AFDPS.editingFinished.connect(B_ItemLevel.AFDPSDone)
         self.ShieldType.activated[str].connect(B_ItemLevel.ShieldChanged)
         self.OK.clicked.connect(B_ItemLevel.OkClicked)
         self.Cancel.clicked.connect(B_ItemLevel.CancelClicked)
@@ -146,8 +148,6 @@ class Ui_B_ItemLevel(object):
         self.AFDPSLabel.setText(_translate("B_ItemLevel", "AF/DPS:"))
         self.OK.setText(_translate("B_ItemLevel", "OK"))
         self.Cancel.setText(_translate("B_ItemLevel", "Cancel"))
-
-from SearchingCombo import SearchingCombo
 
 if __name__ == "__main__":
     import sys

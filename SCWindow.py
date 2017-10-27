@@ -9,10 +9,9 @@ import sip
 sip.setapi('QVariant', 1)
 
 from PyQt5.Qt import qApp
-from PyQt5.QtCore import pyqtSignal, QEvent, QModelIndex, QPoint, QRect, QSize, Qt, QVariant
-from PyQt5.QtGui import QBrush, QColor, QIcon, QFontMetrics, QIntValidator, QPainter, QPalette, QStandardItemModel
-from PyQt5.QtWidgets import QApplication, QFrame, QGridLayout, QListWidgetItem, QMainWindow, QSizePolicy, QStyle, QStyleOptionTab
-from PyQt5.QtWidgets import QStyleOptionTabBarBase, QStyleOptionTabWidgetFrame, QTabBar, QWidget
+from PyQt5.QtCore import QEvent, QModelIndex, QVariant
+from PyQt5.QtGui import QBrush, QColor, QIcon, QFontMetrics, QIntValidator, QKeySequence, QPalette, QPixmap, QStandardItemModel
+from PyQt5.QtWidgets import QAction, QFileDialog, QListWidgetItem, QMainWindow, QMenu, QSizeGrip, QToolBar
 from B_SCWindow import *
 from Item import *
 from Character import *
@@ -20,7 +19,6 @@ from Constants import *
 from xml.dom.minidom import *
 from MyStringIO import UnicodeStringIO
 from SCOptions import SCOptions
-import types
 import re
 import ItemLevel
 import ChooseSlot
@@ -30,16 +28,10 @@ import CraftWindow
 import ReportWindow
 import DisplayWindow
 import CraftBar
-import SearchingCombo
-import MultiTabBar
 import UIXML
 import os
 import os.path
 import ItemList
-import time
-import locale
-import encodings
-import codecs
 import sys
 import binascii
 

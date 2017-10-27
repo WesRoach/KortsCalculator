@@ -5,6 +5,7 @@
 # See NOTICE.txt for copyrights and grant of license
 
 
+from PyQt5.Qt import Qt
 from PyQt5.QtWidgets import QDialog
 from B_ItemLevel import *
 from Constants import *
@@ -27,11 +28,11 @@ class ItemLevel(QDialog, Ui_B_ItemLevel):
         self.Shield.clicked.connect(self.TypeChanged)
         self.ReinforcedShield.clicked.connect(self.TypeChanged)
         self.Level.textChanged[str].connect(self.LevelChanged)
-        self.Level.lostFocus.connect(self.LevelDone)
+        self.Level.editingFinished.connect(self.LevelDone)
         self.AFDPS.textChanged[str].connect(self.AFDPSChanged)
 
         # TODO: VALUE DOES NOT AUTO CORRECT WHEN > 102 FOR ARMOR OR > 51 FOR CLOTH
-        self.AFDPS.lostFocus.connect(self.AFDPSDone)
+        self.AFDPS.editingFinished.connect(self.AFDPSDone)
         self.ShieldType.activated[str].connect(self.ShieldChanged)
         self.OK.clicked.connect(self.OkClicked)
         self.Cancel.clicked.connect(self.CancelClicked)
