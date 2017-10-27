@@ -7,9 +7,9 @@
 
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QDialog, QFileDialog
-from B_ReportWindow import *
-from HTMLPlus import *
-from SC import *
+from B_ReportWindow import Ui_B_ReportWindow
+from HTMLPlus import HTMLPlusParser, ObtuseFormatter, DimWriter
+from SC import formatCost, gemNameSort, gemTypeSort
 from lxml import etree
 import os.path
 import re

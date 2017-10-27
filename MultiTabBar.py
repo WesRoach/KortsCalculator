@@ -9,7 +9,9 @@ from PyQt5.QtCore import pyqtSignal, QEvent, QPoint, QRect, QSize, Qt
 from PyQt5.QtGui import QColor, QIcon, QPainter, QPalette
 from PyQt5.QtWidgets import QApplication, QFrame, QMainWindow, QSizePolicy, QStyle, QStyleOptionTab
 from PyQt5.QtWidgets import QStyleOptionTabBarBase, QStyleOptionTabWidgetFrame, QTabBar, QWidget
+import math
 import sys
+
 
 class MultiTabFrame(QFrame):
 

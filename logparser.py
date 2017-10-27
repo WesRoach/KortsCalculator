@@ -1,9 +1,7 @@
+from Constants import statList, resistList, skillTable, otherBonusList
+import Item
 import sys
 import re
-
-
-import Item
-from Constants import statList, resistList, skillTable, otherBonusList
 
 f = file(sys.argv[1], 'rU')
 lines = f.readlines()

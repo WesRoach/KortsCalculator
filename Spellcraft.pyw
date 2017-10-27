@@ -9,8 +9,11 @@
 from PyQt5.QtCore import QDir, QResource
 from PyQt5.QtGui import QIcon, QFont
 from PyQt5.QtWidgets import QApplication
+from SCOptions import SCOptions
 import SCWindow
 import locale
+import os
+import os.path
 import sys
 
 
@@ -21,7 +24,7 @@ class ScApplication(QApplication):
 
     def __init__(self):
         args = sys.argv
-        self.curPath = QDir.cleanPath(QDir.currentPath())
+        self.curPath = str(QDir.cleanPath(QDir.currentPath()))
 
         if args[0]:
             args[0] = str(QDir(self.curPath).absoluteFilePath(args[0]))
@@ -48,7 +51,7 @@ class ScApplication(QApplication):
         scw.setWindowIcon(QIcon(":/images/ScWindow.png"))
 
         if len(app.argv()) > 1:
-            scw.openFile(app.argv()[1], True)
+           scw.openFile(app.argv()[1], True)
 
         scw.show()
 

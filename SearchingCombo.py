@@ -9,6 +9,8 @@ from PyQt5.QtCore import QItemSelectionModel, QSize, Qt
 from PyQt5.QtGui import QFontMetrics
 from PyQt5.QtWidgets import QComboBox, QStyle, QStyleOptionComboBox
 from ComboListView import ComboListView
+import string
+import sys
 
 
 class SearchingCombo(QComboBox):

@@ -1,5 +1,6 @@
 class Singleton:
     __single = None
+
     def instance():
         return Singleton.__single
     instance = staticmethod(instance)

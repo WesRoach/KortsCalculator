@@ -7,8 +7,10 @@
 
 from PyQt5.QtWidgets import QApplication, QFileDialog, QListWidget
 from Character import *
+from Constants import *
 from Item import *
 from SCOptions import SCOptions
+import sys
 
 
 class ItemPreview(QListWidget):

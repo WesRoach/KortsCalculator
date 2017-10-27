@@ -11,7 +11,10 @@ from Constants import *
 from MyStringIO import UnicodeStringIO
 import XMLHelper
 import re
+import SC
+import string
 import sys
+import types
 
 
 class ItemSlot:

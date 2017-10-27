@@ -8,9 +8,15 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QAbstractItemView, QDialog, QHeaderView, QTableWidgetItem
 from B_Options import *
+from MyStringIO import UnicodeStringIO
 from SCOptions import SCOptions
+from xml.dom.minidom import *
 import Constants
+import types
+import os.path
 import re
+import sys
+import XMLHelper
 
 
 class Options(QDialog, Ui_B_Options):

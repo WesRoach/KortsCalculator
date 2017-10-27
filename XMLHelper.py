@@ -1,21 +1,19 @@
 # XMLHelper.py: Kort's Spellcrafting Calculator
 #
-# See http://kscraft.sourceforge.net/ for updates
+# See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
 #
 # See NOTICE.txt for copyrights and grant of license
 
 from xml.dom.minidom import *
+from MyStringIO import UnicodeStringIO
+import binascii
+import string
 
-# I didn't like how the default writer wrote to files, so I wrote my own
+
 def writexml(self, writer, indent="", addindent="", newl=""):
     if self.nodeType == Node.DOCUMENT_NODE:
         writer.write('<?xml version="1.0" encoding="UTF-8"?>\n')
-    #    writer.write('''
-#<!DOCTYPE doc [
-#  <!ENTITY % html2utf8 SYSTEM "html2utf8.ent">
-# %html2utf8;
-# ]>
-# ''')
+
         if self.childNodes:
             for node in self.childNodes:
                 writexml(node, writer, indent, addindent, newl)
@@ -50,6 +48,7 @@ def writexml(self, writer, indent="", addindent="", newl=""):
     else:
         writer.write("/>%s"%(newl))
 
+
 def getText(nodelist):
     rc = ''
     for node in nodelist:
@@ -60,9 +59,8 @@ def getText(nodelist):
                 rc = rc + node.data
     return rc
 
+
 def _write_data(writer, data):
-    "Writes datachars to writer."
     data = data.replace("&", "&amp;").replace("<", "&lt;")
     data = data.replace("\"", "&quot;").replace(">", "&gt;")
     writer.write(data, True)    
-

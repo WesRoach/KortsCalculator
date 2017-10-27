@@ -5,9 +5,9 @@
 
 "Proper handling of line breaks, newer entity defs and indentation"
 
-
 from html.parser import HTMLParser
 import formatter  # TODO: FIND REPLACEMENT FOR FORMATTER
+import string
 import sys
 
 

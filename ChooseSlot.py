@@ -8,7 +8,7 @@
 from PyQt5.QtCore import Qt, QMetaObject
 from PyQt5.QtWidgets import QApplication, QDialog, QLabel, QSizePolicy
 from PyQt5.QtWidgets import QRadioButton, QVBoxLayout, QDialogButtonBox
-
+import sys
 
 class Ui_ChooseSlot(object):
     def setupUi(self, ChooseSlot, buttonlabels):

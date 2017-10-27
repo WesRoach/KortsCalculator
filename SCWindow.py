@@ -5,9 +5,6 @@
 # See NOTICE.txt for copyrights and grant of license
 
 
-import sip
-sip.setapi('QVariant', 1)
-
 from PyQt5.Qt import qApp
 from PyQt5.QtCore import QEvent, QModelIndex, QVariant
 from PyQt5.QtGui import QBrush, QColor, QIcon, QFontMetrics, QIntValidator, QKeySequence, QPalette, QPixmap, QStandardItemModel
@@ -19,21 +16,29 @@ from Constants import *
 from xml.dom.minidom import *
 from MyStringIO import UnicodeStringIO
 from SCOptions import SCOptions
-import re
-import ItemLevel
+import binascii
 import ChooseSlot
-import Options
-import SC
-import CraftWindow
-import ReportWindow
-import DisplayWindow
+import codecs
 import CraftBar
-import UIXML
+import CraftWindow
+import DisplayWindow
+import encodings
+import ItemLevel
+import ItemList
+import locale
+import MultiTabBar
+import Options
 import os
 import os.path
-import ItemList
+import re
+import ReportWindow
+import SC
+import SearchingCombo
+import string
 import sys
-import binascii
+import time
+import types
+import UIXML
 
 
 def plainXMLTag(strval):

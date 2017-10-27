@@ -6,9 +6,7 @@
 
 
 from PyQt5.QtWidgets import QMessageBox, QFileDialog
-from MyStringIO import UnicodeStringIO
 from lxml import etree
-import XMLHelper
 import os.path
 
 

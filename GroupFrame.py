@@ -9,6 +9,7 @@
 
 from PyQt5.QtGui import QPainter
 from PyQt5.QtWidgets import QFrame, QStyle, QStyleOptionFrame, QStyleOptionTabWidgetFrame
+import sys
 
 
 class GroupFrame(QFrame):

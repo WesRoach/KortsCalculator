@@ -9,6 +9,7 @@ from PyQt5.Qt import Qt
 from PyQt5.QtWidgets import QDialog
 from B_ItemLevel import *
 from Constants import *
+import re
 
 
 class ItemLevel(QDialog, Ui_B_ItemLevel):

@@ -5,11 +5,11 @@
 # See NOTICE.txt for copyrights and grant of license
 
 
-import io
 import codecs
 import html.entities
+import io
 import re
-
+import string
 
 entity_map = {}
 

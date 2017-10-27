@@ -4,8 +4,6 @@
 #
 # See NOTICE.txt for copyrights and grant of license
 
-import sip
-sip.setapi('QVariant', 1)
 
 from PyQt5.QtCore import Qt, QVariant, QModelIndex
 from PyQt5.QtGui import QStandardItemModel
@@ -14,18 +12,19 @@ from B_CraftBar import *
 from Character import *
 from Constants import *
 from SCOptions import SCOptions
+import ConfigParser
+import glob
 import os
 import os.path
-import glob
 import re
-
-import configparser 
+import SC
+import string
 import sys
 
 
-class IniConfigParser(configparser.RawConfigParser):
+class IniConfigParser(ConfigParser.RawConfigParser):
     def __init__(self, defaults=None):
-        configparser.RawConfigParser.__init__(self,defaults)
+        ConfigParser.RawConfigParser.__init__(self,defaults)
 
     def write(self, fp):
 

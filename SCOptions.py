@@ -5,14 +5,13 @@
 # See NOTICE.txt for copyrights and grant of license
 
 
-import XMLHelper
-import os.path
-import stat
-import sys
-
 from MyStringIO import UnicodeStringIO
 from Singleton import Singleton
 from xml.dom.minidom import *
+import os.path
+import stat
+import sys
+import XMLHelper
 
 
 class SCOptions(Singleton):
