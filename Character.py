@@ -1,6 +1,6 @@
-# Character.py: Dark Age of Camelot Spellcrafting Calculator
+# Character.py: Kort's Spellcrafting Calculator
 #
-# See http://kscraft.sourceforge.net/ for updates
+# See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
 #
 # See NOTICE.txt for copyrights and grant of license
 
@@ -66,7 +66,6 @@ AllBonusList = {
         'All Magic Skills' : ('Aura Manipulation', 'Magnetism', 'Power Strikes',),
         'All Melee Weapon Skills' : ('Fist Wraps', 'Mauler Staff',),
         'Races' : t2(('Briton', 'Half Ogre', 'Korazh',)),
-#       no bonus from 'Acuity' : ('Strength',),
     },
 
     'Mercenary' : {
@@ -198,7 +197,6 @@ AllBonusList = {
         'All Magic Skills' : ('Aura Manipulation', 'Magnetism', 'Power Strikes',),
         'All Melee Weapon Skills' : ('Fist Wraps', 'Mauler Staff',),
         'Races' : t2(('Celt', 'Graoch', 'Lurikeen',)),
-#       no bonus from 'Acuity' : ('Strength',),
     },
 
     'Mentalist' : {
@@ -287,7 +285,6 @@ AllBonusList = {
         'All Magic Skills' : ('Aura Manipulation', 'Magnetism', 'Power Strikes',),
         'All Melee Weapon Skills' : ('Fist Wraps', 'Mauler Staff',),
         'Races' : t2(('Kobold', 'Norseman', 'Deifrang',)),
-#       no bonus from 'Acuity' : ('Strength',),
     },
 
     'Runemaster' : {

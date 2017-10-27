@@ -1,12 +1,10 @@
-# XMLHelper.py: Dark Age of Camelot Spellcrafting Calculator
+# XMLHelper.py: Kort's Spellcrafting Calculator
 #
 # See http://kscraft.sourceforge.net/ for updates
 #
 # See NOTICE.txt for copyrights and grant of license
 
 from xml.dom.minidom import *
-import binascii
-from MyStringIO import UnicodeStringIO
 
 # I didn't like how the default writer wrote to files, so I wrote my own
 def writexml(self, writer, indent="", addindent="", newl=""):

@@ -1,21 +1,21 @@
-# Item.py: Dark Age of Camelot Spellcrafting Calculator 
+# Item.py: Kort's Spellcrafting Calculator
 #
-# See http://kscraft.sourceforge.net/ for updates
+# See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
 #
 # See NOTICE.txt for copyrights and grant of license
 
+
+from PyQt5.QtWidgets import QMessageBox
 from xml.dom.minidom import *
 from Constants import *
-
+from MyStringIO import UnicodeStringIO
 import XMLHelper
 import re
-import types
-from PyQt4.QtGui import *
-from MyStringIO import UnicodeStringIO
 import sys
-import SC
+
 
 class ItemSlot:
+
     def __init__(self, slottype='player', type='Unused', amount='0', effect='',
                  requirement='', makes='0'):
         self.__dict__ = { 

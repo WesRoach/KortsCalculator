@@ -1,13 +1,15 @@
-# MultiTabBar.py: Dark Age of Camelot Spellcrafting Calculator
+# MultiTabBar.py: Kort's Spellcrafting Calculator
 #
-# See http://kscraft.sourceforge.net/ for updates
+# See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
 #
 # See NOTICE.txt for copyrights and grant of license
 
 
+from PyQt5.QtCore import pyqtSignal, QEvent, QPoint, QRect, QSize, Qt
+from PyQt5.QtGui import QColor, QIcon, QPainter, QPalette
+from PyQt5.QtWidgets import QApplication, QFrame, QMainWindow, QSizePolicy, QStyle, QStyleOptionTab
+from PyQt5.QtWidgets import QStyleOptionTabBarBase, QStyleOptionTabWidgetFrame, QTabBar, QWidget
 import sys
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
 
 class MultiTabFrame(QFrame):
 
@@ -443,7 +445,7 @@ class MultiTabBar(QWidget):
         tab = self.__tabAt(row, col)
         if not tab: return None
 
-        opt = QStyleOptionTabV2()
+        opt = QStyleOptionTab()
         opt.initFrom(self)
         opt.state &= ~(QStyle.State_HasFocus | QStyle.State_MouseOver)
         opt.rect = self.tabRect(row, col)

@@ -1,14 +1,18 @@
-# ScWindow.py: Dark Age of Camelot Spellcrafting Calculator (main Window)
+# ScWindow.py: Kort's Spellcrafting Calculator (main Window)
 #
 # See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
 #
 # See NOTICE.txt for copyrights and grant of license
 
+
 import sip
 sip.setapi('QVariant', 1)
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQt5.Qt import qApp
+from PyQt5.QtCore import pyqtSignal, QEvent, QModelIndex, QPoint, QRect, QSize, Qt, QVariant
+from PyQt5.QtGui import QBrush, QColor, QIcon, QFontMetrics, QIntValidator, QPainter, QPalette, QStandardItemModel
+from PyQt5.QtWidgets import QApplication, QFrame, QGridLayout, QListWidgetItem, QMainWindow, QSizePolicy, QStyle, QStyleOptionTab
+from PyQt5.QtWidgets import QStyleOptionTabBarBase, QStyleOptionTabWidgetFrame, QTabBar, QWidget
 from B_SCWindow import *
 from Item import *
 from Character import *

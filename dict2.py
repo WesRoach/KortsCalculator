@@ -1,12 +1,13 @@
+# dict2.py: Kort's Spellcrafting Calculator
+#
+# See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
 #
 # Copyright 2005 by Ehrayn <ehrayn@sourceforge.net>
 # Granted 2006 by Ehrayn to the public domain
 #
 
-import sys
-import types
-
 __all__ = ['d2']
+
 
 class d2(dict):
 
@@ -38,4 +39,3 @@ class d2(dict):
 
     def __setitem__(self, k, value):
         raise TypeError("invalid item assignment - d2 object is read-only")
-

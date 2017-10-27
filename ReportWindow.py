@@ -1,24 +1,18 @@
-# ReportWindow.py: Dark Age of Camelot Spellcrafting Calculator
+# ReportWindow.py: Kort's Spellcrafting Calculator
 #
-# See http://kscraft.sourceforge.net/ for updates
+# See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
 #
 # See NOTICE.txt for copyrights and grant of license
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QDialog, QFileDialog
 from B_ReportWindow import *
-from Character import *
-from Constants import *
 from HTMLPlus import *
 from SC import *
-from MyStringIO import UnicodeStringIO
-import XMLHelper
-import Item
-
-import re
-import sys
-import os.path
 from lxml import etree
+import os.path
+import re
 
 
 class ReportWindow(QDialog, Ui_B_ReportWindow):

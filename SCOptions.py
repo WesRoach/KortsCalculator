@@ -1,16 +1,19 @@
-# SCOptions.py: Dark Age of Camelot Spellcrafting Calculator
+# SCOptions.py: Kort's Spellcrafting Calculator
 #
-# See http://kscraft.sourceforge.net/ for updates
+# See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS  UPDATING
 #
 # See NOTICE.txt for copyrights and grant of license
 
+
 import XMLHelper
-import sys
 import os.path
 import stat
-from xml.dom.minidom import *
+import sys
+
 from MyStringIO import UnicodeStringIO
 from Singleton import Singleton
+from xml.dom.minidom import *
+
 
 class SCOptions(Singleton):
     def __init__(self):

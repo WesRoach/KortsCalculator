@@ -1,16 +1,17 @@
 #!/usr/bin/pythonw
-# CraftBar.py: Dark Age of Camelot Spellcrafting Calculator 
+# CraftBar.py: Kort's Spellcrafting Calculator
 #
 # See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
 #
 # See NOTICE.txt for copyrights and grant of license
 
 
+from PyQt5.QtCore import QDir, QResource
+from PyQt5.QtGui import QIcon, QFont
+from PyQt5.QtWidgets import QApplication
 import SCWindow
-import sys
 import locale
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+import sys
 
 
 locale.setlocale(locale.LC_ALL, '')  # TODO: ADD SUPPORT FOR ADDITIONAL LANGUAGES

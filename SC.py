@@ -1,13 +1,11 @@
-# SC.py: Dark Age of Camelot Spellcrafting Calculator
+# SC.py: Kort's Spellcrafting Calculator
 #
 # See http://kscraft.sourceforge.net/ for updates
 #
 # See NOTICE.txt for copyrights and grant of license
 
-from Item import *
-from Constants import *
 
-import sys
+from Constants import *
 import re
 
 

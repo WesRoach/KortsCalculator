@@ -7,7 +7,7 @@
 
 
 from html.parser import HTMLParser
-import formatter
+import formatter  # TODO: FIND REPLACEMENT FOR FORMATTER
 import sys
 
 

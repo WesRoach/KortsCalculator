@@ -5,9 +5,9 @@
 # See NOTICE.txt for copyrights and grant of license
 
 
-from PyQt4.QtGui import QComboBox, QFontMetrics, QStyleOptionComboBox, QStyle
-from PyQt4.QtGui import QItemSelectionModel
-from PyQt4.QtCore import Qt, QSize
+from PyQt5.QtCore import QItemSelectionModel, QSize, Qt
+from PyQt5.QtGui import QFontMetrics
+from PyQt5.QtWidgets import QComboBox, QStyle, QStyleOptionComboBox
 from ComboListView import ComboListView
 
 

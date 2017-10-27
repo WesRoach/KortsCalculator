@@ -1,16 +1,14 @@
-# ItemList.py: Dark Age of Camelot Spellcrafting Calculator 
+# ItemList.py: Kort's Spellcrafting Calculator
 #
-# See http://kscraft.sourceforge.net/ for updates
+# See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
 #
 # See NOTICE.txt for copyrights and grant of license
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
-from Item import *
+
+from PyQt5.QtWidgets import QApplication, QFileDialog, QListWidget
 from Character import *
-from Constants import *
+from Item import *
 from SCOptions import SCOptions
-import sys
 
 
 class ItemPreview(QListWidget):

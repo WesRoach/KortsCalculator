@@ -1,22 +1,16 @@
-# Options.py: Dark Age of Camelot Spellcrafting Calculator
+# Options.py: Kort's Spellcrafting Calculator
 #
 # See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
 #
 # See NOTICE.txt for copyrights and grant of license
 
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QAbstractItemView, QDialog, QHeaderView, QTableWidgetItem
 from B_Options import *
-import re
-import types
-import XMLHelper
-import sys
-import os.path
-import Constants
-from xml.dom.minidom import *
-from MyStringIO import UnicodeStringIO
 from SCOptions import SCOptions
+import Constants
+import re
 
 
 class Options(QDialog, Ui_B_Options):

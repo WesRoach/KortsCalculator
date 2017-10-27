@@ -1,5 +1,14 @@
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
+# ComboListView.py: Kort's Spellcrafting Calculator
+#
+# See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
+#
+# See NOTICE.txt for copyrights and grant of license
+
+
+from PyQt5.QtCore import QEvent, QSize, Qt, qVersion
+from PyQt5.QtGui import QKeyEvent
+from PyQt5.QtWidgets import QApplication, QAbstractItemView, QListView
+
 
 class ComboListView(QListView):
     def __init__(self, p, cb):

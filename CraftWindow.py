@@ -1,14 +1,17 @@
-# CraftWindow.py: Dark Age of Camelot Spellcrafting Calculator
+# CraftWindow.py: Kort's Spellcrafting Calculator
 #
-# See http://kscraft.sourceforge.net/ for updates
+# See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
 #
 # See NOTICE.txt for copyrights and grant of license
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QFontMetrics
+from PyQt5.QtWidgets import QApplication, QDialog
 from B_CraftWindow import *
 from Constants import *
 import SC
+
 
 class CraftWindow(QDialog, Ui_B_CraftWindow):
     def __init__(self,parent = None,name = None,modal = False,fl = Qt.Widget):

@@ -1,19 +1,22 @@
-# ItemLevel.py: Dark Age of Camelot Spellcrafting Calculator 
+# ItemLevel.py: Kort's Spellcrafting Calculator
 #
-# See http://kscraft.sourceforge.net/ for updates
+# See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
 #
 # See NOTICE.txt for copyrights and grant of license
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
-from Constants import *
+
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QDialog
 from B_ItemLevel import *
-import re
+from Constants import *
+
 
 class ItemLevel(QDialog, Ui_B_ItemLevel):
-    def __init__(self,parent = None,name = None,modal = False,fl = Qt.Widget):
-        QDialog.__init__(self,parent,fl)
-        Ui_B_ItemLevel.setupUi(self,self)
+
+    def __init__(self, parent = None, name = None, modal = False, fl = Qt.Widget):
+        QDialog.__init__(self, parent, fl)
+        Ui_B_ItemLevel.setupUi(self, self)
+
         if (name):
             self.setObjectName(name)
         if (modal):

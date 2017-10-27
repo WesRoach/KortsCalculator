@@ -1,14 +1,14 @@
-# DisplayWindow.py: Dark Age of Camelot Spellcrafting Calculator 
+# DisplayWindow.py: Kort's Spellcrafting Calculator
 #
 # See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
 #
 # See NOTICE.txt for copyrights and grant of license
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QDialog
 from B_DisplayWindow import *
 from Constants import *
-
 
 
 class DisplayWindow(QDialog, Ui_B_DisplayWindow):

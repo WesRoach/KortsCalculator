@@ -1,4 +1,4 @@
-# constants.py: Dark Age of Camelot Spellcrafting Calculator
+# constants.py: Kort's Spellcrafting Calculator
 #
 # See http://kscraft.sourceforge.net/ for updates
 #

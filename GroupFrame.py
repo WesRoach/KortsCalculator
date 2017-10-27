@@ -1,16 +1,18 @@
-# GroupFrame.py: Dark Age of Camelot Spellcrafting Calculator
+# GroupFrame.py: Kort's Spellcrafting Calculator
 #
 # See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
 #
 # See NOTICE.txt for copyrights and grant of license
 
+# TODO: CONSIDER DROPPING SUPPORT FOR WINDOWS XP
 
-from PyQt4.QtGui import QFrame, QPainter, QStyle, QPalette
-from PyQt4.QtGui import QStyleOptionTabWidgetFrame, QStyleOptionFrameV2
-import sys
+
+from PyQt5.QtGui import QPainter
+from PyQt5.QtWidgets import QFrame, QStyle, QStyleOptionFrame, QStyleOptionTabWidgetFrame
 
 
 class GroupFrame(QFrame):
+
     def __init__(self, parent=None):
         QFrame.__init__(self, parent)
         ltrb = self.getContentsMargins()
@@ -28,7 +30,8 @@ class GroupFrame(QFrame):
             styleoptions = QStyleOptionTabWidgetFrame()
             frame = QStyle.PE_FrameTabWidget
         else:
-            styleoptions = QStyleOptionFrameV2()
+            styleoptions = QStyleOptionFrame()
             frame = QStyle.PE_FrameGroupBox
+
         styleoptions.initFrom(self)
         self.style().drawPrimitive(frame, styleoptions, painter, self)

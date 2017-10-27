@@ -1,12 +1,15 @@
-# CraftBar.py: Dark Age of Camelot Spellcrafting Calculator 
+# CraftBar.py: Kort's Spellcrafting Calculator
 #
 # See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
 #
 # See NOTICE.txt for copyrights and grant of license
 
+import sip
+sip.setapi('QVariant', 1)
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQt5.QtCore import Qt, QVariant, QModelIndex
+from PyQt5.QtGui import QStandardItemModel
+from PyQt5.QtWidgets import QApplication, QAbstractItemView, QDialog, QHeaderView, QFileDialog
 from B_CraftBar import *
 from Character import *
 from Constants import *
@@ -16,7 +19,6 @@ import os.path
 import glob
 import re
 
-import SC
 import configparser 
 import sys
 

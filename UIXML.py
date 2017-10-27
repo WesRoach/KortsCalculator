@@ -1,17 +1,16 @@
-# UIXML.py: Dark Age of Camelot Spellcrafting Calculator
+# UIXML.py: Kort's Spellcrafting Calculator
 #
-# See http://kscraft.sourceforge.net/ for updates
+# See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
 #
 # See NOTICE.txt for copyrights and grant of license
 
-from PyQt4.QtGui import *
-import sys
-import re
+
+from PyQt5.QtWidgets import QMessageBox, QFileDialog
+from MyStringIO import UnicodeStringIO
+from lxml import etree
+import XMLHelper
 import os.path
 
-from MyStringIO import UnicodeStringIO
-import XMLHelper
-from lxml import etree
 
 def uixml(scwin, uixslt):
     extidx = uixslt.rindex('.')

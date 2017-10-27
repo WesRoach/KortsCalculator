@@ -1,41 +1,43 @@
-# ScrollArea.py: Dark Age of Camelot Spellcrafting Calculator
+# ScrollArea.py: Kort's Spellcrafting Calculator
 #
 # See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
 #
 # See NOTICE.txt for copyrights and grant of license
 
 
-from PyQt4 import QtGui, QtCore
+from PyQt5.QtCore import QSize, Qt
+from PyQt5.QtGui import QBrush, QColor, QPalette
+from PyQt5.QtWidgets import QScrollArea
 
 
-class ScrollArea(QtGui.QScrollArea):
+class ScrollArea(QScrollArea):
 
     def __init__(self, parent = None):
-        QtGui.QScrollArea.__init__(self, parent)
+        QScrollArea.__init__(self, parent)
 
         # REMOVE THE BACKGROUND FROM 'QScrollArea'
-        palette = QtGui.QPalette(self.palette())
-        palette.setColor(QtGui.QPalette.Window, QtGui.QColor(0,0,0,0))
-        palette.setBrush(QtGui.QPalette.Window, QtGui.QBrush(QtGui.QColor(0,0,0,0)))
+        palette = QPalette(self.palette())
+        palette.setColor(QPalette.Window, QColor(0,0,0,0))
+        palette.setBrush(QPalette.Window, QBrush(QColor(0,0,0,0)))
         self.setPalette(palette)
 
-        self.sizehint = QtCore.QSize(QtGui.QScrollArea.sizeHint(self))
+        self.sizehint = QSize(QScrollArea.sizeHint(self))
         self.rowheight = -1
 
         self.verticalScrollBar().valueChanged[int].connect(self.positionNearest)
 
     def setWidget(self, widget):
-        QtGui.QScrollArea.setWidget(self, widget)
+        QScrollArea.setWidget(self, widget)
         self.bestFit()
 
     def sizeHint(self):
-        return QtCore.QSize(self.sizehint)
+        return QSize(self.sizehint)
 
     def setSizeHint(self, width, height = None):
-        if isinstance(width, QtCore.QSize) and height is None:
+        if isinstance(width, QSize) and height is None:
             self.sizehint = width
         else:
-            self.sizehint = QtCore.QSize(width, height)
+            self.sizehint = QSize(width, height)
 
     def setRowHeight(self, rowheight):
         self.rowheight = rowheight
@@ -51,7 +53,7 @@ class ScrollArea(QtGui.QScrollArea):
 
         viewheight = self.size().height()
 
-        if self.horizontalScrollBarPolicy() != QtCore.Qt.ScrollBarAlwaysOff and self.horizontalScrollBar().isVisible():
+        if self.horizontalScrollBarPolicy() != Qt.ScrollBarAlwaysOff and self.horizontalScrollBar().isVisible():
             viewheight -= self.horizontalScrollBar().height()
 
         if bestheight <= viewheight:
@@ -77,20 +79,20 @@ class ScrollArea(QtGui.QScrollArea):
         rows = ((bestheight - 1) / self.rowheight) + 1
         bestheight += bestheight - (rows * self.rowheight)
 
-        if self.horizontalScrollBarPolicy() == QtCore.Qt.ScrollBarAlwaysOn:
+        if self.horizontalScrollBarPolicy() == Qt.ScrollBarAlwaysOn:
             bestheight += self.horizontalScrollBar().sizeHint().height()
 
         rows = ((minheight - 1) / self.rowheight) + 1
         minheight += minheight - (rows * self.rowheight)
 
-        if self.verticalScrollBarPolicy() != QtCore.Qt.ScrollBarAlwaysOff:
+        if self.verticalScrollBarPolicy() != Qt.ScrollBarAlwaysOff:
             minheight += self.verticalScrollBar().sizeHint().height()
 
         self.setMinimumHeight(minheight)
         self.setMaximumHeight(bestheight)
         bestwidth = self.widget().sizeHint().width()
 
-        if self.verticalScrollBarPolicy() != QtCore.Qt.ScrollBarAlwaysOff:
+        if self.verticalScrollBarPolicy() != Qt.ScrollBarAlwaysOff:
             bestwidth += self.verticalScrollBar().sizeHint().width()
 
         self.setSizeHint(bestwidth, bestheight)
@@ -98,7 +100,7 @@ class ScrollArea(QtGui.QScrollArea):
 
     def resizeEvent(self, e):
         self.resizeHeight()
-        QtGui.QScrollArea.resizeEvent(self, e)
+        QScrollArea.resizeEvent(self, e)
 
     def positionNearest(self, value):
         row = (value + self.rowheight / 2) / self.rowheight

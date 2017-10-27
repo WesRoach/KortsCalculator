@@ -1,30 +1,32 @@
-# SkillsView.py: Dark Age of Camelot Spellcrafting Calculator
+# SkillsView.py: Kort's Spellcrafting Calculator
 #
-# See http://kscraft.sourceforge.net/ for updates
+# See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
 #
 # See NOTICE.txt for copyrights and grant of license
 
-from PyQt4 import QtGui, QtCore
 
-class SkillsView(QtGui.QListView):
+from PyQt5.QtCore import QSize, Qt
+from PyQt5.QtGui import QBrush, QColor, QPalette
+from PyQt5.QtWidgets import QListView
+
+
+class SkillsView(QListView):
     def __init__(self, parent = None):
-        QtGui.QListView.__init__(self, parent)
-        # Improve the look of QListView - should have no background
-        #
-        palette = QtGui.QPalette(self.palette())
-        palette.setColor(QtGui.QPalette.Base, QtGui.QColor(0,0,0,0))
-        palette.setBrush(QtGui.QPalette.Base, QtGui.QBrush(QtGui.QColor(0,0,0,0)))
+        QListView.__init__(self, parent)
+        palette = QPalette(self.palette())
+        palette.setColor(QPalette.Base, QColor(0,0,0,0))
+        palette.setBrush(QPalette.Base, QBrush(QColor(0,0,0,0)))
         self.setPalette(palette)
-        self.sizehint = QtCore.QSize(QtGui.QListView.sizeHint(self))
+        self.sizehint = QSize(QListView.sizeHint(self))
 
     def sizeHint(self):
-        return QtCore.QSize(self.sizehint)
+        return QSize(self.sizehint)
 
     def setSizeHint(self, width, height = None):
-        if isinstance(width, QtCore.QSize) and height is None:
+        if isinstance(width, QSize) and height is None:
             self.sizehint = width
         else:
-            self.sizehint = QtCore.QSize(width, height)
+            self.sizehint = QSize(width, height)
         self.bestFit()
 
     def bestFit(self):
@@ -32,7 +34,7 @@ class SkillsView(QtGui.QListView):
         if self.rowheight < 1: return
         bestheight = self.sizehint.height()
         if (self.horizontalScrollBarPolicy() != 
-                    QtCore.Qt.ScrollBarAlwaysOff):
+                    Qt.ScrollBarAlwaysOff):
             scrollheight = self.horizontalScrollBar().sizeHint().height() + 1
         else:
             scrollheight = 0
