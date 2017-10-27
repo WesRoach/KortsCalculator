@@ -12,7 +12,7 @@ from B_CraftBar import *
 from Character import *
 from Constants import *
 from SCOptions import SCOptions
-import ConfigParser
+import configparser
 import glob
 import os
 import os.path
@@ -22,9 +22,9 @@ import string
 import sys
 
 
-class IniConfigParser(ConfigParser.RawConfigParser):
+class IniConfigParser(configparser.RawConfigParser):
     def __init__(self, defaults=None):
-        ConfigParser.RawConfigParser.__init__(self,defaults)
+        configparser.RawConfigParser.__init__(self,defaults)
 
     def write(self, fp):
 

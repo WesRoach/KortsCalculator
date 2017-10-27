@@ -15,6 +15,7 @@ import XMLHelper
 
 
 class SCOptions(Singleton):
+
     def __init__(self):
         Singleton.__init__(self)
         self.__options = {}
@@ -47,8 +48,7 @@ class SCOptions(Singleton):
         if isinstance(defaultValue, str):
             defaultValue = str(defaultValue)
         if name in self.__options and \
-                (isinstance(self.__options[name], type(defaultValue)) or \
-                defaultValue is None):
+                (isinstance(self.__options[name], type(defaultValue)) or defaultValue is None):
             return self.__options[name]
 
         return defaultValue

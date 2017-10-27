@@ -50,8 +50,8 @@ class ScApplication(QApplication):
         app.setActiveWindow(scw)
         scw.setWindowIcon(QIcon(":/images/ScWindow.png"))
 
-        if len(app.argv()) > 1:
-           scw.openFile(app.argv()[1], True)
+        # if len(app.argv()) > 1:
+        #   scw.openFile(app.argv()[1], True)
 
         scw.show()
 
