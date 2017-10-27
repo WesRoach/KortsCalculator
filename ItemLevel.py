@@ -5,7 +5,6 @@
 # See NOTICE.txt for copyrights and grant of license
 
 
-from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QDialog
 from B_ItemLevel import *
 from Constants import *
