@@ -18,22 +18,22 @@ def testTreeXML(itemnode, slots):
         if child.nodeType == Node.TEXT_NODE: continue
         tag = child.tagName
         value = XMLHelper.getText(child.childNodes)
-        if not slots.has_key(child.tagName):
+        if child.tagName not in slots:
             slots[child.tagName] = {}
             slots[child.tagName][None] = {}
             slots[child.tagName][None][None] = {}
         if len(value) > 0:
-            if not slots[child.tagName][None][None].has_key(value):
+            if value not in slots[child.tagName][None][None]:
                 slots[child.tagName][None][None][value] = None
-        for attr, value in child.attributes.items():
-            if not slots[child.tagName][None].has_key(attr):
+        for attr, value in list(child.attributes.items()):
+            if attr not in slots[child.tagName][None]:
                 slots[child.tagName][None][attr] = {}
-            if not slots[child.tagName][None][attr].has_key(value):
+            if value not in slots[child.tagName][None][attr]:
                 slots[child.tagName][None][attr][value] = None
         testTreeXML(child, slots[child.tagName])
 
 def dumptree(slots, depth):
-    for key, val in slots.iteritems():
+    for key, val in list(slots.items()):
         sys.stdout.write("%*c%s\n" % (depth, ' ', str(key)))
         if val is not None:
             dumptree(val, depth + 2)

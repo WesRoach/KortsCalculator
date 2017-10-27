@@ -6,5 +6,5 @@ class Singleton:
 
     def __init__(self):
         if Singleton.__single:
-            raise TypeError, "Singleton is already instantiated"
+            raise TypeError("Singleton is already instantiated")
         Singleton.__single = self

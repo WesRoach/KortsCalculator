@@ -52,9 +52,9 @@ class Options(QDialog, Ui_B_Options):
         self.TierPriceTable.itemChanged['QTableWidgetItem *'].connect(self.tierPriceSet)
 
         self.parent = parent
-        skilllist = range(1000, -1, -50)
+        skilllist = list(range(1000, -1, -50))
         self.Skill.clear()
-        self.Skill.addItems(map(lambda (x): str(x), skilllist))
+        self.Skill.addItems([str(x) for x in skilllist])
         self.TierPricing = {}
         self.loadOptions()
 
@@ -121,10 +121,10 @@ class Options(QDialog, Ui_B_Options):
         return pricing
 
     def loadPriceInfo(self, pinfo):
-        if not pinfo.has_key('PPGem'): return
+        if 'PPGem' not in pinfo: return
 
         # do some consistency checks
-        if not pinfo.has_key('Tier') or not isinstance(pinfo['Tier'], dict):
+        if 'Tier' not in pinfo or not isinstance(pinfo['Tier'], dict):
             pinfo['Tier'] = {}
 
         self.PPGem.setText(str(pinfo['PPGem']))
@@ -160,6 +160,6 @@ class Options(QDialog, Ui_B_Options):
         else:
             self.CostInPrice.setChecked(0)
 
-        for tier, price in self.TierPricing.items():
+        for tier, price in list(self.TierPricing.items()):
             tnum = int(tier)
             self.TierPriceTable.item(tnum - 1, 1).setText(str(price))

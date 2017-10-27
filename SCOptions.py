@@ -34,7 +34,7 @@ class SCOptions(Singleton):
             try:
                 os.makedirs(path)
             except error:
-                print 'Error creating subdirectories'
+                print('Error creating subdirectories')
                 path = os.path.dirname(os.path.abspath(sys.argv[0]))
 
         return path
@@ -43,8 +43,8 @@ class SCOptions(Singleton):
 
     def getOption(self, name, defaultValue):
         if isinstance(defaultValue, str):
-            defaultValue = unicode(defaultValue)
-        if self.__options.has_key(name) and \
+            defaultValue = str(defaultValue)
+        if name in self.__options and \
                 (isinstance(self.__options[name], type(defaultValue)) or \
                 defaultValue is None):
             return self.__options[name]
@@ -53,14 +53,14 @@ class SCOptions(Singleton):
 
     def setOption(self, name, val):
         if isinstance(val, str):
-            val = unicode(val)
+            val = str(val)
         self.__options[name] = val
 
     def asXML(self):
         document = Document()
         rootnode = document.createElement('DefaultOptions')
         document.appendChild(rootnode)
-        for key, val in self.__options.items():
+        for key, val in list(self.__options.items()):
             rootnode.appendChild(self.writeOption(document, key, val))
         return document
 
@@ -70,7 +70,7 @@ class SCOptions(Singleton):
         elem = doc.createElement(key)
         if isinstance(val, dict):
             elem.setAttribute('type', 'dict')
-            for subkey, subval in val.items():
+            for subkey, subval in list(val.items()):
                 elem.appendChild(self.writeOption(doc, subkey, subval))
             return elem
         elif isinstance(val, list):
@@ -78,7 +78,7 @@ class SCOptions(Singleton):
             for v in val:
                 elem.appendChild(self.writeOption(doc, key + 'Item', v))
         else:
-            elem.appendChild(doc.createTextNode(unicode(val)))
+            elem.appendChild(doc.createTextNode(str(val)))
 
         return elem
             
@@ -162,9 +162,9 @@ class SCOptions(Singleton):
                 template = xmldoc.getElementsByTagName('DefaultOptions')
                 self.loadFromXML(template[0])
                 f.close()
-            except xml.parsers.expat.ExpatError, ex: 
-                print 'Error parsing XML document, code: %d line: %d offset %d', (
-                    ex.code, ex.lineno, ex.offset)
+            except xml.parsers.expat.ExpatError as ex: 
+                print(('Error parsing XML document, code: %d line: %d offset %d', (
+                    ex.code, ex.lineno, ex.offset)))
                 pass
 
     def save(self):        
@@ -176,8 +176,8 @@ class SCOptions(Singleton):
                 f.write(XMLHelper.writexml(self.asXML(), UnicodeStringIO(), '', '\t', '\n'))
                 f.write('\n')
                 f.close()
-            except Exception, ex:
-                print 'Error saving Spellcraft.xml!! ', ex
+            except Exception as ex:
+                print(('Error saving Spellcraft.xml!! ', ex))
                 pass
             try:
                 os.chmod(scfile, stat.S_IRUSR | stat.S_IWUSR)

@@ -155,11 +155,11 @@ statTableOrdered = (
 )
 
 statTable = dict(statTableOrdered)
-for (key, val) in statTable.iteritems():
+for (key, val) in list(statTable.items()):
     statTable[key] = (val, type, GemDusts[type], GemLiquids[val],)
 statTable = d2(statTable)
 
-statList = t2(map(lambda(x): x[0], statTableOrdered))
+statList = t2([x[0] for x in statTableOrdered])
 
 del statTableOrdered
 
@@ -193,11 +193,11 @@ resistTableOrdered = (
 )
 
 resistTable = dict(resistTableOrdered)
-for (key, val) in resistTable.iteritems():
+for (key, val) in list(resistTable.items()):
     resistTable[key] = (val, type, GemDusts[type], GemLiquids[val])
 resistTable = d2(resistTable)
 
-resistList = t2(map(lambda(x): x[0], resistTableOrdered))
+resistList = t2([x[0] for x in resistTableOrdered])
 
 resistValues = t2(('1', '2', '3', '5', '7', '9', '11', '13', '15', '17',))
 
@@ -260,8 +260,8 @@ focusTable = {
 
 focusTable['All'] = {}
 for realm in Realms:
-  for (key, val) in focusTable[realm].iteritems():
-    if GemLiquids.has_key(val[0]):
+  for (key, val) in list(focusTable[realm].items()):
+    if val[0] in GemLiquids:
       liquid = GemLiquids[val[0]]
     else:
       liquid = GemLiquids[val[0] + " " + val[1].split()[0]]
@@ -272,8 +272,8 @@ focusTable['All'] = d2(focusTable['All'])
 focusTable = d2(focusTable)
 
 focusList = {}
-for realm in focusTable.keys():
-  focusList[realm] = focusTable[realm].keys()
+for realm in list(focusTable.keys()):
+  focusList[realm] = list(focusTable[realm].keys())
   focusList[realm].sort()
   focusList[realm] = t2(focusList[realm])
 focusList = d2(focusList)
@@ -412,8 +412,8 @@ skillTable = {
 
 skillTable['All'] = {}
 for realm in Realms:
-  for (key, val) in skillTable[realm].iteritems():
-    if GemLiquids.has_key(val[0]):
+  for (key, val) in list(skillTable[realm].items()):
+    if val[0] in GemLiquids:
       liquid = GemLiquids[val[0]]
     else:
       liquid = GemLiquids[val[0] + " " + val[1].split()[0]]
@@ -426,8 +426,8 @@ skillTable = d2(skillTable)
 skillList = {}
 dropSkillList = {}
 
-for realm in skillTable.keys():
-  skills = skillTable[realm].keys()
+for realm in list(skillTable.keys()):
+  skills = list(skillTable[realm].keys())
   skills.sort()
   skillList[realm] = t2(skills)
   skills.insert(2, 'All Archery Skills')
@@ -574,15 +574,15 @@ chargedEffectValues.update({
 })
 chargedEffectValues = d2(chargedEffectValues)
 
-offensiveEffectList = offensiveEffectValues.keys()
+offensiveEffectList = list(offensiveEffectValues.keys())
 offensiveEffectList.sort()
 offensiveEffectList = t2(offensiveEffectList)
 
-reactiveEffectList = reactiveEffectValues.keys()
+reactiveEffectList = list(reactiveEffectValues.keys())
 reactiveEffectList.sort()
 reactiveEffectList = t2(reactiveEffectList)
 
-chargedEffectList = chargedEffectValues.keys()
+chargedEffectList = list(chargedEffectValues.keys())
 chargedEffectList.sort()
 chargedEffectList = t2(chargedEffectList)
 
@@ -703,7 +703,7 @@ for realm in Realms:
   GemLists[realm].update(GemLists['All'])
   DropLists[realm] = {}
   DropLists[realm].update(DropLists['All'])
-for realm in GemTables.keys():
+for realm in list(GemTables.keys()):
   GemTables[realm]['Focus'] = focusTable[realm]
   GemTables[realm]['Skill'] = skillTable[realm]
   GemTables[realm] = d2(GemTables[realm])
@@ -1317,12 +1317,12 @@ FixEffectsTable = d2({
 
 if __name__ == "__main__":
 
-    for (realm, realmtable) in GemTables.iteritems():
+    for (realm, realmtable) in list(GemTables.items()):
 
         if realm == "All": continue
 
-        for (type, typetable) in realmtable.iteritems():
-            for (effect, effecttable) in typetable.iteritems():
+        for (type, typetable) in list(realmtable.items()):
+            for (effect, effecttable) in list(typetable.items()):
                 try:
                     name = effecttable[0] + " " + effecttable[1] 
                     tryit = HotkeyGems[realm][name]

@@ -8,7 +8,7 @@ from PyQt4.QtGui import *
 import sys
 import re
 import os.path
-import string
+
 from MyStringIO import UnicodeStringIO
 import XMLHelper
 from lxml import etree
@@ -28,7 +28,7 @@ def uixml(scwin, uixslt):
             transform2 = etree.XSLT(xslt2_xml)
             uixmlstr = transform2(uixmlstr)
 
-    except Exception, e:
+    except Exception as e:
         QMessageBox.critical(None, 'Error!', 'Error with XSLT transform!\n\n'+str(e), 'OK')
         return
         

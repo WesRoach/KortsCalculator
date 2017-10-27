@@ -23,15 +23,15 @@ class ScApplication(QApplication):
         self.curPath = QDir.cleanPath(QDir.currentPath())
 
         if args[0]:
-            args[0] = unicode(QDir(self.curPath).absoluteFilePath(args[0]))
+            args[0] = str(QDir(self.curPath).absoluteFilePath(args[0]))
 
         else:
 
-            args[0] = unicode(QDir(self.curPath).absoluteFilePath(__file__))
-        self.appPath = unicode(QDir.cleanPath(QDir(args[0]).absoluteFilePath("..")))
+            args[0] = str(QDir(self.curPath).absoluteFilePath(__file__))
+        self.appPath = str(QDir.cleanPath(QDir(args[0]).absoluteFilePath("..")))
 
         if len(args) > 1:
-            args[1] = unicode(QDir.cleanPath(QDir(self.curPath).absoluteFilePath(args[1])))
+            args[1] = str(QDir.cleanPath(QDir(self.curPath).absoluteFilePath(args[1])))
 
         QResource.registerResource(QDir(self.appPath).absoluteFilePath("SC.rcc"))
         QApplication.__init__(self, args)

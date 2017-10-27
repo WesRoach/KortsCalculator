@@ -6,7 +6,7 @@
 
 from Item import *
 from Constants import *
-import string
+
 import sys
 import re
 
@@ -31,7 +31,7 @@ def getGemNameParts(gemname):
     # returns level, liquid prefix and dust suffix
     if gemname == '':
         return ['', '', '']
-    gemwords = string.split(gemname, ' ', 3)
+    gemwords = str.split(gemname, ' ', 3)
     if gemwords[0] not in GemNames:
         return ['', '', '']
     # Prefix (two words distinguish some borked gems)
@@ -76,8 +76,8 @@ def gemNameSort(a, b):
         if t_b is None: return 1
         return cmp(a, b)
 
-    gemlevel_a, r = string.split(a, ' ', 1)
-    gemlevel_b, r = string.split(b, ' ', 1)
+    gemlevel_a, r = str.split(a, ' ', 1)
+    gemlevel_b, r = str.split(b, ' ', 1)
     if GemNames.index(gemlevel_a) < GemNames.index(gemlevel_b):
         return -1
     elif GemNames.index(gemlevel_a) > GemNames.index(gemlevel_b):

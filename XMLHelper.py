@@ -5,7 +5,6 @@
 # See NOTICE.txt for copyrights and grant of license
 
 from xml.dom.minidom import *
-import string
 import binascii
 from MyStringIO import UnicodeStringIO
 
@@ -29,7 +28,7 @@ def writexml(self, writer, indent="", addindent="", newl=""):
     writer.write(indent+"<" + self.tagName)
 
     attrs = self._get_attributes()
-    a_names = attrs.keys()
+    a_names = list(attrs.keys())
     a_names.sort()
 
     for a_name in a_names:
@@ -58,7 +57,7 @@ def getText(nodelist):
     for node in nodelist:
         if node.nodeType == node.TEXT_NODE:
             try:
-                rc = rc + unicode(node.data, 'UTF-8')
+                rc = rc + str(node.data, 'UTF-8')
             except:
                 rc = rc + node.data
     return rc

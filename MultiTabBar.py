@@ -116,14 +116,14 @@ class MultiTabBar(QWidget):
             if isinstance(loctuple, tuple) and len(loctuple) == 2:
                 self.__setCurrentIndex(loctuple[0], loctuple[1])
             else:
-                raise TypeError, 'Argument should be a row,col tuple! or row,col as separate arguments!'
+                raise TypeError('Argument should be a row,col tuple! or row,col as separate arguments!')
 
         elif len(args) == 2:
             row = args[0]
             col = args[1]
             self.__setCurrentIndex(row, col)
         else:
-            raise TypeError, 'Argument should be a row,col tuple! or row,col as separate arguments!'
+            raise TypeError('Argument should be a row,col tuple! or row,col as separate arguments!')
 
     def __setCurrentIndex(self, row, col):
         self.__selectedIndex = (row, col)
@@ -411,7 +411,7 @@ class MultiTabBar(QWidget):
                 maxWidth = max(sz.width(), maxWidth)
                 maxHeight = max(maxHeight, sz.height())
                 rowpcts[i].append(sz.width())
-            rowpcts[i] = map(lambda x: float(x) / mw, rowpcts[i])
+            rowpcts[i] = [float(x) / mw for x in rowpcts[i]]
             maxRowWidth = max(mw, maxRowWidth)
 
         maxHeight -= rowoverlap

@@ -6,7 +6,7 @@
 
 from xml.dom.minidom import *
 from Constants import *
-import string
+
 import XMLHelper
 import re
 import types
@@ -19,43 +19,43 @@ class ItemSlot:
     def __init__(self, slottype='player', type='Unused', amount='0', effect='',
                  requirement='', makes='0'):
         self.__dict__ = { 
-            'SlotType' : unicode(slottype),
+            'SlotType' : str(slottype),
             'Type': '', 'Effect' : '', 'Amount' : '', 'Requirement' : '',
             'Makes' : '', }
         self.setAll(type, amount, effect, requirement, makes)
 
     def setAll(self, type='Unused', amount='0', effect='',
                requirement='', makes='0'):
-        self.Type = unicode(type)
-        self.Amount = unicode(amount)
-        self.Effect = unicode(effect)
-        self.Makes = unicode(makes)
-        self.Requirement = unicode(requirement)
+        self.Type = str(type)
+        self.Amount = str(amount)
+        self.Effect = str(effect)
+        self.Makes = str(makes)
+        self.Requirement = str(requirement)
         self.fixEffect()
         self.CraftOk = False
 
     def getAttr(self, attrname):
-        if self.__dict__.has_key(attrname):
+        if attrname in self.__dict__:
             return self.__dict__[attrname]
 
     def setAttr(self, attrname, value):
         self.CraftOk = False
-        if self.__dict__.has_key(attrname):
-            self.__dict__[attrname] = unicode(value)
+        if attrname in self.__dict__:
+            self.__dict__[attrname] = str(value)
 
     def fixEffect(self):
-        if FixTypeTable.has_key(self.Type):
+        if self.Type in FixTypeTable:
             self.Type = FixTypeTable[self.Type]
         if self.Type == 'Focus' and len(self.Effect) > 6 and self.Effect[-6:] == ' Focus':
             self.Effect = self.Effect[:-6]
-        if FixEffectsTable.has_key(self.Effect):
+        if self.Effect in FixEffectsTable:
             self.Effect = FixEffectsTable[self.Effect]
 
     def slotType(self):
         return self.SlotType
     def setSlotType(self, slottype):
         self.CraftOk = False
-        self.SlotType=unicode(slottype)
+        self.SlotType=str(slottype)
 
     def type(self):
         return self.Type
@@ -64,7 +64,7 @@ class ItemSlot:
         if type == 'Unused' or type == '':
             self.setAll()
         else:
-            self.Type=unicode(type)
+            self.Type=str(type)
 
     def amount(self):
         if self.Type == 'Unused': return ''
@@ -72,25 +72,25 @@ class ItemSlot:
     def setAmount(self, amount):
         self.CraftOk = False
         if amount == '': amount = '0'
-        self.Amount = unicode(amount)
+        self.Amount = str(amount)
 
     def effect(self):
         return self.Effect
     def setEffect(self, effect):
         self.CraftOk = False
-        self.Effect = unicode(effect)
+        self.Effect = str(effect)
 
     def requirement(self):
         return self.Requirement
     def setRequirement(self, requirement):
         self.CraftOk = False
-        self.Requirement = unicode(requirement)
+        self.Requirement = str(requirement)
 
     def makes(self):
         return self.Makes
     def setMakes(self, makes):
         if makes == '': makes = '0'
-        self.Makes = unicode(makes)
+        self.Makes = str(makes)
 
     def crafted(self):
         if self.CraftOk: return True
@@ -103,15 +103,15 @@ class ItemSlot:
 
     def gemLevel(self):
         if ((self.SlotType != 'player' and self.SlotType != 'effect')
-         or not ValuesLists.has_key(self.Type)): 
+         or self.Type not in ValuesLists): 
             return -1
         amountlist = ValuesLists[self.Type]
         if not isinstance(amountlist, tuple):
-            if amountlist.has_key(self.Effect):
+            if self.Effect in amountlist:
                 amountlist = amountlist[self.Effect]
                 if isinstance(amountlist[0], tuple):
                     amountlist = amountlist[0]
-            elif amountlist.has_key(None):
+            elif None in amountlist:
                 amountlist = amountlist[None]
             else:
                 return -1            
@@ -154,19 +154,19 @@ class ItemSlot:
     def gemName(self, realm, parts = 7):
         if self.SlotType == 'crafted': 
             return '(Crafted Item Bonus)'
-        if not GemTables.has_key(realm): return ''
+        if realm not in GemTables: return ''
         if not self.crafted():
             return ''
         amountindex = self.gemLevel() - 1
         if self.Type[-6:] == 'Effect':
-            if not EffectTypeNames.has_key(self.Type): return ''
+            if self.Type not in EffectTypeNames: return ''
             if self.Type == 'Charged Effect':
                 effectItemNames = StableItemNames
             else:
                 effectItemNames = ProcItemNames
-            if not effectItemNames.has_key(self.Effect): return ''
+            if self.Effect not in effectItemNames: return ''
             if not (isinstance(ValuesLists[self.Type], dict)
-                and ValuesLists[self.Type].has_key(self.Effect)
+                and self.Effect in ValuesLists[self.Type]
                 and isinstance(ValuesLists[self.Type][self.Effect][0], tuple)):
                     return ''
             #requiredlevel = ValuesLists[self.Type][self.Effect][1][self.gemLevel()]
@@ -174,14 +174,14 @@ class ItemSlot:
             if (len(effectItemNames[self.Effect]) > 2 
             and EffectMetal['All'][amountindex] == ""):
                 # Different naming for the Drop tinctures
-                return string.strip(
+                return str.strip(
                     ' '.join([
                         EffectTypeNames[self.Type][0],
                         effectItemNames[self.Effect][2],
                         "Tincture (Drop)"
                     ]))
             else:
-                return string.strip(
+                return str.strip(
                     ' '.join([
                         effectItemNames[self.Effect][0],
                         EffectTypeNames[self.Type][0],
@@ -189,13 +189,13 @@ class ItemSlot:
                         EffectMetal['All'][amountindex],
                         EffectTypeNames[self.Type][1]
                     ]))
-        if not GemTables[realm].has_key(self.Type): return ''
+        if self.Type not in GemTables[realm]: return ''
         gemlist = GemTables[realm][self.Type]
-        if not gemlist.has_key(self.Effect):
+        if self.Effect not in gemlist:
             gemlist = GemTables['All'][self.Type]
-            if not gemlist.has_key(self.Effect): return ''
+            if self.Effect not in gemlist: return ''
         if parts == 7:
-            return string.strip(
+            return str.strip(
                 ' '.join([
                     GemNames[amountindex],
                     gemlist[self.Effect][0],
@@ -209,17 +209,17 @@ class ItemSlot:
                 name += gemlist[self.Effect][0] + ' '
             if parts & 1:
                 name += gemlist[self.Effect][1] + ' '
-            return string.strip(name)
+            return str.strip(name)
 
     def gemMaterials(self, realm):
         ret = { 'Gems' : { }, 'Dusts' : { }, 'Liquids' : { } }
-        if not self.crafted() or not GemTables.has_key(realm):
+        if not self.crafted() or realm not in GemTables:
             return ret
         gemindex = self.gemLevel() - 1
         gemlist = GemTables[realm][self.Type]
-        if not gemlist.has_key(self.Effect):
+        if self.Effect not in gemlist:
             gemlist = GemTables['All'][self.Type]
-            if not gemlist.has_key(self.Effect): return ret
+            if self.Effect not in gemlist: return ret
         gemdust = gemlist[self.Effect][2]
         gemliquid = gemlist[self.Effect][3]
         ret['Gems'][MaterialGems[gemindex]] = 1
@@ -277,29 +277,29 @@ class ItemSlot:
     def asXML(self,slotnode,realm='',rich=False):
         document = Document()
         if self.Type == 'Unused' or self.Type == '':
-            savexml = [(u'Type', u'Unused',),]
+            savexml = [('Type', 'Unused',),]
         else:
-            savexml = [(u'Type', self.Type,), 
-                       (u'Effect', self.Effect,),
-                       (u'Amount', self.Amount,)]
+            savexml = [('Type', self.Type,), 
+                       ('Effect', self.Effect,),
+                       ('Amount', self.Amount,)]
             if self.SlotType == 'player':
                 savexml.extend([
-                       (u'Makes', self.Makes,)])
+                       ('Makes', self.Makes,)])
             if len(self.Requirement) > 0:
-                savexml.append((u'Requirement', self.Requirement,))
+                savexml.append(('Requirement', self.Requirement,))
             if rich:
                 if self.Type[-6:] != "Effect":
                     savexml.append(
-                       (u'Utility', u"%.1f" % self.gemUtility(),))
+                       ('Utility', "%.1f" % self.gemUtility(),))
                 name = self.gemName(realm)
                 if len(name) > 0:
                     savexml.append(
-                       (u'Name', name,))
+                       ('Name', name,))
                 if self.crafted():
                     savexml.extend([
-                       (u'Imbue', u"%.1f" % self.gemImbue(),),
-                       (u'Level', unicode(self.gemLevel()),),
-                       (u'Cost', unicode(self.gemCost()),)])
+                       ('Imbue', "%.1f" % self.gemImbue(),),
+                       ('Level', str(self.gemLevel()),),
+                       ('Cost', str(self.gemCost()),)])
         for attrkey, attrval in savexml:
             if not rich and (attrval == '0' or attrval == ''):
                 continue
@@ -310,17 +310,17 @@ class ItemSlot:
         if rich and (self.SlotType == 'player') and self.crafted():
             matslist = self.gemMaterials(realm)
             #valnode = document.createElement(u'Materials')
-            for mattype in (u'Gems', u'Dusts', u'Liquids',):
-                matnames = matslist[mattype].keys()
+            for mattype in ('Gems', 'Dusts', 'Liquids',):
+                matnames = list(matslist[mattype].keys())
                 matnames.sort()
                 for mat in matnames:
                     matsort = MaterialsOrder.index(mat)
-                    matnode = document.createElement(u'Material')
-                    matnode.setAttribute(u'Amount', 
-                                          unicode(matslist[mattype][mat]))
-                    matnode.setAttribute(u'Type', mattype)
-                    matnode.setAttribute(u'Name', unicode(mat))
-                    matnode.setAttribute(u'Order', unicode(matsort))
+                    matnode = document.createElement('Material')
+                    matnode.setAttribute('Amount', 
+                                          str(matslist[mattype][mat]))
+                    matnode.setAttribute('Type', mattype)
+                    matnode.setAttribute('Name', str(mat))
+                    matnode.setAttribute('Order', str(matsort))
                     slotnode.appendChild(matnode)
                     #valnode.appendChild(matnode)
             #slotnode.appendChild(valnode)
@@ -402,7 +402,7 @@ class Item:
         item.Speed = self.Speed
         item.Bonus = self.Bonus
         item.itemslots = self.itemslots[:]
-        item.next = self.next
+        item.next = self.__next__
         return item
 
     def slot(self, index):
@@ -415,7 +415,7 @@ class Item:
         return list(self.itemslots)
 
     def loadAttr(self, attrname, attrval):
-        if self.__dict__.has_key(attrname):
+        if attrname in self.__dict__:
             self.__dict__[attrname] = attrval
             #eval(self.attrs[attrname] + ' = ' + attrval)
             #if attrname == 'ItemName':
@@ -423,11 +423,11 @@ class Item:
             #    print 'loadAttr direct ' + self.ItemName
 
     def getAttr(self, attrname):
-        if self.__dict__.has_key(attrname):
+        if attrname in self.__dict__:
             return self.__dict__[attrname]
 
     def __repr__(self):
-        return unicode(self.itemslots)
+        return str(self.itemslots)
 
     def itemImbue(self):
         if self.ActiveState != "player": return 0
@@ -522,70 +522,70 @@ class Item:
         if realm is None:
             realm = self.Realm
         document = Document()
-        rootnode = document.createElement(u'SCItem')
+        rootnode = document.createElement('SCItem')
         document.appendChild(rootnode)
-        fields = [(u'ActiveState', self.ActiveState,),
-                  (u'Location',self.Location,),
-                  (u'Realm', self.Realm,),
-                  (u'ItemName', self.ItemName,),
-                  (u'AFDPS', self.AFDPS,),
-                  (u'Speed', self.Speed,),
-                  (u'Bonus', self.Bonus,),
-                  (u'ItemQuality', self.ItemQuality,),
-                  (u'Equipped', self.Equipped,),
-                  (u'Level', self.Level,),
-                  (u'Notes', self.Notes,),
-                  (u'Requirement', self.Requirement,),
-                  (u'TYPE', self.TYPE,),
-                  (u'SOURCE', self.SOURCE,),
-                  (u'OFFHAND', self.OFFHAND,),
-                  (u'DAMAGETYPE', self.DAMAGETYPE,),
-                  (u'DBSOURCE', self.DBSOURCE,),]
+        fields = [('ActiveState', self.ActiveState,),
+                  ('Location',self.Location,),
+                  ('Realm', self.Realm,),
+                  ('ItemName', self.ItemName,),
+                  ('AFDPS', self.AFDPS,),
+                  ('Speed', self.Speed,),
+                  ('Bonus', self.Bonus,),
+                  ('ItemQuality', self.ItemQuality,),
+                  ('Equipped', self.Equipped,),
+                  ('Level', self.Level,),
+                  ('Notes', self.Notes,),
+                  ('Requirement', self.Requirement,),
+                  ('TYPE', self.TYPE,),
+                  ('SOURCE', self.SOURCE,),
+                  ('OFFHAND', self.OFFHAND,),
+                  ('DAMAGETYPE', self.DAMAGETYPE,),
+                  ('DBSOURCE', self.DBSOURCE,),]
         if self.Time > "0":
             fields.extend([
-                  (u'Time', self.Time,),])
+                  ('Time', self.Time,),])
         if writeIndex:
             fields.extend([
-                  (u'TemplateIndex', unicode(self.TemplateIndex),),])
+                  ('TemplateIndex', str(self.TemplateIndex),),])
         if rich:
             imbuevals = self.listGemImbue()
             fields.extend([
-                  (u'Utility', u"%.1f" % self.utility(),),
-                  (u'Cost', unicode(self.cost()),),
-                  (u'Price', unicode(self.price(pricingInfo)),),
-                  (u'Imbue', u"%.1f" % sum(imbuevals),),
-                  (u'ItemImbue', unicode(self.itemImbue()),),
-                  (u'Success',
-                       unicode(self.overchargeSuccess(crafterSkill)),),])
+                  ('Utility', "%.1f" % self.utility(),),
+                  ('Cost', str(self.cost()),),
+                  ('Price', str(self.price(pricingInfo)),),
+                  ('Imbue', "%.1f" % sum(imbuevals),),
+                  ('ItemImbue', str(self.itemImbue()),),
+                  ('Success',
+                       str(self.overchargeSuccess(crafterSkill)),),])
 
         for key, val in fields:
             if not rich and val == '': continue
-            if not isinstance(val, basestring):
+            if not isinstance(val, str):
                 sys.stderr.write("%s value %s is not a string\n" % (key, str(val)))
             elem = document.createElement(key)
-            elem.appendChild(document.createTextNode(unicode(val)))
+            elem.appendChild(document.createTextNode(str(val)))
             rootnode.appendChild(elem)
         if (len(self.CLASSRESTRICTIONS) > 0):
-            elem = document.createElement(u'CLASSRESTRICTIONS')
+            elem = document.createElement('CLASSRESTRICTIONS')
             rootnode.appendChild(elem)
             for val in self.CLASSRESTRICTIONS:
-                if not isinstance(val, basestring):
+                if not isinstance(val, str):
                     sys.stderr.write("CLASSRESTRICTION %s is not a string\n" % str(val))
-                classnode = document.createElement(u'CLASS')
-                classnode.appendChild(document.createTextNode(unicode(val)))
+                classnode = document.createElement('CLASS')
+                classnode.appendChild(document.createTextNode(str(val)))
                 elem.appendChild(classnode)
         slotnode = None
         for num in range(0,len(self.itemslots)):
             if self.itemslots[num].type() == "Unused": 
                 continue
-            slotnode = document.createElement(u'SLOT')
-            slotnode.setAttribute(u'Number', unicode(num))
+            slotnode = document.createElement('SLOT')
+            slotnode.setAttribute('Number', str(num))
             if rich or self.itemslots[num].slotType() != self.ActiveState:
-                slotnode.setAttribute(u'Type', unicode(self.itemslots[num].slotType()))
+                slotnode.setAttribute('Type', str(self.itemslots[num].slotType()))
             self.itemslots[num].asXML(slotnode,realm,rich)
             if rich and num < len(imbuevals) and imbuevals[num] > 0:
                 imbuenode = slotnode.getElementsByTagName('Imbue')[0]
-                elem = document.createTextNode(u"%.1f" % imbuevals[num])
+                elem = document.createTextNode("%.1f" % imbuevals[num])
                 imbuenode.replaceChild(elem, imbuenode.childNodes[0])
             rootnode.appendChild(slotnode)
         return document
@@ -647,7 +647,7 @@ class Item:
                 for attr in child.childNodes:
                     if attr.nodeType == Node.TEXT_NODE: continue
                     val = XMLHelper.getText(attr.childNodes)
-                    if itemslot.__dict__.has_key(attr.tagName):
+                    if attr.tagName in itemslot.__dict__:
                         itemslot.setAttr(attr.tagName, val)
                     itemslot.fixEffect()
             elif child.tagName == 'CLASSRESTRICTIONS':
@@ -659,7 +659,7 @@ class Item:
                         self.CLASSRESTRICTIONS.append(val)
             elif child.tagName[-4:] == "ITEM":
                 # Legacy nested DROPITEM/PLAYERITEM slots
-                type = string.lower(child.tagName[:-4])
+                type = str.lower(child.tagName[:-4])
                 slots[type] = self.makeSlots(type)
                 if len(slots[type]) == 0:
                     slots.pop(type)
@@ -680,14 +680,14 @@ class Item:
                         if attr.nodeType == Node.TEXT_NODE: continue
                         val = XMLHelper.getText(attr.childNodes)
                         itemslot = slots[type][slotnum]
-                        if itemslot.__dict__.has_key(attr.tagName):
+                        if attr.tagName in itemslot.__dict__:
                             itemslot.setAttr(attr.tagName, val)
                     if itemslot.type() != 'Unused':
                         found = True
                     itemslot.fixEffect()
                 if not (convert or found):
                     slots.pop(type)
-            elif self.__dict__.has_key(child.tagName):
+            elif child.tagName in self.__dict__:
                 #if child.tagName == 'ItemName':
                 #    print 'ItemName'
                 #print XMLHelper.getText(child.childNodes)
@@ -699,12 +699,12 @@ class Item:
                 elif child.tagName == 'TemplateIndex':
                     self.TemplateIndex = int(self.TemplateIndex)
         if len(slots) > 0:
-            if slots.has_key(self.ActiveState):
+            if self.ActiveState in slots:
                 self.itemslots = slots[self.ActiveState]
                 self.itemslots = slots.pop(self.ActiveState)
             if len(slots) > 0:
                 self.next = self.copy()
-                type = slots.keys()[0]
+                type = list(slots.keys())[0]
                 self.next.Equipped = '0'
                 self.next.ActiveState = type
                 self.next.itemslots = slots[type]
@@ -716,4 +716,4 @@ class Item:
                 item.ItemName = 'Crafted Item' + namehint
             elif len(item.ItemName) == 0:
                 item.ItemName = 'Drop Item' + namehint
-            item = item.next
+            item = item.__next__

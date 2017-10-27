@@ -17,75 +17,75 @@ pve = False
 
 def updateRealm(lst):
     realm = lst[0]
-    print 'realm: %s' % realm
+    print(('realm: %s' % realm))
 
 def isPlayerMade():
-    print 'player made!'
+    print('player made!')
 
 def stat(lst):
     t = lst[0]
     amount = lst[1]
-    print 'stat %s %s' % (t, amount)
+    print(('stat %s %s' % (t, amount)))
 
 def resist(lst):
     t = lst[0]
     amount = lst[1]
-    print 'resist %s %s' % (t, amount)
+    print(('resist %s %s' % (t, amount)))
 
 def power(lst):
     t = lst[0]
     amount = lst[1]
-    print 'power %s %s' % (t, amount)
+    print(('power %s %s' % (t, amount)))
 
 def hits(lst):
     t = lst[0]
     amount = lst[1]
-    print 'hits %s %s' % (t, amount)
+    print(('hits %s %s' % (t, amount)))
 
 def skill(lst):
     t = lst[0]
     amount = lst[1]
-    print 'skill %s %s' % (t, amount)
+    print(('skill %s %s' % (t, amount)))
 
 def outOfItem():
     global in_item
-    print 'out'
+    print('out')
     in_item = False
     
 def otherBonus(lst):
     t = lst[0]
     amount = lst[1]
 
-    oblist = map(lambda x: x[0].lower(), otherBonusList)
+    oblist = [x[0].lower() for x in otherBonusList]
     words = t.split(' ')
     if t.endswith('bonus cap'):
         if t.find(' attribute ') != -1:
-            print '%s cap increase: %s' % (words[0], amount)
+            print(('%s cap increase: %s' % (words[0], amount)))
         elif t.find('hit points ') != -1:
-            print 'hits cap increase: %s' % amount
+            print(('hits cap increase: %s' % amount))
     if t in oblist:
-        print 'other bonus: %s %s' % (t, amount)
+        print(('other bonus: %s %s' % (t, amount)))
 
         
 
 
 def af(lst):
     amount = lst[0]
-    print 'af %s' % amount
+    print(('af %s' % amount))
 
 def qua(lst):
     amount = lst[0]
-    print 'qua %s' % amount
+    print(('qua %s' % amount))
 
 def dps(lst):
     amount = lst[0]
-    print 'dps %s' % amount
+    print(('dps %s' % amount))
 
 def speed(lst):
     amount = lst[0]
-    print 'speed %s' % amount
+    print(('speed %s' % amount))
 
-print '|'.join(list(statList) + list(resistList))
+print(('|'.join(list(statList) + list(resistList))))
 re_table = [
     (re.compile(r'Realm: (\w+)'), 1, updateRealm),
     (re.compile(r'Crafted By:'), 0, isPlayerMade),
@@ -94,8 +94,8 @@ re_table = [
     (re.compile(r'- (?:\[L\d+\]: )?(' + r'|'.join(list(resistList)) + '): (\d+)%'),
         2, resist),
     (re.compile(r'- (?:\[L\d+\]: )?(' + r'|'.join(
-        skillTable['Albion'].keys() + skillTable['Midgard'].keys() +
-        skillTable['Hibernia'].keys()) + '): (\d+) pts'),
+        list(skillTable['Albion'].keys()) + list(skillTable['Midgard'].keys()) +
+        list(skillTable['Hibernia'].keys())) + '): (\d+) pts'),
         2, skill),
     (re.compile(r'- (?:\[L\d+\]: )?(Hits): (\d+) pts'), 2, hits),
     (re.compile(r'- (?:\[L\d+\]: )?(Power): (\d+)'), 2, power),
@@ -107,7 +107,7 @@ re_table = [
     (re.compile(r'- ([0-9.]+) Weapon Speed'), 1, speed),
 ]
 
-print re_table
+print(re_table)
 
 
 for line in lines:
@@ -116,7 +116,7 @@ for line in lines:
         m = begin_exp.match(line)
         if m:
             item_name = m.group(1)
-            print item_name
+            print(item_name)
             in_item = True
     else:
         pve = (line.find('PvE Only') != -1)

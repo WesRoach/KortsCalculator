@@ -378,7 +378,7 @@ ClassList['All'] = []
 AllBonusList['All'] = {}
 
 for realm in Realms:
-  classes = AllBonusList[realm].keys()
+  classes = list(AllBonusList[realm].keys())
   classes.sort()
   ClassList[realm] = t2(classes)
   for charclass in AllBonusList[realm]:
@@ -386,14 +386,14 @@ for realm in Realms:
     for listname in ('All Magic Skills', 'All Melee Weapon Skills',
                      'All Dual Wield Skills', 'All Archery Skills',
                      'Other Skills',):
-        if not AllBonusList[realm][charclass].has_key(listname):
+        if listname not in AllBonusList[realm][charclass]:
             AllBonusList[realm][charclass][listname] = ()
         skills.extend(AllBonusList[realm][charclass][listname])
 
     AllBonusList[realm][charclass]['Skills Hash'] = d2(dict.fromkeys(skills))
 
     for listname in ('All Spell Lines', 'No Skill Effect', 'Acuity',):
-        if not AllBonusList[realm][charclass].has_key(listname):
+        if listname not in AllBonusList[realm][charclass]:
             AllBonusList[realm][charclass][listname] = ()
 
     AllBonusList[realm][charclass]['Focus Hash'] \
@@ -529,7 +529,7 @@ RaceList['All'] = []
 for realm in Realms:
   for charclass in Races[realm]:
     Races['All'][charclass] = Races[realm][charclass]
-  RaceList[realm] = Races[realm].keys()
+  RaceList[realm] = list(Races[realm].keys())
   RaceList[realm].sort()
   RaceList[realm] = t2(RaceList[realm])
   RaceList['All'].extend(Races[realm])

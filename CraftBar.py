@@ -15,22 +15,22 @@ import os
 import os.path
 import glob
 import re
-import string
+
 import SC
-import ConfigParser 
+import configparser 
 import sys
 
 
-class IniConfigParser(ConfigParser.RawConfigParser):
+class IniConfigParser(configparser.RawConfigParser):
     def __init__(self, defaults=None):
-        ConfigParser.RawConfigParser.__init__(self,defaults)
+        configparser.RawConfigParser.__init__(self,defaults)
 
     def write(self, fp):
 
         if self._defaults:
             fp.write("[%s]\n" % DEFAULTSECT)
 
-            for (key, value) in self._defaults.items():
+            for (key, value) in list(self._defaults.items()):
                 fp.write("%s=%s\n" % (key, str(value).replace('\n', '\n\t')))
 
             fp.write("\n")
@@ -38,7 +38,7 @@ class IniConfigParser(ConfigParser.RawConfigParser):
         for section in self._sections:
             fp.write("[%s]\n" % section)
 
-            for (key, value) in self._sections[section].items():
+            for (key, value) in list(self._sections[section].items()):
 
                 if key != "__name__":
                     fp.write("%s=%s\n" % (key, str(value).replace('\n', '\n\t')))
@@ -108,8 +108,8 @@ class CraftBar(QDialog, Ui_B_CraftBar):
             self.ItemSelect[i].clicked.connect(self.pieceBoxChanged)
             item = self.parent.itemattrlist[self.items[i]]
 
-            while item.ActiveState == 'drop' and item.next is not None:
-                item = item.next
+            while item.ActiveState == 'drop' and item.__next__ is not None:
+                item = item.__next__
 
             if item.ActiveState == 'drop':
                 self.ItemSelect[i].setEnabled(False)
@@ -169,7 +169,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
 
         row = indexList[0].row()
         fileIndex = self.model.index(row, 0)
-        filename = unicode(self.model.data(fileIndex, Qt.UserRole).toString())
+        filename = str(self.model.data(fileIndex, Qt.UserRole).toString())
         
         self.LoadGemsButton.setEnabled(0)
         self.LoadGemsButton.update()
@@ -195,7 +195,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
                     newbuttons.append(slotcounter)
 
             else:
-                buttonval = string.split(buttonstr, ',', 1)
+                buttonval = str.split(buttonstr, ',', 1)
 
                 if len(buttonval) > 1 and buttonval[1][:7].lower() == '/craft ':
 
@@ -231,14 +231,14 @@ class CraftBar(QDialog, Ui_B_CraftBar):
                             sys.stdout.write("Out of slots!\n")
                             continue
 
-                        if not HotkeyGems[realm].has_key(gemname):
+                        if gemname not in HotkeyGems[realm]:
                             for i in (0, 1, 2):
                                 gemname = slot.gemName(Realms[i], 3)
 
                                 if realm == Realms[i]:
                                     continue
 
-                                if HotkeyGems[Realms[i]].has_key(gemname):
+                                if gemname in HotkeyGems[Realms[i]]:
                                     realm = Realms[i]
                                     buttonstr = 'Hotkey_%d' % buttons[i]
 
@@ -254,7 +254,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
                                     slotcounter += 1
                                     break
 
-                        if HotkeyGems[realm].has_key(gemname):
+                        if gemname in HotkeyGems[realm]:
                             val = HotkeyGems[realm][gemname]
                             buttonstr = '45,13%03d%02d,,-1' % (val, slot.gemLevel() - 1)
 
@@ -296,7 +296,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
             servers = EuroServerCodes
 
         self.model.removeRows(0, self.model.rowCount())
-        rootpath = unicode(rootpath)
+        rootpath = str(rootpath)
 
         if os.path.isdir(rootpath):
             filelist = glob.glob(rootpath+'/*-*.ini')
@@ -315,7 +315,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
                 else:
                     path = path[:slash]
 
-                if m is None or not servers.has_key(m.group(2)):
+                if m is None or m.group(2) not in servers:
                     continue
 
                 # search the section(s) for the pattern
@@ -397,7 +397,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
     def computeGemCount(self):
         self.gemcount = 0
 
-        for loc, item in self.piecelist.items():
+        for loc, item in list(self.piecelist.items()):
 
             if item.ActiveState == 'player':
 
@@ -417,8 +417,8 @@ class CraftBar(QDialog, Ui_B_CraftBar):
             if self.ItemSelect[i].checkState() == Qt.Checked:
                 item = self.parent.itemattrlist[self.items[i]]
 
-                while item.ActiveState == 'drop' and item.next is not None:
-                    item = item.next
+                while item.ActiveState == 'drop' and item.__next__ is not None:
+                    item = item.__next__
 
                 self.piecelist[self.items[i]] = item
 

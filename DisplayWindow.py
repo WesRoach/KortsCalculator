@@ -8,7 +8,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from B_DisplayWindow import *
 from Constants import *
-import string
+
 
 
 class DisplayWindow(QDialog, Ui_B_DisplayWindow):
@@ -29,7 +29,7 @@ class DisplayWindow(QDialog, Ui_B_DisplayWindow):
         self.scwindow = parent
 
     def loadLocations(self, locs):
-        strlist = map(lambda (x): '%s: %s' % (x[0], x[1]), locs)
+        strlist = ['%s: %s' % (x[0], x[1]) for x in locs]
         self.DisplayText.clear()
         self.DisplayText.insertItems(0, strlist)
 
@@ -38,7 +38,7 @@ class DisplayWindow(QDialog, Ui_B_DisplayWindow):
 
     def LocationClicked(self, a0):
         if a0 is None: return
-        tabname, rest = string.split(str(a0.text()), ':', 1)
+        tabname, rest = str.split(str(a0.text()), ':', 1)
 
         if tabname in JewelTabList:
             col = JewelTabList.index(tabname)

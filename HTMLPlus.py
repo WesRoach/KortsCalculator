@@ -5,9 +5,9 @@
 
 "Proper handling of line breaks, newer entity defs and indentation"
 
-import string
+
+from html.parser import HTMLParser
 import formatter
-import htmllib
 import sys
 
 
@@ -117,14 +117,14 @@ class ObtuseFormatter(formatter.AbstractFormatter):
         self.have_label = self.softspace = self.para_end = 0
     
 
-class HTMLPlusParser(htmllib.HTMLParser):
+class HTMLPlusParser(HTMLParser):
     """This is extends the basic HTML parser class.
     """
 
     def __init__(self, formatter, verbose=None):
         if verbose and not hasattr(verbose, "write"):
             verbose = sys.stderr
-        htmllib.HTMLParser.__init__(self, formatter, verbose)
+        HTMLParser.__init__(self, formatter, verbose)
         # consists of [tables][rows][cols]
         # where reparsestack[-1] is the deepest replayable elt
         self.reparsestack = []
@@ -137,17 +137,17 @@ class HTMLPlusParser(htmllib.HTMLParser):
     def handle_data(self, data):
         if len(self.reparsestack):
             self.reparsestack[-1].append((getattr(self, 'handle_data'), data,))
-        htmllib.HTMLParser.handle_data(self, data)
+        HTMLParser.handle_data(self, data)
 
     def handle_starttag(self, tag, method, attrs):
         if self.reparsestack:
             self.reparsestack[-1].append((method, attrs,))
-        htmllib.HTMLParser.handle_starttag(self, tag, method, attrs)
+        HTMLParser.handle_starttag(self, tag, method, attrs)
 
     def handle_endtag(self, tag, method):
         if self.tdelt:
             self.tdelt[-1].append((method,))
-        htmllib.HTMLParser.handle_endtag(self, tag, method)
+        HTMLParser.handle_endtag(self, tag, method)
 
 
     def do_p(self, attr):
@@ -230,7 +230,6 @@ class HTMLPlusParser(htmllib.HTMLParser):
         if self.verbose:
             self.verbose.write('\n*** Stack:' + '\n'.join(self.stack))
             self.verbose.write('\n*** Unbalanced </' + tag + '>\n')
-
 
 
 if __name__ == '__main__':

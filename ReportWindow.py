@@ -14,7 +14,7 @@ from SC import *
 from MyStringIO import UnicodeStringIO
 import XMLHelper
 import Item
-import string
+
 import re
 import sys
 import os.path
@@ -44,7 +44,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
         self.materials = {'Gems': {}, 'Liquids': {}, 'Dusts': {}}
         self.gemnames = {}
         self.totalcost = 0
-        for loc, item in itemlist.items():
+        for loc, item in list(itemlist.items()):
             if item.ActiveState != 'player':
                 continue
             for slot in item.slots():
@@ -59,36 +59,36 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                     continue
                 effect = slot.effect()
                 amount = slot.amount()
-                for mattype, matl in slot.gemMaterials(self.parent.realm).items():
-                    for mat, val in matl.items():
-                        if self.materials[mattype].has_key(mat):
+                for mattype, matl in list(slot.gemMaterials(self.parent.realm).items()):
+                    for mat, val in list(matl.items()):
+                        if mat in self.materials[mattype]:
                             self.materials[mattype][mat] += val
                         else:
                             self.materials[mattype][mat] = val
                 gemname = slot.gemName(self.parent.realm)
-                if self.gemnames.has_key(gemname):
+                if gemname in self.gemnames:
                     self.gemnames[gemname] += 1
                 else:
                     self.gemnames[gemname] = 1
 
                 cost = slot.gemCost(1)
                 self.totalcost += cost
-        keys = self.gemnames.keys()
+        keys = list(self.gemnames.keys())
         keys.sort(gemNameSort)
-        self.gemnames = map(lambda (x): [x, self.gemnames.get(x)], keys)
-        for type, matlist in self.materials.items():
+        self.gemnames = [[x, self.gemnames.get(x)] for x in keys]
+        for type, matlist in list(self.materials.items()):
             if type == 'Gems':
-                keys = matlist.keys()
+                keys = list(matlist.keys())
                 keys.sort(gemTypeSort)
-                matlist = map(lambda (x): [x, matlist.get(x)], keys)
+                matlist = [[x, matlist.get(x)] for x in keys]
             elif type == 'Liquids':
-                keys = matlist.keys()
+                keys = list(matlist.keys())
                 keys.sort()
-                matlist = map(lambda (x): [x, matlist.get(x)], keys)
+                matlist = [[x, matlist.get(x)] for x in keys]
             elif type == 'Dusts':
-                keys = matlist.keys()
+                keys = list(matlist.keys())
                 keys.sort()
-                matlist = map(lambda (x): [x, matlist.get(x)], keys)
+                matlist = [[x, matlist.get(x)] for x in keys]
             self.materials[type] = matlist
         self.printMaterials()
 
@@ -117,7 +117,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
             report = transform(source)
             self.reportHtml = str(report)
 
-        except Exception, e:
+        except Exception as e:
             QMessageBox.critical(None, 'Error!', 'Error composing report ' + filename + "\n\n" + str(e), 'OK')
             return
 
