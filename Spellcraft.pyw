@@ -24,18 +24,14 @@ class ScApplication(QApplication):
 
     def __init__(self):
         args = sys.argv
-        self.curPath = str(QDir.cleanPath(QDir.currentPath()))
+        self.curPath = QDir.cleanPath(QDir.currentPath())
 
         if args[0]:
             args[0] = str(QDir(self.curPath).absoluteFilePath(args[0]))
-
         else:
-
             args[0] = str(QDir(self.curPath).absoluteFilePath(__file__))
-        self.appPath = str(QDir.cleanPath(QDir(args[0]).absoluteFilePath("..")))
 
-        if len(args) > 1:
-            args[1] = str(QDir.cleanPath(QDir(self.curPath).absoluteFilePath(args[1])))
+        self.appPath = str(QDir.cleanPath(QDir(args[0]).absoluteFilePath("..")))
 
         QResource.registerResource(QDir(self.appPath).absoluteFilePath("SC.rcc"))
         QApplication.__init__(self, args)
@@ -50,6 +46,8 @@ class ScApplication(QApplication):
         app.setActiveWindow(scw)
         scw.setWindowIcon(QIcon(":/images/ScWindow.png"))
 
+        # THIS IS NO LONGER NEEDED SINCE WE HAVE STRIPPED SUPPORT FOR MACINTOSH
+        # AND HAVE NO PLANS IN PORTING THIS TO ANY OTHER PLATFORMS.
         # if len(app.argv()) > 1:
         #   scw.openFile(app.argv()[1], True)
 
