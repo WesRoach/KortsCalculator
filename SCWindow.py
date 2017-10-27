@@ -1169,7 +1169,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
         altitem = item
         while altitem is not None:
             self.ItemNameCombo.addItem(altitem.ItemName)
-            altitem = altitem.__next__
+            altitem = altitem.next
         self.ItemNameCombo.setCurrentIndex(0)
 
         self.Equipped.setChecked(int(item.Equipped))
@@ -1196,7 +1196,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
         else:
             item.SOURCE = str(self.ItemSource.currentText())
 
-        self.itemRealmChanged(item=item)
+        self.itemRealmChanged(item = item)
 
         self.ItemRequirement.setText(item.Requirement)
         self.DBSource.setText(item.DBSOURCE)
