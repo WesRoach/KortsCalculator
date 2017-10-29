@@ -8,6 +8,7 @@
 from MyStringIO import UnicodeStringIO
 from Singleton import Singleton
 from xml.dom.minidom import *
+from xml.parsers import expat
 import os.path
 import stat
 import sys
@@ -15,7 +16,6 @@ import XMLHelper
 
 
 class SCOptions(Singleton):
-
     def __init__(self):
         Singleton.__init__(self)
         self.__options = {}
@@ -27,7 +27,7 @@ class SCOptions(Singleton):
             if not os.path.isdir(path):
                 path = os.path.dirname(os.path.abspath(sys.argv[0]))
         else:
-            extradirs = '.kscraft'
+            extradirs = '.kscraft'  # TODO: MACINTOSH/DARWIN STUFF - DELETE
             path = os.environ.get('HOME', '')
             if not os.path.isdir(path):
                 path = os.path.dirname(os.path.abspath(sys.argv[0]))
@@ -41,14 +41,13 @@ class SCOptions(Singleton):
                 path = os.path.dirname(os.path.abspath(sys.argv[0]))
 
         return path
-    getAppDirectory = staticmethod(getAppDirectory)
 
+    getAppDirectory = staticmethod(getAppDirectory)
 
     def getOption(self, name, defaultValue):
         if isinstance(defaultValue, str):
             defaultValue = str(defaultValue)
-        if name in self.__options and \
-                (isinstance(self.__options[name], type(defaultValue)) or defaultValue is None):
+        if name in self.__options and (isinstance(self.__options[name], type(defaultValue)) or defaultValue is None):
             return self.__options[name]
 
         return defaultValue
@@ -83,13 +82,12 @@ class SCOptions(Singleton):
             elem.appendChild(doc.createTextNode(str(val)))
 
         return elem
-            
+
     def parseOption(self, node):
         hasElements = False
         sameElements = True
         ptag = None
 
-        
         for child in node.childNodes:
             if child.nodeType == Node.ELEMENT_NODE:
                 hasElements = True
@@ -99,8 +97,10 @@ class SCOptions(Singleton):
 
         if not node.hasAttribute('type') and not hasElements:
             val = XMLHelper.getText(node.childNodes)
-            if val.lower() == 'true': return True
-            elif val.lower() == 'false': return False
+            if val.lower() == 'true':
+                return True
+            elif val.lower() == 'false':
+                return False
             else:
                 try:
                     return int(val)
@@ -116,12 +116,13 @@ class SCOptions(Singleton):
                     (not node.hasAttribute('type') and not sameElements):
                 vals = {}
                 for child in node.childNodes:
-                    if child.nodeType == Node.TEXT_NODE: continue
+                    if child.nodeType == Node.TEXT_NODE:
+                        continue
                     nodeName = child.nodeName
-                    if len(nodeName) > 3 and nodeName[:3] == 'N__': 
+                    if len(nodeName) > 3 and nodeName[:3] == 'N__':
                         nodeName = nodeName[3:]
-                    elif len(nodeName) >= 2 and nodeName[0] == 'L' and nodeName[1].isdigit():  # old style
-                            nodeName = nodeName[1:]
+                    elif len(nodeName) >= 2 and nodeName[0] == 'L' and nodeName[1].isdigit():
+                        nodeName = nodeName[1:]
                     vals[nodeName] = self.parseOption(child)
 
                 return vals
@@ -142,15 +143,13 @@ class SCOptions(Singleton):
             if len(nodeName) > 3 and nodeName[:3] == 'N__':
                 nodeName = nodeName[3:]
             self.__options[nodeName] = self.parseOption(child)
-            
+
     def load(self):
-        scfile = os.path.join(SCOptions.getAppDirectory(),
-            'Spellcraft.xml')
-        oldscfile = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])),
-                              'Spellcraft.xml')
+        scfile = os.path.join(SCOptions.getAppDirectory(), 'Spellcraft.xml')
+        oldscfile = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), 'Spellcraft.xml')
         if not os.path.exists(scfile) and os.path.exists(oldscfile):
             if os.access(os.path.dirname(scfile), os.W_OK):
-                f = open(oldscfile, 'r') 
+                f = open(oldscfile, 'r')
                 f2 = open(scfile, 'w')
                 f2.write(f.read())
                 f.close()
@@ -164,14 +163,13 @@ class SCOptions(Singleton):
                 template = xmldoc.getElementsByTagName('DefaultOptions')
                 self.loadFromXML(template[0])
                 f.close()
-            except xml.parsers.expat.ExpatError as ex: 
+            except expat.ExpatError as ex:
                 print(('Error parsing XML document, code: %d line: %d offset %d', (
                     ex.code, ex.lineno, ex.offset)))
                 pass
 
-    def save(self):        
-        scfile = os.path.join(SCOptions.getAppDirectory(),
-            'Spellcraft.xml')
+    def save(self):
+        scfile = os.path.join(SCOptions.getAppDirectory(), 'Spellcraft.xml')
         if os.access(os.path.dirname(scfile), os.W_OK):
             try:
                 f = open(scfile, 'w')

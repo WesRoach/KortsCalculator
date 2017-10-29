@@ -206,7 +206,7 @@ class MultiTabBar(QWidget):
         r = QRect()
         for i in range(len(self.__tabList)):
             for j in range(len(self.__tabList[i])):
-                r = r.unite(self.__tabAt(i, j).rect)
+                r = r.united(self.__tabAt(i, j).rect)
         r.setRight(r.right() + padwidth)
 
         if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
