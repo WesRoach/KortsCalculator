@@ -1,3 +1,5 @@
+# coding = utf-8
+
 # DisplayWindow.py: Kort's Spellcrafting Calculator
 #
 # See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
@@ -18,10 +20,10 @@ class DisplayWindow(QDialog, Ui_B_DisplayWindow):
         QDialog.__init__(self, parent, fl)
         Ui_B_DisplayWindow.setupUi(self, self)
 
-        if (name):
+        if name:
             self.setObjectName(name)
 
-        if (modal):
+        if modal:
             self.setModal(modal)
 
         self.PushButton1.clicked.connect(self.CloseWindow)

@@ -1,3 +1,5 @@
+# coding = utf-8
+
 # ChooseSlot.py: Kort's Spellcrafting Calculator
 #
 # See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING

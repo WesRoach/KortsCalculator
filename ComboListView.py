@@ -1,3 +1,5 @@
+# coding=utf-8
+
 # ComboListView.py: Kort's Spellcrafting Calculator
 #
 # See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
@@ -11,15 +13,16 @@ from PyQt5.QtWidgets import QApplication, QAbstractItemView, QListView
 
 
 class ComboListView(QListView):
+
     def __init__(self, p, cb):
         QListView.__init__(self, p)
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.setSelectionMode(QAbstractItemView.SingleSelection)
 
     def showEvent(self, e):
-        if qVersion < '4.2': 
+        if qVersion() < '4.2':
             QListView.showEvent(self, e)
-            return
+        return
         e.accept()
         model = self.model()
         rows = model.rowCount()
@@ -37,19 +40,18 @@ class ComboListView(QListView):
         mx += 25
 
         if mx > self.parent().parent().width():
-            self.setGeometry(self.pos().x(), self.pos().y(), 
-                             mx, self.height())
-            self.parent().setGeometry(self.parent().pos().x(),
-                self.parent().pos().y(), mx, self.parent().height())
+            self.setGeometry(self.pos().x(), self.pos().y(), mx, self.height())
+            self.parent().setGeometry(self.parent().pos().x(), self.parent().pos().y(), mx, self.parent().height())
+
         QListView.showEvent(self, e)
 
     def keyPressEvent(self, e):
-        if (e.key() == Qt.Key_Tab or e.key() == Qt.Key_Backtab):
+        if e.key() == Qt.Key_Tab or e.key() == Qt.Key_Backtab:
             e.accept()
-            ev = QKeyEvent(QEvent.KeyPress, e.key(), e.modifiers(),
-                           e.text(), e.isAutoRepeat(), e.count())
-            QApplication.postEvent(self.parent().parent(),ev)
+            ev = QKeyEvent(QEvent.KeyPress, e.key(), e.modifiers(), e.text(), e.isAutoRepeat(), e.count())
+            QApplication.postEvent(self.parent().parent(), ev)
             return
+
         QListView.keyPressEvent(self, e)
 
     def event(self, e):

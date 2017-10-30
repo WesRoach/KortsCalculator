@@ -1,3 +1,5 @@
+# coding = utf-8
+
 from Constants import statList, resistList, skillTable, otherBonusList
 import Item
 import sys

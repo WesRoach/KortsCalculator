@@ -1,3 +1,5 @@
+# coding = utf-8
+
 # MyStringIO.py: Kort's Spellcrafting Calculator (main Window)
 #
 # See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
@@ -42,6 +44,6 @@ class UnicodeStringIO(io.StringIO):
     def __init__(self):
         io.StringIO.__init__(self)
 
-    def write(self, string, escape=False):
-        io.StringIO.write(self, str.encode('UTF-8'))
-        return 
+    def write(self, str, escape=False):
+        io.StringIO.write(self, str.encode('UTF-8'))  # POTENTIAL PROBLEM
+        return

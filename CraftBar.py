@@ -1,3 +1,5 @@
+# coding = utf-8
+
 # CraftBar.py: Kort's Spellcrafting Calculator
 #
 # See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
@@ -68,10 +70,10 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         self.CharList.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.CharList.setSelectionMode(QAbstractItemView.SingleSelection)
 
-        if (name):
+        if name:
             self.setObjectName(name)
 
-        if (modal):
+        if modal:
             self.setModal(modal)
 
         self.parent = parent

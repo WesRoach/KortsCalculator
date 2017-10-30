@@ -1,3 +1,5 @@
+<!--suppress ALL -->
+
 <ui version="4.0">
  <class>B_SC</class>
  <widget class="QMainWindow" name="B_SCWindow">

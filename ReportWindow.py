@@ -1,3 +1,5 @@
+# coding = utf-8
+
 # ReportWindow.py: Kort's Spellcrafting Calculator
 #
 # See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
@@ -19,9 +21,9 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
     def __init__(self, parent=None, name=None, modal=False, fl=Qt.Widget):
         QDialog.__init__(self, parent, fl)
         Ui_B_ReportWindow.setupUi(self, self)
-        if (name):
+        if name:
             self.setObjectName(name)
-        if (modal):
+        if modal:
             self.setModal(modal)
 
         self.PushButton2.clicked.connect(self.closeWindow)

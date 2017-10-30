@@ -1,3 +1,5 @@
+# coding = utf-8
+
 # MultiTabBar.py: Kort's Spellcrafting Calculator
 #
 # See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
@@ -42,7 +44,7 @@ class MultiTabBar(QWidget):
         self.__layoutDirty = True
 
         QWidget.__init__(self, parent)
-        if (name):
+        if name:
             self.setObjectName(name)
 
         self.setFocusPolicy(Qt.TabFocus)
@@ -176,7 +178,7 @@ class MultiTabBar(QWidget):
     def tabSizeHint(self, row, col):
         tab = self.__tabAt(row, col)
 
-        if (tab):
+        if tab:
             opt = self.__getStyleOption(row, col)
 
             if tab.icon.isNull():
@@ -507,7 +509,7 @@ class MultiTabBar(QWidget):
             for j in range(len(self.__tabList[i])):
                 if self.__tabAt(i, j).enabled and self.tabRect(i,
                         j).contains(p):
-                    return (i, j)
+                    return i, j
 
         return -1, -1
 

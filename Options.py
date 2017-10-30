@@ -1,3 +1,5 @@
+# coding = utf-8
+
 # Options.py: Kort's Spellcrafting Calculator
 #
 # See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
@@ -25,9 +27,9 @@ class Options(QDialog, Ui_B_Options):
         QDialog.__init__(self, parent, fl)
         Ui_B_Options.setupUi(self, self)
 
-        if (name):
+        if name:
             self.setObjectName(name)
-        if (modal):
+        if modal:
             self.setModal(modal)
 
         self.TierPriceTable.verticalHeader().hide()

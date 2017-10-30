@@ -1,3 +1,5 @@
+# coding = utf-8
+
 # CraftWindow.py: Kort's Spellcrafting Calculator
 #
 # See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
@@ -17,9 +19,9 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
     def __init__(self,parent = None,name = None,modal = False,fl = Qt.Widget):
         QDialog.__init__(self,parent,fl)
         Ui_B_CraftWindow.setupUi(self,self)
-        if (name):
+        if name:
             self.setObjectName(name)
-        if (modal):
+        if modal:
             self.setModal(modal)
         self.gems = []
         self.GemName = []
@@ -64,7 +66,7 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
             'Expected' : { 'Gems' : { }, 'Dusts' : {}, 'Liquids': {} } }
         totalcost = 0
         for slot in range(0, 4):
-            if (slot >= len(self.gems)): continue
+            if slot >= len(self.gems): continue
             totalcost += self.gems[slot].gemCost()
             for mattype, matl in list(self.gems[slot].gemMaterials(self.parent.realm).items()):
                 for mat, val in list(matl.items()):
@@ -83,7 +85,7 @@ class CraftWindow(QDialog, Ui_B_CraftWindow):
                                 (self.MatsExpected, materials['Expected'],),):
             matctl.clear()
             for mat in MaterialGems:
-                if (mat in matlist['Gems']):
+                if mat in matlist['Gems']:
                     matctl.append("%d %s Gem" % (matlist['Gems'][mat], mat))
             for mattype in ('Liquids', 'Dusts',):
                 matsorted = list(matlist[mattype].items())

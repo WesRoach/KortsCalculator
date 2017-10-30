@@ -10,6 +10,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from SearchingCombo import SearchingCombo
 
+
 class Ui_B_ItemLevel(object):
     def setupUi(self, B_ItemLevel):
         B_ItemLevel.setObjectName("B_ItemLevel")
@@ -148,6 +149,7 @@ class Ui_B_ItemLevel(object):
         self.AFDPSLabel.setText(_translate("B_ItemLevel", "AF/DPS:"))
         self.OK.setText(_translate("B_ItemLevel", "OK"))
         self.Cancel.setText(_translate("B_ItemLevel", "Cancel"))
+
 
 if __name__ == "__main__":
     import sys

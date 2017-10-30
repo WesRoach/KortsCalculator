@@ -1,3 +1,5 @@
+# coding = utf-8
+
 # ItemLevel.py: Kort's Spellcrafting Calculator
 #
 # See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
@@ -18,9 +20,9 @@ class ItemLevel(QDialog, Ui_B_ItemLevel):
         QDialog.__init__(self, parent, fl)
         Ui_B_ItemLevel.setupUi(self, self)
 
-        if (name):
+        if name:
             self.setObjectName(name)
-        if (modal):
+        if modal:
             self.setModal(modal)
 
         self.Armor.clicked.connect(self.TypeChanged)

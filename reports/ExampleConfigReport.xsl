@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
+<!--suppress ALL -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
- xmlns="http://www.w3.org/1999/xhtml" xmlns:math="http://exslt.org/math" 
+ xmlns="http://www.w3.org/1999/xhtml" xmlns:math="http://exslt.org/math"
  version="1.0">
 <xsl:output encoding="iso-8859-1" method="xml" 
  doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" 

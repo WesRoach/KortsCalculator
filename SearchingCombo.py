@@ -1,3 +1,5 @@
+# coding = utf-8
+
 # SearchingCombo.py
 #
 # See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
@@ -51,7 +53,7 @@ class SearchingCombo(QComboBox):
         if items is not None:
 
             for str in items:
-                opt.currentText = str  # Changed from QString(str)
+                opt.currentText = str
                 sz = QSize(fm.width(opt.currentText), fm.height())
                 mw = max(mw, style.sizeFromContents(QStyle.CT_ComboBox, opt, sz, self).width())
 
@@ -63,7 +65,7 @@ class SearchingCombo(QComboBox):
                 mw = max(mw, style.sizeFromContents(QStyle.CT_ComboBox, opt, sz, self).width())
 
         elif mw == 0:
-            opt.currentText = ' '  # Changed from QString(' ')
+            opt.currentText = ' '
             sz = QSize(fm.width(opt.currentText), fm.height())
             mw = max(mw, style.sizeFromContents(QStyle.CT_ComboBox, opt, sz, self).width())
 

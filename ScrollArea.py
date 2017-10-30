@@ -1,3 +1,5 @@
+# coding = utf-8
+
 # ScrollArea.py: Kort's Spellcrafting Calculator
 #
 # See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
@@ -11,14 +13,13 @@ from PyQt5.QtWidgets import QScrollArea
 
 
 class ScrollArea(QScrollArea):
-
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         QScrollArea.__init__(self, parent)
 
         # REMOVE THE BACKGROUND FROM 'QScrollArea'
         palette = QPalette(self.palette())
-        palette.setColor(QPalette.Window, QColor(0,0,0,0))
-        palette.setBrush(QPalette.Window, QBrush(QColor(0,0,0,0)))
+        palette.setColor(QPalette.Window, QColor(0, 0, 0, 0))
+        palette.setBrush(QPalette.Window, QBrush(QColor(0, 0, 0, 0)))
         self.setPalette(palette)
 
         self.sizehint = QSize(QScrollArea.sizeHint(self))
@@ -33,7 +34,7 @@ class ScrollArea(QScrollArea):
     def sizeHint(self):
         return QSize(self.sizehint)
 
-    def setSizeHint(self, width, height = None):
+    def setSizeHint(self, width, height=None):
         if isinstance(width, QSize) and height is None:
             self.sizehint = width
         else:
@@ -44,8 +45,10 @@ class ScrollArea(QScrollArea):
         self.bestFit()
 
     def resizeHeight(self):
-        if self.rowheight < 0: return
-        if self.widget() is None: return
+        if self.rowheight < 0:
+            return
+        if self.widget() is None:
+            return
 
         bestheight = self.widget().sizeHint().height()
         rows = ((bestheight - 1) / self.rowheight) + 1

@@ -1,4 +1,6 @@
 #!/usr/bin/pythonw
+# coding = utf-8
+
 # CraftBar.py: Kort's Spellcrafting Calculator
 #
 # See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING

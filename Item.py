@@ -1,3 +1,5 @@
+# coding = utf-8
+
 # Item.py: Kort's Spellcrafting Calculator
 #
 # See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
@@ -135,10 +137,10 @@ class ItemSlot:
             mval = (int(self.Amount) - 1) * 2.0
         elif self.Type == 'Skill':
             mval = (int(self.Amount) - 1) * 5.0
-        if (mval < 1): return 1.0
+        if mval < 1: return 1.0
         return mval
 
-    def gemUtility(self,skilltable={}):
+    def gemUtility(self, skilltable={}):
         if self.Amount == '0' or self.Amount == '':
             return 0.0
 
@@ -446,7 +448,7 @@ class Item:
         return itemimbue
 
     def listGemImbue(self):
-        if self.ActiveState != 'player': return (0.0, 0.0, 0.0, 0.0,)
+        if self.ActiveState != 'player': return 0.0, 0.0, 0.0, 0.0,
         mvals = [self.slot(0).gemImbue(), self.slot(1).gemImbue(),
                  self.slot(2).gemImbue(), self.slot(3).gemImbue(),]
         maximbue = max(mvals)
@@ -568,7 +570,7 @@ class Item:
             elem = document.createElement(key)
             elem.appendChild(document.createTextNode(str(val)))
             rootnode.appendChild(elem)
-        if (len(self.CLASSRESTRICTIONS) > 0):
+        if len(self.CLASSRESTRICTIONS) > 0:
             elem = document.createElement('CLASSRESTRICTIONS')
             rootnode.appendChild(elem)
             for val in self.CLASSRESTRICTIONS:

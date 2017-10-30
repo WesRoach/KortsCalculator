@@ -1,3 +1,5 @@
+# coding = utf-8
+
 # SCOptions.py: Kort's Spellcrafting Calculator
 #
 # See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS  UPDATING
@@ -9,6 +11,7 @@ from MyStringIO import UnicodeStringIO
 from Singleton import Singleton
 from xml.dom.minidom import *
 from xml.parsers import expat
+from xml.parsers.expat import ExpatError
 import os.path
 import stat
 import sys
@@ -36,7 +39,7 @@ class SCOptions(Singleton):
         if not os.path.isdir(path):
             try:
                 os.makedirs(path)
-            except error:
+            except IOError:  # Changed from except error:
                 print('Error creating subdirectories')
                 path = os.path.dirname(os.path.abspath(sys.argv[0]))
 
@@ -112,8 +115,7 @@ class SCOptions(Singleton):
                     pass
                 return val
         else:
-            if node.getAttribute('type') == 'dict' or \
-                    (not node.hasAttribute('type') and not sameElements):
+            if node.getAttribute('type') == 'dict' or (not node.hasAttribute('type') and not sameElements):
                 vals = {}
                 for child in node.childNodes:
                     if child.nodeType == Node.TEXT_NODE:
@@ -126,11 +128,11 @@ class SCOptions(Singleton):
                     vals[nodeName] = self.parseOption(child)
 
                 return vals
-            elif node.getAttribute('type') == 'list' or \
-                    (not node.hasAttribute('type') and sameElements):
+            elif node.getAttribute('type') == 'list' or (not node.hasAttribute('type') and sameElements):
                 vals = []
                 for child in node.childNodes:
-                    if child.nodeType == Node.TEXT_NODE: continue
+                    if child.nodeType == Node.TEXT_NODE:
+                        continue
                     vals.append(self.parseOption(child))
 
                 return vals
@@ -164,8 +166,7 @@ class SCOptions(Singleton):
                 self.loadFromXML(template[0])
                 f.close()
             except expat.ExpatError as ex:
-                print(('Error parsing XML document, code: %d line: %d offset %d', (
-                    ex.code, ex.lineno, ex.offset)))
+                print(('Error parsing XML document, code: %d line: %d offset %d', (ex.code, ex.lineno, ex.offset)))
                 pass
 
     def save(self):

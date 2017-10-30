@@ -1,3 +1,5 @@
+# coding = utf-8
+
 # XMLHelper.py: Kort's Spellcrafting Calculator
 #
 # See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
@@ -21,7 +23,7 @@ def writexml(self, writer, indent="", addindent="", newl=""):
     elif self.nodeType == Node.TEXT_NODE:
         _write_data(writer, self.data)
         return
-    writer.write(indent+"<" + self.tagName)
+    writer.write(indent + "<" + self.tagName)
 
     attrs = self._get_attributes()
     a_names = list(attrs.keys())
@@ -40,13 +42,13 @@ def writexml(self, writer, indent="", addindent="", newl=""):
                 textonly = 0
             else:
                 textonly = 1
-            writexml(node, writer,indent+addindent,addindent,newl)
+            writexml(node, writer, indent + addindent, addindent, newl)
         if textonly:
-            writer.write("</%s>" % (self.tagName))
+            writer.write("</%s>" % self.tagName)
         else:
-            writer.write("%s%s</%s>" % (newl,indent,self.tagName))
+            writer.write("%s%s</%s>" % (newl, indent, self.tagName))
     else:
-        writer.write("/>%s"%(newl))
+        writer.write("/>%s" % newl)
 
 
 def getText(nodelist):
@@ -54,7 +56,7 @@ def getText(nodelist):
     for node in nodelist:
         if node.nodeType == node.TEXT_NODE:
             try:
-                rc = rc + str(node.data, 'UTF-8')
+                rc = rc + str(node.data)  # Changed from rc = rc + str(node.data, 'UTF-8')
             except:
                 rc = rc + node.data
     return rc
@@ -63,4 +65,4 @@ def getText(nodelist):
 def _write_data(writer, data):
     data = data.replace("&", "&amp;").replace("<", "&lt;")
     data = data.replace("\"", "&quot;").replace(">", "&gt;")
-    writer.write(data, True)    
+    writer.write(data, True)

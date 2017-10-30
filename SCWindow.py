@@ -1,3 +1,5 @@
+# coding = utf-8
+
 # ScWindow.py: Kort's Spellcrafting Calculator (main Window)
 #
 # See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
@@ -7,7 +9,8 @@
 
 from PyQt5.Qt import qApp
 from PyQt5.QtCore import QEvent, QModelIndex, QVariant
-from PyQt5.QtGui import QBrush, QColor, QIcon, QFontMetrics, QIntValidator, QKeySequence, QPalette, QPixmap, QStandardItemModel
+from PyQt5.QtGui import QBrush, QColor, QIcon, QFontMetrics, QIntValidator, QKeySequence, QPalette, QPixmap, \
+    QStandardItemModel
 from PyQt5.QtWidgets import QAction, QFileDialog, QListWidgetItem, QMainWindow, QMenu, QSizeGrip, QToolBar
 from B_SCWindow import *
 from Item import *
@@ -55,7 +58,6 @@ def plainXMLTag(strval):
 
 
 class AboutScreen(QDialog):
-
     def __init__(self, parent=None, name="About", modal=True, fl=Qt.SplashScreen):
         QDialog.__init__(self, parent, fl)
         self.setModal(modal)
@@ -76,17 +78,15 @@ class AboutScreen(QDialog):
             self.close()
 
 
-UserEventItemNameUpdatedID = QEvent.Type(QEvent.User + 1)
+UserEventItemNameUpdatedID = QEvent.Type(QEvent.User + 1)  # POTENTIAL PROBLEM
 
 
 class UserEventItemNameUpdated(QEvent):
-
     def __init__(self):
         QEvent.__init__(self, UserEventItemNameUpdatedID)
 
 
 class SCWindow(QMainWindow, Ui_B_SC):
-
     def __init__(self):
         SCOptions()
         SCOptions.instance().load()
@@ -130,7 +130,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
 
         self.switchOnType['drop'] = [
             self.QualEdit,
-            self.LabelRequirement,]
+            self.LabelRequirement, ]
 
         self.switchOnType['player'] = [
             self.QualDrop,
@@ -140,7 +140,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
             self.ItemImbueLabel, self.ItemImbue, self.ItemImbueTotal,
             self.ItemOverchargeLabel, self.ItemOvercharge,
             self.ItemCostLabel, self.ItemCost,
-            self.ItemPriceLabel, self.ItemPrice,]
+            self.ItemPriceLabel, self.ItemPrice, ]
 
         cbwidth = self.CharClass.getMinimumWidth(['Necromancer'])
         itmcbwidth = self.ItemType.getMinimumWidth(['Composite Bow'])
@@ -235,7 +235,8 @@ class SCWindow(QMainWindow, Ui_B_SC):
         self.GroupSkillsList.layout().setColumnStretch(0, 1)
         self.ScWinFrame.layout().setColumnStretch(3, 1)
 
-        self.GroupItemFrame.layout().itemAt(0).changeSize(1, self.PieceTab.baseOverlap(), QSizePolicy.Minimum, QSizePolicy.Fixed)
+        self.GroupItemFrame.layout().itemAt(0).changeSize(1, self.PieceTab.baseOverlap(), QSizePolicy.Minimum,
+                                                          QSizePolicy.Fixed)
 
         for tabname in PieceTabList:
             self.PieceTab.addTab(0, qApp.translate("B_SCWindow", tabname, None))
@@ -311,7 +312,8 @@ class SCWindow(QMainWindow, Ui_B_SC):
             item.setSizeHint(QSize(chkboxwidth, cbheight))
             self.ClassRestrictionTable.addItem(item)
 
-        self.ClassRestrictionTable.setFixedWidth(chkboxwidth + self.ClassRestrictionTable.verticalScrollBar().sizeHint().width())
+        self.ClassRestrictionTable.setFixedWidth(
+            chkboxwidth + self.ClassRestrictionTable.verticalScrollBar().sizeHint().width())
         self.ClassRestrictionTable.updateGeometry()
 
         self.NoteText.setAcceptRichText(False)
@@ -491,9 +493,12 @@ class SCWindow(QMainWindow, Ui_B_SC):
         thisicon = QIcon()
 
         for size in (16, 24, 32,):
-            thisicon.addFile(':/images/normal/' + namebase + str(size) + '.png', QSize(size, size), QIcon.Normal, QIcon.Off)
-            thisicon.addFile(':/images/disabled/' + namebase + str(size) + '.png', QSize(size, size), QIcon.Disabled, QIcon.Off)
-            thisicon.addFile(':/images/hot/' + namebase + str(size) + '.png', QSize(size, size), QIcon.Active, QIcon.Off)
+            thisicon.addFile(':/images/normal/' + namebase + str(size) + '.png', QSize(size, size), QIcon.Normal,
+                             QIcon.Off)
+            thisicon.addFile(':/images/disabled/' + namebase + str(size) + '.png', QSize(size, size), QIcon.Disabled,
+                             QIcon.Off)
+            thisicon.addFile(':/images/hot/' + namebase + str(size) + '.png', QSize(size, size), QIcon.Active,
+                             QIcon.Off)
 
         return thisicon
 
@@ -589,7 +594,8 @@ class SCWindow(QMainWindow, Ui_B_SC):
         self.editmenu.addAction('&Options...', self.openOptions, QKeySequence(Qt.ALT + Qt.Key_O))
         self.menuBar().addMenu(self.editmenu)
         self.viewmenu = QMenu('&View', self)
-        self.craftingmenuid = self.viewmenu.addAction('Craft &Gems', self.openCraftWindow, QKeySequence(Qt.ALT + Qt.Key_G))
+        self.craftingmenuid = self.viewmenu.addAction('Craft &Gems', self.openCraftWindow,
+                                                      QKeySequence(Qt.ALT + Qt.Key_G))
         self.craftingtoolid = self.toolbar.addAction(self.getIcon('CraftGems'), 'Craft Gems', self.openCraftWindow)
 
         self.viewmenu.addSeparator()
@@ -604,7 +610,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
 
         self.viewtoolbarmenu = QMenu('&Toolbar', self)
 
-        for (title, res) in (("Large", 32,), ("Normal", 24,),("Tiny", 16,), ("Hide", 0,),):
+        for (title, res) in (("Large", 32,), ("Normal", 24,), ("Tiny", 16,), ("Hide", 0,),):
             act = QAction(title, self)
             act.setData(QVariant(res))
             act.setCheckable(True)
@@ -640,7 +646,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
 
             for act in self.viewtoolbarmenu.actions():
 
-                if act.data().toInt()[0] == iconsz:
+                if act.data() == iconsz:  # Changed from act.data().toInt[0] == iconsz:
                     act.setChecked(True)
                 else:
                     act.setChecked(False)
@@ -796,7 +802,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
         if maximized and sys.platform == 'win32':
             self.setWindowState(Qt.WindowMaximized)
         sizepolicy = QSizePolicy(self.GroupItemFrame.sizePolicy())
-        if (SCOptions.instance().getOption('ShowScrollingSlots', True)):
+        if SCOptions.instance().getOption('ShowScrollingSlots', True):
             sizepolicy.setVerticalPolicy(QSizePolicy.Preferred)
         else:
             sizepolicy.setVerticalPolicy(QSizePolicy.Minimum)
@@ -821,12 +827,9 @@ class SCWindow(QMainWindow, Ui_B_SC):
 
         SCOptions.instance().setOption('Maximized', maximized)
 
-        SCOptions.instance().setOption('WindowState',
-                                       binascii.b2a_base64(self.saveState(0))[:-1])
-        SCOptions.instance().setOption('ToolbarSize',
-                                       self.iconSize().width())
-        SCOptions.instance().setOption('CurrentItemFrame',
-                                       self.stackedlayout.currentWidget().objectName())
+        SCOptions.instance().setOption('WindowState', binascii.b2a_base64(self.saveState(0))[:-1])
+        SCOptions.instance().setOption('ToolbarSize', self.iconSize().width())
+        SCOptions.instance().setOption('CurrentItemFrame', self.stackedlayout.currentWidget().objectName())
 
     def initialize(self, moretodo):
         self.nocalc = True
@@ -885,8 +888,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
         rootnode = document.createElement('SCTemplate')
         document.appendChild(rootnode)
         childnode = document.createElement('Name')
-        childnode.appendChild(document.createTextNode(
-            str(self.CharName.text())))
+        childnode.appendChild(document.createTextNode(str(self.CharName.text())))
         rootnode.appendChild(childnode)
         childnode = document.createElement('Realm')
         childnode.appendChild(document.createTextNode(self.realm))
@@ -895,29 +897,23 @@ class SCWindow(QMainWindow, Ui_B_SC):
         childnode.appendChild(document.createTextNode(self.charclass))
         rootnode.appendChild(childnode)
         childnode = document.createElement('Race')
-        childnode.appendChild(document.createTextNode(
-            str(self.CharRace.currentText())))
+        childnode.appendChild(document.createTextNode(str(self.CharRace.currentText())))
         rootnode.appendChild(childnode)
         childnode = document.createElement('Level')
-        childnode.appendChild(document.createTextNode(
-            str(self.CharLevel.text())))
+        childnode.appendChild(document.createTextNode(str(self.CharLevel.text())))
         rootnode.appendChild(childnode)
         childnode = document.createElement('RealmRank')
-        childnode.appendChild(document.createTextNode(
-            str(self.RealmRank.text())))
+        childnode.appendChild(document.createTextNode(str(self.RealmRank.text())))
         rootnode.appendChild(childnode)
         childnode = document.createElement('ChampionLevel')
-        childnode.appendChild(document.createTextNode(
-            str(self.ChampionLevel.text())))
+        childnode.appendChild(document.createTextNode(str(self.ChampionLevel.text())))
         rootnode.appendChild(childnode)
         rootnode.appendChild(childnode)
         childnode = document.createElement('CraftTime')
-        childnode.appendChild(document.createTextNode(
-            str(self.CraftTime.text())))
+        childnode.appendChild(document.createTextNode(str(self.CraftTime.text())))
         rootnode.appendChild(childnode)
         childnode = document.createElement('Notes')
-        childnode.appendChild(document.createTextNode(
-            str(self.NoteText.toPlainText())))
+        childnode.appendChild(document.createTextNode(str(self.NoteText.toPlainText())))
         rootnode.appendChild(childnode)
 
         if rich:
@@ -951,7 +947,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
                     else:
                         subs = ('Bonus', 'TotalBonus', 'BaseCap',)
                         if key == 'Resists' and \
-                                'RacialBonus' in totalsdict[key][type]:
+                                        'RacialBonus' in totalsdict[key][type]:
                             subs = subs + ('RacialBonus',)
                     for subtype in subs:
                         tagname = str(plainXMLTag(subtype))
@@ -1052,7 +1048,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
     def changePieceTab(self, a0):
-        mask = a0.data().toInt()[0]
+        mask = a0.data().toInt()[0]  # POTENTIAL PROBLEM
         row = (mask >> 8) & 0xff
         col = mask & 0xff
         self.PieceTab.setCurrentIndex(row, col)
@@ -1197,7 +1193,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
         else:
             item.SOURCE = str(self.ItemSource.currentText())
 
-        self.itemRealmChanged(item = item)
+        self.itemRealmChanged(item=item)
 
         self.ItemRequirement.setText(item.Requirement)
         self.DBSource.setText(item.DBSOURCE)
@@ -1341,7 +1337,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
                 if gemtype == 'Skill':
                     effects = [effect, ]
                     if effect[0:4] == 'All ' and \
-                            effect in AllBonusList[self.realm][self.charclass]:
+                                    effect in AllBonusList[self.realm][self.charclass]:
                         effects.extend(AllBonusList[self.realm] \
                                            [self.charclass][effect])
                     for effect in effects:
@@ -1979,7 +1975,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
             effcombo.insertItems(0, list(effectlist))
         i = 0
         if typetext == 'Skill':
-            while (i < len(effectlist) and effectlist[i][:5] == 'All M'):
+            while i < len(effectlist) and effectlist[i][:5] == 'All M':
                 i = i + 1
         effcombo.setCurrentIndex(i)
         # Here we go... cascade
@@ -2052,7 +2048,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
 
     def saveItem(self):
         itemname = str.replace(str(self.ItemNameCombo.currentText()),
-                                  ' ', '_')
+                               ' ', '_')
         if itemname == '':
             QMessageBox.critical(self, 'Error!',
                                  'Cannot save item - You must specify a name!', 'OK')
@@ -2117,12 +2113,8 @@ class SCWindow(QMainWindow, Ui_B_SC):
                 item = Item('drop', self.currentTabLabel, self.realm,
                             self.itemIndex)
                 if item.load(filename, str(self.itemnumbering)) == -1: return
-                if str.lower(item.Realm) != str.lower(self.realm) \
-                        and str.lower(item.Realm) != 'all' \
-                        and not self.coop:
-                    QMessageBox.critical(None, 'Error!',
-                                         'You are trying to load an ' \
-                                         + 'item for another realm!', 'OK')
+                if str.lower(item.Realm) != str.lower(self.realm) and str.lower(item.Realm) != 'all' and not self.coop:
+                    QMessageBox.critical(None, 'Error!', 'You are trying to load an item for another realm!', 'OK')
                     return
                 self.itemIndex += 1
                 self.itemnumbering += 1
@@ -2167,8 +2159,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
                 return
             try:
                 f = open(self.filename, 'w')
-                f.write(XMLHelper.writexml(xmlbody, UnicodeStringIO(),
-                                           '', '\t', '\n'))
+                f.write(XMLHelper.writexml(xmlbody, UnicodeStringIO(), '', '\t', '\n'))
                 f.close()
                 self.modified = False
             except IOError:
@@ -2244,18 +2235,18 @@ class SCWindow(QMainWindow, Ui_B_SC):
 
     def openFile(self, *args):
         if self.modified:
-            ret = QMessageBox.warning(self, 'Save Changes?',
-                                      "This template has been changed.\n"
-                                      "Do you want to save these changes?",
-                                      QMessageBox.Yes, QMessageBox.No,
-                                      QMessageBox.Cancel)
-            if ret == QMessageBox.Cancel: return
+            ret = QMessageBox.Warning(self, 'Save Changes?',
+                                      'This template has been changed.\n Do you want to save these changes?',
+                                      QMessageBox.Yes, QMessageBox.No, QMessageBox.Cancel)
+
+            if ret == QMessageBox.Cancel:
+                return
             if ret == QMessageBox.Yes:
                 self.saveFile()
-                if self.modified: return
+                if self.modified:
+                    return
         if len(args) == 0:
-            filename = QFileDialog.getOpenFileName(self, "Open Template",
-                                                   self.TemplatePath,
+            filename = QFileDialog.getOpenFileName(self, "Open Template", self.TemplatePath,
                                                    "Templates (*.xml);;All Files (*.*)")
         else:
             filename = args[0]
@@ -2263,23 +2254,22 @@ class SCWindow(QMainWindow, Ui_B_SC):
         if filename is not None and filename != '':
             f = None
             try:
-                f = open(filename, 'r')
+                f = open(filename)
                 docstr = f.read()
             except:
-                QMessageBox.critical(None, 'Error!',
-                                     'Error reading template file ' + str(filename), 'OK')
-                if f is not None: f.close()
+                QMessageBox.critical(None, 'Error!', 'Error reading template file ' + str(filename), 'OK')
+                if f is not None:
+                    f.close()
                 return
             try:
-                f = open(filename, 'r')
+                f = open(filename)
                 docstr = f.read()
                 if docstr[0:5] == '<?xml':
                     xmldoc = parseString(docstr)
                     template = xmldoc.getElementsByTagName('SCTemplate')
                     self.loadFromXML(template[0])
                 else:
-                    QMessageBox.critical(None, 'Error!',
-                                         'Unrecognized Template Type', 'OK')
+                    QMessageBox.critical(None, 'Error!', 'Unrecognized Template Type', 'OK')
                     f.close()
                     return
             except Exception as ex:
@@ -2373,8 +2363,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
                         item = item.__next__
                     item.next = newItem
             elif child.tagName == 'Coop':
-                self.coop = eval(XMLHelper.getText(child.childNodes),
-                                 globals(), globals())
+                self.coop = eval(XMLHelper.getText(child.childNodes), globals(), globals())
             elif child.tagName == 'Outfit':
                 if child.nodeType == Node.TEXT_NODE: continue
                 self.outfitnumbering += 1
@@ -2432,7 +2421,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
         UIXML.uixml(self, self.UiReportFile)
 
     def loadRecentFile(self, action):
-        index = action.data().toInt()[0]
+        index = action.data().toInt()[0]  # POTENTIAL PROBLEM
         self.openFile(self.recentFiles[index], True)
 
     def openOptions(self):
@@ -2494,7 +2483,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
         locs = []
         finddesc = findtype
         if findtype is not None:
-            if (find == 'AF' or find == 'Fatigue' or find == '% Power Pool'):
+            if find == 'AF' or find == 'Fatigue' or find == '% Power Pool':
                 findtype = None
             else:
                 findtype = findtype[-5:]
@@ -2519,7 +2508,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
                             continue
                     elif (slottype == 'Skill' or slottype == 'Focus') and \
                                     effect[0:4] == 'All ' and \
-                            effect in AllBonusList[self.realm][self.charclass]:
+                                    effect in AllBonusList[self.realm][self.charclass]:
                         if not find in AllBonusList[self.realm] \
                                 [self.charclass][effect]:
                             continue
@@ -2806,9 +2795,9 @@ class SCWindow(QMainWindow, Ui_B_SC):
             self.PieceTab.setCurrentIndex(idx)
 
     def viewToolbar(self, action):
-        view = action.data().toInt()[0]
+        view = action.data().toInt()[0]  # POTENTIAL PROBLEM
         for act in self.viewtoolbarmenu.actions():
-            if act.data().toInt()[0] == view:
+            if act.data().toInt()[0] == view:  # POTENTIAL PROBLEM
                 if not act.isChecked():
                     act.setChecked(True)
                     return

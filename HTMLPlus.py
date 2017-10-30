@@ -1,3 +1,5 @@
+# coding = utf-8
+
 #
 # Copyright 2006 by Ehrayn <ehrayn@sourceforge.net>
 # Granted 2006 by Ehrayn to the public domain
@@ -29,7 +31,7 @@ class DimWriter(formatter.DumbWriter):
         if self.margin > 0:
             col = self.col
             for line in data.splitlines(True):
-                if (col < self.margin):
+                if col < self.margin:
                     self.file.write(' '*(self.margin - col))
                     col = self.margin
                 self.file.write(line)
@@ -65,7 +67,7 @@ class DimWriter(formatter.DumbWriter):
                     indent = max(self.margin - len(data) - 1, 0)
                 else:
                     indent = self.margin - col
-                write(' '*(indent))
+                write(' ' * indent)
                 col += indent
                 label = 0
                 atbreak = 0
@@ -131,7 +133,6 @@ class HTMLPlusParser(HTMLParser):
         # the current dt element somewhere in tablestack
         self.tdelt = []
 
-
     # Manage a replay buffer, with self.tdelt being our current hdr/data block
 
     def handle_data(self, data):
@@ -148,7 +149,6 @@ class HTMLPlusParser(HTMLParser):
         if self.tdelt:
             self.tdelt[-1].append((method,))
         HTMLParser.handle_endtag(self, tag, method)
-
 
     def do_p(self, attr):
         self.formatter.end_paragraph(1)
@@ -197,11 +197,11 @@ class HTMLPlusParser(HTMLParser):
     def end_tr(self):
         self.formatter.end_paragraph(0)
 
-    def start_tr(self, attr):
-        self.formatter.end_paragraph(0)
+    # def start_tr(self, attr):
+    #    self.formatter.end_paragraph(0)
 
-    def end_tr(self):
-        self.formatter.end_paragraph(0)
+    # def end_tr(self):
+    #    self.formatter.end_paragraph(0)
 
     def do_th(self, attr):
         self.formatter.add_column_break(attr)
@@ -214,7 +214,6 @@ class HTMLPlusParser(HTMLParser):
 
     def end_td(self):
         self.atbreak = 1
-
 
     def unknown_starttag(self, tag, attrs):
         if self.verbose:

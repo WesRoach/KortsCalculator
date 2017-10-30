@@ -1,3 +1,5 @@
+# coding = utf-8
+
 #
 # Copyright 2005 by Ehrayn <ehrayn@sourceforge.net>
 # Granted 2006 by Ehrayn to the public domain
@@ -10,7 +12,8 @@ __all__ = ['t2']
 class t2(tuple):
 
     def __repr__(self):
-        if len(self) == 0: return "t2()"
+        if len(self) == 0:
+            return "t2()"
         return "t2(" + tuple.__repr__(self) + ")"
 
     def count(self, value):
@@ -21,7 +24,8 @@ class t2(tuple):
         return cnt
 
     def index(self, value, start=0, stop=None):
-        if stop is None: stop = len(self)
+        if stop is None:
+            stop = len(self)
         for n in range(start, stop):
             if (self[n] > value) - (self[n] < value):
                 return n

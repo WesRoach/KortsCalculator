@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
+<!--suppress XmlHighlighting, XmlUnusedNamespaceDeclaration -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
  xmlns="http://www.w3.org/1999/xhtml" xmlns:math="http://exslt.org/math" 
  version="1.0">
