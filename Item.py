@@ -512,6 +512,7 @@ class Item:
 
     def utility(self, skilltable={}):
         utility = 0.0
+
         for slot in self.slots():
             utility += slot.gemUtility(skilltable)
         return utility
@@ -721,4 +722,4 @@ class Item:
                 item.ItemName = 'Crafted Item' + namehint
             elif len(item.ItemName) == 0:
                 item.ItemName = 'Drop Item' + namehint
-            item = item.__next__
+            item = item.next  # Changed from item = item.__next__

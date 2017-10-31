@@ -40,10 +40,10 @@ def unicodeHtmlEscape(string):
     return pattern.sub(escape_entity, string)
 
 
-class UnicodeStringIO(io.StringIO):
+class UnicodeStringIO(io.StringIO):  # THIS IS PROBABLY NOT NECESSARY SINCE UNICODE IS STR DEFAULT
     def __init__(self):
         io.StringIO.__init__(self)
 
-    def write(self, str, escape=False):
-        io.StringIO.write(self, str.encode('UTF-8'))  # POTENTIAL PROBLEM
+    def write(self, strval, escape=False):  # Changed from def write(self, str, escape=False):
+        io.StringIO.write(self, strval)  # Changed from io.StringIO.write(self, str.encode('UTF-8'))
         return

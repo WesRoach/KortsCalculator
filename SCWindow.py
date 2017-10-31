@@ -968,7 +968,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
                                        self.realm, rich, True)
                 if childnode is not None:
                     rootnode.appendChild(childnode.firstChild)
-                item = item.__next__
+                item = item.next  # Changed from item = item.__next__
 
         for idx in range(0, len(self.outfitlist)):
             outfit = self.outfitlist[idx]
@@ -2204,8 +2204,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
             self.setWindowTitle(filetitle + " - Kort's Spellcrafting Calculator")
 
     def exportAsFile(self):
-        filename = os.path.join(self.ReportPath, str(self.CharName.text()) \
-                                + "_report.xml")
+        filename = os.path.join(self.ReportPath, str(self.CharName.text()) + "_report.xml")
         filename = str(filename)
         filename = QFileDialog.getSaveFileName(self, "Save SCTemplate XML",
                                                filename, "SCTemplates (*_report.xml);;All Files (*.*)")
@@ -2235,26 +2234,34 @@ class SCWindow(QMainWindow, Ui_B_SC):
 
     def openFile(self, *args):
         if self.modified:
-            ret = QMessageBox.Warning(self, 'Save Changes?',
-                                      'This template has been changed.\n Do you want to save these changes?',
-                                      QMessageBox.Yes, QMessageBox.No, QMessageBox.Cancel)
+            ret = QMessageBox.warning(
+                self, 'Save Changes?',
+                'This template has been changed.\n Do you want to save these changes?',
+                QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel)
 
             if ret == QMessageBox.Cancel:
                 return
+
             if ret == QMessageBox.Yes:
                 self.saveFile()
+
                 if self.modified:
                     return
+
         if len(args) == 0:
-            filename = QFileDialog.getOpenFileName(self, "Open Template", self.TemplatePath,
-                                                   "Templates (*.xml);;All Files (*.*)")
+            filename, filters = QFileDialog.getOpenFileName(
+                self, "Open Template", self.TemplatePath,
+                "Templates (*.xml);;All Files (*.*)")
+
         else:
             filename = args[0]
+
         filename = str(filename)
+
         if filename is not None and filename != '':
             f = None
             try:
-                f = open(filename)
+                f = open(filename, 'r')
                 docstr = f.read()
             except:
                 QMessageBox.critical(None, 'Error!', 'Error reading template file ' + str(filename), 'OK')
@@ -2339,7 +2346,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
                     self.itemIndex += 1
                 else:
                     self.itemIndex = max(newItem.TemplateIndex + 1, self.itemIndex)
-                if newItem.__next__:
+                if newItem.next:  # Changed from if newItem.__next__:
                     if newItem.next.TemplateIndex == -1:
                         newItem.next.TemplateIndex = self.itemIndex
                         self.itemIndex += 1
@@ -2359,8 +2366,8 @@ class SCWindow(QMainWindow, Ui_B_SC):
                     self.itemattrlist[newItem.Location] = newItem
                 else:
                     item = self.itemattrlist[newItem.Location]
-                    while item.__next__ is not None:
-                        item = item.__next__
+                    while item.next is not None:  # Changed from while item.__next__ is not None:
+                        item = item.next  # Changed from item = item.__next__
                     item.next = newItem
             elif child.tagName == 'Coop':
                 self.coop = eval(XMLHelper.getText(child.childNodes), globals(), globals())
@@ -2620,7 +2627,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
         piece = str(action.text())
         part = self.itemattrlist[piece]
         if cur == part: return
-        if cur.__next__ is None:
+        if cur.next is None:  # Changed from if cur.__next__ is None:
             item = Item(realm=self.realm, loc=self.currentTabLabel,
                         state=cur.ActiveState)
             if cur.ActiveState == 'drop':
@@ -2630,7 +2637,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
             self.itemnumbering += 1
             self.itemattrlist[self.currentTabLabel] = item
         else:
-            self.itemattrlist[self.currentTabLabel] = cur.__next__
+            self.itemattrlist[self.currentTabLabel] = cur.next  # Chagned from self.itemattrlist[self.currentTabLabel] = cur.__next__
         if cur.Equipped == '1':
             self.itemattrlist[self.currentTabLabel].Equipped = '1'
         if part.Equipped == '1':
@@ -2660,7 +2667,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
         self.PieceTab.setCurrentIndex(row, col)
 
     def chooseItemType(self, action):
-        newtype = str(action.data().toString())
+        newtype = str(action.data())  # Changed from newtype = str(action.data().toString())
         item = self.itemattrlist[self.currentTabLabel]
         if newtype == 'Normal Item' or newtype == 'Enhanced Bow':
             if newtype == 'Normal Item':
@@ -2738,7 +2745,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
         self.restoreItem(item)
 
     def newItemType(self, action):
-        newtype = str(action.data().toString())
+        newtype = str(action.data())  # Changed from newtype = str(action.data().toString())
         if newtype == 'Drop Item':
             item = Item('drop', self.currentTabLabel, self.realm, self.itemIndex)
             item.ItemName = "Drop Item" + str(self.itemnumbering)
@@ -2795,9 +2802,9 @@ class SCWindow(QMainWindow, Ui_B_SC):
             self.PieceTab.setCurrentIndex(idx)
 
     def viewToolbar(self, action):
-        view = action.data().toInt()[0]  # POTENTIAL PROBLEM
+        view = action.data()  # Changed from view = action.data().toInt()[0]
         for act in self.viewtoolbarmenu.actions():
-            if act.data().toInt()[0] == view:  # POTENTIAL PROBLEM
+            if act.data() == view:  # Changed from if act.data().toInt()[0] == view:
                 if not act.isChecked():
                     act.setChecked(True)
                     return

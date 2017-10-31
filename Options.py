@@ -43,7 +43,7 @@ class Options(QDialog, Ui_B_Options):
             item = QTableWidgetItem('0')
             self.TierPriceTable.setItem(i, 1, item)
 
-        self.TierPriceTable.horizontalHeader().setResizeMode(QHeaderView.Stretch)
+        self.TierPriceTable.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.TierPriceTable.setEditTriggers(QAbstractItemView.CurrentChanged)
         self.TierPriceTable.resizeRowsToContents()
 

@@ -66,7 +66,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         self.CharList.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.CharList.setShowGrid(False)
         self.CharList.verticalHeader().hide()
-        self.CharList.horizontalHeader().setResizeMode(QHeaderView.Stretch)
+        self.CharList.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.CharList.setSelectionBehavior(QAbstractItemView.SelectRows)
         self.CharList.setSelectionMode(QAbstractItemView.SingleSelection)
 
