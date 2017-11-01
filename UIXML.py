@@ -32,7 +32,7 @@ def uixml(scwin, uixslt):
         return
         
     path = os.path.join(scwin.ReportPath, 'custom1_window.xml')
-    filename = QFileDialog.getSaveFileName(scwin, "Save UI Window as", path, "UI Window XML (*_window.xml);;All Files (*.*)")
+    filename, filters = QFileDialog.getSaveFileName(scwin, "Save UI Window as", path, "UI Window XML (*_window.xml);;All Files (*.*)")
 
     if str(filename) == '':
         return
