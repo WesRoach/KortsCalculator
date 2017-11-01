@@ -9,8 +9,7 @@
 
 from PyQt5.Qt import qApp
 from PyQt5.QtCore import QEvent, QModelIndex, QVariant
-from PyQt5.QtGui import QBrush, QColor, QIcon, QFontMetrics, QIntValidator, QKeySequence, QPalette, QPixmap, \
-    QStandardItemModel
+from PyQt5.QtGui import QBrush, QColor, QIcon, QFontMetrics, QIntValidator, QKeySequence, QPalette, QPixmap, QStandardItemModel
 from PyQt5.QtWidgets import QAction, QFileDialog, QListWidgetItem, QMainWindow, QMenu, QSizeGrip, QToolBar
 from B_SCWindow import *
 from Item import *
@@ -51,6 +50,7 @@ def plainXMLTag(strval):
 
         if not (strval[i].isalpha() or (i > 0 and strval[i].isdigit())):
             strval = strval[:i] + strval[i + 1:]
+
         else:
             i += 1
 
@@ -2022,8 +2022,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
     def chooseItemPath(self):
-        itemdir = QFileDialog.getExistingDirectory(self,
-                                                   'Select Item Database Path', self.ItemPath)
+        itemdir = QFileDialog.getExistingDirectory(self, 'Select Item Database Path', self.ItemPath)
         if itemdir:
             self.ItemPath = os.path.abspath(str(itemdir))
             ret = QMessageBox.question(self, 'Create Database Directories?',
@@ -2050,8 +2049,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
         itemname = str.replace(str(self.ItemNameCombo.currentText()),
                                ' ', '_')
         if itemname == '':
-            QMessageBox.critical(self, 'Error!',
-                                 'Cannot save item - You must specify a name!', 'OK')
+            QMessageBox.critical(self, 'Error!', 'Cannot save item - You must specify a name!', 'OK')
             return
         item = self.itemattrlist[self.currentTabLabel]
 
@@ -2133,69 +2131,76 @@ class SCWindow(QMainWindow, Ui_B_SC):
 
     def newFile(self):
         if self.modified:
-            ret = QMessageBox.warning(self, 'Save Changes?',
-                                      "This template has been changed.\n"
-                                      "Do you want to save these changes?",
-                                      QMessageBox.Yes, QMessageBox.No,
-                                      QMessageBox.Cancel)
-            if ret == QMessageBox.Cancel: return
+            ret = QMessageBox.warning(
+                self, 'Save Changes?',
+                "This template has been changed.\n" "Do you want to save these changes?",
+                QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel)
+
+            if ret == QMessageBox.Cancel:
+                return
             if ret == QMessageBox.Yes:
                 self.saveFile()
-                if self.modified: return
+
+                if self.modified:
+                    return
+
         self.initialize(False)
 
     def saveFile(self):
         if self.filename is None:
             self.saveAsFile()
+
         else:
+
             try:
                 xmlbody = self.asXML()
+
             except Exception as ex:
                 print(('Error converting template to XML: ', ex))
-                QMessageBox.critical(None, 'Error!',
-                                     "Error creating xml to save this template\r\n\r\n" \
-                                     + "Please share your Spellcraft.exe.log error report with " \
-                                     + "http://sourceforge.net/projects/kscraft", 'OK')
+                QMessageBox.critical(None, 'Error!', 'Error creating XML to save this template!', 'OK')
                 return
+
             try:
                 f = open(self.filename, 'w')
                 f.write(XMLHelper.writexml(xmlbody, UnicodeStringIO(), '', '\t', '\n'))
                 f.close()
                 self.modified = False
+
             except IOError:
-                QMessageBox.critical(None, 'Error!',
-                                     'Error writing to file: ' + self.filename, 'OK')
+                QMessageBox.critical(None, 'Error!', 'Error writing to file: ' + self.filename, 'OK')
 
     def saveAsFile(self):
         filename = self.filename
+
         if filename is None:
-            filename = os.path.join(self.TemplatePath,
-                                    str(self.CharName.text()) + "_template.xml")
+            filename = os.path.join(self.TemplatePath, str(self.CharName.text()) + "_template.xml")
+
         filename = str(filename)
-        filename = QFileDialog.getSaveFileName(self, "Save Template", filename,
-                                               "Templates (*.xml);;All Files (*.*)")
+        filename, filters = QFileDialog.getSaveFileName(self, "Save Template", filename, "Templates (*.xml);;All Files (*.*)")
         filename = str(filename)
+
         if filename != '':
+
             if filename[-4:] != '.xml':
                 filename += '.xml'
+
             try:
                 xmlbody = self.asXML()
+
             except Exception as ex:
                 print(('Error converting template to XML: ', ex))
-                QMessageBox.critical(None, 'Error!',
-                                     "Error creating xml to save this template\r\n\r\n" \
-                                     + "Please share your Spellcraft.exe.log error report with " \
-                                     + "http://sourceforge.net/projects/kscraft", 'OK')
+                QMessageBox.critical(None, 'Error!', 'Error creating xml to save this template!', 'OK')
                 return
+
             try:
                 f = open(filename, 'w')
-                f.write(XMLHelper.writexml(xmlbody, UnicodeStringIO(),
-                                           '', '\t', '\n'))
+                f.write(XMLHelper.writexml(xmlbody, UnicodeStringIO(), '', '\t', '\n'))
                 f.close()
+
             except IOError:
-                QMessageBox.critical(None, 'Error!',
-                                     'Error writing to file: ' + filename, 'OK')
+                QMessageBox.critical(None, 'Error!', 'Error writing to file: ' + filename, 'OK')
                 return
+
             self.modified = False
             self.filename = os.path.abspath(filename)
             self.updateRecentFiles(self.filename)
@@ -2206,30 +2211,31 @@ class SCWindow(QMainWindow, Ui_B_SC):
     def exportAsFile(self):
         filename = os.path.join(self.ReportPath, str(self.CharName.text()) + "_report.xml")
         filename = str(filename)
-        filename = QFileDialog.getSaveFileName(self, "Save SCTemplate XML",
-                                               filename, "SCTemplates (*_report.xml);;All Files (*.*)")
+        filename, filters = QFileDialog.getSaveFileName(self, "Save SCTemplate XML", filename, "SCTemplates (*_report.xml);;All Files (*.*)")
         filename = str(filename)
+
         if filename != '':
+
             if filename[-4:] != '.xml':
                 filename += '.xml'
+
             try:
                 xmlbody = self.asXML(True)
+
             except Exception as ex:
                 print(('Error converting template to XML: ', ex))
-                QMessageBox.critical(None, 'Error!',
-                                     "Error creating xml to export this template\r\n\r\n" \
-                                     + "Please share your Spellcraft.exe.log error report with " \
-                                     + "http://sourceforge.net/projects/kscraft", 'OK')
+                QMessageBox.critical(None, 'Error!', 'Error creating XML to export this template', 'OK')
                 return
+
             try:
                 f = open(filename, 'w')
-                f.write(XMLHelper.writexml(xmlbody, UnicodeStringIO(),
-                                           '', '\t', '\n'))
+                f.write(XMLHelper.writexml(xmlbody, UnicodeStringIO(), '', '\t', '\n'))
                 f.close()
+
             except IOError:
-                QMessageBox.critical(None, 'Error!',
-                                     'Error writing to file: ' + filename, 'OK')
+                QMessageBox.critical(None, 'Error!', 'Error writing to file: ' + filename, 'OK')
                 return
+
             self.ReportPath = os.path.dirname(os.path.abspath(filename))
 
     def openFile(self, *args):
@@ -2249,9 +2255,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
                     return
 
         if len(args) == 0:
-            filename, filters = QFileDialog.getOpenFileName(
-                self, "Open Template", self.TemplatePath,
-                "Templates (*.xml);;All Files (*.*)")
+            filename, filters = QFileDialog.getOpenFileName(self, "Open Template", self.TemplatePath, "Templates (*.xml);;All Files (*.*)")
 
         else:
             filename = args[0]
@@ -2281,14 +2285,13 @@ class SCWindow(QMainWindow, Ui_B_SC):
                     return
             except Exception as ex:
                 print(('Error loading template file: ', ex))
-                QMessageBox.critical(None, 'Error!', \
-                                     "Error loading template file " + str(filename) \
-                                     + "\r\n(Perhaps this isn't a spellcrafting template file?)" \
-                                     + "\r\n\r\nPlease share this template file and your " \
-                                     + "Spellcraft.exe.log error report with the authors at " \
-                                     + "http://sourceforge.net/projects/kscraft", 'OK')
-                if f is not None: f.close()
+                QMessageBox.critical(None, 'Error!', 'Error loading template file " + str(filename)', 'OK')
+
+                if f is not None:
+                    f.close()
+
                 return
+
             self.filename = os.path.abspath(filename)
             self.updateRecentFiles(self.filename)
             self.TemplatePath = os.path.dirname(self.filename)
@@ -2360,8 +2363,8 @@ class SCWindow(QMainWindow, Ui_B_SC):
                 elif newItem.Equipped == '1':
                     self.itemattrlist[newItem.Location].Equipped = '0'
                     item = newItem
-                    while item.__next__ is not None:
-                        item = item.__next__
+                    while item.next is not None:  # Changed from while item.__next__ is not None:
+                        item = item.next  # Changed from item = item.__next__
                     item.next = self.itemattrlist[newItem.Location]
                     self.itemattrlist[newItem.Location] = newItem
                 else:
@@ -2867,10 +2870,10 @@ class SCWindow(QMainWindow, Ui_B_SC):
             prev = None
             while item and item.TemplateIndex != indexes[0]:
                 prev = item
-                item = item.__next__
+                item = item.next  # Changed from item = item.__next__
             if item:
                 if prev:
-                    prev.next = prev.next.__next__
+                    prev.next = prev.next.next  # Changed from prev.next = prev.next.next
                     item.next = self.itemattrlist[piece]
                     self.itemattrlist[piece].Equipped = '0'
                     self.itemattrlist[piece] = item

@@ -181,6 +181,6 @@ class SCOptions(Singleton):
                 print(('Error saving Spellcraft.xml!! ', ex))
                 pass
             try:
-                os.chmod(scfile, stat.S_IRUSR | stat.S_IWUSR)
+                os.chmod(scfile, stat.S_IRUSR | stat.S_IWUSR) # TODO: Linux stuff 'REMOVE'
             except:
                 pass
