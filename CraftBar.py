@@ -111,8 +111,13 @@ class CraftBar(QDialog, Ui_B_CraftBar):
             self.ItemSelect[i].clicked.connect(self.pieceBoxChanged)
             item = self.parent.itemattrlist[self.items[i]]
 
-            while item.ActiveState == 'drop' and item.__next__ is not None:
-                item = item.__next__
+            # Changed from
+            # while item.ActiveState == 'drop' and item.__next__ is not None:
+            #     item = item.__next__
+
+            while item.ActiveState == 'drop' and item.next is not None:
+                item = item.next
+
 
             if item.ActiveState == 'drop':
                 self.ItemSelect[i].setEnabled(False)
@@ -420,8 +425,12 @@ class CraftBar(QDialog, Ui_B_CraftBar):
             if self.ItemSelect[i].checkState() == Qt.Checked:
                 item = self.parent.itemattrlist[self.items[i]]
 
-                while item.ActiveState == 'drop' and item.__next__ is not None:
-                    item = item.__next__
+                # Changed from
+                # while item.ActiveState == 'drop' and item.__next__ is not None:
+                #     item = item.__next__
+
+                while item.ActiveState == 'drop' and item.next is not None:
+                    item = item.next
 
                 self.piecelist[self.items[i]] = item
 

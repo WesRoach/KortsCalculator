@@ -27,6 +27,6 @@ class t2(tuple):
         if stop is None:
             stop = len(self)
         for n in range(start, stop):
-            if (self[n] > value) - (self[n] < value):
+            if (self[n] > value) - (self[n] < value) == 0:
                 return n
         raise ValueError("t2.index(x): x not in tuple")

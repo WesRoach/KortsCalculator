@@ -151,7 +151,7 @@ class ItemSlot:
                 'Resist': lambda x: x * 2,
                 'Power': lambda x: x * 2,
                 'Skill': lambda x: x * 5,
-                'Focus': lambda x: 1.0,
+                'Focus': lambda x: 1.0
             }[self.Type](float(self.Amount))
         except KeyError:
             return 0
