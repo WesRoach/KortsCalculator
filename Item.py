@@ -603,7 +603,7 @@ class Item:
                 'There was no item to save!', 'OK')
             return
         try:
-            f = file(filename, 'w')
+            f = file(filename, 'w')  # CRASH
         except IOError:
             QMessageBox.critical(None, 'Error!', 
                 'Error opening file: ' + filename, 'OK')
@@ -613,7 +613,7 @@ class Item:
 
     def load(self, filename, namehint = '', silent = 0):
         try:
-            f = file(filename, 'r')
+            f = file(filename, 'r')  # CRASH
         except IOError:
             if not silent:
                 QMessageBox.critical(None, 'Error!', 

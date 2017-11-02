@@ -1048,7 +1048,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
     def changePieceTab(self, a0):
-        mask = a0.data().toInt()[0]  # POTENTIAL PROBLEM
+        mask = a0.data().toInt()[0]  # CRASH
         row = (mask >> 8) & 0xff
         col = mask & 0xff
         self.PieceTab.setCurrentIndex(row, col)
@@ -2003,11 +2003,11 @@ class SCWindow(QMainWindow, Ui_B_SC):
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
     def deleteCurrentItem(self):
-        if self.itemattrlist[self.currentTabLabel].__next__ is None:
+        if self.itemattrlist[self.currentTabLabel].next is None:  # Changed from if self.itemattrlist[self.currentTabLabel].__next__ is None:
             self.clearCurrentItem()
             return
         item = self.itemattrlist[self.currentTabLabel]
-        self.itemattrlist[self.currentTabLabel] = item.__next__
+        self.itemattrlist[self.currentTabLabel] = item.next  # Changed from self.itemattrlist[self.currentTabLabel] = item.__next__
         item.next = None
         if item.Equipped == '1':
             self.itemattrlist[self.currentTabLabel].Equipped = '1'
@@ -2576,7 +2576,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
             self.delveItemsDialog(shortname)
 
     def skillClicked(self, index):
-        effect = str(index.data(Qt.DisplayRole).toString())
+        effect = str(index.data(Qt.DisplayRole).toString())  # CRASH
         bonus = str(index.data(Qt.UserRole).toString())
         if effect[-6:] == ' (PvE)' or effect[-6:] == ' Focus':
             effect = effect[:-6]
