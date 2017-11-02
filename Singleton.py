@@ -1,5 +1,12 @@
 # coding = utf-8
 
+# Singleton.py: Kort's Spellcrafting Calculator
+#
+# See http://www.github.com/artomason/KortsCalculator/ for updates
+#
+# See NOTICE.txt for copyrights and grant of license
+
+
 class Singleton:
     __single = None
 

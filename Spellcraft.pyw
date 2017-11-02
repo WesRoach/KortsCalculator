@@ -3,7 +3,7 @@
 
 # CraftBar.py: Kort's Spellcrafting Calculator
 #
-# See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
+# See http://www.github.com/artomason/KortsCalculator/ for updates
 #
 # See NOTICE.txt for copyrights and grant of license
 
@@ -22,7 +22,7 @@ import sys
 locale.setlocale(locale.LC_ALL, '')  # TODO: ADD SUPPORT FOR ADDITIONAL LANGUAGES
 
 
-class ScApplication(QApplication):
+class SpellCraftingCalculator(QApplication):
 
     def __init__(self):
         args = sys.argv
@@ -30,6 +30,7 @@ class ScApplication(QApplication):
 
         if args[0]:
             args[0] = str(QDir(self.curPath).absoluteFilePath(args[0]))
+
         else:
             args[0] = str(QDir(self.curPath).absoluteFilePath(__file__))
 
@@ -44,19 +45,14 @@ class ScApplication(QApplication):
         font.setFamily("Trebuchet MS")
         self.setFont(font)
 
-        scw = SCWindow.SCWindow()
-        app.setActiveWindow(scw)
-        scw.setWindowIcon(QIcon(":/images/ScWindow.png"))
+        scc = SCWindow.SCWindow()
+        scc.setWindowIcon(QIcon(":/images/ScWindow.png"))
+        app.setActiveWindow(scc)
 
-        # THIS IS NO LONGER NEEDED SINCE WE HAVE STRIPPED SUPPORT FOR MACINTOSH
-        # AND HAVE NO PLANS IN PORTING THIS TO ANY OTHER PLATFORMS.
-        # if len(app.argv()) > 1:
-        #   scw.openFile(app.argv()[1], True)
-
-        scw.show()
+        scc.show()
 
 
 if __name__ == '__main__':
-    app = ScApplication()
+    app = SpellCraftingCalculator()
     app.start()
     sys.exit(app.exec_())

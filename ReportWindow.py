@@ -2,7 +2,7 @@
 
 # ReportWindow.py: Kort's Spellcrafting Calculator
 #
-# See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
+# See http://www.github.com/artomason/KortsCalculator/ for updates
 #
 # See NOTICE.txt for copyrights and grant of license
 

@@ -2,7 +2,7 @@
 
 # ScWindow.py: Kort's Spellcrafting Calculator (main Window)
 #
-# See http://kscraft.sourceforge.net/ for updates  <-- TODO: NEEDS UPDATING
+# See http://www.github.com/artomason/KortsCalculator/ for updates
 #
 # See NOTICE.txt for copyrights and grant of license
 
@@ -610,7 +610,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
 
         self.viewtoolbarmenu = QMenu('&Toolbar', self)
 
-        for (title, res) in (("Large", 32,), ("Normal", 24,), ("Tiny", 16,), ("Hide", 0,),):
+        for (title, res) in (("Large", 32,), ("Normal", 24,), ("Small", 16,), ("Hide", 0,),):
             act = QAction(title, self)
             act.setData(QVariant(res))
             act.setCheckable(True)

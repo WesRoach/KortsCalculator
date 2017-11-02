@@ -1,9 +1,11 @@
 # coding = utf-8
 
+# tuple2.py: Kort's Spellcrafting Calculator
+#
+# See http://www.github.com/artomason/KortsCalculator/ for updates
 #
 # Copyright 2005 by Ehrayn <ehrayn@sourceforge.net>
 # Granted 2006 by Ehrayn to the public domain
-#
 
 
 __all__ = ['t2']

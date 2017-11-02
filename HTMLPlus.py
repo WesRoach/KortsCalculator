@@ -1,11 +1,15 @@
 # coding = utf-8
 
+# HTMLPlus.py: Kort's Spellcrafting Calculator
+#
+# See http://www.github.com/artomason/KortsCalculator/ for updates
 #
 # Copyright 2006 by Ehrayn <ehrayn@sourceforge.net>
 # Granted 2006 by Ehrayn to the public domain
-#
 
-"Proper handling of line breaks, newer entity defs and indentation"
+
+"""Proper handling of line breaks, newer entity defs and indentation"""
+
 
 from html.parser import HTMLParser
 import formatter  # TODO: FIND REPLACEMENT FOR FORMATTER
@@ -126,7 +130,7 @@ class HTMLPlusParser(HTMLParser):
     def __init__(self, formatter, verbose=None):
         if verbose and not hasattr(verbose, "write"):
             verbose = sys.stderr
-        HTMLParser.__init__(self, formatter, verbose)
+        HTMLParser.__init__(self, formatter, verbose)  # CRASH
         # consists of [tables][rows][cols]
         # where reparsestack[-1] is the deepest replayable elt
         self.reparsestack = []

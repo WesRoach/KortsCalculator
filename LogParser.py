@@ -1,5 +1,11 @@
 # coding = utf-8
 
+# LogParser.py: Kort's Spellcrafting Calculator
+#
+# See http://www.github.com/artomason/KortsCalculator/ for updates
+#
+# See NOTICE.txt for copyrights and grant of license
+
 from Constants import statList, resistList, skillTable, otherBonusList
 import Item
 import sys
@@ -65,8 +71,6 @@ def otherBonus(lst):
             print(('hits cap increase: %s' % amount))
     if t in oblist:
         print(('other bonus: %s %s' % (t, amount)))
-
-        
 
 
 def af(lst):
