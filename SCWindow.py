@@ -2075,14 +2075,13 @@ class SCWindow(QMainWindow, Ui_B_SC):
                         recentdir.append(os.path.join(self.ItemPath, realm, ext))
             recentdir.append(os.path.join(self.ItemPath, "All", ext))
         filename = os.path.join(itemdir, itemname)
-        filename = QFileDialog.getSaveFileName(self, "Save Item", filename,
-                                               "Templates (*.xml);;All Files (*.*)")
+        filename, filters = QFileDialog.getSaveFileName(self, "Save Item", filename, "Templates (*.xml);;All Files (*.*)")
         filename = str(filename)
         if filename != '':
             item.save(filename)
 
     def loadItem(self):
-        ext = FileExt[self.currentTabLabel]
+        ext = FileExt[self.currentTabLabel]  # TODO: CREATE REALISTIC FILE EXTENSIONS..
         extstr = ''
         if not isinstance(ext, bytes):
             for e in ext:
@@ -2116,7 +2115,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
                     return
                 self.itemIndex += 1
                 self.itemnumbering += 1
-                if item.__next__:
+                if item.__next__:  # POTENTIAL PROBLEM
                     item.next.TemplateIndex = self.itemIndex
                     self.itemIndex += 1
                 item.Location = self.currentTabLabel
@@ -2417,7 +2416,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
 
     def chooseXMLUIFile(self):
         filters = "UI XML Templates (*.xsl *.xslt);;All Files (*.*)"
-        filename = QFileDialog.getOpenFileName(self, "Choose UI Window Format",
+        filename, filters = QFileDialog.getOpenFileName(self, "Choose UI Window Format",
                                                self.ReportPath, filters)
         filename = str(filename)
         if filename is not None and str(filename) != '':
@@ -2475,7 +2474,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
 
     def chooseReportFile(self):
         filters = "Report Templates (*.xsl *.xslt);;All Files (*.*)"
-        filename = QFileDialog.getOpenFileName(self, "Choose Report Format",
+        filename, filters = QFileDialog.getOpenFileName(self, "Choose Report Format",
                                                self.ReportPath, filters)
         filename = str(filename)
         if filename is not None and str(filename) != '':
@@ -2576,8 +2575,8 @@ class SCWindow(QMainWindow, Ui_B_SC):
             self.delveItemsDialog(shortname)
 
     def skillClicked(self, index):
-        effect = str(index.data(Qt.DisplayRole).toString())  # CRASH
-        bonus = str(index.data(Qt.UserRole).toString())
+        effect = str(index.data(Qt.DisplayRole))  # Changed from effect = str(index.data(Qt.DisplayRole).toString())
+        bonus = str(index.data(Qt.UserRole))  # Changed from bonus = str(index.data(Qt.UserRole).toString())
         if effect[-6:] == ' (PvE)' or effect[-6:] == ' Focus':
             effect = effect[:-6]
         if effect[-1:] == ')':
