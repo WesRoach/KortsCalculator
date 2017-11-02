@@ -123,7 +123,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
     def saveToHTML(self):
         filename = os.path.join(self.parent.ReportPath,
                                 str(self.parent.CharName.text()) + "_report.html")
-        filename = QFileDialog.getSaveFileName(self, "Save HTML Report", filename,
+        filename, filters = QFileDialog.getSaveFileName(self, "Save HTML Report", filename,
                                                "HTML (*.html *.htm);;All Files (*.*)")
         if filename is not None and str(filename) != '':
             try:
@@ -141,7 +141,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
     def saveToText(self):
         filename = os.path.join(self.parent.ReportPath,
                                 str(self.parent.CharName.text()) + "_report.txt")
-        filename = QFileDialog.getSaveFileName(self, "Save HTML Report", filename,
+        filename, filters = QFileDialog.getSaveFileName(self, "Save HTML Report", filename,
                                                "Text (*.txt);;All Files (*.*)")
         if filename is not None and str(filename) != '':
             try:
