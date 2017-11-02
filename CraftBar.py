@@ -182,7 +182,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         self.LoadGemsButton.setEnabled(0)
         self.LoadGemsButton.update()
 
-        f = open(filename, 'r')
+        f = open(filename)
         g = open(filename + '.bak', 'w')
         g.write(f.read())
         f.close()
