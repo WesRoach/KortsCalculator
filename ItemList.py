@@ -16,15 +16,16 @@ import sys
 
 
 class ItemPreview(QListWidget):
+
     def __init__(self, parent, realm, charclass):
-        QListWidget.__init__(self, None)
-        parent.layout().addWidget(self, 1, 4, 1, 2)
+        QListWidget.__init__(self)
+        parent.layout().addWidget(self, 1, 4, 1, 2)  # CRASH
         self.realm = realm
         self.charclass = charclass
 
     def preview(self, filename):
         self.clear()
-        item = Item(realm=self.realm)
+        item = Item(realm = self.realm)
         if item.load(str(filename), silent = 1) == -2:
             return
         stattext = []
@@ -49,6 +50,7 @@ class ItemPreview(QListWidget):
 
     
 class ItemListDialog(QFileDialog):
+
     def __init__(self, parent = None, caption = None, itemdir = None, filter = None, realm = None, charclass = None):
         QFileDialog.__init__(self, parent, caption, itemdir, filter)
         self.setAcceptMode(QFileDialog.AcceptOpen)
@@ -100,5 +102,3 @@ class ItemListDialog(QFileDialog):
         self.resize(w, h)
         self.move(x, y)
         self.updateGeometry()
-
-
