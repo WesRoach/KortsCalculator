@@ -9,7 +9,7 @@
 
 
 from PyQt5.QtCore import QMetaObject, QRect, QSize, Qt
-from PyQt5.QtWidgets import QAbstractItemView, QApplication, QCheckBox, QComboBox, QDialog, QFrame, QGridLayout
+from PyQt5.QtWidgets import QAbstractItemView, QApplication, QCheckBox, QComboBox, QFrame, QGridLayout
 from PyQt5.QtWidgets import QHBoxLayout, QListView, QListWidget, QLabel, QLineEdit, QPushButton, QSizePolicy
 from PyQt5.QtWidgets import QSpacerItem, QSpinBox, QStackedLayout, QTextEdit, QVBoxLayout, QWidget
 
