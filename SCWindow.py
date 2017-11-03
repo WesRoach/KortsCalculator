@@ -438,7 +438,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
         self.ItemSummaryFrame.setMinimumHeight(minheight)
         self.ItemSlotsFrame.setMinimumHeight(minheight)
         maxheight = self.LabelGemType.sizeHint().height()
-        maxheight += self.ScrollSlots.maximumHeight()
+        maxheight += self.ScrollSlots.maximumHeight()  # TODO: NEED TO ACCOUNT FOR UTILITY LABLES / SCTIME
         self.ItemSummaryFrame.setMaximumHeight(maxheight)
         self.ItemSlotsFrame.setMaximumHeight(maxheight)
 
@@ -728,8 +728,8 @@ class SCWindow(QMainWindow, Ui_B_SC):
             ret = QMessageBox.warning(self, 'Save Changes?',
                                       "This template has been changed.\n"
                                       "Do you want to save these changes?",
-                                      QMessageBox.Yes, QMessageBox.No,
-                                      QMessageBox.Cancel)
+                                      QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel)
+
             if ret == QMessageBox.Cancel:
                 e.ignore()
                 return
@@ -740,7 +740,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
                     return
         e.accept()
 
-    def setWindowGeometry(self):
+    def setWindowGeometry(self):  # TODO: UPDATE VARIABLE NAMES
         x = SCOptions.instance().getOption('WindowX', self.pos().x())
         y = SCOptions.instance().getOption('WindowY', self.pos().y())
         w = SCOptions.instance().getOption('WindowW', self.width())
@@ -1802,9 +1802,9 @@ class SCWindow(QMainWindow, Ui_B_SC):
         item.Equipped = '0'
         prev = item
         for a1 in range(0, a0 - 1):
-            prev = prev.__next__
-        item = prev.__next__
-        prev.next = prev.next.__next__
+            prev = prev.next
+        item = prev.next
+        prev.next = prev.next.next
         item.next = self.itemattrlist[self.currentTabLabel]
         self.itemattrlist[self.currentTabLabel] = item
         item.Equipped = wasequipped
@@ -2105,7 +2105,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
                                       self.realm, self.charclass)
         Qfd.setHistory(recentdir)
         if Qfd.exec_():
-            if Qfd.selectedFiles().count() > 0:
+            if len(Qfd.selectedFiles()) > 0:  # Changed from if Qfd.selectedFiles().count() > 0:
                 filename = str(Qfd.selectedFiles()[0])
                 item = Item('drop', self.currentTabLabel, self.realm,
                             self.itemIndex)
@@ -2115,7 +2115,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
                     return
                 self.itemIndex += 1
                 self.itemnumbering += 1
-                if item.__next__:  # POTENTIAL PROBLEM
+                if item.next:
                     item.next.TemplateIndex = self.itemIndex
                     self.itemIndex += 1
                 item.Location = self.currentTabLabel

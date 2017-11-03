@@ -518,9 +518,9 @@ if __name__ == '__main__':
     QApplication.setDesktopSettingsAware(0)
     app = QApplication(sys.argv)
 
-    wind = QMainWindow()
-    child = QWidget(wind)
-    wind.setCentralWidget(child)
+    window = QMainWindow()
+    child = QWidget(window)
+    window.setCentralWidget(child)
 
     bar = MultiTabBar(child)
     bar.addTab(0, 'One')
@@ -541,8 +541,8 @@ if __name__ == '__main__':
     frame.setGeometry(QRect(0, bar.sizeHint().height() - bar.baseOverlap(), bar.sizeHint().width(), 200))
     frame.stackUnder(bar)
 
-    wind.resize(600, 400)
+    window.resize(600, 400)
     bar.setCurrentIndex((0, 0))
     bar.setCurrentIndex(1,1)
-    wind.show()
+    window.show()
     app.exec_()

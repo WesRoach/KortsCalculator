@@ -19,7 +19,7 @@ class ItemPreview(QListWidget):
 
     def __init__(self, parent, realm, charclass):
         QListWidget.__init__(self)
-        parent.layout().addWidget(self, 1, 4, 1, 2)  # CRASH
+        parent.layout().addWidget(self, 1, 4, 1, 2)
         self.realm = realm
         self.charclass = charclass
 
@@ -42,9 +42,8 @@ class ItemPreview(QListWidget):
             str(item.ItemName),
             "Level: %s   Quality: %s" % (item.Level, item.ItemQuality),
             "AF/DPS: %s   Speed: %s" % (item.AFDPS, item.Speed),
-            "Utility: %.1f   Bonus: %s" 
-                    % (item.utility(classinfo), item.Bonus),
-        ]
+            "Utility: %.1f   Bonus: %s" % (item.utility(classinfo), item.Bonus)]
+
         self.addItems(listtext)
         self.addItems(stattext)
 
@@ -52,10 +51,13 @@ class ItemPreview(QListWidget):
 class ItemListDialog(QFileDialog):
 
     def __init__(self, parent = None, caption = None, itemdir = None, filter = None, realm = None, charclass = None):
+
+        # TODO: THIS THING (BUILT-IN-DIALOG) IS UUGGGLLYYY.. MAKE IT PRETTY..
         QFileDialog.__init__(self, parent, caption, itemdir, filter)
         self.setAcceptMode(QFileDialog.AcceptOpen)
         self.setFileMode(QFileDialog.ExistingFile)
         self.setViewMode(QFileDialog.List)
+        self.setOption(QFileDialog.DontUseNativeDialog)
         self.preview = ItemPreview(self, realm, charclass)
 
         self.currentChanged[str].connect(self.onCurrentChanged)

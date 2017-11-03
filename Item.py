@@ -603,21 +603,19 @@ class Item:
                 'There was no item to save!', 'OK')
             return
         try:
-            f = file(filename, 'w')  # CRASH
+            f = open(filename, 'w')  # Changed from f = file(filename, 'w')
         except IOError:
-            QMessageBox.critical(None, 'Error!', 
-                'Error opening file: ' + filename, 'OK')
+            QMessageBox.critical(None, 'Error!', 'Error opening file: ' + filename, 'OK')
             return
         f.write(XMLHelper.writexml(itemxml, UnicodeStringIO(), '', '\t', '\n'))
         f.close()
 
     def load(self, filename, namehint = '', silent = 0):
         try:
-            f = file(filename, 'r')  # CRASH
+            f = open(filename)  # Changed from f = file(filename)
         except IOError:
             if not silent:
-                QMessageBox.critical(None, 'Error!', 
-                    'Error opening item file: ' + filename, 'OK')
+                QMessageBox.critical(None, 'Error!', 'Error opening item file: ' + filename, 'OK')
             return -2
 
         docstr = f.read()
@@ -677,7 +675,7 @@ class Item:
                     if slot_match is None:
                         slotval = slot.getAttribute("Number")
                         if slotval is None or slotval == '':
-                            slotnum = slotnum + 1
+                            slotnum += 1
                         else:
                             slotnum = int(slotval)
                     else:
