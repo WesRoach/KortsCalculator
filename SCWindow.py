@@ -423,22 +423,23 @@ class SCWindow(QMainWindow, Ui_B_SC):
         # the height of ItemInfoFrame and round it out to the next-multiple of a combobox
         # height. Scroll the lines by the combobox height, page from the top to bottom slots.
         self.ScrollSlots.setWidgetResizable(False)
-        self.ScrollSlots.setWidget(self.ItemSlotsGrid)
-        self.ScrollSlots.setRowHeight(cbheight)
+        # self.ScrollSlots.setWidget(self.ItemSlotsGrid)
+        # self.ScrollSlots.setRowHeight(cbheight)
 
         self.ScrollItemInfo.setWidgetResizable(False)
-        self.ScrollItemInfo.setWidget(self.ItemInfoGrid)
-        self.ScrollItemInfo.setRowHeight(cbheight)
-        self.ScrollItemInfo.setMaximumHeight(self.ScrollSlots.maximumHeight())
+        # self.ScrollItemInfo.setWidget(self.ItemInfoGrid)
+        # self.ScrollItemInfo.setRowHeight(cbheight)
+        # self.ScrollItemInfo.setMaximumHeight(self.ScrollSlots.maximumHeight())
 
         # To round this out, we want the ItemSummaryFrame and ItemSlotsFrame to grow first to
         # a maximum of the height of the ScrollSlots plus the height of the labels above.
-        minheight = self.ItemSlotsHeader.sizeHint().height()
-        minheight += self.ScrollItemInfo.minimumHeight()
-        self.ItemSummaryFrame.setMinimumHeight(minheight)
-        self.ItemSlotsFrame.setMinimumHeight(minheight)
+        # minheight = self.ItemSlotsHeader.sizeHint().height()
+        # minheight += self.ScrollItemInfo.minimumHeight()
+        self.ItemSummaryFrame.setMinimumHeight(260)
+        self.ItemSlotsFrame.setMinimumHeight(260)
+
         maxheight = self.LabelGemType.sizeHint().height()
-        maxheight += self.ScrollSlots.maximumHeight()  # TODO: NEED TO ACCOUNT FOR UTILITY LABLES / SCTIME
+        maxheight += self.ScrollSlots.maximumHeight()
         self.ItemSummaryFrame.setMaximumHeight(maxheight)
         self.ItemSlotsFrame.setMaximumHeight(maxheight)
 

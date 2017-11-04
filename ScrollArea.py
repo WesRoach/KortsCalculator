@@ -71,6 +71,7 @@ class ScrollArea(QScrollArea):
         self.verticalScrollBar().setPageStep(self.rowheight * rows)
 
     def bestFit(self):
+
         if self.rowheight < 0:
             return
 

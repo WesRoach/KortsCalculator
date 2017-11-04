@@ -8,7 +8,7 @@
 
 
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QDialog, QFileDialog
+from PyQt5.QtWidgets import QDialog, QFileDialog, QMessageBox
 from B_ReportWindow import Ui_B_ReportWindow
 from HTMLPlus import HTMLPlusParser, ObtuseFormatter, DimWriter
 from SC import formatCost, gemNameSort, gemTypeSort
@@ -70,7 +70,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                 cost = slot.gemCost(1)
                 self.totalcost += cost
         keys = list(self.gemnames.keys())
-        keys.sort(key = gemNameSort)  # Changed from keys.sort(gemNameSort)
+        keys.sort(key = gemNameSort)  # Changed from keys.sort(gemNameSort) and STILL BROKEN
         self.gemnames = [[x, self.gemnames.get(x)] for x in keys]
         for type, matlist in list(self.materials.items()):
             if type == 'Gems':

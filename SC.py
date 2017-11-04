@@ -77,7 +77,7 @@ def gemNameSort(a, b):
     if not (t_a is None and t_b is None):
         if t_a is None: return -1
         if t_b is None: return 1
-        return cmp(a, b)
+        return (a > b) - (a < b)
 
     gemlevel_a, r = str.split(a, ' ', 1)
     gemlevel_b, r = str.split(b, ' ', 1)
@@ -90,7 +90,7 @@ def gemNameSort(a, b):
     e_b = essence_re.search(b)
     if e_a is not None:
         if e_b is not None:
-            return cmp(a, b)
+            return (a > b) - (a < b)
         else:
             return -1
 
@@ -98,7 +98,7 @@ def gemNameSort(a, b):
     s_b = shielding_re.search(b)
     if s_a is not None:
         if s_b is not None:
-            return cmp(a, b)
+            return (a > b) - (a < b)
         elif e_b is not None:
             return 1
         else:
@@ -112,7 +112,7 @@ def gemNameSort(a, b):
         elif e_b is not None:
             return 1
         elif b_b is not None:
-            return cmp(a, b)
+            return (a > b) - (a < b)
         else:
             return -1
 
@@ -126,8 +126,8 @@ def gemNameSort(a, b):
         elif b_b is not None:
             return 1
         elif w_b is not None:
-            return cmp(a, b)
+            return (a > b) - (a < b)
         else:
             return -1
 
-    return cmp(a, b)
+        return (a > b) - (a < b)
