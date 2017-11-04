@@ -55,7 +55,8 @@ class DimWriter(formatter.DumbWriter):
     def send_flowing_data(self, data, label = 0):
         if data:
             data = data.replace('\xa0', '')
-        if not data: return
+        if not data:
+            return
         atbreak = self.atbreak or data[0].isspace()
         col = self.col
         maxcol = self.maxcol
@@ -126,8 +127,6 @@ class ObtuseFormatter(formatter.AbstractFormatter):
 class HTMLPlusParser(HTMLParser):
 
     def __init__(self, formatter, verbose = None):
-        # HTMLParser.__init__(self)
-
         if verbose and not hasattr(verbose, "write"):
             HTMLParser.__init__(self, formatter, verbose)
             verbose = sys.stderr
