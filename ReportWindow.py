@@ -118,33 +118,35 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
         self.ReportText.setHtml(self.reportHtml)
 
     def saveToHTML(self):
-        filename = os.path.join(self.parent.ReportPath,
-                                str(self.parent.CharName.text()) + "_report.html")
-        filename, filters = QFileDialog.getSaveFileName(self, "Save HTML Report", filename,
-                                               "HTML (*.html *.htm);;All Files (*.*)")
+        filename = os.path.join(self.parent.ReportPath, str(self.parent.CharName.text()) + "_report.html")
+        filename, filters = QFileDialog.getSaveFileName(self, "Save HTML Report", filename, "HTML (*.html *.htm);;All Files (*.*)")
+
         if filename is not None and str(filename) != '':
+
             try:
                 if re.compile('\.html$').search(str(filename)) is None:
                     filename = str(filename)
                     filename += '.html'
+
                 f = open(str(filename), 'w')
                 f.write('<HTML>' + self.reportHtml + '</HTML>')
                 f.close()
                 self.parent.ReportPath = os.path.dirname(os.path.abspath(filename))
+
             except IOError:
-                QMessageBox.critical(None, 'Error!',
-                                     'Error writing to file: ' + filename, 'OK')
+                QMessageBox.critical(None, 'Error!', 'Error writing to file: ' + filename, 'OK')
 
     def saveToText(self):
-        filename = os.path.join(self.parent.ReportPath,
-                                str(self.parent.CharName.text()) + "_report.txt")
-        filename, filters = QFileDialog.getSaveFileName(self, "Save Report", filename,
-                                               "Text (*.txt);;All Files (*.*)")
+        filename = os.path.join(self.parent.ReportPath, str(self.parent.CharName.text()) + "_report.txt")
+        filename, filters = QFileDialog.getSaveFileName(self, "Save Report", filename, "Text (*.txt);;All Files (*.*)")
+
         if filename is not None and str(filename) != '':
+
             try:
                 if re.compile('\.txt$').search(str(filename)) is None:
                     filename = str(filename)
                     filename += '.txt'
+
                 f = open(str(filename), 'w')
                 w = DimWriter(f)
                 s = ObtuseFormatter(w)
@@ -154,20 +156,9 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                 w.flush()
                 f.close()
                 self.parent.ReportPath = os.path.dirname(os.path.abspath(str(filename)))
+
             except IOError:
-                QMessageBox.critical(None, 'Error!',
-                                     'Error writing to file: ' + filename, 'OK')
+                QMessageBox.critical(None, 'Error!', 'Error writing to file: ' + filename, 'OK')
 
     def closeWindow(self):
         self.done(1)
-
-
-class XSLTMessageHandler:
-    def __init__(self):
-        self.content = ''
-
-    def write(self, msg):
-        self.content = self.content + msg
-
-    def getContent(self):
-        return self.content
