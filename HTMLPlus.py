@@ -124,20 +124,16 @@ class ObtuseFormatter(formatter.AbstractFormatter):
     
 
 class HTMLPlusParser(HTMLParser):
-    """This is extends the basic HTML parser class.
-    """
 
     def __init__(self, formatter, verbose = None):
-        if verbose and not hasattr(verbose, "write"):
-            verbose = sys.stderr
-            HTMLParser.__init__(self, formatter, verbose)  # CRASH: AttributeError("'HTMLPlusParser' object has no attribute 'rawdata'",)
-        # consists of [tables][rows][cols]
-        # where reparsestack[-1] is the deepest replayable elt
-        self.reparsestack = []
-        # the current dt element somewhere in tablestack
-        self.tdelt = []
+        # HTMLParser.__init__(self)
 
-    # Manage a replay buffer, with self.tdelt being our current hdr/data block
+        if verbose and not hasattr(verbose, "write"):
+            HTMLParser.__init__(self, formatter, verbose)
+            verbose = sys.stderr
+
+        self.reparsestack = []
+        self.tdelt = []
 
     def handle_data(self, data):
         if len(self.reparsestack):
@@ -240,15 +236,19 @@ if __name__ == '__main__':
     fi = sys.stdin
     fo = sys.stdout
     args = sys.argv[1:]
+
     if '-v' in args:
         verbose = True
         del args[args.index('-v')]
+
     if len(args):
         fi = open(args[0], 'r')
         del args[0]
+
     if len(args):
         fo = open(args[0], 'w')
         del args[0]
+
     w = DimWriter(fo, 36)
     s = ObtuseFormatter(w)
     p = HTMLPlusParser(s, verbose)

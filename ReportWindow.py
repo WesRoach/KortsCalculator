@@ -138,7 +138,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
     def saveToText(self):
         filename = os.path.join(self.parent.ReportPath,
                                 str(self.parent.CharName.text()) + "_report.txt")
-        filename, filters = QFileDialog.getSaveFileName(self, "Save HTML Report", filename,
+        filename, filters = QFileDialog.getSaveFileName(self, "Save Report", filename,
                                                "Text (*.txt);;All Files (*.*)")
         if filename is not None and str(filename) != '':
             try:

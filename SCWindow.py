@@ -508,6 +508,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
         # TODO: DISABLE MENUBAR RIGHT CLICK TO DESELECT TOOLBAR
         self.toolbar = QToolBar("Crafting Toolbar")
         self.toolbar.setObjectName("CraftingToolbar")
+        self.toolbar.setFloatable(False)
 
         self.rf_menu = QMenu('&Recent Files')
         self.rf_menu.triggered['QAction *'].connect(self.loadRecentFile)
