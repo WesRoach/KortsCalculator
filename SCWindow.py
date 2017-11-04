@@ -10,7 +10,7 @@
 from PyQt5.Qt import qApp
 from PyQt5.QtCore import QEvent, QModelIndex, QVariant
 from PyQt5.QtGui import QBrush, QColor, QIcon, QFontMetrics, QIntValidator, QKeySequence, QPalette, QPixmap, QStandardItemModel
-from PyQt5.QtWidgets import QAction, QFileDialog, QListWidgetItem, QMainWindow, QMenu, QSizeGrip, QToolBar
+from PyQt5.QtWidgets import QAction, QDialog, QFileDialog, QListWidgetItem, QMainWindow, QMenu, QSizeGrip, QToolBar
 from B_SCWindow import *
 from Item import *
 from Character import *
@@ -752,7 +752,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
         if w < 100:
             w = 780
         if h < 100:
-            w = 490
+            h = 490
 
         if w > screenWidth:
             w = 780
