@@ -53,6 +53,7 @@ class ItemListDialog(QFileDialog):
     def __init__(self, parent = None, caption = None, itemdir = None, filter = None, realm = None, charclass = None):
 
         # TODO: THIS THING (BUILT-IN-DIALOG) IS UUGGGLLYYY.. MAKE IT PRETTY..
+        # TODO: DIALOG DOES NOT OPEN ON CENTER OF MAIN WINDOW - FIX IT!
         QFileDialog.__init__(self, parent, caption, itemdir, filter)
         self.setAcceptMode(QFileDialog.AcceptOpen)
         self.setFileMode(QFileDialog.ExistingFile)

@@ -65,7 +65,6 @@ def gemTypeSort(a, b):
 
 
 def gemNameSort(a, b):
-    ## XXX need to be static singletons...
     essence_re = re.compile("essence", re.IGNORECASE);
     shielding_re = re.compile("shielding", re.IGNORECASE);
     battle_re = re.compile("battle", re.IGNORECASE);
@@ -74,9 +73,15 @@ def gemNameSort(a, b):
 
     t_a = tincture_re.search(a)
     t_b = tincture_re.search(b)
+
     if not (t_a is None and t_b is None):
-        if t_a is None: return -1
-        if t_b is None: return 1
+
+        if t_a is None:
+            return -1
+
+        if t_b is None:
+            return 1
+
         return (a > b) - (a < b)
 
     gemlevel_a, r = str.split(a, ' ', 1)
@@ -88,45 +93,63 @@ def gemNameSort(a, b):
 
     e_a = essence_re.search(a)
     e_b = essence_re.search(b)
+
     if e_a is not None:
+
         if e_b is not None:
             return (a > b) - (a < b)
+
         else:
             return -1
 
     s_a = shielding_re.search(a)
     s_b = shielding_re.search(b)
+
     if s_a is not None:
+
         if s_b is not None:
             return (a > b) - (a < b)
+
         elif e_b is not None:
             return 1
+
         else:
             return -1
 
     b_a = battle_re.search(a)
     b_b = battle_re.search(b)
+
     if b_a is not None:
+
         if s_b is not None:
             return 1
+
         elif e_b is not None:
             return 1
+
         elif b_b is not None:
             return (a > b) - (a < b)
+
         else:
             return -1
 
     w_a = war_re.search(a)
     w_b = war_re.search(b)
+
     if w_a is not None:
+
         if s_b is not None:
             return 1
+
         elif e_b is not None:
             return 1
+
         elif b_b is not None:
             return 1
+
         elif w_b is not None:
             return (a > b) - (a < b)
+
         else:
             return -1
 

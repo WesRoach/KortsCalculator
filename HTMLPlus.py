@@ -12,7 +12,7 @@
 
 
 from html.parser import HTMLParser
-import formatter  # TODO: FIND REPLACEMENT FOR FORMATTER
+import formatter
 import string
 import sys
 
@@ -127,10 +127,10 @@ class HTMLPlusParser(HTMLParser):
     """This is extends the basic HTML parser class.
     """
 
-    def __init__(self, formatter, verbose=None):
+    def __init__(self, formatter, verbose = None):
         if verbose and not hasattr(verbose, "write"):
             verbose = sys.stderr
-        HTMLParser.__init__(self, formatter, verbose)  # CRASH
+            HTMLParser.__init__(self, formatter, verbose)  # CRASH: AttributeError("'HTMLPlusParser' object has no attribute 'rawdata'",)
         # consists of [tables][rows][cols]
         # where reparsestack[-1] is the deepest replayable elt
         self.reparsestack = []
@@ -201,11 +201,11 @@ class HTMLPlusParser(HTMLParser):
     def end_tr(self):
         self.formatter.end_paragraph(0)
 
-    # def start_tr(self, attr):
-    #    self.formatter.end_paragraph(0)
+    def start_tr(self, attr):
+        self.formatter.end_paragraph(0)
 
-    # def end_tr(self):
-    #    self.formatter.end_paragraph(0)
+    def end_tr(self):
+        self.formatter.end_paragraph(0)
 
     def do_th(self, attr):
         self.formatter.add_column_break(attr)

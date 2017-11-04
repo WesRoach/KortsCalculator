@@ -422,10 +422,6 @@ class Item:
     def loadAttr(self, attrname, attrval):
         if attrname in self.__dict__:
             self.__dict__[attrname] = attrval
-            #eval(self.attrs[attrname] + ' = ' + attrval)
-            #if attrname == 'ItemName':
-            #    print 'loadAttr ' + attrval
-            #    print 'loadAttr direct ' + self.ItemName
 
     def getAttr(self, attrname):
         if attrname in self.__dict__:
@@ -447,6 +443,7 @@ class Item:
         itemimbue = ImbuePts[itemlevel - 1]
         return itemimbue
 
+    # TODO: FIX IMBUE POINTS.. SHIT IS BROKEN
     def listGemImbue(self):
         if self.ActiveState != 'player': return 0.0, 0.0, 0.0, 0.0,
         mvals = [self.slot(0).gemImbue(), self.slot(1).gemImbue(),

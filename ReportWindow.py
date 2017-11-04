@@ -69,21 +69,18 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
 
                 cost = slot.gemCost(1)
                 self.totalcost += cost
-        keys = list(self.gemnames.keys())
-        keys.sort(key = gemNameSort)  # Changed from keys.sort(gemNameSort) and STILL BROKEN
+
+        keys = sorted(list(self.gemnames.keys()))
         self.gemnames = [[x, self.gemnames.get(x)] for x in keys]
         for type, matlist in list(self.materials.items()):
             if type == 'Gems':
-                keys = list(matlist.keys())
-                keys.sort(key = gemTypeSort)  # Changed from keys.sort(gemTypeSort)
+                keys = sorted(list(matlist.keys()))
                 matlist = [[x, matlist.get(x)] for x in keys]
             elif type == 'Liquids':
-                keys = list(matlist.keys())
-                keys.sort()
+                keys = sorted(list(matlist.keys()))
                 matlist = [[x, matlist.get(x)] for x in keys]
             elif type == 'Dusts':
-                keys = list(matlist.keys())
-                keys.sort()
+                keys = sorted(list(matlist.keys()))
                 matlist = [[x, matlist.get(x)] for x in keys]
             self.materials[type] = matlist
         self.printMaterials()

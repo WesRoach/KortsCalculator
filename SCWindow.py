@@ -86,7 +86,7 @@ class UserEventItemNameUpdated(QEvent):
         QEvent.__init__(self, UserEventItemNameUpdatedID)
 
 
-class SCWindow(QMainWindow, Ui_B_SC):
+class SCWindow(QMainWindow, UI_B_SCWindow):
     def __init__(self):
         SCOptions()
         SCOptions.instance().load()
@@ -104,7 +104,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
 
         QMainWindow.__init__(self, None, Qt.Window)
         self.setAttribute(Qt.WA_DeleteOnClose)
-        Ui_B_SC.setupUi(self, self)
+        UI_B_SCWindow.setupUi(self, self)
         self.statusBar().hide()
 
         if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
@@ -504,6 +504,8 @@ class SCWindow(QMainWindow, Ui_B_SC):
         return thisicon
 
     def initMenu(self):  # TODO: ORGANIZE THIS BETTER
+
+        # TODO: DISABLE MENUBAR RIGHT CLICK TO DESELECT TOOLBAR
         self.toolbar = QToolBar("Crafting Toolbar")
         self.toolbar.setObjectName("CraftingToolbar")
 
@@ -1049,7 +1051,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
     def changePieceTab(self, a0):
-        mask = a0.data().toInt()[0]  # CRASH
+        mask = a0.data()  # Changed from mask = a0.data().toInt()[0]
         row = (mask >> 8) & 0xff
         col = mask & 0xff
         self.PieceTab.setCurrentIndex(row, col)
@@ -2431,7 +2433,7 @@ class SCWindow(QMainWindow, Ui_B_SC):
         UIXML.uixml(self, self.UiReportFile)
 
     def loadRecentFile(self, action):
-        index = action.data().toInt()[0]  # POTENTIAL PROBLEM
+        index = action.data()  # Changed from index = action.data().toInt()[0]
         self.openFile(self.recentFiles[index], True)
 
     def openOptions(self):

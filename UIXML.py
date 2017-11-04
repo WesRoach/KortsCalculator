@@ -45,5 +45,5 @@ def uixml(scwin, uixslt):
     except IOError:
         QMessageBox.critical(None, 'Error!', 
             'Error opening file: ' + filename, 'OK')
-        return
+        return  # CRASH: TypeError('write() argument must be str, not lxml.etree._XSLTResultTree',)
 

@@ -19,7 +19,7 @@ from SkillsView import SkillsView
 from ScrollArea import ScrollArea
 
 
-class Ui_B_SC(object):
+class UI_B_SCWindow(object):
     def setupUi(self, B_SCWindow):
         B_SCWindow.setObjectName("B_SCWindow")
         B_SCWindow.resize(QSize(QRect(0, 0, 761, 510).size()).expandedTo(B_SCWindow.minimumSizeHint()))
