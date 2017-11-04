@@ -12,6 +12,11 @@ from PyQt5.QtCore import QMetaObject, QRect, QSize, Qt
 from PyQt5.QtWidgets import QAbstractItemView, QApplication, QCheckBox, QComboBox, QFrame, QGridLayout
 from PyQt5.QtWidgets import QHBoxLayout, QListView, QListWidget, QLabel, QLineEdit, QPushButton, QSizePolicy
 from PyQt5.QtWidgets import QSpacerItem, QSpinBox, QStackedLayout, QTextEdit, QVBoxLayout, QWidget
+from SearchingCombo import SearchingCombo
+from MultiTabBar import MultiTabFrame, MultiTabBar
+from GroupFrame import GroupFrame
+from SkillsView import SkillsView
+from ScrollArea import ScrollArea
 
 
 class Ui_B_SC(object):
@@ -542,7 +547,7 @@ class Ui_B_SC(object):
 
         self.SkillsList = SkillsView(self.GroupSkillsList)
 
-        sizePolicy = QSizePolicy(QSizePolicy.Policy(7), QSizePolicy.Policy(7))
+        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(1)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.SkillsList.sizePolicy().hasHeightForWidth())
@@ -576,7 +581,7 @@ class Ui_B_SC(object):
 
         self.GroupItemFrame = MultiTabFrame(self.ScWinFrame)
 
-        sizePolicy = QSizePolicy(QSizePolicy.Policy(7), QSizePolicy.Policy(5))
+        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(1)
         sizePolicy.setHeightForWidth(self.GroupItemFrame.sizePolicy().hasHeightForWidth())
@@ -630,7 +635,7 @@ class Ui_B_SC(object):
 
         self.ItemNameCombo = SearchingCombo(self.GroupItemFrame)
 
-        sizePolicy = QSizePolicy(QSizePolicy.Policy(7), QSizePolicy.Policy(0))
+        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(20)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.ItemNameCombo.sizePolicy().hasHeightForWidth())
@@ -677,7 +682,7 @@ class Ui_B_SC(object):
 
         self.ScrollItemInfo = ScrollArea(self.ItemInfoFrame)
 
-        sizePolicy = QSizePolicy(QSizePolicy.Policy(0), QSizePolicy.Policy(5))
+        sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(1)
         sizePolicy.setHeightForWidth(self.ScrollItemInfo.sizePolicy().hasHeightForWidth())
@@ -912,7 +917,7 @@ class Ui_B_SC(object):
 
         self.ScrollSlots = ScrollArea(self.ItemSlotsFrame)
 
-        sizePolicy = QSizePolicy(QSizePolicy.Policy(7), QSizePolicy.Policy(5))
+        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(1)
         sizePolicy.setHeightForWidth(self.ScrollSlots.sizePolicy().hasHeightForWidth())
@@ -1668,9 +1673,3 @@ class Ui_B_SC(object):
         self.ItemCostLabel.setText(QApplication.translate("B_SCWindow", "Item Cost: ", None))
         self.ItemPriceLabel.setText(QApplication.translate("B_SCWindow", "Item Price: ", None))
 
-
-from SearchingCombo import SearchingCombo
-from MultiTabBar import MultiTabFrame, MultiTabBar
-from GroupFrame import GroupFrame
-from SkillsView import SkillsView
-from ScrollArea import ScrollArea
