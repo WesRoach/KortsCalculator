@@ -279,10 +279,10 @@
 <xsl:template match="/SCTemplate">
 <html>
 <head>
-<title>Config Report</title>
+<title>Configuration Report</title>
 </head>
 <body>
-  <center><b>Config Report</b></center>
+  <center><b>Configuration Report</b></center>
   <xsl:call-template name="br"/>
   <xsl:apply-templates select="Stats"/>
   <xsl:apply-templates select="Resists"/>
