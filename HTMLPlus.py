@@ -127,8 +127,9 @@ class ObtuseFormatter(formatter.AbstractFormatter):
 class HTMLPlusParser(HTMLParser):
 
     def __init__(self, formatter, verbose = None):
+        HTMLParser.__init__(self)
         if verbose and not hasattr(verbose, "write"):
-            HTMLParser.__init__(self, formatter, verbose)
+            # HTMLParser.__init__(self, formatter, verbose)
             verbose = sys.stderr
 
         self.reparsestack = []
