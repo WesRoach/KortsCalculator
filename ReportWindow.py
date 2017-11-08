@@ -10,7 +10,7 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QDialog, QFileDialog, QMessageBox
 from B_ReportWindow import Ui_B_ReportWindow
-from HTMLPlus import HTMLPlusParser, ObtuseFormatter, DimWriter
+from bs4 import BeautifulSoup, Doctype
 from SC import formatCost, gemNameSort, gemTypeSort
 from lxml import etree
 import os.path
@@ -101,7 +101,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
         self.ReportText.setHtml(self.reportHtml)
 
     def parseConfigReport(self, filename, scxmldoc):
-        source = etree.fromstring(scxmldoc.toxml())
+        source = etree.fromstring(scxmldoc.toxml())-
 
         try:
             xslt_xml = etree.parse(filename)
@@ -136,6 +136,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
             except IOError:
                 QMessageBox.critical(None, 'Error!', 'Error writing to file: ' + filename, 'OK')
 
+    # TODO: WIP
     def saveToText(self):
         filename = os.path.join(self.parent.ReportPath, str(self.parent.CharName.text()) + "_report.txt")
         filename, filters = QFileDialog.getSaveFileName(self, "Save Report", filename, "Text (*.txt);;All Files (*.*)")
@@ -147,15 +148,62 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                     filename = str(filename)
                     filename += '.txt'
 
-                f = open(str(filename), 'w')
-                w = DimWriter(f)
-                s = ObtuseFormatter(w)
-                p = HTMLPlusParser(s)
-                p.feed(self.reportHtml)
-                p.close()
-                w.flush()
-                f.close()
-                self.parent.ReportPath = os.path.dirname(os.path.abspath(str(filename)))
+                soup = BeautifulSoup(self.reportHtml, "lxml")
+
+                # REMOVE UNNECESSARY ELEMENTS
+                for item in soup.contents:
+                    if isinstance(item, Doctype):
+                        item.extract()
+
+                try:  # THROWS 'AttributeError' IF NOT FOUND ..
+                    soup.find('head').extract()
+
+                except AttributeError:
+                    pass
+
+                try:  # THROWS 'AttributeError' IF NOT FOUND ..
+                    soup.find('font').extract()
+
+                except AttributeError:
+                    pass
+
+                # UNWRAP THE CRAP WE DON'T NEED
+                soup.html.unwrap()
+                soup.body.unwrap()
+
+                for b in soup.find_all('b'):
+                    b.unwrap()
+
+                for table in soup.find_all('table'):
+                    table.unwrap()
+
+                for td in soup.find_all('td'):
+                    td.unwrap()
+
+                # DEFINE LINE BREAKS AND INDENTS
+                for br in soup.find_all('br'):
+                    br.replace_with('\n')
+
+                for center in soup.find_all('center'):
+                    center.insert_after('\n')
+
+                for dl in soup.find_all('dl'):
+                    dl.insert_after('\n')
+
+                for dt in soup.find_all('dt'):
+                    dt.insert_after('\n')
+
+                for hr in soup.find_all('hr'):
+                    hr.replace_with(('-' * 80) + '\n')
+
+                for tr in soup.find_all('tr'):
+                    tr.insert_before('  ')
+                    tr.insert_after('\n')
+
+                # DEBUGGING
+                print(soup)
+                print(soup.get_text())
+                print("endwhitespace")
 
             except IOError:
                 QMessageBox.critical(None, 'Error!', 'Error writing to file: ' + filename, 'OK')
