@@ -435,6 +435,8 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
         # a maximum of the height of the ScrollSlots plus the height of the labels above.
         # minheight = self.ItemSlotsHeader.sizeHint().height()
         # minheight += self.ScrollItemInfo.minimumHeight()
+
+        # TODO: FIX ... DIFFERENT DEPENDING ON SCREEN RESOLUTION ...
         self.ItemSummaryFrame.setMinimumHeight(260)
         self.ItemSlotsFrame.setMinimumHeight(260)
 
