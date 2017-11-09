@@ -161,6 +161,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                 except AttributeError:
                     pass
 
+
                 try:  # THROWS 'AttributeError' IF NOT FOUND ..
                     soup.find('font').extract()
 
