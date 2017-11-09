@@ -13,6 +13,7 @@ from B_ReportWindow import Ui_B_ReportWindow
 from bs4 import BeautifulSoup, Doctype
 from SC import formatCost, gemNameSort, gemTypeSort
 from lxml import etree
+from lxml.html import document_fromstring
 import os.path
 import re
 
@@ -101,7 +102,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
         self.ReportText.setHtml(self.reportHtml)
 
     def parseConfigReport(self, filename, scxmldoc):
-        source = etree.fromstring(scxmldoc.toxml())-
+        source = etree.fromstring(scxmldoc.toxml())
 
         try:
             xslt_xml = etree.parse(filename)
@@ -150,10 +151,9 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
 
                 soup = BeautifulSoup(self.reportHtml, "lxml")
 
-                # REMOVE UNNECESSARY ELEMENTS
-                for item in soup.contents:
-                    if isinstance(item, Doctype):
-                        item.extract()
+                for val in soup.contents:
+                    if isinstance(val, Doctype):
+                        val.extract()
 
                 try:  # THROWS 'AttributeError' IF NOT FOUND ..
                     soup.find('head').extract()
@@ -167,20 +167,12 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                 except AttributeError:
                     pass
 
-                # UNWRAP THE CRAP WE DON'T NEED
                 soup.html.unwrap()
                 soup.body.unwrap()
 
                 for b in soup.find_all('b'):
                     b.unwrap()
 
-                for table in soup.find_all('table'):
-                    table.unwrap()
-
-                for td in soup.find_all('td'):
-                    td.unwrap()
-
-                # DEFINE LINE BREAKS AND INDENTS
                 for br in soup.find_all('br'):
                     br.replace_with('\n')
 
@@ -191,19 +183,24 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                     dl.insert_after('\n')
 
                 for dt in soup.find_all('dt'):
-                    dt.insert_after('\n')
+                    if not dt.find(string = re.compile('Utility')):
+                        dt.insert_before('\n')
+                        print('before')
 
                 for hr in soup.find_all('hr'):
                     hr.replace_with(('-' * 80) + '\n')
+
+                for td in soup.find_all('td'):
+                    td.unwrap()
 
                 for tr in soup.find_all('tr'):
                     tr.insert_before('  ')
                     tr.insert_after('\n')
 
-                # DEBUGGING
-                print(soup)
-                print(soup.get_text())
-                print("endwhitespace")
+                f = open(filename, 'w', encoding = 'utf8')
+                f.write(soup.get_text().strip())
+                f.close()
+
 
             except IOError:
                 QMessageBox.critical(None, 'Error!', 'Error writing to file: ' + filename, 'OK')
