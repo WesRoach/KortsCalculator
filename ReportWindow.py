@@ -182,9 +182,10 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                 for dl in soup.find_all('dl'):
                     dl.insert_after('\n')
 
+                # NOT EXACTLY RIGHT ...
                 for dt in soup.find_all('dt'):
-                    if not dt.find(string = re.compile('Utility')):
-                        dt.insert_before('\n')  # This needs to be dt.insert_after()
+                    if not dt.find_all(string = re.compile('Utility')):
+                        dt.insert_after('\n')
 
                 for hr in soup.find_all('hr'):
                     hr.replace_with(('-' * 80) + '\n')
