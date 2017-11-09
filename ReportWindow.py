@@ -185,7 +185,6 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                 for dt in soup.find_all('dt'):
                     if not dt.find(string = re.compile('Utility')):
                         dt.insert_before('\n')
-                        print('before')
 
                 for hr in soup.find_all('hr'):
                     hr.replace_with(('-' * 80) + '\n')
