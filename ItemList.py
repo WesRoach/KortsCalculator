@@ -90,7 +90,7 @@ class ItemListDialog(QFileDialog):
         if w < 100:
             w = 780
         if h < 100:
-            w = 490
+            h = 490
 
         if w > screenWidth:
             w = 780
