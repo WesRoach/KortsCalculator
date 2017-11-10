@@ -39,11 +39,11 @@ def uixml(scwin, uixslt):
 
     try:
         f = open(str(filename), 'w')
-        f.write(uixmlstr)
+        f.write(str(uixmlstr))
         f.close()
 
     except IOError:
         QMessageBox.critical(None, 'Error!', 
             'Error opening file: ' + filename, 'OK')
-        return  # CRASH: TypeError('write() argument must be str, not lxml.etree._XSLTResultTree',)
+        return
 

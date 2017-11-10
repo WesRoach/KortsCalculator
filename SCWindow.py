@@ -2111,7 +2111,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
                                       self.realm, self.charclass)
         Qfd.setHistory(recentdir)
         if Qfd.exec_():
-            if len(Qfd.selectedFiles()) > 0:  # Changed from if Qfd.selectedFiles().count() > 0:
+            if len(Qfd.selectedFiles()) > 0:
                 filename = str(Qfd.selectedFiles()[0])
                 item = Item('drop', self.currentTabLabel, self.realm,
                             self.itemIndex)
@@ -2129,8 +2129,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
                 self.itemattrlist[self.currentTabLabel].Equipped = '0'
                 item.next = self.itemattrlist[self.currentTabLabel]
                 self.itemattrlist[self.currentTabLabel] = item
-                self.outfitlist[self.currentOutfit][self.currentTabLabel] \
-                    = (item.TemplateIndex, item.Equipped,)
+                self.outfitlist[self.currentOutfit][self.currentTabLabel] = (item.TemplateIndex, item.Equipped,)
                 self.restoreItem(item)
                 self.modified = True
 

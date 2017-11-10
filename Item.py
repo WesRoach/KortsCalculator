@@ -407,7 +407,7 @@ class Item:
         item.Speed = self.Speed
         item.Bonus = self.Bonus
         item.itemslots = self.itemslots[:]
-        item.next = self.__next__
+        item.next = self.next
         return item
 
     def slot(self, index):
