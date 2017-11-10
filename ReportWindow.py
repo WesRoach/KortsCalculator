@@ -136,7 +136,6 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
             except IOError:
                 QMessageBox.critical(None, 'Error!', 'Error writing to file: ' + filename, 'OK')
 
-    # TODO: WIP
     def saveToText(self):
         filename = os.path.join(self.parent.ReportPath, str(self.parent.CharName.text()) + "_report.txt")
         filename, filters = QFileDialog.getSaveFileName(self, "Save Report", filename, "Text (*.txt);;All Files (*.*)")
@@ -201,7 +200,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                 for hr in soup.find_all('hr'):
                     hr.replace_with(('-' * 80) + '\n')
 
-                for li in soup.find_all('li'):  # MATERIALS REPORT
+                for li in soup.find_all('li'):
                     li.insert_before('    * ')
 
                 for td in soup.find_all('td'):
@@ -211,7 +210,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                     tr.insert_before('  ')
                     tr.insert_after('\n')
 
-                for ul in soup.find_all('ul'):  # MATERIALS REPORT
+                for ul in soup.find_all('ul'):
                     ul.insert_after('\n')
 
                 f = open(filename, 'w', encoding = 'utf8')
