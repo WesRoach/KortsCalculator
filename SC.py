@@ -153,4 +153,4 @@ def gemNameSort(a, b):
         else:
             return -1
 
-        return (a > b) - (a < b)
+    return (a > b) - (a < b)
