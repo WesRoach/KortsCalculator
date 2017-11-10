@@ -70,17 +70,18 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                 cost = slot.gemCost(1)
                 self.totalcost += cost
 
-        keys = sorted(list(self.gemnames.keys()))
+        # TODO: SOMETHING IS BROKEN IN HERE ...
+        keys = sorted(list(self.gemnames.keys()))  # PROBABLY THIS ...
         self.gemnames = [[x, self.gemnames.get(x)] for x in keys]
         for type, matlist in list(self.materials.items()):
             if type == 'Gems':
-                keys = sorted(list(matlist.keys()))
+                keys = sorted(list(matlist.keys()))  # OR THIS ...
                 matlist = [[x, matlist.get(x)] for x in keys]
             elif type == 'Liquids':
-                keys = sorted(list(matlist.keys()))
+                keys = sorted(list(matlist.keys()))  # OR THIS ...
                 matlist = [[x, matlist.get(x)] for x in keys]
             elif type == 'Dusts':
-                keys = sorted(list(matlist.keys()))
+                keys = sorted(list(matlist.keys()))  # OR EVEN THIS ...
                 matlist = [[x, matlist.get(x)] for x in keys]
             self.materials[type] = matlist
         self.printMaterials()
@@ -148,6 +149,8 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                     filename += '.txt'
 
                 soup = BeautifulSoup(self.reportHtml, "lxml")
+
+                print(self.reportHtml)
 
                 for val in soup.contents:
                     if isinstance(val, Doctype):
