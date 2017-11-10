@@ -86,6 +86,26 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
             self.materials[type] = matlist
         self.printMaterials()
 
+        # OLD PYTHON 2.x CODE PRIOR TO CONVERSION ...
+        # keys = self.gemnames.keys()
+        # keys.sort(gemNameSort)
+        # self.gemnames = map(lambda x: [x, self.gemnames.get(x)], keys)
+        # for type, matlist in self.materials.items():
+        #     if type == 'Gems':
+        #         keys = matlist.keys()
+        #         keys.sort(gemTypeSort)
+        #         matlist = map(lambda x: [x, matlist.get(x)], keys)
+        #     elif type == 'Liquids':
+        #         keys = matlist.keys()
+        #         keys.sort()
+        #         matlist = map(lambda x: [x, matlist.get(x)], keys)
+        #     elif type == 'Dusts':
+        #         keys = matlist.keys()
+        #         keys.sort()
+        #         matlist = map(lambda x: [x, matlist.get(x)], keys)
+        #     self.materials[type] = matlist
+        # self.printMaterials()
+
     def printMaterials(self):
         materialsstr = '<b>Total Cost:</b> <font color="#FF0000">%s</font>\n' % formatCost(self.totalcost)
         materialsstr += '<hr><center><b>Gem Names</b></center><ul>\n'
