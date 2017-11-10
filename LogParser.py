@@ -11,7 +11,7 @@ import Item
 import sys
 import re
 
-f = file(sys.argv[1], 'rU')
+f = open(sys.argv[1], 'rU')
 lines = f.readlines()
 f.close()
 
@@ -132,7 +132,3 @@ for line in lines:
                 else:
                     func()
                 break
-
-        
-        
-    
