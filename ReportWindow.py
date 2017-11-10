@@ -70,7 +70,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                 cost = slot.gemCost(1)
                 self.totalcost += cost
 
-        # TODO: SOMETHING IS BROKEN IN HERE ...
+        # TODO: SOMETHING IS BROKEN IN HERE ... MISSING SORT KEY
         keys = sorted(list(self.gemnames.keys()))  # PROBABLY THIS ...
         self.gemnames = [[x, self.gemnames.get(x)] for x in keys]
         for type, matlist in list(self.materials.items()):
