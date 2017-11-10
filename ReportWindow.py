@@ -13,7 +13,6 @@ from B_ReportWindow import Ui_B_ReportWindow
 from bs4 import BeautifulSoup, Doctype
 from SC import formatCost, gemNameSort, gemTypeSort
 from lxml import etree
-from lxml.html import document_fromstring
 import os.path
 import re
 
@@ -155,14 +154,8 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                     if isinstance(val, Doctype):
                         val.extract()
 
-                try:  # THROWS 'AttributeError' IF NOT FOUND ..
+                try:  # THROWS 'AttributeError' IF NOT FOUND ...
                     soup.find('head').extract()
-
-                except AttributeError:
-                    pass
-
-                try:  # THROWS 'AttributeError' IF NOT FOUND ..
-                    soup.find('font').extract()
 
                 except AttributeError:
                     pass
@@ -179,15 +172,37 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                 for center in soup.find_all('center'):
                     center.insert_after('\n')
 
+                for dd in soup.find_all('dd'):
+                    dd.insert_before('      ')
+
                 for dl in soup.find_all('dl'):
                     dl.insert_after('\n')
 
                 for dt in soup.find_all('dt'):
-                    if not dt.find(string = re.compile('Utility')):
-                        dt.insert_before('\n')  # This needs to be dt.insert_after()
+                    next_tag = dt.find_next('dt')
+
+                    try:  # THROWS 'AttributeError' IF NOT FOUND ...
+                        if not next_tag.text.startswith('Utility'):
+                            dt.insert_after('\n')
+
+                    except AttributeError as e:
+                        pass
+
+                    if dt.find(string = re.compile('Gems')):
+                        dt.insert_before('\n')
+
+                    elif dt.find(string=re.compile('Liquids')):
+                        dt.insert_before('\n')
+
+                    elif dt.find(string=re.compile('Dusts')):
+                        dt.insert_before('\n')
+                        dt.insert_after('\n')
 
                 for hr in soup.find_all('hr'):
                     hr.replace_with(('-' * 80) + '\n')
+
+                for li in soup.find_all('li'):  # MATERIALS REPORT
+                    li.insert_before('    * ')
 
                 for td in soup.find_all('td'):
                     td.unwrap()
@@ -196,10 +211,12 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                     tr.insert_before('  ')
                     tr.insert_after('\n')
 
+                for ul in soup.find_all('ul'):  # MATERIALS REPORT
+                    ul.insert_after('\n')
+
                 f = open(filename, 'w', encoding = 'utf8')
                 f.write(soup.get_text().strip())
                 f.close()
-
 
             except IOError:
                 QMessageBox.critical(None, 'Error!', 'Error writing to file: ' + filename, 'OK')
