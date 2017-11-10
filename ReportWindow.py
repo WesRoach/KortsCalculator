@@ -182,7 +182,6 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                 for dl in soup.find_all('dl'):
                     dl.insert_after('\n')
 
-
                 for dt in soup.find_all('dt'):
                     if not dt.find(string = re.compile('Utility')):
                         dt.insert_before('\n')  # This needs to be dt.insert_after()
