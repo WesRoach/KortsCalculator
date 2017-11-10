@@ -11,11 +11,8 @@
 from PyQt5.QtCore import QDir, QResource
 from PyQt5.QtGui import QIcon, QFont
 from PyQt5.QtWidgets import QApplication
-from SCOptions import SCOptions
 import SCWindow
 import locale
-import os
-import os.path
 import sys
 
 
