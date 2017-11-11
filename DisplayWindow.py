@@ -11,7 +11,6 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QDialog
 from B_DisplayWindow import *
 from Constants import *
-import string
 
 
 class DisplayWindow(QDialog, Ui_B_DisplayWindow):

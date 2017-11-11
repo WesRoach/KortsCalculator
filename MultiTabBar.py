@@ -363,7 +363,7 @@ class MultiTabBar(QWidget):
                             break
                 if e.oldPos() != QPoint(-1, -1):
                     self.update(oldHoverRect)
-                self.update(self.__hoverRect)  # NOTE: Added self.*
+                self.update(self.__hoverRect)
             return True
         elif e.type() == QEvent.HoverLeave:
             oldHoverRect = self.__hoverRect

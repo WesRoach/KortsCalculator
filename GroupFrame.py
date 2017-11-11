@@ -11,7 +11,6 @@
 
 from PyQt5.QtGui import QPainter
 from PyQt5.QtWidgets import QFrame, QStyle, QStyleOptionFrame, QStyleOptionTabWidgetFrame
-import sys
 
 
 class GroupFrame(QFrame):
@@ -22,6 +21,7 @@ class GroupFrame(QFrame):
 
         if str(self.style().objectName()).lower() == "windowsxp":
             self.setContentsMargins(ltrb[0] + 1, ltrb[1], ltrb[2] + 2, ltrb[3] + 1)
+
         else:
             self.setContentsMargins(ltrb[0] + 1, ltrb[1], ltrb[2] + 1, ltrb[3])
 
@@ -32,6 +32,7 @@ class GroupFrame(QFrame):
             # WINDOWS XP IN CLASIC VIEW DISPLAYS NO GROUPFRAME
             styleoptions = QStyleOptionTabWidgetFrame()
             frame = QStyle.PE_FrameTabWidget
+
         else:
             styleoptions = QStyleOptionFrame()
             frame = QStyle.PE_FrameGroupBox

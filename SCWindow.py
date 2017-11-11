@@ -1929,8 +1929,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
                     if efftext in valueslist:
                         valueslist = valueslist[efftext]
                         if isinstance(valueslist[0], tuple):
-                            if (len(valueslist[0]) > 1 and amtindex < 1
-                                and (valueslist[2] == 0 or valueslist[2] == 8)):
+                            if len(valueslist[0]) > 1 and amtindex < 1 and (valueslist[2] == 0 or valueslist[2] == 8):
                                 # Let's default to crafted tincts
                                 amtindex = 1
                             valueslist = valueslist[0]
@@ -2089,41 +2088,59 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
     def loadItem(self):
         ext = FileExt[self.currentTabLabel]  # TODO: CREATE REALISTIC FILE EXTENSIONS..
         extstr = ''
+
         if not isinstance(ext, bytes):
+
             for e in ext:
                 extstr += '*%s.xml *.%s ' % (e, e)
+
             ext = ext[0]
+
         else:
             extstr = '*%s.xml *.%s' % (ext, ext)
+
         extstr = "Items (%s);;All Files (*.*)" % extstr.rstrip()
         itemdir = self.ItemPath
         recentdir = []
+
         if os.path.exists(os.path.join(itemdir, self.realm, ext)):
             itemdir = os.path.join(self.ItemPath, self.realm, ext)
+
             if self.coop:
+
                 for realm in Realms:
+
                     if realm != self.realm:
                         recentdir.append(os.path.join(self.ItemPath, realm, ext))
+
             recentdir.append(os.path.join(self.ItemPath, "All", ext))
+
         elif os.path.exists(os.path.join(itemdir, 'All', ext)):
             itemdir = os.path.join(self.ItemPath, 'All', ext)
-        Qfd = ItemList.ItemListDialog(self, "Load Item", itemdir, extstr,
-                                      self.realm, self.charclass)
+
+        Qfd = ItemList.ItemListDialog(self, "Load Item", itemdir, extstr, self.realm, self.charclass)
         Qfd.setHistory(recentdir)
+
         if Qfd.exec_():
+
             if len(Qfd.selectedFiles()) > 0:
                 filename = str(Qfd.selectedFiles()[0])
-                item = Item('drop', self.currentTabLabel, self.realm,
-                            self.itemIndex)
-                if item.load(filename, str(self.itemnumbering)) == -1: return
+                item = Item('drop', self.currentTabLabel, self.realm, self.itemIndex)
+
+                if item.load(filename, str(self.itemnumbering)) == -1:
+                    return
+
                 if str.lower(item.Realm) != str.lower(self.realm) and str.lower(item.Realm) != 'all' and not self.coop:
                     QMessageBox.critical(None, 'Error!', 'You are trying to load an item for another realm!', 'OK')
                     return
+
                 self.itemIndex += 1
                 self.itemnumbering += 1
+
                 if item.next:
                     item.next.TemplateIndex = self.itemIndex
                     self.itemIndex += 1
+
                 item.Location = self.currentTabLabel
                 item.Equipped = self.itemattrlist[self.currentTabLabel].Equipped
                 self.itemattrlist[self.currentTabLabel].Equipped = '0'
