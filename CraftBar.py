@@ -9,27 +9,24 @@
 
 from PyQt5.QtCore import Qt, QVariant, QModelIndex
 from PyQt5.QtGui import QStandardItemModel
-from PyQt5.QtWidgets import QApplication, QAbstractItemView, QDialog, QHeaderView, QFileDialog
+from PyQt5.QtWidgets import QAbstractItemView, QDialog, QHeaderView, QFileDialog
 from B_CraftBar import *
 from Character import *
 from Constants import *
 from SCOptions import SCOptions
-import configparser
+from configparser import DEFAULTSECT, RawConfigParser
 import glob
 import os
 import os.path
 import re
-import SC
-import string
 import sys
 
 
-class IniConfigParser(configparser.RawConfigParser):
+class IniConfigParser(RawConfigParser):
     def __init__(self, defaults=None):
-        configparser.RawConfigParser.__init__(self,defaults)
+        RawConfigParser.__init__(self, defaults)
 
-    def write(self, fp):
-
+    def write(self, fp):  # OVERRIDE METHOD BUG
         if self._defaults:
             fp.write("[%s]\n" % DEFAULTSECT)
 
@@ -51,12 +48,11 @@ class IniConfigParser(configparser.RawConfigParser):
     def optionxform(self, optionstr):
         return optionstr
 
-    
-class CraftBar(QDialog, Ui_B_CraftBar):
 
-    def __init__(self,parent = None,name = None,modal = False,fl = Qt.Widget):
+class CraftBar(QDialog, Ui_B_CraftBar):
+    def __init__(self, parent=None, name=None, modal=False, fl=Qt.Widget):
         QDialog.__init__(self, parent, fl)
-        Ui_B_CraftBar.setupUi(self,self)
+        Ui_B_CraftBar.setupUi(self, self)
 
         self.model = QStandardItemModel(0, 3)
         self.model.setHeaderData(0, Qt.Horizontal, QVariant('Client'), Qt.DisplayRole)
@@ -78,7 +74,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
 
         self.parent = parent
         self.gemcount = 0
-        self.piecelist = { }
+        self.piecelist = {}
 
         self.ItemSelect = [
             self.ChestSelect, self.ArmsSelect, self.HeadSelect,
@@ -93,10 +89,10 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         self.reini = re.compile('(\w+)-(\d+)\.ini$')
         self.resec = re.compile('\[(\w+)\]')
         self.rectl = re.compile('[Hh]otkey_(\d+)=44,13,')
-        
-        if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
-            self.PathSelectButton.setFixedWidth(50)
-            self.PathSelectButton.setFixedHeight(32)
+
+        # if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
+        #     self.PathSelectButton.setFixedWidth(50)
+        #     self.PathSelectButton.setFixedHeight(32)
 
         self.PathSelectButton.clicked.connect(self.openFileDialog)
         self.PushButton19.clicked.connect(self.accept)
@@ -111,13 +107,8 @@ class CraftBar(QDialog, Ui_B_CraftBar):
             self.ItemSelect[i].clicked.connect(self.pieceBoxChanged)
             item = self.parent.itemattrlist[self.items[i]]
 
-            # Changed from
-            # while item.ActiveState == 'drop' and item.__next__ is not None:
-            #     item = item.__next__
-
             while item.ActiveState == 'drop' and item.next is not None:
                 item = item.next
-
 
             if item.ActiveState == 'drop':
                 self.ItemSelect[i].setEnabled(False)
@@ -128,12 +119,12 @@ class CraftBar(QDialog, Ui_B_CraftBar):
 
             for slot in item.slots():
 
-                 if slot.crafted():
-                     unused = False
+                if slot.crafted():
+                    unused = False
 
-                     if slot.makes() == "0":
-                         done = False
-                         break
+                    if slot.makes() == "0":
+                        done = False
+                        break
 
             if unused:
                 self.ItemSelect[i].setEnabled(False)
@@ -178,7 +169,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         row = indexList[0].row()
         fileIndex = self.model.index(row, 0)
         filename = str(self.model.data(fileIndex, Qt.UserRole).toString())
-        
+
         self.LoadGemsButton.setEnabled(0)
         self.LoadGemsButton.update()
 
@@ -196,7 +187,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         while slotcounter <= 99:
 
             try:
-                buttonstr=CP.get('Macros', 'Macro_%d' % slotcounter)
+                buttonstr = CP.get('Macros', 'Macro_%d' % slotcounter)
 
             except:
                 if len(newbuttons) < 3:
@@ -217,9 +208,10 @@ class CraftBar(QDialog, Ui_B_CraftBar):
             if buttons[i] < 0 and len(newbuttons) > 0:
                 buttons[i] = newbuttons.pop(0)
                 CP.set('Macros', 'Macro_%d' % buttons[i], "%s,/craft %s" % (Realms[i][0:3], Realms[i]))
-        
+
         realm = self.parent.realm
-        slotcounter = (self.HotbarNum.value() - 1) * 100 + (self.HotbarRow.value() - 1) * 10 + self.HotbarPos.value() - 1
+        slotcounter = (self.HotbarNum.value() - 1) * 100 + (
+                                                           self.HotbarRow.value() - 1) * 10 + self.HotbarPos.value() - 1
         startslot = slotcounter
 
         for loc in TabList:
@@ -287,7 +279,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         self.HotbarNum.setValue(int(slotcounter / 100) + 1)
         self.HotbarRow.setValue(int(slotcounter / 10) % 10 + 1)
         self.HotbarPos.setValue(slotcounter % 10 + 1)
-        self.piecelist = { }
+        self.piecelist = {}
 
         for ctl in self.ItemSelect:
 
@@ -297,7 +289,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         self.gemcount = 0
         self.computeBarEnd()
 
-    def findPath(self,rootpath):
+    def findPath(self, rootpath):
         servers = ServerCodes
 
         if self.parent.euroServers:
@@ -307,15 +299,15 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         rootpath = str(rootpath)
 
         if os.path.isdir(rootpath):
-            filelist = glob.glob(rootpath+'/*-*.ini')
-            filelist.extend(glob.glob(rootpath+'/*/*-*.ini'))
-            filelist.extend(glob.glob(rootpath+'/*/*/*-*.ini'))
+            filelist = glob.glob(rootpath + '/*-*.ini')
+            filelist.extend(glob.glob(rootpath + '/*/*-*.ini'))
+            filelist.extend(glob.glob(rootpath + '/*/*/*-*.ini'))
 
             for file in filelist:
-                path = file[len(rootpath)+1:]
+                path = file[len(rootpath) + 1:]
                 slash = path.rfind('/')
                 slash = max(slash, path.rfind('\\'))
-                m = self.reini.search(path[(slash+1):])
+                m = self.reini.search(path[(slash + 1):])
 
                 if slash < 0:
                     path = ''
@@ -326,10 +318,6 @@ class CraftBar(QDialog, Ui_B_CraftBar):
                 if m is None or m.group(2) not in servers:
                     continue
 
-                # search the section(s) for the pattern
-                # [Quickbar[2-3]*]
-                # Hotkey_[0-9]*=44,13,
-                # corresponding to an SC'er menu quickbar item
                 f = open(file, 'r')
                 find = 0
 
@@ -357,12 +345,12 @@ class CraftBar(QDialog, Ui_B_CraftBar):
 
                 server = servers[m.group(2)]
                 self.model.insertRows(self.model.rowCount(), 1)
-                index = self.model.index(self.model.rowCount()-1, 0, QModelIndex())
+                index = self.model.index(self.model.rowCount() - 1, 0, QModelIndex())
                 self.model.setData(index, QVariant(path), Qt.DisplayRole)
                 self.model.setData(index, QVariant(file), Qt.UserRole)
-                index = self.model.index(self.model.rowCount()-1, 1, QModelIndex())
+                index = self.model.index(self.model.rowCount() - 1, 1, QModelIndex())
                 self.model.setData(index, QVariant(server), Qt.DisplayRole)
-                index = self.model.index(self.model.rowCount()-1, 2, QModelIndex())
+                index = self.model.index(self.model.rowCount() - 1, 2, QModelIndex())
                 self.model.setData(index, QVariant(m.group(1)), Qt.DisplayRole)
 
                 if self.model.rowCount() == 1:
@@ -399,7 +387,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
             self.EndRow.setText(str(er))
             self.EndPos.setText(str(ep))
 
-    def hotbarNumChanged(self,a0):
+    def hotbarNumChanged(self, a0):
         self.computeBarEnd()
 
     def computeGemCount(self):
@@ -424,10 +412,6 @@ class CraftBar(QDialog, Ui_B_CraftBar):
 
             if self.ItemSelect[i].checkState() == Qt.Checked:
                 item = self.parent.itemattrlist[self.items[i]]
-
-                # Changed from
-                # while item.ActiveState == 'drop' and item.__next__ is not None:
-                #     item = item.__next__
 
                 while item.ActiveState == 'drop' and item.next is not None:
                     item = item.next
