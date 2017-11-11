@@ -12,12 +12,13 @@ from PyQt5.QtWidgets import QApplication, QDialog, QLabel, QSizePolicy
 from PyQt5.QtWidgets import QRadioButton, QVBoxLayout, QDialogButtonBox
 import sys
 
+
 class Ui_ChooseSlot(object):
     def setupUi(self, ChooseSlot, buttonlabels):
         ChooseSlot.setObjectName("ChooseSlot")
         ChooseSlot.setWindowModality(Qt.ApplicationModal)
 
-        sizePolicy = QSizePolicy(QSizePolicy.Policy(0),QSizePolicy.Policy(0))
+        sizePolicy = QSizePolicy(QSizePolicy.Policy(0), QSizePolicy.Policy(0))
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(ChooseSlot.sizePolicy().hasHeightForWidth())
@@ -38,11 +39,13 @@ class Ui_ChooseSlot(object):
         self.vboxlayout1.addWidget(self.Label)
 
         self.Buttons = []
+
         for button in buttonlabels:
             self.Buttons.append(QRadioButton(ChooseSlot))
             self.Buttons[-1].setObjectName("Button[%d]" % (len(self.Buttons) - 1))
             self.Buttons[-1].setText(QApplication.translate("ChooseSlot", button, None, QApplication.UnicodeUTF8))
             self.vboxlayout1.addWidget(self.Buttons[-1])
+
         if len(self.Buttons):
             self.Buttons[0].setChecked(Qt.Checked)
 
@@ -50,7 +53,7 @@ class Ui_ChooseSlot(object):
 
         self.buttonBox = QDialogButtonBox(ChooseSlot)
         self.buttonBox.setOrientation(Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel | QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
         self.vboxlayout.addWidget(self.buttonBox)
 
@@ -62,27 +65,29 @@ class Ui_ChooseSlot(object):
         ChooseSlot.setWindowTitle(QApplication.translate("ChooseSlot", "Choose Slot", None, QApplication.UnicodeUTF8))
         self.Label.setText(QApplication.translate("ChooseSlot", "Add Item to Slot", None, QApplication.UnicodeUTF8))
 
+
 class ChooseSlot(QDialog, Ui_ChooseSlot):
     def __init__(self, parent=None, buttons=tuple()):
-        QDialog.__init__(self,parent)
-        Ui_ChooseSlot.setupUi(self,self,buttons)
-        self.buttonBox.accepted.connect(self.accepted)
-        self.buttonBox.rejected.connect(self.reject)
+        QDialog.__init__(self, parent)
+        Ui_ChooseSlot.setupUi(self, self, buttons)
+        self.buttonBox.accepted().connect(self.accepted)
+        self.buttonBox.rejected().connect(self.reject)
 
     def rejected(self):
         self.done(-1)
 
     def accepted(self):
-        for button in range(0,len(self.Buttons)):
+        for button in range(0, len(self.Buttons)):
+
             if self.Buttons[button].isChecked():
                 self.done(button)
                 return
+
         self.done(-2)
+
 
 if __name__ == '__main__':
     app = QApplication([])
-    dlg = ChooseSlot(buttons=("Left Ring","Right Ring","Spare"))
+    dlg = ChooseSlot(buttons=("Left Ring", "Right Ring", "Spare"))
     res = dlg.exec_()
-    import sys
     sys.stdout.write('Exited with ' + str(res))
-
