@@ -170,8 +170,6 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
 
                 soup = BeautifulSoup(self.reportHtml, "lxml")
 
-                print(self.reportHtml)
-
                 for val in soup.contents:
                     if isinstance(val, Doctype):
                         val.extract()
