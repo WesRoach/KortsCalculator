@@ -22,7 +22,12 @@ class ComboListView(QListView):
     def showEvent(self, e):
         if qVersion() < '4.2':
             QListView.showEvent(self, e)
+
+        # CAUSES REMAINING STATEMENTS TO BE SKIPPED, BUT ONLY WORKS THIS WAY ...
+        # THE CODE FROM LINE 31 TO 53 DOES NOT SEEM TO DO ANYTHING ...
+
         return
+
         e.accept()
         model = self.model()
         rows = model.rowCount()
@@ -32,8 +37,10 @@ class ComboListView(QListView):
         for i in range(0, rows):
             item = model.item(i, col)
             mx = max(mx, item.sizeHint().width())
+
         if rows:
             sz = QSize(mx, item.sizeHint().height())
+
         for i in range(0, rows):
             model.item(i, col).setSizeHint(sz)
 
@@ -45,28 +52,36 @@ class ComboListView(QListView):
 
         QListView.showEvent(self, e)
 
+    # DOESN'T REALLY SEEM TO DO ANYTHING
     def keyPressEvent(self, e):
         if e.key() == Qt.Key_Tab or e.key() == Qt.Key_Backtab:
             e.accept()
             ev = QKeyEvent(QEvent.KeyPress, e.key(), e.modifiers(), e.text(), e.isAutoRepeat(), e.count())
             QApplication.postEvent(self.parent().parent(), ev)
+
             return
 
         QListView.keyPressEvent(self, e)
 
+    # DOESN'T REALLY SEEM TO DO ANYTHING
     def event(self, e):
         if e.type() == QEvent.ShortcutOverride and e.key() == Qt.Key_Escape:
             self.clearSelection()
+
         return QListView.event(self, e)
 
+    # THE FOCUS OUT EVENT MIGHT NOT BE NEEDED ...
     def focusOutEvent(self, e):
-        # from the focus events posted at our combobox, we must...
         combobox = self.parent().parent()
+
         if e.reason() in (Qt.TabFocusReason, Qt.BacktabFocusReason,):
             combobox.hidePopup()
+
         idxs = self.selectedIndexes()
+
         if len(idxs) > 0 and combobox.currentIndex() != idxs[0].row():
             combobox.setCurrentIndex(idxs[0].row())
             combobox.activated[int].emit(combobox.currentIndex())
             combobox.activated[str].emit(combobox.currentText())
+
         QListView.focusOutEvent(self, e)
