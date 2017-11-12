@@ -6,15 +6,11 @@ import sys
 if __name__ == "__main__":
     sys.argv.append('py2exe')
 
-sc = {
-    "script" : "Spellcraft.pyw",
-    "icon_resources" : [(1, 'images/ScWindow.ico')],
-    }
+sc = {"script": "Spellcraft.pyw", "icon_resources": [(1, 'images/ScWindow.ico')], }
 
-setup(name="kscraftsetup",
-    zipfile=None,
-    windows=[sc],
-    data_files=[
+setup(name="kscraftsetup", zipfile = None, windows = [sc],
+
+    data_files = [
         ('.', ['./LICENSE.txt']),
         ('.', ['./NOTICE.txt']),
         ('.', ['./CHANGES.txt']),
@@ -23,6 +19,7 @@ setup(name="kscraftsetup",
         ('reports', glob.glob("reports/*.xml")),
         ('reports', glob.glob("reports/*.xsl")),
     ],
+
     options = {'py2exe': {'excludes' : ['_ssl',],
                           'includes' : ['sip',],
                           'bundle_files' : 3,
