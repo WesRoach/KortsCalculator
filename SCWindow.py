@@ -107,10 +107,6 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
         UI_B_SCWindow.setupUi(self, self)
         self.statusBar().hide()
 
-        if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
-            self.sizegrip = QSizeGrip(self)
-            self.sizegrip.move(self.width() - 15, self.height() - 15)
-
         self.initLayout()
         self.initControls()
         self.updateGeometry()
@@ -126,7 +122,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
     def initLayout(self):
         testfont = QFontMetrics(QApplication.font())
 
-        self.switchOnType = {'drop': [], 'player': []}
+        self.switchOnType = {'drop': [], 'player': [] }
 
         self.switchOnType['drop'] = [
             self.QualEdit,
@@ -148,15 +144,8 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
         amtedwidth = self.ItemLevel.minimumSizeHint().width()
         amtedwidth += testfont.size(Qt.TextSingleLine, "19.").width()
 
-        if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
-            cbwidth = cbwidth - 14
-            itmcbwidth = itmcbwidth - 14
-            amtcbwidth = amtcbwidth - 14
-            edheight = self.CharName.sizeHint().height() - 1
-            cbheight = self.Realm.sizeHint().height()
-        else:
-            edheight = min(self.CharName.minimumSizeHint().height(), self.Realm.minimumSizeHint().height()) - 2
-            cbheight = edheight
+        edheight = min(self.CharName.minimumSizeHint().height(), self.Realm.minimumSizeHint().height()) - 2
+        cbheight = edheight
 
         self.CharName.setFixedSize(QSize(cbwidth, edheight))
         self.Realm.setFixedSize(QSize(cbwidth, cbheight))
@@ -952,9 +941,8 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
                                 'BaseCapToCapBonus',)
                     else:
                         subs = ('Bonus', 'TotalBonus', 'BaseCap',)
-                        if key == 'Resists' and \
-                                        'RacialBonus' in totalsdict[key][type]:
-                            subs = subs + ('RacialBonus',)
+                        if key == 'Resists' and 'RacialBonus' in totalsdict[key][type]:
+                            subs += ('RacialBonus', )
                     for subtype in subs:
                         tagname = str(plainXMLTag(subtype))
                         valnode = document.createElement(tagname)
@@ -1284,7 +1272,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
         wid = 3
         if amt > -10 and amt < 10: wid += 1
         if bonus[0:4] == 'All ':
-            bonus = "%*s%d %s)" % (wid - 1, "(", amt, bonus,)
+            bonus = "%*s%d %s)" % (wid - 1, '(', amt, bonus,)
         else:
             bonus = "%*d %s" % (wid, amt, bonus,)
         index = model.index(model.rowCount() - 1, 0, QModelIndex())
@@ -1638,7 +1626,10 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
                                                              ['Resists'][rt]))
             else:
                 self.StatBonus[rt].setText('-')
-        if self.nocalc: return
+
+        if self.nocalc:
+            return
+
         self.modified = True
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
@@ -2562,9 +2553,9 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
                 locs.append([key, amount])
         DW = DisplayWindow.DisplayWindow(self)
         if findtype:
-            DW.setWindowTitle('Slots With %s %s' % (find, finddesc))
+            DW.setWindowTitle('Slots with %s %s' % (find, finddesc))
         else:
-            DW.setWindowTitle('Slots With %s' % find)
+            DW.setWindowTitle('Slots with %s' % find)
         DW.loadLocations(locs)
         DW.exec_()
 
@@ -2772,16 +2763,15 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
         newtype = str(action.data())  # Changed from newtype = str(action.data().toString())
         if newtype == 'Drop Item':
             item = Item('drop', self.currentTabLabel, self.realm, self.itemIndex)
-            item.ItemName = "Drop Item" + str(self.itemnumbering)
+            item.ItemName = "Drop Item " + str(self.itemnumbering)
         else:
             item = Item('player', self.currentTabLabel, self.realm, self.itemIndex)
-            item.ItemName = "Crafted Item" + str(self.itemnumbering)
+            item.ItemName = "Crafted Item " + str(self.itemnumbering)
         self.itemIndex += 1
         self.itemnumbering += 1
         item.next = self.itemattrlist[self.currentTabLabel]
         self.itemattrlist[self.currentTabLabel] = item
-        self.outfitlist[self.currentOutfit][self.currentTabLabel] \
-            = (item.TemplateIndex, item.Equipped,)
+        self.outfitlist[self.currentOutfit][self.currentTabLabel] = (item.TemplateIndex, item.Equipped,)
         if newtype == 'Drop Item' or newtype == 'Normal Item':
             self.restoreItem(item)
         else:
