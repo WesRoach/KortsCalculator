@@ -211,8 +211,6 @@ class MultiTabBar(QWidget):
                 r = r.united(self.__tabAt(i, j).rect)
         r.setRight(r.right() + padwidth)
 
-        if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
-            r.setBottom(r.bottom() + padwidth)
         sz = QApplication.globalStrut()
         return r.size().expandedTo(sz)
 
@@ -396,10 +394,8 @@ class MultiTabBar(QWidget):
         taboverlap.shape = QTabBar.RoundedNorth
 
         baseoverlap = self.baseOverlap()
-        rowoverlap = self.style().pixelMetric(QStyle.PM_TabBarTabShiftVertical,
-                                              taboverlap, self)
-        if not str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
-            rowoverlap += baseoverlap
+        rowoverlap = self.style().pixelMetric(QStyle.PM_TabBarTabShiftVertical, taboverlap, self)
+        rowoverlap += baseoverlap
 
         maxWidth = 0
         maxHeight = 0
@@ -421,10 +417,7 @@ class MultiTabBar(QWidget):
             maxRowWidth = max(mw, maxRowWidth)
 
         maxHeight -= rowoverlap
-        if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
-            centerOffset = (self.width() - maxRowWidth) / 2.0
-        else:
-            centerOffset = 0
+        centerOffset = 0
 
         for i in range(numrows):
             x = 0
