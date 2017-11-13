@@ -54,6 +54,8 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         QDialog.__init__(self, parent, fl)
         Ui_B_CraftBar.setupUi(self, self)
 
+        # TODO: CENTER CLIENT, SERVER, AND CRAFTER DATA
+        # TODO: MAKE DIALOG RESIZEABLE, CURRENTLY NOT POSSIBLE
         self.model = QStandardItemModel(0, 3)
         self.model.setHeaderData(0, Qt.Horizontal, QVariant('Client'), Qt.DisplayRole)
         self.model.setHeaderData(1, Qt.Horizontal, QVariant('Server'), Qt.DisplayRole)
@@ -89,10 +91,6 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         self.reini = re.compile('(\w+)-(\d+)\.ini$')
         self.resec = re.compile('\[(\w+)\]')
         self.rectl = re.compile('[Hh]otkey_(\d+)=44,13,')
-
-        # if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
-        #     self.PathSelectButton.setFixedWidth(50)
-        #     self.PathSelectButton.setFixedHeight(32)
 
         self.PathSelectButton.clicked.connect(self.openFileDialog)
         self.PushButton19.clicked.connect(self.accept)
@@ -137,6 +135,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         self.HotbarRow.setValue(1)
         self.HotbarPos.setValue(1)
 
+        # TODO: REMOVE NON-WIN32 STUFF
         if sys.platform == 'win32':
             path = os.environ.get('APPDATA', '')
 
@@ -210,8 +209,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
                 CP.set('Macros', 'Macro_%d' % buttons[i], "%s,/craft %s" % (Realms[i][0:3], Realms[i]))
 
         realm = self.parent.realm
-        slotcounter = (self.HotbarNum.value() - 1) * 100 + (
-                                                           self.HotbarRow.value() - 1) * 10 + self.HotbarPos.value() - 1
+        slotcounter = (self.HotbarNum.value() - 1) * 100 + (self.HotbarRow.value() - 1) * 10 + self.HotbarPos.value() - 1
         startslot = slotcounter
 
         for loc in TabList:
@@ -291,9 +289,6 @@ class CraftBar(QDialog, Ui_B_CraftBar):
 
     def findPath(self, rootpath):
         servers = ServerCodes
-
-        if self.parent.euroServers:
-            servers = EuroServerCodes
 
         self.model.removeRows(0, self.model.rowCount())
         rootpath = str(rootpath)
