@@ -43,7 +43,7 @@ class SpellCraftingCalculator(QApplication):
         self.setFont(font)
 
         scc = SCWindow.SCWindow()
-        scc.setWindowIcon(QIcon(":/images/ScWindow.png"))
+        scc.setWindowIcon(QIcon(":/images/SCWindow.png"))
         app.setActiveWindow(scc)
 
         scc.show()
