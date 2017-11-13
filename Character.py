@@ -8,7 +8,7 @@
 
 __all__ = [
     'AllBonusList', 'ClassList', 'RaceList', 'Races', 'Realms', 'AllRealms',
-    'ItemTypes', 'ServerCodes', 'EuroServerCodes', 'ServerIgnCodes',
+    'ItemTypes', 'ServerCodes', 'ServerIgnCodes',
 ]
 
 from tuple2 import *
@@ -634,86 +634,23 @@ ItemTypes = d2({
     'Spare': spareTypes,
 })
 
-# It looks like 1.86 is moving twords one .ign file per cluster,
-# so .ign server numbers are shared across servers now.
-#
+# SERVER CODES (*.IGN)
 ServerIgnCodes = d2({
-    'Akatsuki': '80',
-    'Bedevere': '85',
-    'Bors': '100',
-    'Ector': '27',
-    'Gaheris': '135',
-    'Galahad': '55',
-    'Gareth': '27',
-    'Gawaine': '95',
-    'Gwinevere': '80',
-    'Hector': '51',
-    'Igraine': '130',
-    'Iseult': '105',
-    'Kay': '120',
-    'Lamorak': '27',
-    'Lancelot': '60',
-    'Merlin': '75',
-    'Mordred': '140',
-    'Morgan Le Fey': '90',
-    'Nimue': '115',
-    'Palomides': '70',
-    'Pellinor': '110',
-    'Pendragon': '50',
-    'Percival': '65',
-    'Tristan': '125',
+    'Pendragon': '74',
+    'Ywain': '143',
 })
 
-# .ini file server codes
-#
+# SERVER CODES (*.INI)
 ServerCodes = d2({
-
-    '35': 'Akatsuki',
-    '16': 'Bedevere',
-    '19': 'Bors',
-    '34': 'Ector',
-    '23': 'Gaheris',
-    '10': 'Galahad',
-    '33': 'Gareth',
-    '18': 'Gawaine',
-    '15': 'Guinevere',
-    '40': 'Hector',
-    '28': 'Igraine',
-    '20': 'Iseult',
-    '26': 'Kay',
-    '32': 'Lamorak',
-    '11': 'Lancelot',
-    '14': 'Merlin',
-    '31': 'Mordred',
-    '17': 'Morgan Le Fey',
-    '22': 'Nimue',
-    '13': 'Palomides',
-    '21': 'Pellinor',
     '5': 'Pendragon',
-    '12': 'Percival',
-    '27': 'Tristan',
+    '52': 'Ywain-5',
+    '53': 'Ywain-6',
+    '54': 'Ywain-7',
+    '55': 'Ywain-8',
+    '56': 'Ywain-9',
+    '57': 'Ywain-10',
 })
 
-# Euro
-EuroServerCodes = d2({
-    '18': 'Glastonbury',
-    '19': 'Salisbury',
-    '1': 'Excalibur',
-    '6': 'Prydwen',
-    '2': 'Broceliande',
-    '5': 'Ys',
-    '13': 'Carnac',
-    '10': 'Orcanie',
-    '3': 'Avalon',
-    '4': 'Lyonesse',
-    '12': 'Dartmoor',
-    '8': 'Logres',
-    '7': 'Stonehenge',
-    '17': 'Cumbria',
-    '16': 'Deira',
-    '11': 'Camlann',
-    '9': 'Gorre',
-})
 
 if __name__ == "__main__":
     pass
