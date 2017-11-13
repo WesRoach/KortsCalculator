@@ -381,10 +381,11 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
         self.ItemSummaryFrame.setMinimumHeight(minheight)
         self.ItemSlotsFrame.setMinimumHeight(minheight)
 
-        maxheight = self.LabelGemType.sizeHint().height()
-        maxheight += self.ScrollSlots.maximumHeight()
-        self.ItemSummaryFrame.setMaximumHeight(maxheight)
-        self.ItemSlotsFrame.setMaximumHeight(maxheight)
+        # CHANGED PROBABY NOT NEEDED ...
+        # maxheight = self.LabelGemType.sizeHint().height()
+        # maxheight += self.ScrollSlots.maximumHeight()
+        # self.ItemSummaryFrame.setMaximumHeight(maxheight)
+        # self.ItemSlotsFrame.setMaximumHeight(maxheight)
 
         self.ScWinFrame.updateGeometry()
 
@@ -1063,8 +1064,8 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
         self.Offhand.setVisible(isweapon and not notoffhand)
         self.LabelDamageType.setVisible(isweapon)
         self.DamageType.setVisible(isweapon)
-        self.ScrollItemInfo.bestFit()
-        self.ScrollItemInfo.setMaximumHeight(self.ScrollSlots.maximumHeight())
+        #self.ScrollItemInfo.bestFit()  # CHANGED
+        #self.ScrollItemInfo.setMaximumHeight(self.ScrollSlots.maximumHeight())
 
     def itemRealmChanged(self, a0=None, item=None):
         if item is None:
