@@ -10,7 +10,7 @@
 from PyQt5.Qt import qApp
 from PyQt5.QtCore import QEvent, QModelIndex, QVariant
 from PyQt5.QtGui import QBrush, QColor, QIcon, QFontMetrics, QIntValidator, QKeySequence, QPalette, QPixmap, QStandardItemModel
-from PyQt5.QtWidgets import QAction, QDialog, QFileDialog, QListWidgetItem, QMainWindow, QMenu, QSizeGrip, QToolBar
+from PyQt5.QtWidgets import QAction, QDialog, QFileDialog, QListWidgetItem, QMainWindow, QMenu, QToolBar
 from B_SCWindow import *
 from Item import *
 from Character import *
@@ -78,7 +78,7 @@ class AboutScreen(QDialog):
             self.close()
 
 
-UserEventItemNameUpdatedID = QEvent.Type(QEvent.User + 1)  # POTENTIAL PROBLEM
+UserEventItemNameUpdatedID = QEvent.User + 1
 
 
 class UserEventItemNameUpdated(QEvent):
@@ -322,11 +322,6 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
         typewidth = self.Type_1.getMinimumWidth(list(DropTypeList))
         effectwidth = self.Effect_1.getMinimumWidth(["Archery and Casting Speed"])
 
-        # Macintosh is including a checkbox / icon width which is absurd
-        if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
-            typewidth = typewidth - 14
-            effectwidth = effectwidth - 14
-
         headergrid = self.ItemSlotsHeader.layout()
         itemslotgrid = self.ItemSlotsGrid.layout()
         headergrid.setColumnStretch(8, 1)
@@ -408,26 +403,10 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
             self.ItemCraftTime.setFixedSize(QSize(amtcbwidth, edheight))
             self.ItemCraftTime.setValidator(QIntValidator(0, 99, self))
 
-        # Lock the height of ItemSlotsGrid, this is all we need. Then optimize based on
-        # the height of ItemInfoFrame and round it out to the next-multiple of a combobox
-        # height. Scroll the lines by the combobox height, page from the top to bottom slots.
-        self.ScrollSlots.setWidgetResizable(False)
-        # self.ScrollSlots.setWidget(self.ItemSlotsGrid)
-        # self.ScrollSlots.setRowHeight(cbheight)
-
-        self.ScrollItemInfo.setWidgetResizable(False)
-        # self.ScrollItemInfo.setWidget(self.ItemInfoGrid)
-        # self.ScrollItemInfo.setRowHeight(cbheight)
-        # self.ScrollItemInfo.setMaximumHeight(self.ScrollSlots.maximumHeight())
-
-        # To round this out, we want the ItemSummaryFrame and ItemSlotsFrame to grow first to
-        # a maximum of the height of the ScrollSlots plus the height of the labels above.
-        # minheight = self.ItemSlotsHeader.sizeHint().height()
-        # minheight += self.ScrollItemInfo.minimumHeight()
-
-        # TODO: FIX ... DIFFERENT DEPENDING ON SCREEN RESOLUTION ...
-        self.ItemSummaryFrame.setMinimumHeight(260)
-        self.ItemSlotsFrame.setMinimumHeight(260)
+        minheight = self.ItemSlotsHeader.sizeHint().height()
+        minheight += self.ItemSlotsGrid.sizeHint().height()
+        self.ItemSummaryFrame.setMinimumHeight(minheight)
+        self.ItemSlotsFrame.setMinimumHeight(minheight)
 
         maxheight = self.LabelGemType.sizeHint().height()
         maxheight += self.ScrollSlots.maximumHeight()
@@ -441,9 +420,11 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
         self.GroupResists.mousePressEvent = self.ignoreMouseEvent
         self.GroupItemFrame.mousePressEvent = self.ignoreMouseEvent
 
+        # TODO: FIGURE OUT WHAT THESE DO EXACTLY ...
         # self.connect(self.GroupStats, SIGNAL("mousePressEvent(QMouseEvent*)"), self.mousePressEvent)
         # self.connect(self.GroupResists, SIGNAL("mousePressEvent(QMouseEvent*)"), self.mousePressEvent)
         # self.connect(self.GroupItemFrame, SIGNAL("mousePressEvent(QMouseEvent*)"), self.mousePressEvent)
+
         self.CharName.textChanged[str].connect(self.templateChanged)
         self.Realm.activated[int].connect(self.realmChanged)
         self.CharClass.activated[int].connect(self.charClassChanged)
@@ -496,7 +477,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
 
     def initMenu(self):  # TODO: ORGANIZE THIS BETTER
 
-        # TODO: DISABLE MENUBAR RIGHT CLICK TO DESELECT TOOLBAR
+        # TODO: ORGANIZE AS MENUBAR THEN TOOLBAR
         self.toolbar = QToolBar("Crafting Toolbar")
         self.toolbar.setObjectName("CraftingToolbar")
         self.toolbar.setFloatable(False)

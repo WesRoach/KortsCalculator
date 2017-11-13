@@ -6,6 +6,7 @@
 #
 # See NOTICE.txt for copyrights and grant of license
 
+# TODO: THIS MIGHT NOT BE NECESSARY ANYMORE ...
 
 from PyQt5.QtCore import QSize, Qt
 from PyQt5.QtGui import QBrush, QColor, QPalette
@@ -16,7 +17,7 @@ class ScrollArea(QScrollArea):
     def __init__(self, parent=None):
         QScrollArea.__init__(self, parent)
 
-        # REMOVE THE BACKGROUND FROM 'QScrollArea'
+        # TODO: REMOVE THE BACKGROUND FROM 'QScrollArea'
         palette = QPalette(self.palette())
         palette.setColor(QPalette.Window, QColor(0, 0, 0, 0))
         palette.setBrush(QPalette.Window, QBrush(QColor(0, 0, 0, 0)))
