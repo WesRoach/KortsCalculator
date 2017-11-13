@@ -192,26 +192,6 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
         width = testfont.size(Qt.TextSingleLine, " (5)").width()
         self.GroupResists.layout().setColumnMinimumWidth(2, width)
 
-        # Macintosh text is entirely too compressed, and edit boxes a bit shorter than
-        # cbheights.  Adjust some label heights so that we compensate and balance out
-        # the display of these grids. Hiding the controls will still hide the grid rows.
-        if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
-
-            lbheight = self.LabelTotalCost.sizeHint().height() + 5
-            self.LabelCharName.setFixedHeight(cbheight)
-            self.LabelCharLevel.setFixedHeight(cbheight)
-            self.LabelTotalCost.setFixedHeight(lbheight)
-            self.LabelTotalPrice.setFixedHeight(lbheight)
-
-            for ctl in list(self.StatLabel.values()):
-                ctl.setFixedHeight(lbheight)
-
-            self.LabelTotalUtility.setFixedHeight(lbheight)
-            self.LabelCraftTime.setFixedHeight(cbheight)
-            self.LabelBonusEdit.setFixedHeight(cbheight)
-            self.LabelSpeedEdit.setFixedHeight(cbheight)
-            self.LabelDBSource.setFixedHeight(lbheight)
-
         skillmodel = QStandardItemModel(0, 1, self.SkillsList)
         self.SkillsList.setModel(skillmodel)
         skillmodel.insertRows(0, 1)
@@ -250,11 +230,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
         self.ItemNameCombo.setFixedHeight(cbheight)
         self.ItemNameCombo.setCompleter(None)
 
-        # Force buttons to be rounded on Macintosh
-        if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
-            self.ToggleItemView.setFixedHeight(32)
-        else:
-            self.ToggleItemView.setFixedHeight(cbheight)
+        self.ToggleItemView.setFixedHeight(cbheight)
 
         itemctllayout.insertStretch(10, 1)
         itemctllayout.insertStretch(12, 1)
@@ -388,9 +364,6 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
 
             if i < 4:
                 self.Makes.append(getattr(self, 'Makes_%d' % idx))
-                if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
-                    self.Makes[i].setFrame(False)
-                    self.Makes[i].lineEdit().setFrame(True)
                 self.Makes[i].setFixedSize(QSize(amtcbwidth, cbheight))
                 self.Makes[i].valueChanged[int].connect(self.amountsChanged)
                 self.Makes[i].setSpecialValueText(" ")
@@ -2532,11 +2505,14 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
                 if slottype == 'Cap Increase':
                     amount += ' Cap'
                 locs.append([key, amount])
+
         DW = DisplayWindow.DisplayWindow(self)
         if findtype:
             DW.setWindowTitle('Slots with %s %s' % (find, finddesc))
+
         else:
             DW.setWindowTitle('Slots with %s' % find)
+
         DW.loadLocations(locs)
         DW.exec_()
 
@@ -2897,10 +2873,6 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
 
     def ignoreMouseEvent(self, e):
         e.ignore()
-
-    def resizeEvent(self, e):
-        if str(QApplication.style().objectName()[0:9]).lower() == "macintosh":
-            self.sizegrip.move(self.width() - 15, self.height() - 15)
 
 
 if __name__ == '__main__':
