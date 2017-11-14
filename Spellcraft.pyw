@@ -47,12 +47,12 @@ class SpellCraftingCalculator(QApplication):
 
     def start(self):
         font = QFont(self.font())
-        font.setPointSize(8);
+        font.setPointSize(8)
         font.setFamily("Trebuchet MS")
         self.setFont(font)
 
         scc = SCWindow.SCWindow()
-        self.setWindowIcon(QIcon(":/images/ScWindow.png"))
+        self.setWindowIcon(QIcon(r"images/ScWindow.png"))
         app.setActiveWindow(scc)
 
         scc.show()
