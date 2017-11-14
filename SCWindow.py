@@ -439,13 +439,10 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
     def getIcon(self, namebase):
         thisicon = QIcon()
 
-        for size in (16, 24, 32,):
-            thisicon.addFile(':/images/normal/' + namebase + str(size) + '.png', QSize(size, size), QIcon.Normal,
-                             QIcon.Off)
-            thisicon.addFile(':/images/disabled/' + namebase + str(size) + '.png', QSize(size, size), QIcon.Disabled,
-                             QIcon.Off)
-            thisicon.addFile(':/images/hot/' + namebase + str(size) + '.png', QSize(size, size), QIcon.Active,
-                             QIcon.Off)
+        for size in (16, 24, 32,):  # TO USE *.RCC FILE --> ':/images/normal/'
+            thisicon.addFile(r'images/normal/' + namebase + str(size) + '.png', QSize(size, size), QIcon.Normal, QIcon.Off)
+            thisicon.addFile(r'images/disabled/' + namebase + str(size) + '.png', QSize(size, size), QIcon.Disabled, QIcon.Off)
+            thisicon.addFile(r'images/hot/' + namebase + str(size) + '.png', QSize(size, size), QIcon.Active, QIcon.Off)
 
         return thisicon
 

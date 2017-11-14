@@ -19,6 +19,15 @@ import sys
 locale.setlocale(locale.LC_ALL, '')  # TODO: ADD SUPPORT FOR ADDITIONAL LANGUAGES
 
 
+if sys.platform == "darwin":
+    QApplication.setDesktopSettingsAware(False)
+
+else:
+    QApplication.setDesktopSettingsAware(True)
+
+locale.setlocale(locale.LC_ALL, '')
+
+
 class SpellCraftingCalculator(QApplication):
 
     def __init__(self):
@@ -33,7 +42,7 @@ class SpellCraftingCalculator(QApplication):
 
         self.appPath = str(QDir.cleanPath(QDir(args[0]).absoluteFilePath("..")))
 
-        QResource.registerResource(QDir(self.appPath).absoluteFilePath("SC.rcc"))
+        # QResource.registerResource(QDir(self.appPath).absoluteFilePath("SC.rcc"))
         QApplication.__init__(self, args)
 
     def start(self):
