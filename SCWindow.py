@@ -2560,8 +2560,14 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
         if effect[-6:] == ' (PvE)' or effect[-6:] == ' Focus':
             effect = effect[:-6]
         if effect[-1:] == ')':
-            amount, effect = str.split(effect.lstrip()[:-1], ' ', 1)
-            ignore, amount = str.split(amount, '(', 1)
+
+            try:  # FIXES 'ValueError' WHEN SELECTING 'Unique Bonus' ITEMS
+                amount, effect = str.split(effect.lstrip()[:-1], ' ', 1)
+                ignore, amount = str.split(amount, '(', 1)
+
+            except ValueError:
+                pass
+
         else:
             amount, effect = str.split(effect.lstrip(), ' ', 1)
         self.delveItemsDialog(effect, bonus)
