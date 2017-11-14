@@ -1997,7 +1997,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
         itemname = str.replace(str(self.ItemNameCombo.currentText()),
                                ' ', '_')
         if itemname == '':
-            QMessageBox.critical(self, 'Error!', 'Cannot save item - You must specify a name!', 'OK')
+            QMessageBox.critical(self, 'Error!', 'Cannot save item - You must specify a name!')
             return
         item = self.itemattrlist[self.currentTabLabel]
 
@@ -2074,7 +2074,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
                     return
 
                 if str.lower(item.Realm) != str.lower(self.realm) and str.lower(item.Realm) != 'all' and not self.coop:
-                    QMessageBox.critical(None, 'Error!', 'You are trying to load an item for another realm!', 'OK')
+                    QMessageBox.critical(None, 'Error!', 'You are trying to load an item for another realm!')
                     return
 
                 self.itemIndex += 1
@@ -2121,7 +2121,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
 
             except Exception as ex:
                 print(('Error converting template to XML: ', ex))
-                QMessageBox.critical(None, 'Error!', 'Error creating XML to save this template!', 'OK')
+                QMessageBox.critical(None, 'Error!', 'Error creating XML to save this template!')
                 return
 
             try:
@@ -2131,7 +2131,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
                 self.modified = False
 
             except IOError:
-                QMessageBox.critical(None, 'Error!', 'Error writing to file: ' + self.filename, 'OK')
+                QMessageBox.critical(None, 'Error!', 'Error writing to file: ' + self.filename)
 
     def saveAsFile(self):
         filename = self.filename
@@ -2153,7 +2153,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
 
             except Exception as ex:
                 print(('Error converting template to XML: ', ex))
-                QMessageBox.critical(None, 'Error!', 'Error creating xml to save this template!', 'OK')
+                QMessageBox.critical(None, 'Error!', 'Error creating xml to save this template!')
                 return
 
             try:
@@ -2162,7 +2162,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
                 f.close()
 
             except IOError:
-                QMessageBox.critical(None, 'Error!', 'Error writing to file: ' + filename, 'OK')
+                QMessageBox.critical(None, 'Error!', 'Error writing to file: ' + filename)
                 return
 
             self.modified = False
@@ -2188,7 +2188,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
 
             except Exception as ex:
                 print(('Error converting template to XML: ', ex))
-                QMessageBox.critical(None, 'Error!', 'Error creating XML to export this template', 'OK')
+                QMessageBox.critical(None, 'Error!', 'Error creating XML to export this template')
                 return
 
             try:
@@ -2197,7 +2197,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
                 f.close()
 
             except IOError:
-                QMessageBox.critical(None, 'Error!', 'Error writing to file: ' + filename, 'OK')
+                QMessageBox.critical(None, 'Error!', 'Error writing to file: ' + filename)
                 return
 
             self.ReportPath = os.path.dirname(os.path.abspath(filename))
@@ -2232,7 +2232,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
                 f = open(filename, 'r')
                 docstr = f.read()
             except:
-                QMessageBox.critical(None, 'Error!', 'Error reading template file ' + str(filename), 'OK')
+                QMessageBox.critical(None, 'Error!', 'Error reading template file ' + str(filename))
                 if f is not None:
                     f.close()
                 return
@@ -2244,12 +2244,12 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
                     template = xmldoc.getElementsByTagName('SCTemplate')
                     self.loadFromXML(template[0])
                 else:
-                    QMessageBox.critical(None, 'Error!', 'Unrecognized Template Type', 'OK')
+                    QMessageBox.critical(None, 'Error!', 'Unrecognized Template Type')
                     f.close()
                     return
             except Exception as ex:
                 print(('Error loading template file: ', ex))
-                QMessageBox.critical(None, 'Error!', 'Error loading template file " + str(filename)', 'OK')
+                QMessageBox.critical(None, 'Error!', 'Error loading template file " + str(filename)')
 
                 if f is not None:
                     f.close()
@@ -2571,7 +2571,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
             if part.__next__ is None:
                 QMessageBox.critical(None, 'Error!', 'There is no crafted ' \
                                      + piece + ' to swap gems with.  Create a new crafted ' \
-                                     + piece + ' and try again.', 'OK')
+                                     + piece + ' and try again.')
                 return
             prev = part
             part = part.__next__

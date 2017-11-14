@@ -28,7 +28,7 @@ def uixml(scwin, uixslt):
             uixmlstr = transform2(uixmlstr)
 
     except Exception as e:
-        QMessageBox.critical(None, 'Error!', 'Error with XSLT transform!\n\n'+str(e), 'OK')
+        QMessageBox.critical(None, 'Error!', 'Error with XSLT transform!\n\n'+str(e))
         return
         
     path = os.path.join(scwin.ReportPath, 'custom1_window.xml')
@@ -44,6 +44,6 @@ def uixml(scwin, uixslt):
 
     except IOError:
         QMessageBox.critical(None, 'Error!', 
-            'Error opening file: ' + filename, 'OK')
+            'Error opening file: ' + filename)
         return
 
