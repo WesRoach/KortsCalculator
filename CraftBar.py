@@ -24,7 +24,7 @@ import sys
 
 class IniConfigParser(RawConfigParser):
     def __init__(self, defaults=None):
-        RawConfigParser.__init__(self, defaults)
+        RawConfigParser.__init__(self, defaults, strict=False)
 
     def write(self, fp):  # OVERRIDE METHOD BUG
         if self._defaults:
@@ -163,11 +163,11 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         for idx in indexList:
 
             if idx.column() == 0:
-                server = str(idx.data().toString())
+                server = str(idx.data())  # .toString())
 
         row = indexList[0].row()
         fileIndex = self.model.index(row, 0)
-        filename = str(self.model.data(fileIndex, Qt.UserRole).toString())
+        filename = str(self.model.data(fileIndex, Qt.UserRole))  # .toString())
 
         self.LoadGemsButton.setEnabled(0)
         self.LoadGemsButton.update()
@@ -186,7 +186,7 @@ class CraftBar(QDialog, Ui_B_CraftBar):
         while slotcounter <= 99:
 
             try:
-                buttonstr = CP.get('Macros', 'Macro_%d' % slotcounter)
+                buttonstr = CP.get('[Macros]', 'Macro_%d' % slotcounter)
 
             except:
                 if len(newbuttons) < 3:
@@ -209,7 +209,8 @@ class CraftBar(QDialog, Ui_B_CraftBar):
                 CP.set('Macros', 'Macro_%d' % buttons[i], "%s,/craft %s" % (Realms[i][0:3], Realms[i]))
 
         realm = self.parent.realm
-        slotcounter = (self.HotbarNum.value() - 1) * 100 + (self.HotbarRow.value() - 1) * 10 + self.HotbarPos.value() - 1
+        slotcounter = (self.HotbarNum.value() - 1) * 100 + (
+                                                           self.HotbarRow.value() - 1) * 10 + self.HotbarPos.value() - 1
         startslot = slotcounter
 
         for loc in TabList:
