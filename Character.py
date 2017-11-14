@@ -637,7 +637,7 @@ ItemTypes = d2({
 # SERVER CODES (*.IGN)
 ServerIgnCodes = d2({
     'Pendragon': '74',
-    'Gaheris': '135',
+    'Gaheris': '95',
     'Ywain': '143',
 })
 
