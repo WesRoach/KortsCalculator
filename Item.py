@@ -740,14 +740,14 @@ class Item:
         itemxml = self.asXML()
 
         if itemxml is None:
-            QMessageBox.critical(None, 'Error!', 'There was no item to save!', 'OK')
+            QMessageBox.critical(None, 'Error!', 'There was no item to save!')
             return
 
         try:
             f = open(filename, 'w')
 
         except IOError:
-            QMessageBox.critical(None, 'Error!', 'Error opening file: ' + filename, 'OK')
+            QMessageBox.critical(None, 'Error!', 'Error opening file: ' + filename)
             return
 
         f.write(XMLHelper.writexml(itemxml, UnicodeStringIO(), '', '\t', '\n'))
@@ -759,7 +759,7 @@ class Item:
 
         except IOError:
             if not silent:
-                QMessageBox.critical(None, 'Error!', 'Error opening item file: ' + filename, 'OK')
+                QMessageBox.critical(None, 'Error!', 'Error opening item file: ' + filename)
 
             return -2
 
@@ -774,7 +774,7 @@ class Item:
 
             except:
                 if not silent:
-                    QMessageBox.critical(None, 'Error!', 'Error loading item:', 'OK')
+                    QMessageBox.critical(None, 'Error!', 'Error loading item:')
 
                 f.close()
                 return -1
