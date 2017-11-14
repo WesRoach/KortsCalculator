@@ -132,7 +132,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
             self.reportHtml = str(report)
 
         except Exception as e:
-            QMessageBox.critical(None, 'Error!', 'Error composing report ' + filename + "\n\n" + str(e), 'OK')
+            QMessageBox.critical(None, 'Error!', 'Error composing report ' + filename + "\n\n" + str(e))
             return
 
         self.setWindowTitle('Configuration Report')
@@ -155,7 +155,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                 self.parent.ReportPath = os.path.dirname(os.path.abspath(filename))
 
             except IOError:
-                QMessageBox.critical(None, 'Error!', 'Error writing to file: ' + filename, 'OK')
+                QMessageBox.critical(None, 'Error!', 'Error writing to file: ' + filename)
 
     def saveToText(self):
         filename = os.path.join(self.parent.ReportPath, str(self.parent.CharName.text()) + "_report.txt")
@@ -239,7 +239,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                 f.close()
 
             except IOError:
-                QMessageBox.critical(None, 'Error!', 'Error writing to file: ' + filename, 'OK')
+                QMessageBox.critical(None, 'Error!', 'Error writing to file: ' + filename)
 
     def closeWindow(self):
         self.done(1)
