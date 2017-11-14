@@ -1994,59 +1994,67 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
                             os.makedirs(itempath)
 
     def saveItem(self):
-        itemname = str.replace(str(self.ItemNameCombo.currentText()),
-                               ' ', '_')
+        itemname = str.replace(str(self.ItemNameCombo.currentText()), ' ', '_')
+
         if itemname == '':
             QMessageBox.critical(self, 'Error!', 'Cannot save item - You must specify a name!')
             return
-        item = self.itemattrlist[self.currentTabLabel]
 
+        item = self.itemattrlist[self.currentTabLabel]
         item.Realm = self.realm
 
         ext = FileExt[self.currentTabLabel]
         extstr = ''
+
         if not isinstance(ext, StringTypes):
+
             for e in ext:
                 extstr += '*%s.xml ' % e
+
             ext = ext[0]
+
         else:
             extstr = '*%s.xml' % ext
+
         extstr = "Items (%s);;All Files (*.*)" % extstr.rstrip()
         itemname = itemname + '_' + ext + '.xml'
         itemdir = self.ItemPath
         recentdir = []
+
         if os.path.exists(os.path.join(itemdir, self.realm, ext)):
             itemdir = os.path.join(self.ItemPath, self.realm, ext)
+
             if self.coop:
+
                 for realm in Realms:
+
                     if realm != self.realm:
                         recentdir.append(os.path.join(self.ItemPath, realm, ext))
+
             recentdir.append(os.path.join(self.ItemPath, "All", ext))
+
         filename = os.path.join(itemdir, itemname)
         filename, filters = QFileDialog.getSaveFileName(self, "Save Item", filename, "Templates (*.xml);;All Files (*.*)")
         filename = str(filename)
+
         if filename != '':
             item.save(filename)
 
     def loadItem(self):
         ext = FileExt[self.currentTabLabel]  # TODO: CREATE REALISTIC FILE EXTENSIONS..
         extstr = ''
-        print(extstr)
 
         if not isinstance(ext, StringTypes):
 
             for e in ext:
                 extstr += '*%s.xml *.%s ' % (e, e)
-                print(extstr)
 
             ext = ext[0]
 
         else:
             extstr = '*%s.xml *.%s' % (ext, ext)
-            print(extstr)
 
         extstr = "Items (%s);;All Files (*.*)" % extstr.rstrip()
-        print(extstr)
         itemdir = self.ItemPath
         recentdir = []
 
