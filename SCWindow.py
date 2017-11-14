@@ -2555,8 +2555,8 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
             self.delveItemsDialog(shortname)
 
     def skillClicked(self, index):
-        effect = str(index.data(Qt.DisplayRole))  # Changed from effect = str(index.data(Qt.DisplayRole).toString())
-        bonus = str(index.data(Qt.UserRole))  # Changed from bonus = str(index.data(Qt.UserRole).toString())
+        effect = str(index.data(Qt.DisplayRole))
+        bonus = str(index.data(Qt.UserRole))
         if effect[-6:] == ' (PvE)' or effect[-6:] == ' Focus':
             effect = effect[:-6]
         if effect[-1:] == ')':
@@ -2570,6 +2570,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
 
         else:
             amount, effect = str.split(effect.lstrip(), ' ', 1)
+
         self.delveItemsDialog(effect, bonus)
 
     def showCap(self):
