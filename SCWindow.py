@@ -2005,7 +2005,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
 
         ext = FileExt[self.currentTabLabel]
         extstr = ''
-        if not isinstance(ext, bytes):
+        if not isinstance(ext, StringTypes):
             for e in ext:
                 extstr += '*%s.xml ' % e
             ext = ext[0]
