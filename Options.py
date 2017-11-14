@@ -26,6 +26,7 @@ class Options(QDialog, Ui_B_Options):
     def __init__(self, parent = None ,name = None ,modal = False, fl = Qt.Widget):
         QDialog.__init__(self, parent, fl)
         Ui_B_Options.setupUi(self, self)
+        self.Tab.setCurrentIndex(0)
 
         if name:
             self.setObjectName(name)
