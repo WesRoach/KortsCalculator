@@ -2031,18 +2031,22 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
     def loadItem(self):
         ext = FileExt[self.currentTabLabel]  # TODO: CREATE REALISTIC FILE EXTENSIONS..
         extstr = ''
+        print(extstr)
 
-        if not isinstance(ext, bytes):
+        if not isinstance(ext, StringTypes):
 
             for e in ext:
                 extstr += '*%s.xml *.%s ' % (e, e)
+                print(extstr)
 
             ext = ext[0]
 
         else:
             extstr = '*%s.xml *.%s' % (ext, ext)
+            print(extstr)
 
         extstr = "Items (%s);;All Files (*.*)" % extstr.rstrip()
+        print(extstr)
         itemdir = self.ItemPath
         recentdir = []
 
