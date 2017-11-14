@@ -57,12 +57,12 @@ def plainXMLTag(strval):
     return strval
 
 
-class AboutScreen(QDialog):
+class AboutScreen(QDialog):  # TODO: DOES NOT WORK ... FIX & UPDATE
     def __init__(self, parent=None, name="About", modal=True, fl=Qt.SplashScreen):
         QDialog.__init__(self, parent, fl)
         self.setModal(modal)
         self.setObjectName(name)
-        pixmap = QPixmap(":/images/Spellcraft.png")
+        pixmap = QPixmap(r'images/Spellcraft.png')
         self.palette().setBrush(self.backgroundRole(), QBrush(pixmap))
         self.resize(QSize(480, 340).expandedTo(pixmap.size()))
         self.show()
