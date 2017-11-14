@@ -645,6 +645,10 @@ ServerIgnCodes = d2({
 ServerCodes = d2({
     '5': 'Pendragon',
     '23': 'Gaheris',
+    '41': 'Ywain-1',
+    '49': 'Ywain-2',
+    '50': 'Ywain-3',
+    '51': 'Ywain-4',
     '52': 'Ywain-5',
     '53': 'Ywain-6',
     '54': 'Ywain-7',
