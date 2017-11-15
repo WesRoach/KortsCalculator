@@ -17,7 +17,6 @@ class ScrollArea(QScrollArea):
     def __init__(self, parent=None):
         QScrollArea.__init__(self, parent)
 
-        # TODO: REMOVE THE BACKGROUND FROM 'QScrollArea'
         palette = QPalette(self.palette())
         palette.setColor(QPalette.Window, QColor(0, 0, 0, 0))
         palette.setBrush(QPalette.Window, QBrush(QColor(0, 0, 0, 0)))
