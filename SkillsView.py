@@ -13,18 +13,18 @@ from PyQt5.QtWidgets import QListView
 
 
 class SkillsView(QListView):
-    def __init__(self, parent = None):
+    def __init__(self, parent=None):
         QListView.__init__(self, parent)
         palette = QPalette(self.palette())
-        palette.setColor(QPalette.Base, QColor(0,0,0,0))
-        palette.setBrush(QPalette.Base, QBrush(QColor(0,0,0,0)))
+        palette.setColor(QPalette.Base, QColor(0, 0, 0, 0))
+        palette.setBrush(QPalette.Base, QBrush(QColor(0, 0, 0, 0)))
         self.setPalette(palette)
         self.sizehint = QSize(QListView.sizeHint(self))
 
     def sizeHint(self):
         return QSize(self.sizehint)
 
-    def setSizeHint(self, width, height = None):
+    def setSizeHint(self, width, height=None):
         if isinstance(width, QSize) and height is None:
             self.sizehint = width
         else:
@@ -35,8 +35,8 @@ class SkillsView(QListView):
         self.rowheight = self.sizeHintForRow(0)
         if self.rowheight < 1: return
         bestheight = self.sizehint.height()
-        if (self.horizontalScrollBarPolicy() != 
-                    Qt.ScrollBarAlwaysOff):
+        if (self.horizontalScrollBarPolicy() !=
+                Qt.ScrollBarAlwaysOff):
             scrollheight = self.horizontalScrollBar().sizeHint().height() + 1
         else:
             scrollheight = 0
