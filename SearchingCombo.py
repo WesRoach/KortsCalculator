@@ -77,7 +77,8 @@ class SearchingCombo(QComboBox):
 
         for i in range(0, self.count()):
             txt = str(self.itemText(i))
-            keys.append(str.join([s[0] for s in txt.split()], "").upper())
+            keys.append('.'.join([s[0] for s in txt.split()]).upper())
+            print(keys)
         return keys
 
     def keyPressEvent(self, e):
