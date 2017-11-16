@@ -593,7 +593,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
 
             for act in self.viewtoolbarmenu.actions():
 
-                if act.data() == iconsz:  # Changed from act.data().toInt[0] == iconsz:
+                if act.data() == iconsz:
                     act.setChecked(True)
                 else:
                     act.setChecked(False)
@@ -914,7 +914,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
                                        self.realm, rich, True)
                 if childnode is not None:
                     rootnode.appendChild(childnode.firstChild)
-                item = item.next  # Changed from item = item.__next__
+                item = item.next
 
         for idx in range(0, len(self.outfitlist)):
             outfit = self.outfitlist[idx]
@@ -994,7 +994,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
     def changePieceTab(self, a0):
-        mask = a0.data()  # Changed from mask = a0.data().toInt()[0]
+        mask = a0.data()
         row = (mask >> 8) & 0xff
         col = mask & 0xff
         self.PieceTab.setCurrentIndex(row, col)
@@ -1061,8 +1061,6 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
         self.Offhand.setVisible(isweapon and not notoffhand)
         self.LabelDamageType.setVisible(isweapon)
         self.DamageType.setVisible(isweapon)
-        #self.ScrollItemInfo.bestFit()  # CHANGED
-        #self.ScrollItemInfo.setMaximumHeight(self.ScrollSlots.maximumHeight())
 
     def itemRealmChanged(self, a0=None, item=None):
         if item is None:
@@ -1951,11 +1949,11 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
         self.restoreItem(self.itemattrlist[self.currentTabLabel])
 
     def deleteCurrentItem(self):
-        if self.itemattrlist[self.currentTabLabel].next is None:  # Changed from if self.itemattrlist[self.currentTabLabel].__next__ is None:
+        if self.itemattrlist[self.currentTabLabel].next is None:
             self.clearCurrentItem()
             return
         item = self.itemattrlist[self.currentTabLabel]
-        self.itemattrlist[self.currentTabLabel] = item.next  # Changed from self.itemattrlist[self.currentTabLabel] = item.__next__
+        self.itemattrlist[self.currentTabLabel] = item.next
         item.next = None
         if item.Equipped == '1':
             self.itemattrlist[self.currentTabLabel].Equipped = '1'
@@ -2325,7 +2323,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
                     self.itemIndex += 1
                 else:
                     self.itemIndex = max(newItem.TemplateIndex + 1, self.itemIndex)
-                if newItem.next:  # Changed from if newItem.__next__:
+                if newItem.next:
                     if newItem.next.TemplateIndex == -1:
                         newItem.next.TemplateIndex = self.itemIndex
                         self.itemIndex += 1
@@ -2339,14 +2337,14 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
                 elif newItem.Equipped == '1':
                     self.itemattrlist[newItem.Location].Equipped = '0'
                     item = newItem
-                    while item.next is not None:  # Changed from while item.__next__ is not None:
-                        item = item.next  # Changed from item = item.__next__
+                    while item.next is not None:
+                        item = item.next
                     item.next = self.itemattrlist[newItem.Location]
                     self.itemattrlist[newItem.Location] = newItem
                 else:
                     item = self.itemattrlist[newItem.Location]
-                    while item.next is not None:  # Changed from while item.__next__ is not None:
-                        item = item.next  # Changed from item = item.__next__
+                    while item.next is not None:
+                        item = item.next
                     item.next = newItem
             elif child.tagName == 'Coop':
                 self.coop = eval(XMLHelper.getText(child.childNodes), globals(), globals())
@@ -2407,7 +2405,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
         UIXML.uixml(self, self.UiReportFile)
 
     def loadRecentFile(self, action):
-        index = action.data()  # Changed from index = action.data().toInt()[0]
+        index = action.data()
         self.openFile(self.recentFiles[index], True)
 
     def openOptions(self):
@@ -2587,18 +2585,18 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
         if cur == part: return
         prev = None
         while part.ActiveState != 'player':
-            if part.__next__ is None:
+            if part.next is None:
                 QMessageBox.critical(None, 'Error!', 'There is no crafted ' \
                                      + piece + ' to swap gems with.  Create a new crafted ' \
                                      + piece + ' and try again.')
                 return
             prev = part
-            part = part.__next__
+            part = part.next
         if prev is not None:
             if self.itemattrlist[piece].Equipped == '1':
                 self.itemattrlist[piece] = '0'
                 part.Equipped = '1'
-            prev.next = part.__next__
+            prev.next = part.next
             part.next = self.itemattrlist[piece]
             self.itemattrlist[piece] = part
         for i in range(0, min(cur.slotCount(), part.slotCount())):
@@ -2616,7 +2614,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
         piece = str(action.text())
         part = self.itemattrlist[piece]
         if cur == part: return
-        if cur.next is None:  # Changed from if cur.__next__ is None:
+        if cur.next is None:
             item = Item(realm=self.realm, loc=self.currentTabLabel,
                         state=cur.ActiveState)
             if cur.ActiveState == 'drop':
@@ -2656,7 +2654,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
         self.PieceTab.setCurrentIndex(row, col)
 
     def chooseItemType(self, action):
-        newtype = str(action.data())  # Changed from newtype = str(action.data().toString())
+        newtype = str(action.data())
         item = self.itemattrlist[self.currentTabLabel]
         if newtype == 'Normal Item' or newtype == 'Enhanced Bow':
             if newtype == 'Normal Item':
@@ -2734,7 +2732,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
         self.restoreItem(item)
 
     def newItemType(self, action):
-        newtype = str(action.data())  # Changed from newtype = str(action.data().toString())
+        newtype = str(action.data())
         if newtype == 'Drop Item':
             item = Item('drop', self.currentTabLabel, self.realm, self.itemIndex)
             item.ItemName = "Drop Item " + str(self.itemnumbering)
@@ -2790,9 +2788,9 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
             self.PieceTab.setCurrentIndex(idx)
 
     def viewToolbar(self, action):
-        view = action.data()  # Changed from view = action.data().toInt()[0]
+        view = action.data()
         for act in self.viewtoolbarmenu.actions():
-            if act.data() == view:  # Changed from if act.data().toInt()[0] == view:
+            if act.data() == view:
                 if not act.isChecked():
                     act.setChecked(True)
                     return
@@ -2855,10 +2853,10 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
             prev = None
             while item and item.TemplateIndex != indexes[0]:
                 prev = item
-                item = item.next  # Changed from item = item.__next__
+                item = item.next
             if item:
                 if prev:
-                    prev.next = prev.next.next  # Changed from prev.next = prev.next.next
+                    prev.next = prev.next.next
                     item.next = self.itemattrlist[piece]
                     self.itemattrlist[piece].Equipped = '0'
                     self.itemattrlist[piece] = item

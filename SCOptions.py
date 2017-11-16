@@ -29,7 +29,7 @@ class SCOptions(Singleton):
         if not os.path.isdir(path):
             try: os.makedirs(path)
 
-            except IOError:  # Changed from except error:
+            except IOError:
                 print('Error creating subdirectories')
                 path = os.path.dirname(os.path.abspath(sys.argv[0]))
 

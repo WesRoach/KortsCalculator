@@ -20,36 +20,6 @@ class ComboListView(QListView):
         self.setSelectionMode(QAbstractItemView.SingleSelection)
 
     def showEvent(self, e):
-        if qVersion() < '4.2':
-            QListView.showEvent(self, e)
-
-        # CAUSES REMAINING STATEMENTS TO BE SKIPPED, BUT ONLY WORKS THIS WAY ...
-        # THE CODE FROM LINE 31 TO 53 DOES NOT SEEM TO DO ANYTHING ...
-
-        return
-
-        e.accept()
-        model = self.model()
-        rows = model.rowCount()
-        col = self.modelColumn()
-        mx = 0
-
-        for i in range(0, rows):
-            item = model.item(i, col)
-            mx = max(mx, item.sizeHint().width())
-
-        if rows:
-            sz = QSize(mx, item.sizeHint().height())
-
-        for i in range(0, rows):
-            model.item(i, col).setSizeHint(sz)
-
-        mx += 25
-
-        if mx > self.parent().parent().width():
-            self.setGeometry(self.pos().x(), self.pos().y(), mx, self.height())
-            self.parent().setGeometry(self.parent().pos().x(), self.parent().pos().y(), mx, self.parent().height())
-
         QListView.showEvent(self, e)
 
     # DOESN'T REALLY SEEM TO DO ANYTHING

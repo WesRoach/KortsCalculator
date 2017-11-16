@@ -56,7 +56,7 @@ def getText(nodelist):
     for node in nodelist:
         if node.nodeType == node.TEXT_NODE:
             try:
-                rc = rc + str(node.data)  # Changed from rc = rc + str(node.data, 'UTF-8')
+                rc = rc + str(node.data)
             except:
                 rc = rc + node.data
     return rc

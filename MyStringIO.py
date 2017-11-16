@@ -44,6 +44,6 @@ class UnicodeStringIO(io.StringIO):  # THIS IS PROBABLY NOT NECESSARY SINCE UNIC
     def __init__(self):
         io.StringIO.__init__(self)
 
-    def write(self, strval, escape=False):  # Changed from def write(self, str, escape=False):
-        io.StringIO.write(self, strval)  # Changed from io.StringIO.write(self, str.encode('UTF-8'))
+    def write(self, strval, escape=False):
+        io.StringIO.write(self, strval)
         return
