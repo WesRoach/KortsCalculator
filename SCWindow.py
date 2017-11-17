@@ -1999,8 +1999,6 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
             return
 
         item = self.itemattrlist[self.currentTabLabel]
-        item.Realm = self.realm
-
         ext = FileExt[self.currentTabLabel]
         extstr = ''
 
