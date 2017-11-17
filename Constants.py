@@ -840,7 +840,7 @@ Caps = d2(Caps)
 HighCapBonusList = d2({
     'Death Experience Loss Reduction': (1.00, 0),
     'Hits': (4.00, 0),
-    'Hits Cap': (4.00, 0),
+    'Hits Cap': (8.00, 0),
     'Stat': (1.50, 0),
     'Focus': (1.00, 0),
     '% Power Pool Cap': (1.00, 0),
