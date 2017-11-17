@@ -1711,7 +1711,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
     def itemNotesChanged(self, a0=None):
         if self.nocalc: return
         self.modified = True
-        item.Notes = str(self.ItemNoteText.toPlainText())  # Perhaps this should be self.Notes?
+        self.Notes = str(self.ItemNoteText.toPlainText())  # Changed from item.Notes
 
     def itemChanged(self, a0=None):
         if self.nocalc: return
