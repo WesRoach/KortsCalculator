@@ -11,7 +11,6 @@ from PyQt5.QtCore import QItemSelectionModel, QSize, Qt
 from PyQt5.QtGui import QFontMetrics
 from PyQt5.QtWidgets import QComboBox, QStyle, QStyleOptionComboBox
 from ComboListView import ComboListView
-import string
 import sys
 
 
@@ -37,7 +36,7 @@ class SearchingCombo(QComboBox):
         self.minWidth = 0
 
         if isinstance(lst, str):
-            lst = [lst,]
+            lst = [lst, ]
 
         if not isinstance(lst, list):
             lst = list(lst)
