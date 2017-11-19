@@ -18,14 +18,8 @@ import sys
 
 locale.setlocale(locale.LC_ALL, '')  # TODO: ADD SUPPORT FOR ADDITIONAL LANGUAGES
 
-
-if sys.platform == "darwin":
-    QApplication.setDesktopSettingsAware(False)
-
-else:
-    QApplication.setDesktopSettingsAware(True)
-
-locale.setlocale(locale.LC_ALL, '')
+# THIS MIGHT NOT BE NEEDED
+QApplication.setDesktopSettingsAware(True)
 
 
 class SpellCraftingCalculator(QApplication):
