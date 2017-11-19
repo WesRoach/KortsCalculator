@@ -1,4 +1,4 @@
-# coding = utf-8
+# coding=utf-8
 
 # constants.py: Kort's Spellcrafting Calculator
 #
@@ -6,29 +6,22 @@
 #
 # See NOTICE.txt for copyrights and grant of license
 
-__all__ = [
-    'ScVersion',
-    'GemLists', 'DropLists', 'CraftedLists',
-    'TypeList', 'EffectTypeList', 'DropTypeList', 'CraftedTypeList',
-    'ValuesLists', 'CraftedValuesLists',
-    'QualityValues', 'ImbuePts',
-    'OCStartPercentages', 'ItemQualOCModifiers',
-    'FileExt', 'Caps', 'HighCapBonusList', 'BodyHitOdds',
-    'GemTables', 'GemDusts', 'GemLiquids', 'GemSubName', 'MaterialsOrder',
-    'GemNames', 'MaterialGems', 'GemCosts', 'RemakeCosts',
-    'EffectTypeNames', 'ProcItemNames', 'StableItemNames', 'EffectMetal',
-    'FixTypeTable', 'FixEffectsTable', 'HotkeyGems', 'ImbueMultipliers',
-    'ShieldTypes',
-    'TabList', 'PieceTabList', 'JewelTabList',
-    'ArmorTabList', 'WeaponTabList', 'FocusTabList',
-]
-
-ScVersion = "Kort's Spellcrafting Calulator 3.0.2 (BETA)"
-
 from Character import *
 from tuple2 import *
 from dict2 import *
 import sys
+
+__all__ = [
+    'ScVersion', 'GemLists', 'DropLists', 'CraftedLists', 'TypeList', 'EffectTypeList', 'DropTypeList',
+    'CraftedTypeList', 'ValuesLists', 'CraftedValuesLists', 'QualityValues', 'ImbuePts', 'OCStartPercentages',
+    'ItemQualOCModifiers', 'FileExt', 'Caps', 'HighCapBonusList', 'BodyHitOdds', 'GemTables', 'GemDusts',
+    'GemLiquids', 'GemSubName', 'MaterialsOrder', 'GemNames', 'MaterialGems', 'GemCosts', 'RemakeCosts',
+    'EffectTypeNames', 'ProcItemNames', 'StableItemNames', 'EffectMetal', 'FixTypeTable', 'FixEffectsTable',
+    'HotkeyGems', 'ImbueMultipliers', 'ShieldTypes', 'TabList', 'PieceTabList', 'JewelTabList', 'ArmorTabList',
+    'WeaponTabList', 'FocusTabList',
+]
+
+ScVersion = "Kort's Spellcrafting Calulator 3.0.2 (BETA)"
 
 TypeList = t2((
     'Unused',
@@ -38,8 +31,7 @@ TypeList = t2((
     'Skill',
 ))
 
-# This list is only for the 5th Alchemy imbue slot
-#
+# 5TH ALCHEMY IMBUE SLOT
 EffectTypeList = t2((
     'Offensive Effect',
     'Reactive Effect',
@@ -47,18 +39,11 @@ EffectTypeList = t2((
 ))
 
 DropTypeList = t2(
-    TypeList + (
-        'Cap Increase',
-        'PvE Bonus',
-        'Other Bonus',
-    ) + EffectTypeList + (
-        'Other Effect',
-    ))
+    TypeList + ('Cap Increase', 'PvE Bonus', 'Other Bonus',) +
+    EffectTypeList + ('Other Effect',)
+)
 
-EffectTypeList = t2((
-                        'Unused',
-                    ) + EffectTypeList
-                    )
+EffectTypeList = t2(('Unused',) + EffectTypeList)
 
 unusedTable = d2({})
 unusedList = t2()
@@ -151,11 +136,8 @@ statTableOrdered = (
 )
 
 statTable = dict(statTableOrdered)
-
 for (key, val) in list(statTable.items()):
-
     statTable[key] = (val, type, GemDusts[type], GemLiquids[val],)
-
 statTable = d2(statTable)
 statList = t2([x[0] for x in statTableOrdered])
 
@@ -165,15 +147,9 @@ statValues = t2(('2', '5', '8', '11', '14', '17', '20', '23', '26', '29',))
 hitsValues = t2(('4', '12', '20', '28', '36', '44', '52', '60', '68', '76',))
 powerValues = t2(('1', '2', '3', '5', '7', '9', '11', '13', '15', '17'))
 
-# Duplicate the Stat lists as DropStat lists, add non-craftable 'Acuity' stat
-#
-dropStatList = t2(statList + (
-    'Acuity',
-))
-
+# DUPLICATE 'statList', ADD NON-CRAFTABLE 'Acuity' STAT
+dropStatList = t2(statList + ('Acuity',))
 dropStatTable = dict().fromkeys(dropStatList)
-
-type = 'Shielding Jewel'
 
 resistTableOrdered = (
     ('Body', 'Dusty',),
@@ -188,20 +164,16 @@ resistTableOrdered = (
 )
 
 resistTable = dict(resistTableOrdered)
+type = 'Shielding Jewel'
 for (key, val) in list(resistTable.items()):
     resistTable[key] = (val, type, GemDusts[type], GemLiquids[val])
 resistTable = d2(resistTable)
-
 resistList = t2([x[0] for x in resistTableOrdered])
 
 resistValues = t2(('1', '2', '3', '5', '7', '9', '11', '13', '15', '17',))
 
-# Duplicate the Resist lists as DropResist lists, add non-craftable 'Essence' stat
-#
-dropResistList = t2(resistList + (
-    'Essence',
-))
-
+# DUPLICATE 'resistList', ADD NON-CRAFTABLE 'Essence' RESIST
+dropResistList = t2(resistList + ('Essence',))
 dropResistTable = dict().fromkeys(dropResistList)
 
 del resistTableOrdered
@@ -250,9 +222,9 @@ focusTable = {
         'Summoning': ('Vapor', 'Rune',),
         'Suppression': ('Dust', 'Rune',),
     },
-}
 
-focusTable['All'] = {}
+    'All': {}}
+
 for realm in Realms:
     for (key, val) in list(focusTable[realm].items()):
         if val[0] in GemLiquids:
@@ -274,130 +246,134 @@ focusList = d2(focusList)
 
 focusValues = t2(('5', '10', '15', '20', '25', '30', '35', '40', '45', '50',))
 
-skillTable = {'Albion': {
+skillTable = {
 
-    'All Magic Skills': ('Finesse', 'Fervor Sigil',),
-    'All Melee Weapon Skills': ('Finesse', 'War Sigil',),
-    'Archery': ('Airy', 'War Sigil',),
-    'Aura Manipulation': ('Radiant', 'Fervor Sigil',),
-    'Body Magic': ('Heated', 'Evocation Sigil',),
-    'Chants': ('Earthen', 'Fervor Sigil',),
-    'Cold Magic': ('Icy', 'Evocation Sigil',),
-    'Critical Strike': ('Heated', 'Battle Jewel',),
-    'Crossbow': ('Vapor', 'War Sigil',),
-    'Crush': ('Fiery', 'War Sigil',),
-    'Death Servant': ('Ashen', 'Fervor Sigil',),
-    'Deathsight': ('Vacuous', 'Fervor Sigil',),
-    'Dual Wield': ('Icy', 'War Sigil',),
-    'Earth Magic': ('Earthen', 'Evocation Sigil',),
-    'Enhancement': ('Airy', 'Fervor Sigil',),
-    'Envenom': ('Dusty', 'Battle Jewel',),
-    'Flexible': ('Molten Magma', 'War Sigil',),
-    'Fire Magic': ('Fiery', 'Evocation Sigil',),
-    'Fist Wraps': ('Glacial', 'War Sigil',),
-    'Instruments': ('Vapor', 'Fervor Sigil',),
-    'Magnetism': ('Magnetic', 'Fervor Sigil',),
-    'Matter Magic': ('Dusty', 'Evocation Sigil',),
-    'Mauler Staff': ('Cinder', 'War Sigil',),
-    'Mind Magic': ('Watery', 'Evocation Sigil',),
-    'Painworking': ('Salt Crusted', 'Fervor Sigil',),
-    'Parry': ('Vapor', 'Battle Jewel',),
-    'Polearm': ('Earthen', 'War Sigil',),
-    'Power Strikes': ('Clout', 'Fervor Sigil',),
-    'Rejuvenation': ('Watery', 'Fervor Sigil',),
-    'Shield': ('Fiery', 'Battle Jewel',),
-    'Slash': ('Watery', 'War Sigil',),
-    'Smite': ('Fiery', 'Fervor Sigil',),
-    'Soulrending': ('Steaming', 'Fervor Sigil',),
-    'Spirit Magic': ('Vapor', 'Evocation Sigil',),
-    'Staff': ('Earthen', 'Battle Jewel',),
-    'Stealth': ('Airy', 'Battle Jewel',),
-    'Thrust': ('Dusty', 'War Sigil',),
-    'Two Handed': ('Heated', 'War Sigil',),
-    'Wind Magic': ('Airy', 'Evocation Sigil',),
+    'Albion': {
 
-}, 'Hibernia': {
+        'All Magic Skills': ('Finesse', 'Fervor Sigil',),
+        'All Melee Weapon Skills': ('Finesse', 'War Sigil',),
+        'Archery': ('Airy', 'War Sigil',),
+        'Aura Manipulation': ('Radiant', 'Fervor Sigil',),
+        'Body Magic': ('Heated', 'Evocation Sigil',),
+        'Chants': ('Earthen', 'Fervor Sigil',),
+        'Cold Magic': ('Icy', 'Evocation Sigil',),
+        'Critical Strike': ('Heated', 'Battle Jewel',),
+        'Crossbow': ('Vapor', 'War Sigil',),
+        'Crush': ('Fiery', 'War Sigil',),
+        'Death Servant': ('Ashen', 'Fervor Sigil',),
+        'Deathsight': ('Vacuous', 'Fervor Sigil',),
+        'Dual Wield': ('Icy', 'War Sigil',),
+        'Earth Magic': ('Earthen', 'Evocation Sigil',),
+        'Enhancement': ('Airy', 'Fervor Sigil',),
+        'Envenom': ('Dusty', 'Battle Jewel',),
+        'Flexible': ('Molten Magma', 'War Sigil',),
+        'Fire Magic': ('Fiery', 'Evocation Sigil',),
+        'Fist Wraps': ('Glacial', 'War Sigil',),
+        'Instruments': ('Vapor', 'Fervor Sigil',),
+        'Magnetism': ('Magnetic', 'Fervor Sigil',),
+        'Matter Magic': ('Dusty', 'Evocation Sigil',),
+        'Mauler Staff': ('Cinder', 'War Sigil',),
+        'Mind Magic': ('Watery', 'Evocation Sigil',),
+        'Painworking': ('Salt Crusted', 'Fervor Sigil',),
+        'Parry': ('Vapor', 'Battle Jewel',),
+        'Polearm': ('Earthen', 'War Sigil',),
+        'Power Strikes': ('Clout', 'Fervor Sigil',),
+        'Rejuvenation': ('Watery', 'Fervor Sigil',),
+        'Shield': ('Fiery', 'Battle Jewel',),
+        'Slash': ('Watery', 'War Sigil',),
+        'Smite': ('Fiery', 'Fervor Sigil',),
+        'Soulrending': ('Steaming', 'Fervor Sigil',),
+        'Spirit Magic': ('Vapor', 'Evocation Sigil',),
+        'Staff': ('Earthen', 'Battle Jewel',),
+        'Stealth': ('Airy', 'Battle Jewel',),
+        'Thrust': ('Dusty', 'War Sigil',),
+        'Two Handed': ('Heated', 'War Sigil',),
+        'Wind Magic': ('Airy', 'Evocation Sigil',),
+    },
 
-    'All Magic Skills': ('Finesse', 'Nature Spell Stone',),
-    'All Melee Weapon Skills': ('Finesse', 'War Spell Stone',),
-    'Arboreal Path': ('Steaming', 'Nature Spell Stone',),
-    'Archery': ('Airy', 'War Spell Stone',),
-    'Aura Manipulation': ('Radiant', 'Nature Spell Stone'),
-    'Blades': ('Watery', 'War Spell Stone',),
-    'Blunt': ('Fiery', 'War Spell Stone',),
-    'Celtic Dual': ('Icy', 'War Spell Stone',),
-    'Celtic Spear': ('Earthen', 'War Spell Stone',),
-    'Creeping Path': ('Oozing', 'Nature Spell Stone',),
-    'Critical Strike': ('Heated', 'Battle Jewel',),
-    'Dementia': ('Aberrant', 'Arcane Spell Stone',),
-    'Enchantments': ('Vapor', 'Arcane Spell Stone',),
-    'Envenom': ('Dusty', 'Battle Jewel',),
-    'Ethereal Shriek': ('Ethereal', 'Arcane Spell Stone',),
-    'Fist Wraps': ('Glacial', 'War Spell Stone'),
-    'Large Weaponry': ('Heated', 'War Spell Stone',),
-    'Light': ('Fiery', 'Arcane Spell Stone',),
-    'Magnetism': ('Magnetic', 'Nature Spell Stone'),
-    'Mana': ('Watery', 'Arcane Spell Stone',),
-    'Mauler Staff': ('Cinder', 'War Spell Stone'),
-    'Mentalism': ('Earthen', 'Arcane Spell Stone',),
-    'Music': ('Airy', 'Nature Spell Stone',),
-    'Nature': ('Earthen', 'Nature Spell Stone',),
-    'Nurture': ('Fiery', 'Nature Spell Stone',),
-    'Parry': ('Vapor', 'Battle Jewel',),
-    'Phantasmal Wail': ('Phantasmal', 'Arcane Spell Stone',),
-    'Piercing': ('Dusty', 'War Spell Stone',),
-    'Power Strikes': ('Clout', 'Nature Spell Stone'),
-    'Regrowth': ('Watery', 'Nature Spell Stone',),
-    'Scythe': ('Light', 'War Spell Stone',),
-    'Shadow Mastery': ('Shadowy', 'Arcane Spell Stone',),
-    'Shield': ('Fiery', 'Battle Jewel',),
-    'Spectral Guard': ('Spectral', 'Arcane Spell Stone',),
-    'Staff': ('Earthen', 'Battle Jewel',),
-    'Stealth': ('Airy', 'Battle Jewel',),
-    'Valor': ('Airy', 'Arcane Spell Stone',),
-    'Vampiiric Embrace': ('Embracing', 'Arcane Spell Stone',),
-    'Verdant Path': ('Mineral Encrusted', 'Nature Spell Stone',),
-    'Void': ('Icy', 'Arcane Spell Stone',),
+    'Hibernia': {
 
-}, 'Midgard': {
+        'All Magic Skills': ('Finesse', 'Nature Spell Stone',),
+        'All Melee Weapon Skills': ('Finesse', 'War Spell Stone',),
+        'Arboreal Path': ('Steaming', 'Nature Spell Stone',),
+        'Archery': ('Airy', 'War Spell Stone',),
+        'Aura Manipulation': ('Radiant', 'Nature Spell Stone'),
+        'Blades': ('Watery', 'War Spell Stone',),
+        'Blunt': ('Fiery', 'War Spell Stone',),
+        'Celtic Dual': ('Icy', 'War Spell Stone',),
+        'Celtic Spear': ('Earthen', 'War Spell Stone',),
+        'Creeping Path': ('Oozing', 'Nature Spell Stone',),
+        'Critical Strike': ('Heated', 'Battle Jewel',),
+        'Dementia': ('Aberrant', 'Arcane Spell Stone',),
+        'Enchantments': ('Vapor', 'Arcane Spell Stone',),
+        'Envenom': ('Dusty', 'Battle Jewel',),
+        'Ethereal Shriek': ('Ethereal', 'Arcane Spell Stone',),
+        'Fist Wraps': ('Glacial', 'War Spell Stone'),
+        'Large Weaponry': ('Heated', 'War Spell Stone',),
+        'Light': ('Fiery', 'Arcane Spell Stone',),
+        'Magnetism': ('Magnetic', 'Nature Spell Stone'),
+        'Mana': ('Watery', 'Arcane Spell Stone',),
+        'Mauler Staff': ('Cinder', 'War Spell Stone'),
+        'Mentalism': ('Earthen', 'Arcane Spell Stone',),
+        'Music': ('Airy', 'Nature Spell Stone',),
+        'Nature': ('Earthen', 'Nature Spell Stone',),
+        'Nurture': ('Fiery', 'Nature Spell Stone',),
+        'Parry': ('Vapor', 'Battle Jewel',),
+        'Phantasmal Wail': ('Phantasmal', 'Arcane Spell Stone',),
+        'Piercing': ('Dusty', 'War Spell Stone',),
+        'Power Strikes': ('Clout', 'Nature Spell Stone'),
+        'Regrowth': ('Watery', 'Nature Spell Stone',),
+        'Scythe': ('Light', 'War Spell Stone',),
+        'Shadow Mastery': ('Shadowy', 'Arcane Spell Stone',),
+        'Shield': ('Fiery', 'Battle Jewel',),
+        'Spectral Guard': ('Spectral', 'Arcane Spell Stone',),
+        'Staff': ('Earthen', 'Battle Jewel',),
+        'Stealth': ('Airy', 'Battle Jewel',),
+        'Valor': ('Airy', 'Arcane Spell Stone',),
+        'Vampiiric Embrace': ('Embracing', 'Arcane Spell Stone',),
+        'Verdant Path': ('Mineral Encrusted', 'Nature Spell Stone',),
+        'Void': ('Icy', 'Arcane Spell Stone',),
+    },
 
-    'All Magic Skills': ('Finesse', 'Primal Rune',),
-    'All Melee Weapon Skills': ('Finesse', 'War Rune',),
-    'Archery': ('Airy', 'War Rune',),
-    'Augmentation': ('Airy', 'Chaos Rune',),
-    'Aura Manipulation': ('Radiant', 'Primal Rune',),
-    'Axe': ('Earthen', 'War Rune',),
-    'Battlesongs': ('Airy', 'Primal Rune',),
-    'Beastcraft': ('Earthen', 'Primal Rune',),
-    'Bone Army': ('Ashen', 'Primal Rune',),
-    'Cave Magic': ('Fiery', 'Chaos Rune',),
-    'Critical Strike': ('Heated', 'Battle Jewel',),
-    'Cursing': ('Blighted', 'Primal Rune',),
-    'Darkness': ('Icy', 'Chaos Rune',),
-    'Envenom': ('Dusty', 'Battle Jewel',),
-    'Fist Wraps': ('Glacial', 'War Rune',),
-    'Hammer': ('Fiery', 'War Rune',),
-    'Hand To Hand': ('Lightning Charged', 'War Rune',),
-    'Hexing': ('Unholy', 'Primal Rune',),
-    'Left Axe': ('Icy', 'War Rune',),
-    'Magnetism': ('Magnetic', 'Primal Rune',),
-    'Mauler Staff': ('Cinder', 'War Rune',),
-    'Mending': ('Watery', 'Chaos Rune',),
-    'Odin\'s Will': ('Valiant', 'Primal Rune',),
-    'Parry': ('Vapor', 'Battle Jewel',),
-    'Power Strikes': ('Clout', 'Primal Rune',),
-    'Runecarving': ('Heated', 'Chaos Rune',),
-    'Shield': ('Fiery', 'Battle Jewel',),
-    'Spear': ('Heated', 'War Rune',),
-    'Staff': ('Earthen', 'Battle Jewel',),
-    'Stealth': ('Airy', 'Battle Jewel',),
-    'Stormcalling': ('Fiery', 'Primal Rune',),
-    'Summoning': ('Vapor', 'Chaos Rune',),
-    'Suppression': ('Dusty', 'Chaos Rune',),
-    'Sword': ('Watery', 'War Rune',),
-    'Thrown Weapons': ('Vapor', 'War Rune',),
+    'Midgard': {
 
-}, 'All': {}}
+        'All Magic Skills': ('Finesse', 'Primal Rune',),
+        'All Melee Weapon Skills': ('Finesse', 'War Rune',),
+        'Archery': ('Airy', 'War Rune',),
+        'Augmentation': ('Airy', 'Chaos Rune',),
+        'Aura Manipulation': ('Radiant', 'Primal Rune',),
+        'Axe': ('Earthen', 'War Rune',),
+        'Battlesongs': ('Airy', 'Primal Rune',),
+        'Beastcraft': ('Earthen', 'Primal Rune',),
+        'Bone Army': ('Ashen', 'Primal Rune',),
+        'Cave Magic': ('Fiery', 'Chaos Rune',),
+        'Critical Strike': ('Heated', 'Battle Jewel',),
+        'Cursing': ('Blighted', 'Primal Rune',),
+        'Darkness': ('Icy', 'Chaos Rune',),
+        'Envenom': ('Dusty', 'Battle Jewel',),
+        'Fist Wraps': ('Glacial', 'War Rune',),
+        'Hammer': ('Fiery', 'War Rune',),
+        'Hand To Hand': ('Lightning Charged', 'War Rune',),
+        'Hexing': ('Unholy', 'Primal Rune',),
+        'Left Axe': ('Icy', 'War Rune',),
+        'Magnetism': ('Magnetic', 'Primal Rune',),
+        'Mauler Staff': ('Cinder', 'War Rune',),
+        'Mending': ('Watery', 'Chaos Rune',),
+        'Odin\'s Will': ('Valiant', 'Primal Rune',),
+        'Parry': ('Vapor', 'Battle Jewel',),
+        'Power Strikes': ('Clout', 'Primal Rune',),
+        'Runecarving': ('Heated', 'Chaos Rune',),
+        'Shield': ('Fiery', 'Battle Jewel',),
+        'Spear': ('Heated', 'War Rune',),
+        'Staff': ('Earthen', 'Battle Jewel',),
+        'Stealth': ('Airy', 'Battle Jewel',),
+        'Stormcalling': ('Fiery', 'Primal Rune',),
+        'Summoning': ('Vapor', 'Chaos Rune',),
+        'Suppression': ('Dusty', 'Chaos Rune',),
+        'Sword': ('Watery', 'War Rune',),
+        'Thrown Weapons': ('Vapor', 'War Rune',),
+
+    }, 'All': {}}
 
 for realm in Realms:
     for (key, val) in list(skillTable[realm].items()):
@@ -413,18 +389,15 @@ skillTable = d2(skillTable)
 
 skillList = {}
 dropSkillList = {}
-
 for realm in list(skillTable.keys()):
     skills = list(skillTable[realm].keys())
     skills.sort()
     skillList[realm] = t2(skills)
     skills.insert(2, 'All Archery Skills')
     skills.insert(3, 'All Dual Wield Skills')
-    # bug - CM Explorer shows +Witchcraft, but no craftable gem
-    if realm == 'Midgard':
+    if realm == 'Midgard':  # ADD NON-CRAFTABLE 'Witchcraft' SKILL
         skills.append('Witchcraft')
     dropSkillList[realm] = t2(skills)
-
 skillList = d2(skillList)
 dropSkillList = d2(dropSkillList)
 
@@ -475,21 +448,49 @@ pveBonusList = t2((
     'Unique PvE Bonus...',
 ))
 
-# The tier (dropped), 10, 7, 5 repeat is for newer tinctures that
-# jump from level 47 to 35 to 25.  The third elt of the tuples
-# in the effects tables is an index to the metals (offset by the
-# selected effect).  Drop tinctures have no metal, so they have
-# been omitted from these lists.
+# THE TIER (DROPPED), 10, 7, 5 REPEAT IS FOR NEWER TINCTURES THAT
+# JUMP FROM LEVEL 25 TO 35 TO 47. THE THIRD ELT OF THE TUPLES
+# IN THE EFFECTS TABLE IS AN INDEX TO THE METALS (OFFSET BY THE
+# SELECTED EFFECT). DROP TINCTURES HAVE NO METAL, SO THEY HAVE
+# BEEN OMITTED FROM THESE LISTS.
+metalCommon = (
+    "",
+    "Arcanium",
+    "Netherium",
+    "Asterite",
+    "Adamantium",
+    "Mithril",
+    "Fine Alloy",
+    "Alloy",
+    "",
+    "Arcanium",
+    "Adamantium",
+    "Fine Alloy",
+)
 
-metalCommon = ("", "Arcanium", "Netherium", "Asterite",
-               "Adamantium", "Mithril", "Fine Alloy", "Alloy",
-               "", "Arcanium", "Adamantium", "Fine Alloy",)
 EffectMetal = d2({
-    'All': metalCommon,
-    'Albion': metalCommon,
-    'Hibernia': ("", "Arcanite", "Netherite", "Diamond",
-                 "Sapphire", "Carbide", "Cobolt", "Dolomite",
-                 "", "Arcanite", "Sapphire", "Cobolt",),
+
+    'All':
+        metalCommon,
+
+    'Albion':
+        metalCommon,
+
+    'Hibernia': (
+        "",
+        "Arcanite",
+        "Netherite",
+        "Diamond",
+        "Sapphire",
+        "Carbide",
+        "Cobolt",
+        "Dolomite",
+        "",
+        "Arcanite",
+        "Sapphire",
+        "Cobolt",
+    ),
+
     'Midgard': metalCommon,
 })
 
@@ -522,12 +523,9 @@ reactiveEffectValues.update({
     'Direct Damage (Cold)': (ddEffDmgTable, ddEffReqLevel, 1,),
     'Direct Damage (Energy)': (ddEffDmgTable, ddEffReqLevel, 1,),
     'Direct Damage (Spirit)': (ddEffDmgTable, ddEffReqLevel, 1,),
-    'Self AF Shield': (t2(("75", "56", "37",)),
-                       ("47", "35", "25",), 9,),
-    'Self Damage Shield': (t2(("5.1", "3.6", "2.6",)),
-                           ("47", "35", "25",), 9,),
-    'Self Melee Health Buffer': (t2(("150", "100", "75", "50",)),
-                                 ("48", "47", "35", "25",), 8,),
+    'Self AF Shield': (t2(("75", "56", "37",)), ("47", "35", "25",), 9,),
+    'Self Damage Shield': (t2(("5.1", "3.6", "2.6",)), ("47", "35", "25",), 9,),
+    'Self Melee Health Buffer': (t2(("150", "100", "75", "50",)), ("48", "47", "35", "25",), 8,),
     'Omni Lifedrain': (t2(("100", "75",)), ("49", "45",), 1,),
     'Speed Decrease': (t2(("35%", "30%",)), ("49", "45",), 1,),
 })
@@ -544,14 +542,10 @@ chargedEffectValues.update({
     'Dex/Qui Debuff': (t2(("56",)), ("47",), 1,),
     'Self Damage Add': (t2(("11.3",)), ("47",), 1,),
     'Power Regeneration': (t2(("2",)), ("48",), 0,),
-    'Self Acuity Buff': (t2(("75", "56", "37",)),
-                         ("47", "35", "25",), 9,),
-    'Self AF Shield': (t2(("75", "56", "37",)),
-                       ("47", "35", "25",), 9,),
-    'Self Damage Shield': (t2(("4.2", "2.9", "2.1",)),
-                           ("47", "35", "25",), 9,),
-    'Self Melee Attack Speed': (t2(("15%", "10%",)),
-                                ("49", "45",), 1,),
+    'Self Acuity Buff': (t2(("75", "56", "37",)), ("47", "35", "25",), 9,),
+    'Self AF Shield': (t2(("75", "56", "37",)), ("47", "35", "25",), 9,),
+    'Self Damage Shield': (t2(("4.2", "2.9", "2.1",)), ("47", "35", "25",), 9,),
+    'Self Melee Attack Speed': (t2(("15%", "10%",)), ("49", "45",), 1,),
     'Power Transfer': (t2(("60",)), ("45",), 2,),
     'Health Transfer': (t2(("70",)), ("45",), 2,),
     'Self Cure Poison': (t2(("1",)), ("49",), 1,),
@@ -587,9 +581,7 @@ otherEffectList = list(chargedEffectList) + [
     'Speed Decrease',
 ]
 otherEffectList.sort()
-otherEffectList = t2(otherEffectList + [
-    'Unique Effect...',
-])
+otherEffectList = t2(otherEffectList + ['Unique Effect...', ])
 
 ProcItemNames = d2({
     'Direct Damage (Fire)': t2(('Fiery', 'Fire',)),
@@ -619,7 +611,6 @@ del StableItemNames['Speed Decrease']
 StableItemNames.update({
     'Direct Damage (Cold)': t2(('Frostbringer', 'Cold',)),
     'Direct Damage (Energy)': t2(('Crackling', 'Energy',)),
-    # Most Frenzied, some not (Fine Alloy, Admantium, Netherium)
     'Direct Damage (Spirit)': t2(('Frenzied', 'Spirit',)),
     'Damage Over Time': t2(('Illbane', 'Eroding',)),
     'Self AF Shield': t2(('Hardening', 'Hardening',)),
@@ -644,7 +635,9 @@ EffectTypeNames = d2({
 })
 
 GemTables = {
+
     'All': {
+
         'Unused': unusedTable,
         'Stat': statTable,
         'Resist': resistTable,
@@ -652,7 +645,9 @@ GemTables = {
 }
 
 GemLists = {
+
     'All': {
+
         'Unused': unusedList,
         'Stat': statList,
         'Resist': resistList,
@@ -663,11 +658,15 @@ GemLists = {
 }
 
 DropLists = {
+
     'All': {
+
         'Unused': unusedList,
         'Resist': dropResistList,
         'Stat': dropStatList,
         'Cap Increase': capIncreaseList,
+        'Mythical Cap Increase': None,
+        'Mythical Bonus': None,
         'PvE Bonus': pveBonusList,
         'Other Bonus': otherBonusList,
         'Charged Effect': otherEffectList,
@@ -687,6 +686,7 @@ for realm in Realms:
     GemLists[realm].update(GemLists['All'])
     DropLists[realm] = {}
     DropLists[realm].update(DropLists['All'])
+
 for realm in list(GemTables.keys()):
     GemTables[realm]['Focus'] = focusTable[realm]
     GemTables[realm]['Skill'] = skillTable[realm]
@@ -697,6 +697,7 @@ for realm in list(GemTables.keys()):
     DropLists[realm]['Skill'] = dropSkillList[realm]
     GemLists[realm] = d2(GemLists[realm])
     DropLists[realm] = d2(DropLists[realm])
+
 GemTables = d2(GemTables)
 GemLists = d2(GemLists)
 DropLists = d2(DropLists)
@@ -822,34 +823,40 @@ Caps = dict.fromkeys(resistList, 'Resist')
 Caps.update(Caps.fromkeys(statList, 'Stat'))
 Caps = d2(Caps)
 
-# Bonuses are given as % of level + add constant
-# e.g. [ .25,  1] is the level / 4 + 1
-#      [   0, 10] is a fixed 10
-#      [   4,  0] is the level * 4
-#
+# BONUSES ARE CALCULATED AS % OF LEVEL + CONSTANT
+# E.G. [.25,  1] IS THE LEVEL / 4 + 1
+#      [  0, 10] IS A FIXED 10 VALUE
+#      [  4,  0] IS THE LEVEL * 4
 HighCapBonusList = d2({
+    'AF': (1.00, 0),
+    'AF Cap': (1.00, 0),
+    'Arrow Recovery': (1.00, 0),
     'Death Experience Loss Reduction': (1.00, 0),
+    'Duration of Spells': (.50, 0),
+    'Fatigue': (.50, 0),
+    'Fatigue Cap': (.50, 0),
+    'Focus': (1.00, 0),
+    'Healing Effectiveness': (.50, 0),
     'Hits': (4.00, 0),
     'Hits Cap': (8.00, 0),
-    'Stat': (1.50, 0),
-    'Focus': (1.00, 0),
-    '% Power Pool Cap': (1.00, 0),
-    'Power Cap': (1.00, 0),
-    'AF Cap': (1.00, 0),
-    'AF': (1.00, 0),
-    'Arrow Recovery': (1.00, 0),
-    'Resist': (.50, 1),
+    'Mythical Crowd Control': (0, 0),
+    'Mythical DPS': (0, 0),
+    'Mythical Endurance Regen': (0, 0),
+    'Mythical Health Regen': (0, 0),
+    'Mythical Power Regen': (0, 0),
+    'Mythical Stat Cap': (.50, 1),
+    'Mythical Resist Cap': (0, 0),
     'Power': (.50, 1),
-    'Stat Cap': (.50, 1),
+    'Power Cap': (1.00, 0),
     '% Power Pool': (.50, 0),
+    '% Power Pool Cap': (1.00, 0),
+    'PvE Bonus': (.20, 0),
+    'Resist': (.50, 1),
+    'Skill': (.20, 1),
+    'Stat': (1.50, 0),
+    'Stat Cap': (.50, 1),
     'Stat Buff Effectiveness': (.50, 0),
     'Stat Debuff Effectiveness': (.50, 0),
-    'Healing Effectiveness': (.50, 0),
-    'Duration of Spells': (.50, 0),
-    'Fatigue Cap': (.50, 0),
-    'Fatigue': (.50, 0),
-    'Skill': (.20, 1),
-    'PvE Bonus': (.20, 0),
     'Other Bonus': (.20, 0),
 })
 
@@ -913,7 +920,9 @@ GemSubName = d2({
 })
 
 HotkeyGems = d2({
+
     'Albion': d2({
+
         'Fiery Essence Jewel': 0,
         'Earthen Essence Jewel': 2,
         'Vapor Essence Jewel': 4,
@@ -987,6 +996,7 @@ HotkeyGems = d2({
     }),
 
     'Hibernia': d2({
+
         'Fiery Essence Jewel': 0,
         'Earthen Essence Jewel': 2,
         'Vapor Essence Jewel': 4,
@@ -1061,6 +1071,7 @@ HotkeyGems = d2({
     }),
 
     'Midgard': d2({
+
         'Fiery Essence Jewel': 0,
         'Earthen Essence Jewel': 2,
         'Vapor Essence Jewel': 4,
@@ -1154,8 +1165,7 @@ ImbuePts = (
     7, 8, 9, 9, 10, 10, 11, 12, 12, 13,
     13, 14, 15, 15, 16, 16, 17, 18, 18, 19,
     20, 20, 21, 21, 22, 23, 23, 24, 24, 25,
-    26, 26, 27, 27, 28, 29, 29, 30, 31, 31,
-    32,
+    26, 26, 27, 27, 28, 29, 29, 30, 31, 31, 32,
 )
 
 BodyHitOdds = d2({
@@ -1168,13 +1178,28 @@ BodyHitOdds = d2({
 })
 
 PieceTabList = t2((
-    'Chest', 'Arms', 'Head', 'Legs', 'Hands', 'Feet',
-    'Right Hand', 'Left Hand', '2 Handed', 'Ranged', 'Spare',
+    'Chest',
+    'Arms',
+    'Head',
+    'Legs',
+    'Hands',
+    'Feet',
+    'Right Hand',
+    'Left Hand',
+    '2 Handed',
+    'Ranged',
+    'Spare',
 ))
 
 JewelTabList = t2((
-    'Neck', 'Cloak', 'Jewel', 'Belt',
-    'Left Ring', 'Right Ring', 'Left Wrist', 'Right Wrist',
+    'Neck',
+    'Cloak',
+    'Jewel',
+    'Belt',
+    'Left Ring',
+    'Right Ring',
+    'Left Wrist',
+    'Right Wrist',
     'Mythical',
 ))
 
@@ -1210,20 +1235,24 @@ FileExt = d2({
 })
 
 ShieldTypes = t2((
-    'Rowan', 'Elm', 'Oaken', 'Ironwood', 'Heartwood',
-    'Runewood', 'Stonewood', 'Ebonwood', 'Dyrwood', 'Duskwood',
+    'Rowan',
+    'Elm',
+    'Oaken',
+    'Ironwood',
+    'Heartwood',
+    'Runewood',
+    'Stonewood',
+    'Ebonwood',
+    'Dyrwood',
+    'Duskwood',
 ))
 
-# Rename old slot types to new types, from older template and item files
-#
 FixTypeTable = d2({
     'PvE': 'PvE Bonus',
     'Hits': 'Stat',
     'Power': 'Stat',
 })
 
-# Rename old skills to new skills, from older template and item files
-#
 FixEffectsTable = d2({
     'Bonedancing': 'Bone Army',
     'PainWorking': 'Painworking',
@@ -1307,7 +1336,9 @@ if __name__ == "__main__":
             continue
 
         for (type, typetable) in list(realmtable.items()):
+
             for (effect, effecttable) in list(typetable.items()):
+
                 try:
                     name = effecttable[0] + " " + effecttable[1]
                     tryit = HotkeyGems[realm][name]
