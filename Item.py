@@ -421,7 +421,7 @@ class Item:
             'Location': loc,
             'Realm': realm,
             'Level': '51',
-            'ItemQuality': '99',
+            'ItemQuality': '100',
             'ItemName': '',
             'AFDPS': '',
             'Speed': '',
