@@ -163,7 +163,9 @@ class MultiTabBar(QWidget):
     def tabData(self, row, col):
         tab = self.__tabAt(row, col)
 
-        if tab: return tab.data
+        if tab:
+            return tab.data
+
         return None
 
     def index(self, tabname):
