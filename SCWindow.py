@@ -805,14 +805,14 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
             self.itemIndex += 1
             item.next = Item('drop', tab, self.realm, self.itemIndex)
             self.itemIndex += 1
-            item.ItemName = "Crafted Item" + str(self.itemnumbering)
-            item.next.ItemName = "Drop Item" + str(self.itemnumbering)
+            item.ItemName = "Crafted Item #" + str(self.itemnumbering)
+            item.next.ItemName = "Drop Item #" + str(self.itemnumbering)
             self.itemnumbering += 1
             self.itemattrlist[tab] = item
         for tab in JewelTabList:
             item = Item('drop', tab, self.realm, self.itemIndex)
             self.itemIndex += 1
-            item.ItemName = "Drop Item" + str(self.itemnumbering)
+            item.ItemName = "Drop Item #" + str(self.itemnumbering)
             self.itemnumbering += 1
             self.itemattrlist[tab] = item
 
@@ -871,7 +871,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
                 childnode.appendChild(document.createTextNode(str(val)))
                 rootnode.appendChild(childnode)
             for key in ('Stats', 'Resists', 'Skills', 'Focus',
-                        'OtherBonuses', 'PvEBonuses'):
+                        'MythicalBonuses', 'OtherBonuses', 'PvEBonuses'):
                 if key == 'Stats':
                     types = DropLists['All']['Stat'] + ('% Power Pool', 'Fatigue', 'AF')
                 elif key == 'Resists':
@@ -887,10 +887,17 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
                     effectnode = document.createElement(tagname)
                     if tagname != type:
                         effectnode.setAttribute('text', str(type))
+
                     if key == 'Stats':
-                        subs = ('Bonus', 'TotalBonus', 'BaseCap',
-                                'CapBonus', 'TotalCapBonus',
-                                'BaseCapToCapBonus',)
+                        subs = (
+                            'Bonus',
+                            'TotalBonus',
+                            'CapBonus',
+                            'TotalCapBonus',
+                            'MythicalCapBonus',
+                            'TotalMythicalCapBonus',
+                            'BaseCap',
+                            'BaseCapToCapBonus',)
                     else:
                         subs = ('Bonus', 'TotalBonus', 'BaseCap',)
                         if key == 'Resists' and 'RacialBonus' in totalsdict[key][type]:
@@ -1205,13 +1212,17 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
 
     def toggleItemView(self, frame=None):
         if not isinstance(frame, str):
+
             if self.stackedlayout.currentWidget().objectName() == "ItemSlotsFrame":
                 frame = "ItemSummaryFrame"
+
             else:
                 frame = "ItemSlotsFrame"
+
         if frame == "ItemSummaryFrame":
             self.ToggleItemView.setText("Item Slots")
             self.stackedlayout.setCurrentWidget(self.ItemSummaryFrame)
+
         else:
             self.ToggleItemView.setText("Item Info")
             self.stackedlayout.setCurrentWidget(self.ItemSlotsFrame)
@@ -1220,11 +1231,16 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
         model = self.SkillsList.model()
         model.insertRows(model.rowCount(), 1)
         wid = 3
-        if amt > -10 and amt < 10: wid += 1
+
+        if amt > -10 and amt < 10:
+            wid += 1
+
         if bonus[0:4] == 'All ':
             bonus = "%*s%d %s)" % (wid - 1, '(', amt, bonus,)
+
         else:
             bonus = "%*d %s" % (wid, amt, bonus,)
+
         index = model.index(model.rowCount() - 1, 0, QModelIndex())
         model.setData(index, QVariant(bonus), Qt.DisplayRole)
         model.setData(index, QVariant(group), Qt.UserRole)
@@ -1239,169 +1255,233 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
         tot['Resists'] = {}
         tot['Skills'] = {}
         tot['Focus'] = {}
+        tot['MythicalBonuses'] = {}
         tot['OtherBonuses'] = {}
         tot['PvEBonuses'] = {}
+
         for effect in DropLists['All']['Stat'] + ('AF', 'Fatigue', '% Power Pool'):
             tot['Stats'][effect] = {}
-            tot['Stats'][effect]['TotalBonus'] = 0
             tot['Stats'][effect]['Bonus'] = 0
-            tot['Stats'][effect]['TotalCapBonus'] = 0
+            tot['Stats'][effect]['TotalBonus'] = 0
             tot['Stats'][effect]['CapBonus'] = 0
+            tot['Stats'][effect]['TotalCapBonus'] = 0
+            tot['Stats'][effect]['MythicalCapBonus'] = 0
+            tot['Stats'][effect]['TotalMythicalCapBonus'] = 0
+
             if effect in HighCapBonusList:
                 capcalc = HighCapBonusList[effect]
                 capcapcalc = HighCapBonusList[effect + ' Cap']
+
             else:
                 capcalc = HighCapBonusList['Stat']
                 capcapcalc = HighCapBonusList['Stat Cap']
-            tot['Stats'][effect]['BaseCap'] \
-                = int(charlevel * capcalc[0]) + capcalc[1]
-            tot['Stats'][effect]['BaseCapToCapBonus'] \
-                = int(charlevel * capcapcalc[0]) + capcapcalc[1]
+
+            tot['Stats'][effect]['BaseCap'] = int(charlevel * capcalc[0]) + capcalc[1]
+            tot['Stats'][effect]['BaseCapToCapBonus'] = int(charlevel * capcapcalc[0]) + capcapcalc[1]
+
         for effect in DropLists['All']['Resist']:
             tot['Resists'][effect] = {}
             tot['Resists'][effect]['TotalBonus'] = 0
             tot['Resists'][effect]['Bonus'] = 0
             race = str(self.CharRace.currentText())
+
             if effect in Races['All'][race]['Resists']:
-                tot['Resists'][effect]['RacialBonus'] \
-                    = Races['All'][race]['Resists'][effect]
+                tot['Resists'][effect]['RacialBonus'] = Races['All'][race]['Resists'][effect]
+
             capcalc = HighCapBonusList['Resist']
-            tot['Resists'][effect]['BaseCap'] \
-                = int(charlevel * capcalc[0]) + capcalc[1]
+            tot['Resists'][effect]['BaseCap'] = int(charlevel * capcalc[0]) + capcalc[1]
+
         for key, item in list(self.itemattrlist.items()):
             tot['Cost'] += item.cost()
             tot['Price'] += item.price(self.pricingInfo)
+
+            # DEBUGGING
+            # amts = ''
+
             if not item.Equipped == '1':
                 continue
+
             tot['Utility'] += item.utility()
+
             for i in range(0, item.slotCount()):
                 gemtype = item.slot(i).type()
                 effect = item.slot(i).effect()
                 amount = int('0' + re.sub('[^\d]', '', item.slot(i).amount()))
+
                 if gemtype == 'Skill':
                     effects = [effect, ]
-                    if effect[0:4] == 'All ' and \
-                                    effect in AllBonusList[self.realm][self.charclass]:
-                        effects.extend(AllBonusList[self.realm] \
-                                           [self.charclass][effect])
+
+                    if effect[0:4] == 'All ' and effect in AllBonusList[self.realm][self.charclass]:
+                        effects.extend(AllBonusList[self.realm][self.charclass][effect])
+
                     for effect in effects:
+
                         if effect in tot['Skills']:
                             amts = tot['Skills'][effect]
                             amts['TotalBonus'] += amount
+
                         else:
                             tot['Skills'][effect] = {}
                             amts = tot['Skills'][effect]
                             amts['TotalBonus'] = amount
                             capcalc = HighCapBonusList['Skill']
-                            amts['BaseCap'] = int(charlevel * capcalc[0]) \
-                                              + capcalc[1]
-                        amts['Bonus'] = min(amts['TotalBonus'],
-                                            amts['BaseCap'])
+                            amts['BaseCap'] = int(charlevel * capcalc[0]) + capcalc[1]
+
+                        amts['Bonus'] = min(amts['TotalBonus'], amts['BaseCap'])
+
                 elif gemtype == 'Focus':
                     effects = [effect, ]
+
                     if effect[0:4] == 'All ':
-                        effects.extend(AllBonusList[self.realm] \
-                                           [self.charclass][effect])
+                        effects.extend(AllBonusList[self.realm][self.charclass][effect])
+
                     for effect in effects:
-                        if effect == '': continue
+
+                        if effect == '':
+                            continue
+
                         if effect in tot['Focus']:
                             amts = tot['Focus'][effect]
+
                         else:
                             tot['Focus'][effect] = {}
                             amts = tot['Focus'][effect]
                             capcalc = HighCapBonusList['Focus']
-                            amts['BaseCap'] = int(charlevel * capcalc[0]) \
-                                              + capcalc[1]
+                            amts['BaseCap'] = int(charlevel * capcalc[0]) + capcalc[1]
+
                         amts['TotalBonus'] = amount
-                        amts['Bonus'] = min(amts['TotalBonus'],
-                                            amts['BaseCap'])
+                        amts['Bonus'] = min(amts['TotalBonus'], amts['BaseCap'])
+
                 elif gemtype == 'Resist':
                     amts = tot['Resists'][effect]
                     amts['TotalBonus'] += amount
-                    amts['Bonus'] = min(amts['TotalBonus'],
-                                        amts['BaseCap'])
+                    amts['Bonus'] = min(amts['TotalBonus'], amts['BaseCap'])
+
                 elif gemtype == 'Resist Cap' and item.TYPE == 'Mythirian':
                     amts = tot['Resists'][effect]
                     amts['BaseCap'] += amount
-                    amts['Bonus'] = min(amts['TotalBonus'],
-                                        amts['BaseCap'])
+                    amts['Bonus'] = min(amts['TotalBonus'], amts['BaseCap'])
+
                 elif gemtype == 'Stat':
                     effects = [effect, ]
+
                     if effect == 'Acuity':
-                        effects.extend(AllBonusList[self.realm] \
-                                           [self.charclass][effect])
+                        effects.extend(AllBonusList[self.realm][self.charclass][effect])
+
                     for effect in effects:
                         amts = tot['Stats'][effect]
                         amts['TotalBonus'] += amount
-                        amts['Bonus'] = min(amts['TotalBonus'],
-                                            amts['BaseCap'] + amts['CapBonus'])
+                        amts['Bonus'] = min(amts['TotalBonus'], amts['BaseCap'] + amts['CapBonus'])
+
                 elif gemtype == 'Cap Increase':
                     effects = [effect, ]
-                    # Power cap affects both Power and % Power Pool
+
                     if effect == 'Power':
                         effects.append('% Power Pool')
+
                     elif effect == 'Acuity':
-                        effects.extend(AllBonusList[self.realm] \
-                                           [self.charclass][effect])
+                        effects.extend(AllBonusList[self.realm][self.charclass][effect])
+
                     for effect in effects:
                         amts = tot['Stats'][effect]
                         amts['TotalCapBonus'] += amount
+
                         if item.TYPE == 'Mythirian':
                             amts['BaseCapToCapBonus'] += amount
-                        amts['CapBonus'] = min(amts['TotalCapBonus'],
-                                               amts['BaseCapToCapBonus'])
-                        amts['Bonus'] = min(amts['TotalBonus'],
-                                            amts['BaseCap'] + amts['CapBonus'])
+
+                        amts['CapBonus'] = min(amts['TotalCapBonus'], amts['BaseCapToCapBonus'])
+                        amts['Bonus'] = min(amts['TotalBonus'], amts['BaseCap'] + amts['CapBonus'])
+
+                elif gemtype == 'Mythical Bonus':
+
+                    if effect in tot['MythicalBonuses']:
+                        amts = tot['MythicalBonuses'][effect]
+                        amts['TotalBonus'] += amount
+
+                    else:
+                        tot['MythicalBonuses'][effect] = {}
+                        amts = tot['MythicalBonuses'][effect]
+
+                        if effect in MythicalCapBonusList:
+                            capcalc = MythicalCapBonusList[effect]
+
+                        else:
+                            capcalc = MythicalCapBonusList[gemtype]
+
+                        amts['BaseCap'] = int(charlevel * capcalc[0]) + capcalc[1]
+                        amts['TotalBonus'] = amount
+
+                    amts['Bonus'] = min(amts['TotalBonus'], amts['BaseCap'])
+
                 elif gemtype == 'Other Bonus':
+
                     if effect in ('AF', 'Fatigue', '% Power Pool',):
                         amts = tot['Stats'][effect]
                         amts['TotalBonus'] += amount
-                        amts['Bonus'] = min(amts['TotalBonus'],
-                                            amts['BaseCap'] + amts['CapBonus'])
+                        amts['Bonus'] = min(amts['TotalBonus'], amts['BaseCap'] + amts['CapBonus'])
                         continue
+
                     if effect in ('Casting Speed', 'Archery Speed'):
                         effect = 'Archery and Casting Speed'
+
                     if effect in ('Spell Damage', 'Archery Damage'):
                         effect = 'Archery and Spell Damage'
+
                     if effect in ('Spell Range', 'Archery Range'):
                         effect = 'Archery and Spell Range'
+
                     if effect not in tot['OtherBonuses']:
                         tot['OtherBonuses'][effect] = {}
                         amts = tot['OtherBonuses'][effect]
                         amts['TotalBonus'] = amount
+
                         if effect in HighCapBonusList:
                             capcalc = HighCapBonusList[effect]
+
                         else:
                             capcalc = HighCapBonusList[gemtype]
-                        amts['BaseCap'] = int(charlevel * capcalc[0]) \
-                                          + capcalc[1]
+
+                        amts['BaseCap'] = int(charlevel * capcalc[0]) + capcalc[1]
+
                     else:
                         amts = tot['OtherBonuses'][effect]
                         amts['TotalBonus'] += amount
+
                     if item.TYPE == 'Mythirian':
                         amts['BaseCap'] += amount
-                    amts['Bonus'] = min(amts['TotalBonus'],
-                                        amts['BaseCap'])
+
+                    amts['Bonus'] = min(amts['TotalBonus'], amts['BaseCap'])
+
                 elif gemtype == 'PvE Bonus':
+
                     if effect in tot['PvEBonuses']:
                         amts = tot['PvEBonuses'][effect]
                         amts['TotalBonus'] += amount
+
                     else:
                         tot['PvEBonuses'][effect] = {}
                         amts = tot['PvEBonuses'][effect]
+
                         if effect in HighCapBonusList:
                             capcalc = HighCapBonusList[effect]
+
                         else:
                             capcalc = HighCapBonusList[gemtype]
-                        amts['BaseCap'] = int(charlevel * capcalc[0]) \
-                                          + capcalc[1]
+
+                        amts['BaseCap'] = int(charlevel * capcalc[0]) + capcalc[1]
                         amts['TotalBonus'] = amount
+
                     amts['Bonus'] = min(amts['TotalBonus'], amts['BaseCap'])
+
+            # DEBUGGING
+            # if not amts == '':
+            #     print(amts)
+
         tot['Price'] += self.pricingInfo.get('PPOrder', 0) * 10000
-        if self.pricingInfo.get('HourInclude', 0) \
-                and self.CraftTime.text() > '':
-            tot['Price'] += int(self.pricingInfo.get('Hour', 0) * 10000 \
-                                * int(self.CraftTime.text()) / 60.0)
+
+        if self.pricingInfo.get('HourInclude', 0) and self.CraftTime.text() > '':
+            tot['Price'] += int(self.pricingInfo.get('Hour', 0) * 10000 * int(self.CraftTime.text()) / 60.0)
+
         return tot
 
     def showStat(self, stat, show):
@@ -1414,140 +1494,205 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
     def calculate(self):
         if self.nocalc:
             return
+
         errorcount = 0
         enableCrafting = False
         self.errorsmenu.clear()
         charleveltext = str(self.CharLevel.text())
+
         if charleveltext == '':
             charlevel = 1
+
         else:
             charlevel = max(min(50, int(charleveltext)), 1)
+
         self.CharLevel.setText(str(charlevel))
+
         for key, item in list(self.itemattrlist.items()):
-            if item.ActiveState != 'player': continue
+
+            if item.ActiveState != 'player':
+                continue
+
             gemeffects = []
+
             for i in range(0, item.slotCount()):
                 slot = item.slot(i)
-                if slot.slotType() != 'player': continue
+
+                if slot.slotType() != 'player':
+                    continue
+
                 gemtype = slot.type()
-                if gemtype == 'Unused': continue
+
+                if gemtype == 'Unused':
+                    continue
+
                 effect = slot.effect()
+
                 if [gemtype, effect] in gemeffects:
-                    error_act = QAction('Two of same type of gem on %s' \
-                                        % key, self)
+                    error_act = QAction('Two of same type of gem on %s' % key, self)
+
                     if item.Location in JewelTabList:
                         row = 1
                         col = JewelTabList.index(item.Location)
+
                     else:
                         row = 0
                         col = PieceTabList.index(item.Location)
+
                     error_act.setData(QVariant((row << 8) | col))
                     self.errorsmenu.addAction(error_act)
                     errorcount = errorcount + 1
+
                 gemeffects.append([gemtype, effect])
+
         item = self.itemattrlist[self.currentTabLabel]
         self.ItemUtility.setText('%3.1f' % item.utility())
+
         if item.ActiveState == 'player':
             imbuevals = item.listGemImbue()
             imbuepts = sum(imbuevals)
             itemimbue = item.itemImbue()
+
             for i in range(0, item.slotCount()):
                 slot = item.slot(i)
+
                 if i < len(imbuevals):
                     self.Cost[i].setText(SC.formatCost(slot.gemCost(1)))
                     self.Points[i].setText('%3.1f' % imbuevals[i])
+
                     if slot.crafted():
                         enableCrafting = True
+
                 self.Name[i].setText(slot.gemName(self.realm))
                 self.Name[i].setToolTip(slot.gemName(self.realm))
+
             self.ItemImbue.setText('%3.1f' % imbuepts)
             self.ItemImbueTotal.setText(' / ' + str(itemimbue))
             self.ItemCost.setText(SC.formatCost(item.cost()))
             self.ItemPrice.setText(SC.formatCost(item.price(self.pricingInfo)))
+
             if imbuepts >= (itemimbue + 6.0):
                 self.ItemOvercharge.setText('Impossible')
                 error_act = QAction('Impossible overcharge on %s' % key, self)
+
                 if item.Location in JewelTabList:
                     row = 1
                     col = JewelTabList.index(item.Location)
+
                 else:
                     row = 0
                     col = PieceTabList.index(item.Location)
+
                 error_act.setData(QVariant((row << 8) | col))
                 self.errorsmenu.addAction(error_act)
                 errorcount = errorcount + 1
+
             elif imbuepts < (itemimbue + 1.0):
                 self.ItemOvercharge.setText('None')
+
             else:
                 success = item.overchargeSuccess(self.crafterSkill)
+
                 if success < 0:
                     self.ItemOvercharge.setText('BOOM! (%d%%)' % success)
+
                 else:
                     self.ItemOvercharge.setText('%d%%' % success)
+
         tot = self.summarize()
         self.SkillsList.model().removeRows(0, self.SkillsList.model().rowCount())
+
         for key, amounts in list(tot['Resists'].items()):
             val = amounts['TotalBonus']
+
             if not self.capDistance:
+
                 if self.includeRacials:
+
                     if 'RacialBonus' in amounts:
                         rr = amounts['RacialBonus']
                         val += rr
+
                 self.StatValue[key].setText(str(val))
+
             else:
                 basecap = amounts['BaseCap']
                 self.StatValue[key].setText(str(basecap - val))
+
         for (key, datum) in list(tot['Stats'].items()):
             val = datum['TotalBonus']
             acuity = AllBonusList[self.realm][self.charclass]["Acuity"]
+
             if key == "% Power Pool":
                 key = "PowerPool"
+
             if key[:5] == "Power":
                 skills = AllBonusList[self.realm][self.charclass]["All Magic Skills"]
-                self.showStat(key, (datum['TotalCapBonus'] > 0) \
-                              or (val > 0) or (len(skills) > 0))
+                self.showStat(key, (datum['TotalCapBonus'] > 0) or (val > 0) or (len(skills) > 0))
+
             elif key == "Fatigue":
                 skills = AllBonusList[self.realm][self.charclass]["All Melee Weapon Skills"]
-                self.showStat(key, (datum['TotalCapBonus'] > 0) \
-                              or (val > 0) or (len(skills) > 0))
+                self.showStat(key, (datum['TotalCapBonus'] > 0) or (val > 0) or (len(skills) > 0))
+
             elif key == "Acuity":
-                self.showStat(key, ((datum['TotalCapBonus'] > 0) \
-                                    or (val > 0)) and (len(acuity) == 0))
+                self.showStat(key, ((datum['TotalCapBonus'] > 0) or (val > 0)) and (len(acuity) == 0))
+
             elif key in ("Charisma", "Empathy", "Intelligence", "Piety"):
-                self.showStat(key, (datum['TotalCapBonus'] > 0) \
-                              or (val > 0) or (key in acuity))
+                self.showStat(key, (datum['TotalCapBonus'] > 0) or (val > 0) or (key in acuity))
+
             if not self.capDistance:
+
                 if datum['TotalCapBonus'] > 0:
-                    self.StatCap[key].setText( \
-                        '(' + str(datum['TotalCapBonus']) + ')')
+                    self.StatCap[key].setText('(' + str(datum['TotalCapBonus']) + ')')
+
                 else:
                     self.StatCap[key].setText('-')
+
                 self.StatValue[key].setText(str(val))
+
             else:
                 basecap = datum['BaseCap']
                 addcap = datum['BaseCapToCapBonus']
+
                 if datum['TotalCapBonus'] > 0:
                     capmod = datum['TotalCapBonus']
+
                 else:
                     capmod = 0
+
                 capcap = addcap - capmod
-                if capmod > addcap:  capmod = addcap
+
+                if capmod > addcap:
+                    capmod = addcap
+
                 self.StatCap[key].setText('(' + str(int(capcap)) + ')')
                 self.StatValue[key].setText(str(int(basecap + capmod) - val))
-        for skillkey, suffix, lookup in (
-                ('Skills', '', 'Skill'),
-                ('Focus', ' Focus', 'Focus'),
-                ('OtherBonuses', '', 'Bonus'),
-                ('PvEBonuses', ' (PvE)', 'Bonus')):
+
+        for skillkey, prefix, suffix, lookup in (
+                ('Skills', '', '', 'Skill'),
+                ('Focus', '', ' Focus', 'Focus'),
+                ('MythicalBonuses', 'Mythical ', '', 'Bonus'),
+                ('OtherBonuses', '', '', 'Bonus'),
+                ('PvEBonuses', '', ' (PvE)', 'Bonus')):  # CHANGED
             skills = list(tot[skillkey].keys())
             skills.sort()
+
             for skill in skills:
                 amounts = tot[skillkey][skill]
+
                 if self.capDistance:
-                    amount = amounts['BaseCap'] - amounts['TotalBonus']
+
+                    if amounts['BaseCap'] > 0:
+                        amount = amounts['BaseCap'] - amounts['TotalBonus']
+
+                    else:
+                        amount = amounts['TotalBonus']
+
                 else:
                     amount = amounts['TotalBonus']
-                self.insertSkill(amount, skill + suffix, lookup)
+
+                self.insertSkill(amount, prefix + skill + suffix, lookup)
+
         self.TotalCost.setText(SC.formatCost(tot['Cost']))
         self.TotalPrice.setText(SC.formatCost(tot['Price']))
         self.TotalUtility.setText('%3.1f' % tot['Utility'])
@@ -1939,9 +2084,9 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
                     state=item.ActiveState,
                     idx=item.TemplateIndex)
         if item.ActiveState == 'drop':
-            item.ItemName = "Drop Item" + str(self.itemnumbering)
+            item.ItemName = "Drop Item #" + str(self.itemnumbering)
         else:
-            item.ItemName = "Crafted Item" + str(self.itemnumbering)
+            item.ItemName = "Crafted Item #" + str(self.itemnumbering)
         self.itemattrlist[self.currentTabLabel] = item
         self.itemnumbering += 1
         if self.nocalc: return
@@ -2553,8 +2698,10 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
     def skillClicked(self, index):
         effect = str(index.data(Qt.DisplayRole))
         bonus = str(index.data(Qt.UserRole))
+
         if effect[-6:] == ' (PvE)' or effect[-6:] == ' Focus':
             effect = effect[:-6]
+
         if effect[-1:] == ')':
 
             try:  # FIXES 'ValueError' WHEN SELECTING 'Unique Bonus' ITEMS
@@ -2567,6 +2714,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
         else:
             amount, effect = str.split(effect.lstrip(), ' ', 1)
 
+        # TODO: BUG! MYTHICAL VALUES DO NOT DISPLAY BECAUSE THEIR 'SkillsView'
         self.delveItemsDialog(effect, bonus)
 
     def showCap(self):
@@ -2622,7 +2770,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
             self.itemnumbering += 1
             self.itemattrlist[self.currentTabLabel] = item
         else:
-            self.itemattrlist[self.currentTabLabel] = cur.next  # Chagned from self.itemattrlist[self.currentTabLabel] = cur.__next__
+            self.itemattrlist[self.currentTabLabel] = cur.next
         if cur.Equipped == '1':
             self.itemattrlist[self.currentTabLabel].Equipped = '1'
         if part.Equipped == '1':
