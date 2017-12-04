@@ -18,9 +18,10 @@ import sys
 import types
 import XMLHelper
 
+
 class ItemSlot:
 
-    def __init__(self, slottype='player', type='Unused', amount='0', effect='', requirement='', makes='0'):
+    def __init__(self, slottype='', type='Unused', amount='', effect='', requirement='', makes='0'):
         self.__dict__ = {'SlotType': str(slottype), 'Type': '', 'Effect': '', 'Amount': '', 'Requirement': '', 'Makes': '', }
         self.setAll(type, amount, effect, requirement, makes)
 
