@@ -33,13 +33,18 @@ class SkillsView(QListView):
 
     def bestFit(self):
         self.rowheight = self.sizeHintForRow(0)
-        if self.rowheight < 1: return
+
+        if self.rowheight < 1:
+            return
+
         bestheight = self.sizehint.height()
-        if (self.horizontalScrollBarPolicy() !=
-                Qt.ScrollBarAlwaysOff):
+
+        if (self.horizontalScrollBarPolicy() != Qt.ScrollBarAlwaysOff):
             scrollheight = self.horizontalScrollBar().sizeHint().height() + 1
+
         else:
             scrollheight = 0
+
         bestheight -= scrollheight
         rows = (bestheight + 4) / self.rowheight
         bestheight = (rows * self.rowheight) + scrollheight

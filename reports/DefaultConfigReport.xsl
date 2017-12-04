@@ -65,8 +65,11 @@
 	  <td>Slot <xsl:copy-of select="$slotnum"/>:&#160;</td>
 	  <td align="right"><xsl:value-of select="Amount"/>&#160;</td>
 	  <td>
+        <xsl:if test="Type = 'Mythical Bonus'">
+            <xsl:text>Mythical </xsl:text>
+        </xsl:if>
 	    <xsl:value-of select="Effect"/><xsl:text>&#160;</xsl:text>
-	    <xsl:if test="Type != 'Stat' and Type != 'Other Bonus' and Type != 'PvE Bonus' and Type != 'Other Effect' and substring(Effect, 1, 4) != 'All '">
+	    <xsl:if test="Type != 'Stat' and Type != 'Mythical Bonus' and Type != 'Other Bonus' and Type != 'PvE Bonus' and Type != 'Other Effect' and substring(Effect, 1, 4) != 'All '">
 	      <xsl:value-of select="Type"/><xsl:text>&#160;</xsl:text>
 	    </xsl:if>
 	    <xsl:if test="Type = 'PvE Bonus'">
@@ -93,7 +96,7 @@
       <dt>Name: <xsl:value-of select="ItemName"/></dt>
       <dt>
 	<xsl:text>Level: </xsl:text><xsl:value-of select="Level"/>
-	<xsl:text> &#160; Quality: </xsl:text><xsl:value-of select="ItemQuality"/>
+	<xsl:text>,&#160;Quality: </xsl:text><xsl:value-of select="ItemQuality"/>
 	<xsl:if test="AFDPS != '' and AFDPS != '0' and AFDPS != '-1'">
 	  <xsl:text> &#160; AF/DPS: </xsl:text><xsl:value-of select="AFDPS"/>
 	</xsl:if>
@@ -108,7 +111,6 @@
 	<dt>
 	  <xsl:text>Imbue Points: </xsl:text><xsl:value-of select="Imbue"/>
 	  <xsl:text> of </xsl:text><xsl:value-of select="ItemImbue"/>
-	  <!--<xsl:text> &#160; Quality: </xsl:text><xsl:value-of select="ItemQuality"/>-->
 	  <xsl:text> &#160; Overcharge: </xsl:text>
       <xsl:choose>
 	    <xsl:when test="(Imbue - ItemImbue) &lt; 0">
@@ -260,8 +262,16 @@
   <table cellspacing="0" cellpadding="0">
     <xsl:for-each select="$nodes">
       <tr>
-	<td align="right"><xsl:value-of select="TotalBonus"/>&#160;</td>
-	<td>/ <xsl:value-of select="BaseCap"/>&#160;</td>
+    <xsl:choose>
+        <xsl:when test="BaseCap != '0'">
+          <td align="right"><xsl:value-of select="TotalBonus"/>&#160;</td>
+          <td>/ <xsl:value-of select="BaseCap"/>&#160;</td>
+        </xsl:when>
+        <xsl:otherwise>
+          <td align="right"><xsl:value-of select="TotalBonus"/>&#160;</td>
+          <td>/ -- </td>
+        </xsl:otherwise>
+    </xsl:choose>
 	<xsl:choose>
 	  <xsl:when test="@text != ''">
 	    <td><xsl:value-of select="@text"/></td>
@@ -286,7 +296,7 @@
   <xsl:call-template name="br"/>
   <xsl:apply-templates select="Stats"/>
   <xsl:apply-templates select="Resists"/>
-  <xsl:for-each select="Skills|Focus|OtherBonuses|PvEBonuses">
+  <xsl:for-each select="Skills|Focus|MythicalBonuses|OtherBonuses|PvEBonuses">
     <xsl:if test="count(./*) &gt; 0">
       <xsl:choose>
 	<xsl:when test="@text != ''">
