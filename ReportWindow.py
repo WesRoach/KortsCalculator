@@ -193,7 +193,7 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                     center.insert_after('\n')
 
                 for dd in soup.find_all('dd'):
-                    dd.insert_before('      ')
+                    dd.insert_before('\xa0\xa0\xa0\xa0\xa0\xa0')
 
                 for dl in soup.find_all('dl'):
                     dl.insert_after('\n')
@@ -222,13 +222,13 @@ class ReportWindow(QDialog, Ui_B_ReportWindow):
                     hr.replace_with(('-' * 80) + '\n')
 
                 for li in soup.find_all('li'):
-                    li.insert_before('    * ')
+                    li.insert_before('\xa0\xa0\xa0*\xa0')
 
                 for td in soup.find_all('td'):
                     td.unwrap()
 
                 for tr in soup.find_all('tr'):
-                    tr.insert_before('  ')
+                    tr.insert_before('\xa0\xa0')
                     tr.insert_after('\n')
 
                 for ul in soup.find_all('ul'):
