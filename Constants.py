@@ -14,16 +14,16 @@ import sys
 __all__ = [
     'ScVersion', 'GemLists', 'DropLists', 'CraftedLists', 'TypeList', 'EffectTypeList', 'DropTypeList',
     'CraftedTypeList', 'ValuesLists', 'CraftedValuesLists', 'QualityValues', 'ImbuePts', 'OCStartPercentages',
-    'ItemQualOCModifiers', 'FileExt', 'Caps', 'HighCapBonusList', 'BodyHitOdds', 'GemTables', 'GemDusts',
-    'GemLiquids', 'GemSubName', 'MaterialsOrder', 'GemNames', 'MaterialGems', 'GemCosts', 'RemakeCosts',
+    'ItemQualOCModifiers', 'FileExt', 'Caps', 'HighCapBonusList', 'MythicalCapBonusList', 'BodyHitOdds', 'GemTables',
+    'GemDusts', 'GemLiquids', 'GemSubName', 'MaterialsOrder', 'GemNames', 'MaterialGems', 'GemCosts', 'RemakeCosts',
     'EffectTypeNames', 'ProcItemNames', 'StableItemNames', 'EffectMetal', 'FixTypeTable', 'FixEffectsTable',
     'HotkeyGems', 'ImbueMultipliers', 'ShieldTypes', 'TabList', 'PieceTabList', 'JewelTabList', 'ArmorTabList',
     'WeaponTabList', 'FocusTabList',
 ]
 
-ScVersion = "Kort's Spellcrafting Calulator 3.0.2 (BETA)"
+ScVersion = "Kort's Spellcrafting Calulator 3.0.3 (BETA)"
 
-TypeList = t2((
+TypeList = t2((  # XFERED
     'Unused',
     'Stat',
     'Resist',
@@ -38,8 +38,8 @@ EffectTypeList = t2((
     'Charged Effect',
 ))
 
-DropTypeList = t2(
-    TypeList + ('Cap Increase', 'PvE Bonus', 'Other Bonus',) +
+DropTypeList = t2(  # XFERED
+    TypeList + ('Cap Increase', 'Mythical Bonus', 'PvE Bonus', 'Other Bonus',) +
     EffectTypeList + ('Other Effect',)
 )
 
@@ -404,11 +404,10 @@ dropSkillList = d2(dropSkillList)
 skillValues = t2(('1', '2', '3', '4', '5', '6', '7', '8',))
 
 capIncreaseList = t2(dropStatList + (
-    'AF'
     'Fatigue',
 ))
 
-otherBonusList = t2((
+otherBonusList = t2((  # XFERED
     '% Power Pool',
     'AF',
     'Archery Damage',
@@ -427,6 +426,24 @@ otherBonusList = t2((
     'Stat Debuff Effectiveness',
     'Style Damage',
     'Unique Bonus...',
+))
+
+mythicalBonusList = t2((
+    'Coin',
+    'Bounty Points',
+    'Realm Points',
+    'Crowd Control Reduction',
+    'Endurance Regen',
+    'Health Regen',
+    'Power Regen',
+    'Safe Fall',
+    'Seige Speed',
+    'Spell Increase',
+    'Physical Defense',
+    'DPS',
+    'Block',
+    'Evade',
+    'Parry',
 ))
 
 pveBonusList = t2((
@@ -657,7 +674,7 @@ GemLists = {
     }
 }
 
-DropLists = {
+DropLists = {  # XFERED
 
     'All': {
 
@@ -666,7 +683,7 @@ DropLists = {
         'Stat': dropStatList,
         'Cap Increase': capIncreaseList,
         'Mythical Cap Increase': None,
-        'Mythical Bonus': None,
+        'Mythical Bonus': mythicalBonusList,
         'PvE Bonus': pveBonusList,
         'Other Bonus': otherBonusList,
         'Charged Effect': otherEffectList,
@@ -702,7 +719,7 @@ GemTables = d2(GemTables)
 GemLists = d2(GemLists)
 DropLists = d2(DropLists)
 
-ValuesLists = d2({
+ValuesLists = d2({  # XFERED
     'Stat': d2({
         None: statValues,
         'Hits': hitsValues,
@@ -717,7 +734,7 @@ ValuesLists = d2({
     'Unused': unusedValues,
 })
 
-CraftedTypeList = t2((
+CraftedTypeList = t2((  # XFERED
     'Unused',
     'Focus',
     'Skill',
@@ -729,7 +746,7 @@ CraftedTypeList = t2((
     'Offensive Effect',
 ))
 
-CraftedValuesLists = d2({
+CraftedValuesLists = d2({  # XFERED
     'Unused': unusedValues,
     'Focus': t2(('50',)),
     'Skill': t2(('3',)),
@@ -771,7 +788,10 @@ CraftedLists = {
             'All Melee Weapon Skills',
             'Shield',
         )),
-        'Stat': t2(dropStatList[0:4] + dropStatList[9:]),
+        'Stat': t2(
+            dropStatList[0:4]
+            + dropStatList[9:]
+        ),
         'Cap Increase': t2((
             'Strength',
             'Constitution',
@@ -839,13 +859,6 @@ HighCapBonusList = d2({
     'Healing Effectiveness': (.50, 0),
     'Hits': (4.00, 0),
     'Hits Cap': (8.00, 0),
-    'Mythical Crowd Control': (0, 0),
-    'Mythical DPS': (0, 0),
-    'Mythical Endurance Regen': (0, 0),
-    'Mythical Health Regen': (0, 0),
-    'Mythical Power Regen': (0, 0),
-    'Mythical Stat Cap': (.50, 1),
-    'Mythical Resist Cap': (0, 0),
     'Power': (.50, 1),
     'Power Cap': (1.00, 0),
     '% Power Pool': (.50, 0),
@@ -858,6 +871,21 @@ HighCapBonusList = d2({
     'Stat Buff Effectiveness': (.50, 0),
     'Stat Debuff Effectiveness': (.50, 0),
     'Other Bonus': (.20, 0),
+})
+
+# BONUSES ARE CALCULATED AS % OF LEVEL + CONSTANT
+# E.G. [.25,  1] IS THE LEVEL / 4 + 1
+#      [  0, 10] IS A FIXED 10 VALUE
+#      [  4,  0] IS THE LEVEL * 4
+MythicalCapBonusList = d2({
+    'Crowd Control Reduction': (1.00, 0),
+    'DPS': (.20, 0),
+    'Endurance Regen': (1.00, 0),
+    'Health Regen': (1.00, 0),
+    'Power Regen': (1.00, 0),
+    'Mythical Stat Cap': (.50, 1),
+    'Mythical Resist Cap': (0, 0),
+    'Mythical Bonus': (0, 0),
 })
 
 MaterialGems = t2(('Lo', 'Um', 'On', 'Ee', 'Pal', 'Mon', 'Ros', 'Zo', 'Kath', 'Ra',))
