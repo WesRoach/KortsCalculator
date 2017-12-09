@@ -633,6 +633,11 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
 
     def showDropWidgets(self, item):
         if not self.isVisible(): return
+
+        # DEBUGGING
+        for i in range(0, item.slotCount()):
+            print(item.slot(i).__dict__)
+
         self.GroupItemFrame.hide()
         self.showFixWidgets()
         for w in self.switchOnType['player']:
@@ -650,6 +655,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
         for w in self.switchOnType['player']:
             w.show()
         for i in range(0, item.slotCount()):
+            print(item.slot(i).__dict__)
             if item.slot(i).slotType() == 'player':
                 self.GemLabel[i].setText('Gem &%d:' % (i + 1))
             else:
@@ -1856,7 +1862,7 @@ class SCWindow(QMainWindow, UI_B_SCWindow):
     def itemNotesChanged(self, a0=None):
         if self.nocalc: return
         self.modified = True
-        self.Notes = str(self.ItemNoteText.toPlainText())  # Changed from item.Notes
+        self.Notes = str(self.ItemNoteText.toPlainText())
 
     def itemChanged(self, a0=None):
         if self.nocalc: return
