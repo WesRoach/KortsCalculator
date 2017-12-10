@@ -48,7 +48,7 @@
     <xsl:choose>
       <xsl:when test="@Type = 'player'">
 	<tr>
-	  <td>&#160;&#160;&#160;&#160;&#160;&#160;Gem <xsl:copy-of select="$slotnum"/>:&#160;</td>
+	  <td>&#160;&#160;&#160;&#160;Gem <xsl:copy-of select="$slotnum"/>:&#160;</td>
 	  <td align="right"><xsl:value-of select="Amount"/>&#160;</td>
 	  <td>
 	    <xsl:value-of select="Effect"/><xsl:text>&#160;</xsl:text>
@@ -62,7 +62,7 @@
       </xsl:when>
       <xsl:otherwise>
 	<tr>
-	  <td>&#160;&#160;&#160;&#160;&#160;&#160;Slot <xsl:copy-of select="$slotnum"/>:&#160;</td>
+	  <td>&#160;&#160;&#160;&#160;Slot <xsl:copy-of select="$slotnum"/>:&#160;</td>
 	  <td align="right"><xsl:value-of select="Amount"/>&#160;</td>
 	  <td>
         <xsl:if test="Type = 'Mythical Bonus'">
